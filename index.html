@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Count significant figures, round numbers, and calculate addition and subtraction using significant figure rules."
+    content="Free significant figures calculator to count, round, add, subtract, multiply and divide numbers using significant-figure rules."
   >
 
   <style>
@@ -16,23 +16,33 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f5f7fa;
       color: #1f2937;
       line-height: 1.6;
     }
 
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
     header {
       background: #111827;
-      color: white;
+      color: #ffffff;
       padding: 18px 20px;
     }
 
     .header-inner {
-      max-width: 900px;
-      margin: auto;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
     header h1 {
@@ -41,169 +51,210 @@
     }
 
     main {
-      max-width: 900px;
-      margin: 35px auto;
+      max-width: 960px;
+      margin: 34px auto;
       padding: 0 18px;
     }
 
     .intro {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 26px;
     }
 
     .intro h2 {
-      font-size: 30px;
-      margin-bottom: 10px;
+      margin: 0 0 10px;
+      font-size: 31px;
       color: #111827;
+      line-height: 1.25;
     }
 
     .intro p {
-      color: #6b7280;
+      max-width: 700px;
       margin: 0 auto;
-      max-width: 680px;
+      color: #6b7280;
+    }
+
+    .calculator-card,
+    .info-card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
     }
 
     .calculator-card {
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-      margin-bottom: 25px;
+      padding: 26px;
+      margin-bottom: 26px;
     }
 
     .mode-buttons {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+      margin-bottom: 24px;
     }
 
     button {
-      width: 100%;
-      margin-top: 15px;
-      padding: 14px;
-      border: none;
+      border: 0;
       border-radius: 8px;
+      padding: 13px 14px;
       background: #2563eb;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
+      color: #ffffff;
+      font-weight: 700;
       cursor: pointer;
+      transition: background 0.15s ease;
     }
 
     button:hover {
       background: #1d4ed8;
     }
 
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.25);
+      outline-offset: 2px;
+    }
+
     .mode-button {
-      margin-top: 0;
       background: #e5e7eb;
       color: #111827;
-      font-size: 15px;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .mode-button:hover {
+      background: #dbe0e7;
     }
 
     .mode-button.active {
       background: #2563eb;
-      color: white;
+      color: #ffffff;
+    }
+
+    .field {
+      margin-top: 18px;
+    }
+
+    .field:first-of-type {
+      margin-top: 0;
     }
 
     label {
       display: block;
-      font-weight: bold;
       margin-bottom: 8px;
+      font-weight: 700;
+      color: #111827;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 14px;
-      font-size: 18px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
-      outline: none;
-      font-family: Arial, sans-serif;
+      padding: 14px;
+      color: #111827;
+      background: #ffffff;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: #2563eb;
+    input {
+      font-size: 18px;
     }
 
     textarea {
       min-height: 110px;
       resize: vertical;
+      font-size: 17px;
     }
 
-    .target-group {
-      margin-top: 18px;
-      display: none;
-    }
-
-    .expression-group {
-      display: none;
+    input::placeholder,
+    textarea::placeholder {
+      color: #9ca3af;
     }
 
     .hint {
       margin-top: 7px;
-      font-size: 14px;
       color: #6b7280;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .calculate-button {
+      margin-top: 20px;
+      width: 100%;
+      font-size: 17px;
+      padding: 14px;
     }
 
     .result {
-      margin-top: 20px;
-      padding: 18px;
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
       border-radius: 10px;
       background: #f3f4f6;
-      text-align: center;
-      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
     }
 
     .result-number {
-      font-size: 32px;
-      font-weight: bold;
+      text-align: center;
       color: #111827;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.25;
       word-break: break-word;
     }
 
     .result-label {
+      margin-top: 5px;
+      text-align: center;
       color: #6b7280;
-      margin-top: 4px;
     }
 
-    .explanation {
-      margin-top: 16px;
-      padding-top: 15px;
+    .why {
+      margin-top: 18px;
+      padding-top: 17px;
       border-top: 1px solid #d1d5db;
-      text-align: left;
       color: #374151;
     }
 
     .why-title {
-      font-weight: bold;
+      margin-bottom: 7px;
+      font-weight: 700;
       color: #111827;
-      margin-bottom: 6px;
     }
 
-    .error {
-      color: #b91c1c;
-      background: #fef2f2;
+    .why p {
+      margin: 7px 0;
     }
 
     .info-card {
-      background: white;
       padding: 25px;
-      border-radius: 14px;
       margin-bottom: 20px;
     }
 
     .info-card h2 {
-      margin-top: 0;
+      margin: 0 0 12px;
       color: #111827;
+      font-size: 23px;
+    }
+
+    .info-card p {
+      margin: 9px 0;
     }
 
     .examples {
       margin: 0;
-      padding-left: 20px;
+      padding-left: 21px;
     }
 
     .examples li {
@@ -211,21 +262,27 @@
     }
 
     footer {
-      margin-top: 40px;
-      padding: 25px 18px;
+      margin-top: 42px;
+      padding: 27px 18px;
       background: #111827;
       color: #d1d5db;
       text-align: center;
       font-size: 14px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
+      .mode-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
       main {
         margin-top: 25px;
       }
 
       .intro h2 {
-        font-size: 25px;
+        font-size: 26px;
       }
 
       .calculator-card,
@@ -236,67 +293,88 @@
       .mode-buttons {
         grid-template-columns: 1fr;
       }
+
+      .result-number {
+        font-size: 30px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="header-inner">
-      <h1>Significant Figures Calculator</h1>
+<header>
+  <div class="header-inner">
+    <h1>Significant Figures Calculator</h1>
+  </div>
+</header>
+
+
+<main>
+
+  <section class="intro">
+    <h2>Significant Figures Calculator</h2>
+
+    <p>
+      Count significant figures, round numbers to a chosen precision,
+      or perform addition, subtraction, multiplication and division
+      using significant-figure rules.
+    </p>
+  </section>
+
+
+  <section class="calculator-card">
+
+    <div
+      class="mode-buttons"
+      role="group"
+      aria-label="Calculator mode"
+    >
+
+      <button
+        type="button"
+        id="countModeButton"
+        class="mode-button active"
+        onclick="setMode('count')"
+      >
+        Count
+      </button>
+
+      <button
+        type="button"
+        id="roundModeButton"
+        class="mode-button"
+        onclick="setMode('round')"
+      >
+        Round
+      </button>
+
+      <button
+        type="button"
+        id="addModeButton"
+        class="mode-button"
+        onclick="setMode('add')"
+      >
+        Add / Subtract
+      </button>
+
+      <button
+        type="button"
+        id="multiplyModeButton"
+        class="mode-button"
+        onclick="setMode('multiply')"
+      >
+        Multiply / Divide
+      </button>
+
     </div>
-  </header>
-
-  <main>
-
-    <section class="intro">
-      <h2>Significant Figures Calculator</h2>
-
-      <p>
-        Count significant figures, round numbers to a chosen precision,
-        or calculate addition and subtraction using significant-figure rules.
-      </p>
-    </section>
 
 
-    <section class="calculator-card">
+    <!-- COUNT / ROUND INPUT -->
 
-      <div class="mode-buttons">
+    <div id="singleNumberGroup">
 
-        <button
-          type="button"
-          id="countModeButton"
-          class="mode-button active"
-          onclick="setMode('count')"
-        >
-          Count
-        </button>
-
-        <button
-          type="button"
-          id="roundModeButton"
-          class="mode-button"
-          onclick="setMode('round')"
-        >
-          Round
-        </button>
-
-        <button
-          type="button"
-          id="addModeButton"
-          class="mode-button"
-          onclick="setMode('add')"
-        >
-          Add / Subtract
-        </button>
-
-      </div>
-
-
-      <!-- COUNT MODE -->
-
-      <div id="singleNumberGroup">
+      <div class="field">
 
         <label for="numberInput">
           Enter a number
@@ -307,510 +385,411 @@
           id="numberInput"
           placeholder="Example: 0.004560"
           autocomplete="off"
+          inputmode="decimal"
         >
 
       </div>
 
+    </div>
 
-      <!-- ROUND MODE -->
 
-      <div
-        id="targetGroup"
-        class="target-group"
+    <!-- ROUND TARGET -->
+
+    <div
+      id="targetGroup"
+      class="field hidden"
+    >
+
+      <label for="targetInput">
+        Number of significant figures
+      </label>
+
+      <input
+        type="number"
+        id="targetInput"
+        min="1"
+        max="100"
+        step="1"
+        placeholder="Example: 3"
+        inputmode="numeric"
       >
 
-        <label for="targetInput">
-          Number of significant figures
-        </label>
-
-        <input
-          type="number"
-          id="targetInput"
-          placeholder="Example: 3"
-          min="1"
-          max="100"
-          step="1"
-        >
-
+      <div class="hint">
+        Enter a whole number from 1 to 100.
       </div>
 
+    </div>
 
-      <!-- ADDITION / SUBTRACTION MODE -->
 
-      <div
-        id="expressionGroup"
-        class="expression-group"
-      >
+    <!-- ADD / SUBTRACT -->
 
-        <label for="expressionInput">
+    <div
+      id="addGroup"
+      class="hidden"
+    >
+
+      <div class="field">
+
+        <label for="addInput">
           Enter an expression
         </label>
 
-        <textarea
-          id="expressionInput"
+        <input
+          type="text"
+          id="addInput"
           placeholder="Example: 12.11 + 18.0"
-        ></textarea>
+          autocomplete="off"
+        >
 
         <div class="hint">
-          Use + or − between numbers. Example:
-          12.11 + 18.0
+          Example: 12.11 + 18.0 or 25.6 - 3.21
         </div>
 
       </div>
 
-
-      <button
-        type="button"
-        onclick="calculate()"
-      >
-        Calculate
-      </button>
+    </div>
 
 
-      <div
-        id="result"
-        class="result"
-      >
+    <!-- MULTIPLY / DIVIDE -->
 
-        <div
-          id="resultNumber"
-          class="result-number"
-        ></div>
+    <div
+      id="multiplyGroup"
+      class="hidden"
+    >
 
-        <div
-          id="resultLabel"
-          class="result-label"
-        ></div>
+      <div class="field">
 
-        <div
-          id="explanation"
-          class="explanation"
-        ></div>
+        <label for="multiplyInput">
+          Enter an expression
+        </label>
+
+        <input
+          type="text"
+          id="multiplyInput"
+          placeholder="Example: 12.5 × 2.0"
+          autocomplete="off"
+        >
+
+        <div class="hint">
+          Use ×, *, ÷, or / between numbers.
+        </div>
 
       </div>
 
-    </section>
+    </div>
 
 
-    <section class="info-card">
-
-      <h2>What Are Significant Figures?</h2>
-
-      <p>
-        Significant figures are the digits in a number that carry
-        meaningful information about its precision.
-      </p>
-
-      <p>
-        Leading zeros are not significant. Zeros between non-zero digits
-        are significant. Trailing zeros can be significant when the
-        notation makes the intended precision clear.
-      </p>
-
-    </section>
+    <button
+      type="button"
+      class="calculate-button"
+      onclick="calculate()"
+    >
+      Calculate
+    </button>
 
 
-    <section class="info-card">
+    <div
+      id="result"
+      class="result"
+      aria-live="polite"
+    >
 
-      <h2>Examples</h2>
+      <div
+        id="resultNumber"
+        class="result-number"
+      ></div>
 
-      <ul class="examples">
+      <div
+        id="resultLabel"
+        class="result-label"
+      ></div>
 
-        <li>
-          <strong>123</strong> → 3 significant figures
-        </li>
+      <div
+        id="why"
+        class="why"
+      ></div>
 
-        <li>
-          <strong>0.004560</strong> → 4 significant figures
-        </li>
+    </div>
 
-        <li>
-          <strong>1002</strong> → 4 significant figures
-        </li>
-
-        <li>
-          <strong>100.0</strong> → 4 significant figures
-        </li>
-
-        <li>
-          <strong>1234</strong> → 3 SF → <strong>1230</strong>
-        </li>
-
-        <li>
-          <strong>0.004567</strong> → 2 SF → <strong>0.0046</strong>
-        </li>
-
-        <li>
-          <strong>12.11 + 18.0</strong> → <strong>30.1</strong>
-        </li>
-
-      </ul>
-
-    </section>
-
-  </main>
+  </section>
 
 
-  <footer>
-    © 2026 Significant Figures Calculator
-  </footer>
+  <section class="info-card">
+
+    <h2>What Are Significant Figures?</h2>
+
+    <p>
+      Significant figures are the digits in a measured value that
+      communicate its precision.
+    </p>
+
+    <p>
+      Leading zeros are generally not significant. Zeros between
+      non-zero digits are significant. Trailing zeros may be
+      significant when the notation clearly communicates precision.
+    </p>
+
+  </section>
 
 
-  <script>
+  <section class="info-card">
 
-    let currentMode = "count";
+    <h2>Examples</h2>
 
+    <ul class="examples">
 
-    /*
-      CHANGE CALCULATOR MODE
-    */
+      <li><strong>123</strong> → 3 significant figures</li>
 
-    function setMode(mode) {
+      <li><strong>0.004560</strong> → 4 significant figures</li>
 
-      currentMode = mode;
+      <li><strong>1002</strong> → 4 significant figures</li>
 
-      const countButton =
-        document.getElementById("countModeButton");
+      <li><strong>100.0</strong> → 4 significant figures</li>
 
-      const roundButton =
-        document.getElementById("roundModeButton");
+      <li><strong>1.20e3</strong> → 3 significant figures</li>
 
-      const addButton =
-        document.getElementById("addModeButton");
+      <li><strong>1234</strong> → 3 SF → <strong>1230</strong></li>
 
-      const targetGroup =
-        document.getElementById("targetGroup");
+      <li><strong>0.004567</strong> → 2 SF → <strong>0.0046</strong></li>
 
-      const expressionGroup =
-        document.getElementById("expressionGroup");
+      <li><strong>12.11 + 18.0</strong> → <strong>30.1</strong></li>
 
-      const singleNumberGroup =
-        document.getElementById("singleNumberGroup");
+      <li><strong>12.5 × 2.0</strong> → <strong>25</strong></li>
 
-      const result =
-        document.getElementById("result");
+    </ul>
+
+  </section>
+
+</main>
 
 
-      countButton.classList.remove("active");
-      roundButton.classList.remove("active");
-      addButton.classList.remove("active");
+<footer>
+  © 2026 Significant Figures Calculator
+</footer>
 
 
-      if (mode === "count") {
+<script>
 
-        countButton.classList.add("active");
-
-        singleNumberGroup.style.display = "block";
-
-        targetGroup.style.display = "none";
-
-        expressionGroup.style.display = "none";
-
-      }
+  let currentMode = "count";
 
 
-      if (mode === "round") {
+  /*
+    ------------------------------
+    BASIC NUMBER VALIDATION
+    ------------------------------
+  */
 
-        roundButton.classList.add("active");
+  function isValidNumberString(value) {
 
-        singleNumberGroup.style.display = "block";
-
-        targetGroup.style.display = "block";
-
-        expressionGroup.style.display = "none";
-
-      }
-
-
-      if (mode === "add") {
-
-        addButton.classList.add("active");
-
-        singleNumberGroup.style.display = "none";
-
-        targetGroup.style.display = "none";
-
-        expressionGroup.style.display = "block";
-
-      }
+    return /^[+-]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][+-]?\d+)?$/
+      .test(value.trim());
+  }
 
 
-      result.style.display = "none";
+  /*
+    ------------------------------
+    COUNT SIGNIFICANT FIGURES
+    ------------------------------
+  */
+
+  function countSignificantFigures(value) {
+
+    let str = value.trim();
+
+    if (str === "") {
+      return "invalid";
     }
 
+    if (!isValidNumberString(str)) {
+      return "invalid";
+    }
 
-    /*
-      COUNT SIGNIFICANT FIGURES
-    */
-
-    function countSignificantFigures(value) {
-
-      let str = value.trim();
+    str = str.replace(/^[+-]/, "");
 
 
-      if (str === "") {
-        return "invalid";
-      }
+    // Scientific notation
+    if (/[eE]/.test(str)) {
 
+      const coefficient =
+        str.split(/[eE]/)[0];
 
-      // Remove + or -
-      str = str.replace(/^[+-]/, "");
-
-
-      // Scientific notation
-      if (/[eE]/.test(str)) {
-
-        const parts =
-          str.split(/[eE]/);
-
-
-        if (parts.length !== 2) {
-          return "invalid";
-        }
-
-
-        const coefficient = parts[0];
-
-        const exponent = parts[1];
-
-
-        if (!/^[+-]?\d+$/.test(exponent)) {
-          return "invalid";
-        }
-
-
-        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(coefficient)) {
-          return "invalid";
-        }
-
-
-        const digits =
-          coefficient.replace(".", "");
-
-
-        const significantDigits =
-          digits.replace(/^0+/, "");
-
-
-        if (significantDigits === "") {
-          return 1;
-        }
-
-
-        return significantDigits.length;
-      }
-
-
-      // Decimal
-      if (str.includes(".")) {
-
-        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(str)) {
-          return "invalid";
-        }
-
-
-        const digits =
-          str.replace(".", "");
-
-
-        const significantDigits =
-          digits.replace(/^0+/, "");
-
-
-        if (significantDigits === "") {
-          return 1;
-        }
-
-
-        return significantDigits.length;
-      }
-
-
-      // Whole number
-      if (!/^\d+$/.test(str)) {
-        return "invalid";
-      }
-
+      const digits =
+        coefficient.replace(".", "");
 
       const significantDigits =
-        str.replace(/^0+/, "");
-
+        digits.replace(/^0+/, "");
 
       if (significantDigits === "") {
         return 1;
       }
 
+      return significantDigits.length;
+    }
 
-      // Whole-number trailing zeros
-      if (/0+$/.test(significantDigits)) {
-        return "ambiguous";
+
+    // Decimal number
+    if (str.includes(".")) {
+
+      const digits =
+        str.replace(".", "");
+
+      const significantDigits =
+        digits.replace(/^0+/, "");
+
+      if (significantDigits === "") {
+        return 1;
       }
-
 
       return significantDigits.length;
     }
 
 
-    /*
-      GET DECIMAL PLACES
-      Used for addition/subtraction.
-    */
-
-    function getDecimalPlaces(value) {
-
-      let str = value.trim();
-
-      str = str.replace(/^[+-]/, "");
+    // Whole number
+    const significantDigits =
+      str.replace(/^0+/, "");
 
 
-      if (/[eE]/.test(str)) {
-
-        const parts =
-          str.split(/[eE]/);
-
-        if (parts.length !== 2) {
-          return null;
-        }
-
-        const coefficient =
-          parts[0];
-
-        const exponent =
-          Number(parts[1]);
-
-        if (!Number.isInteger(exponent)) {
-          return null;
-        }
-
-        const decimalIndex =
-          coefficient.indexOf(".");
-
-        const coefficientDecimals =
-          decimalIndex === -1
-            ? 0
-            : coefficient.length - decimalIndex - 1;
-
-        return coefficientDecimals - exponent;
-      }
-
-
-      const decimalIndex =
-        str.indexOf(".");
-
-
-      if (decimalIndex === -1) {
-        return 0;
-      }
-
-
-      return str.length - decimalIndex - 1;
+    if (significantDigits === "") {
+      return 1;
     }
 
 
-    /*
-      ROUND TO SIGNIFICANT FIGURES
-    */
-
-    function roundToSignificantFigures(
-      value,
-      sigFigs
-    ) {
-
-      const number =
-        Number(value);
+    // Whole-number trailing zeros are ambiguous.
+    if (/0+$/.test(significantDigits)) {
+      return "ambiguous";
+    }
 
 
-      if (!Number.isFinite(number)) {
-        return null;
-      }
+    return significantDigits.length;
+  }
 
 
-      if (number === 0) {
-        return "0";
-      }
+  /*
+    ------------------------------
+    DECIMAL PLACES
+    ------------------------------
+  */
+
+  function getDecimalPlaces(value) {
+
+    let str = value.trim();
+
+    str = str.replace(/^[+-]/, "");
 
 
-      const magnitude =
-        Math.floor(
-          Math.log10(Math.abs(number))
-        );
+    if (/[eE]/.test(str)) {
+
+      const parts =
+        str.split(/[eE]/);
+
+      const coefficient =
+        parts[0];
+
+      const exponent =
+        Number(parts[1]);
+
+      const decimalIndex =
+        coefficient.indexOf(".");
 
 
-      const decimalPlaces =
-        sigFigs - magnitude - 1;
+      const coefficientPlaces =
+        decimalIndex === -1
+          ? 0
+          : coefficient.length - decimalIndex - 1;
 
 
-      let rounded;
+      return coefficientPlaces - exponent;
+    }
 
 
-      if (decimalPlaces > 0) {
-
-        rounded =
-          Number(
-            number.toFixed(decimalPlaces)
-          );
-
-      } else {
-
-        const factor =
-          Math.pow(
-            10,
-            -decimalPlaces
-          );
+    const decimalIndex =
+      str.indexOf(".");
 
 
-        rounded =
-          Math.round(
-            number / factor
-          ) * factor;
-      }
+    if (decimalIndex === -1) {
+      return 0;
+    }
 
 
-      return formatRoundedNumber(
-        rounded,
-        decimalPlaces
+    return str.length - decimalIndex - 1;
+  }
+
+
+  /*
+    ------------------------------
+    ROUND TO DECIMAL PLACES
+    ------------------------------
+  */
+
+  function roundToDecimalPlaces(
+    number,
+    decimalPlaces
+  ) {
+
+    if (decimalPlaces >= 0) {
+
+      return Number(
+        number.toFixed(decimalPlaces)
       );
     }
 
 
-    /*
-      FORMAT ROUNDED NUMBER
-    */
-
-    function formatRoundedNumber(
-      number,
-      decimalPlaces
-    ) {
-
-      if (decimalPlaces > 0) {
-
-        return number.toFixed(
-          decimalPlaces
-        );
-      }
+    const factor =
+      Math.pow(10, -decimalPlaces);
 
 
-      return String(number);
+    return Math.round(
+      number / factor
+    ) * factor;
+  }
+
+
+  /*
+    ------------------------------
+    ROUND TO SIGNIFICANT FIGURES
+    ------------------------------
+  */
+
+  function roundToSignificantFigures(
+    value,
+    sigFigs
+  ) {
+
+    const number =
+      Number(value);
+
+
+    if (!Number.isFinite(number)) {
+      return null;
     }
 
 
-    /*
-      ROUND FOR DECIMAL-PLACE PRECISION
-      Used for addition/subtraction.
-    */
+    if (number === 0) {
+      return "0";
+    }
 
-    function roundToDecimalPlaces(
-      number,
-      decimalPlaces
-    ) {
 
-      if (decimalPlaces >= 0) {
+    const magnitude =
+      Math.floor(
+        Math.log10(Math.abs(number))
+      );
 
-        return Number(
+
+    const decimalPlaces =
+      sigFigs - magnitude - 1;
+
+
+    let rounded;
+
+
+    if (decimalPlaces >= 0) {
+
+      rounded =
+        Number(
           number.toFixed(decimalPlaces)
         );
-      }
 
+    } else {
 
       const factor =
         Math.pow(
@@ -819,670 +798,1063 @@
         );
 
 
-      return Math.round(
-        number / factor
-      ) * factor;
+      rounded =
+        Math.round(
+          number / factor
+        ) * factor;
     }
 
 
     /*
-      FORMAT ADDITION/SUBTRACTION RESULT
+      Scientific notation is used when
+      normal JavaScript formatting would
+      otherwise lose clarity.
     */
 
-    function formatDecimalResult(
-      number,
-      decimalPlaces
+    if (
+      Math.abs(rounded) >= 1e21 ||
+      (
+        Math.abs(rounded) > 0 &&
+        Math.abs(rounded) < 1e-7
+      )
     ) {
 
-      if (decimalPlaces > 0) {
-
-        return number.toFixed(
-          decimalPlaces
-        );
-      }
-
-
-      return String(number);
+      return rounded.toExponential(
+        Math.max(0, sigFigs - 1)
+      );
     }
 
 
-    /*
-      ADDITION / SUBTRACTION
-    */
+    if (decimalPlaces > 0) {
 
-    function calculateAdditionSubtraction(
+      return rounded.toFixed(
+        decimalPlaces
+      );
+    }
+
+
+    return String(rounded);
+  }
+
+
+  /*
+    ------------------------------
+    PARSE ADDITION / SUBTRACTION
+    ------------------------------
+  */
+
+  function parseAddExpression(expression) {
+
+    let text =
       expression
+        .trim()
+        .replace(/−/g, "-")
+        .replace(/\s+/g, "");
+
+
+    if (text === "") {
+      return null;
+    }
+
+
+    const numberPattern =
+      "[+-]?(?:(?:\\d+(?:\\.\\d*)?)|(?:\\.\\d+))(?:[eE][+-]?\\d+)?";
+
+
+    const regex =
+      new RegExp(
+        "^(" +
+        numberPattern +
+        ")([+-])(" +
+        numberPattern +
+        ")$"
+      );
+
+
+    const match =
+      text.match(regex);
+
+
+    if (!match) {
+      return null;
+    }
+
+
+    const first =
+      match[1];
+
+    const operator =
+      match[2];
+
+    const second =
+      match[3];
+
+
+    return {
+      first: first,
+      operator: operator,
+      second: second
+    };
+  }
+
+
+  /*
+    ------------------------------
+    ADDITION / SUBTRACTION
+    ------------------------------
+  */
+
+  function calculateAddSubtract(
+    expression
+  ) {
+
+    const parsed =
+      parseAddExpression(expression);
+
+
+    if (!parsed) {
+      return null;
+    }
+
+
+    const a =
+      Number(parsed.first);
+
+    const b =
+      Number(parsed.second);
+
+
+    if (
+      !Number.isFinite(a) ||
+      !Number.isFinite(b)
     ) {
+      return null;
+    }
 
-      const cleaned =
+
+    const aPlaces =
+      getDecimalPlaces(parsed.first);
+
+    const bPlaces =
+      getDecimalPlaces(parsed.second);
+
+
+    const limitingPlaces =
+      Math.min(
+        aPlaces,
+        bPlaces
+      );
+
+
+    const raw =
+      parsed.operator === "+"
+        ? a + b
+        : a - b;
+
+
+    const rounded =
+      roundToDecimalPlaces(
+        raw,
+        limitingPlaces
+      );
+
+
+    return {
+      first: parsed.first,
+      second: parsed.second,
+      operator: parsed.operator,
+      firstPlaces: aPlaces,
+      secondPlaces: bPlaces,
+      limitingPlaces: limitingPlaces,
+      raw: raw,
+      result: rounded
+    };
+  }
+
+
+  /*
+    ------------------------------
+    PARSE MULTIPLICATION / DIVISION
+    ------------------------------
+  */
+
+  function parseMultiplyExpression(
+    expression
+  ) {
+
+    let text =
+      expression
+        .trim()
+        .replace(/×/g, "*")
+        .replace(/÷/g, "/")
+        .replace(/−/g, "-")
+        .replace(/\s+/g, "");
+
+
+    const numberPattern =
+      "[+-]?(?:(?:\\d+(?:\\.\\d*)?)|(?:\\.\\d+))(?:[eE][+-]?\\d+)?";
+
+
+    const regex =
+      new RegExp(
+        "^(" +
+        numberPattern +
+        ")([*/])(" +
+        numberPattern +
+        ")$"
+      );
+
+
+    const match =
+      text.match(regex);
+
+
+    if (!match) {
+      return null;
+    }
+
+
+    return {
+      first: match[1],
+      operator: match[2],
+      second: match[3]
+    };
+  }
+
+
+  /*
+    ------------------------------
+    MULTIPLICATION / DIVISION
+    ------------------------------
+  */
+
+  function calculateMultiplyDivide(
+    expression
+  ) {
+
+    const parsed =
+      parseMultiplyExpression(
         expression
-          .replace(/\s+/g, "");
+      );
 
 
-      if (cleaned === "") {
-        return null;
+    if (!parsed) {
+      return null;
+    }
+
+
+    const a =
+      Number(parsed.first);
+
+    const b =
+      Number(parsed.second);
+
+
+    if (
+      !Number.isFinite(a) ||
+      !Number.isFinite(b)
+    ) {
+      return null;
+    }
+
+
+    if (
+      parsed.operator === "/" &&
+      b === 0
+    ) {
+      return "division-by-zero";
+    }
+
+
+    const aSig =
+      countSignificantFigures(
+        parsed.first
+      );
+
+    const bSig =
+      countSignificantFigures(
+        parsed.second
+      );
+
+
+    if (
+      aSig === "invalid" ||
+      bSig === "invalid" ||
+      aSig === "ambiguous" ||
+      bSig === "ambiguous"
+    ) {
+      return null;
+    }
+
+
+    const limitingSigFigs =
+      Math.min(
+        aSig,
+        bSig
+      );
+
+
+    const raw =
+      parsed.operator === "*"
+        ? a * b
+        : a / b;
+
+
+    const result =
+      roundToSignificantFigures(
+        String(raw),
+        limitingSigFigs
+      );
+
+
+    return {
+      first: parsed.first,
+      second: parsed.second,
+      operator: parsed.operator,
+      firstSig: aSig,
+      secondSig: bSig,
+      limitingSigFigs: limitingSigFigs,
+      raw: raw,
+      result: result
+    };
+  }
+
+
+  /*
+    ------------------------------
+    WHY: ROUNDING
+    ------------------------------
+  */
+
+  function roundingWhy(
+    value,
+    sigFigs
+  ) {
+
+    const number =
+      Number(value);
+
+
+    if (!Number.isFinite(number)) {
+      return "";
+    }
+
+
+    if (number === 0) {
+
+      return `
+        <div class="why-title">Why?</div>
+        Zero remains zero when rounded to any requested
+        number of significant figures.
+      `;
+    }
+
+
+    const magnitude =
+      Math.floor(
+        Math.log10(Math.abs(number))
+      );
+
+
+    const position =
+      sigFigs - magnitude - 1;
+
+
+    let placeText;
+
+
+    if (position > 0) {
+      placeText =
+        position === 1
+          ? "the tenths place"
+          : "the decimal places required for the requested precision";
+    } else if (position === 0) {
+      placeText =
+        "the ones place";
+    } else {
+      placeText =
+        "the appropriate place to the left of the decimal point";
+    }
+
+
+    const result =
+      roundToSignificantFigures(
+        value,
+        sigFigs
+      );
+
+
+    return `
+      <div class="why-title">Why?</div>
+
+      <p>
+        We keep the first ${sigFigs} significant figures
+        and use the next digit to determine the rounding.
+      </p>
+
+      <p>
+        The rounding occurs at ${placeText}.
+      </p>
+
+      <p>
+        Final result:
+        <strong>${result}</strong>
+      </p>
+    `;
+  }
+
+
+  /*
+    ------------------------------
+    WHY: ADDITION / SUBTRACTION
+    ------------------------------
+  */
+
+  function addWhy(
+    calculation
+  ) {
+
+    const place =
+      calculation.limitingPlaces;
+
+
+    let placeText;
+
+
+    if (place === 0) {
+      placeText = "ones place";
+    } else if (place === 1) {
+      placeText = "tenths place";
+    } else if (place === 2) {
+      placeText = "hundredths place";
+    } else {
+      placeText =
+        place + " decimal places";
+    }
+
+
+    const symbol =
+      calculation.operator === "+"
+        ? "+"
+        : "−";
+
+
+    return `
+      <div class="why-title">Why?</div>
+
+      <p>
+        For addition and subtraction, the answer is limited
+        by the input with the fewest decimal places.
+      </p>
+
+      <p>
+        ${calculation.first}
+        ${symbol}
+        ${calculation.second}
+        =
+        ${calculation.raw}
+      </p>
+
+      <p>
+        The least precise input reaches the
+        <strong>${placeText}</strong>, so the final answer
+        is rounded to that precision.
+      </p>
+
+      <p>
+        Final result:
+        <strong>${calculation.result}</strong>
+      </p>
+    `;
+  }
+
+
+  /*
+    ------------------------------
+    WHY: MULTIPLICATION / DIVISION
+    ------------------------------
+  */
+
+  function multiplyWhy(
+    calculation
+  ) {
+
+    const symbol =
+      calculation.operator === "*"
+        ? "×"
+        : "÷";
+
+
+    return `
+      <div class="why-title">Why?</div>
+
+      <p>
+        For multiplication and division, the final answer
+        is limited by the number with the fewest significant figures.
+      </p>
+
+      <p>
+        ${calculation.first}
+        ${symbol}
+        ${calculation.second}
+        =
+        ${calculation.raw}
+      </p>
+
+      <p>
+        ${calculation.first} has
+        <strong>${calculation.firstSig}</strong> significant figures
+        and ${calculation.second} has
+        <strong>${calculation.secondSig}</strong>.
+      </p>
+
+      <p>
+        Therefore the final answer is rounded to
+        <strong>${calculation.limitingSigFigs}</strong>
+        significant figures.
+      </p>
+
+      <p>
+        Final result:
+        <strong>${calculation.result}</strong>
+      </p>
+    `;
+  }
+
+
+  /*
+    ------------------------------
+    MODE SWITCHING
+    ------------------------------
+  */
+
+  function setMode(mode) {
+
+    currentMode = mode;
+
+
+    const buttons = [
+      document.getElementById("countModeButton"),
+      document.getElementById("roundModeButton"),
+      document.getElementById("addModeButton"),
+      document.getElementById("multiplyModeButton")
+    ];
+
+
+    buttons.forEach(function(button) {
+      button.classList.remove("active");
+    });
+
+
+    document
+      .getElementById(
+        mode === "count"
+          ? "countModeButton"
+          : mode === "round"
+            ? "roundModeButton"
+            : mode === "add"
+              ? "addModeButton"
+              : "multiplyModeButton"
+      )
+      .classList.add("active");
+
+
+    document
+      .getElementById("targetGroup")
+      .classList.toggle(
+        "hidden",
+        mode !== "round"
+      );
+
+
+    document
+      .getElementById("singleNumberGroup")
+      .classList.toggle(
+        "hidden",
+        mode !== "count" &&
+        mode !== "round"
+      );
+
+
+    document
+      .getElementById("addGroup")
+      .classList.toggle(
+        "hidden",
+        mode !== "add"
+      );
+
+
+    document
+      .getElementById("multiplyGroup")
+      .classList.toggle(
+        "hidden",
+        mode !== "multiply"
+      );
+
+
+    hideResult();
+  }
+
+
+  /*
+    ------------------------------
+    RESULT HELPERS
+    ------------------------------
+  */
+
+  function hideResult() {
+
+    const result =
+      document.getElementById("result");
+
+    result.classList.remove("show");
+    result.classList.remove("error");
+  }
+
+
+  function showError(
+    title,
+    message
+  ) {
+
+    const result =
+      document.getElementById("result");
+
+    const resultNumber =
+      document.getElementById("resultNumber");
+
+    const resultLabel =
+      document.getElementById("resultLabel");
+
+    const why =
+      document.getElementById("why");
+
+
+    result.classList.add("show");
+    result.classList.add("error");
+
+
+    resultNumber.textContent =
+      title;
+
+    resultLabel.textContent =
+      message;
+
+    why.innerHTML = "";
+  }
+
+
+  /*
+    ------------------------------
+    MAIN CALCULATOR
+    ------------------------------
+  */
+
+  function calculate() {
+
+    const result =
+      document.getElementById("result");
+
+    const resultNumber =
+      document.getElementById("resultNumber");
+
+    const resultLabel =
+      document.getElementById("resultLabel");
+
+    const why =
+      document.getElementById("why");
+
+
+    result.classList.add("show");
+    result.classList.remove("error");
+
+    why.innerHTML = "";
+
+
+    /*
+      COUNT
+    */
+
+    if (currentMode === "count") {
+
+      const value =
+        document
+          .getElementById("numberInput")
+          .value
+          .trim();
+
+
+      if (value === "") {
+
+        showError(
+          "Enter a number",
+          "Please enter a number."
+        );
+
+        return;
       }
 
 
-      /*
-        Split expression while preserving
-        the sign of each number.
-      */
+      const answer =
+        countSignificantFigures(value);
 
-      const tokens =
-        cleaned.match(
-          /[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/g
+
+      if (answer === "invalid") {
+
+        showError(
+          "Invalid input",
+          "Please enter a valid number."
+        );
+
+        return;
+      }
+
+
+      if (answer === "ambiguous") {
+
+        resultNumber.textContent =
+          "Ambiguous";
+
+        resultLabel.textContent =
+          "The exact precision of this whole number is unclear.";
+
+
+        why.innerHTML = `
+          <div class="why-title">Why?</div>
+
+          <p>
+            Trailing zeros in a whole number such as
+            <strong>100</strong> can be interpreted differently
+            depending on the intended precision.
+          </p>
+
+          <p>
+            Scientific notation can make the intended number
+            of significant figures explicit.
+          </p>
+        `;
+
+        return;
+      }
+
+
+      resultNumber.textContent =
+        answer;
+
+
+      resultLabel.textContent =
+        answer === 1
+          ? "significant figure"
+          : "significant figures";
+
+
+      why.innerHTML = `
+        <div class="why-title">Why?</div>
+
+        <p>
+          The calculator identifies the significant digits
+          according to standard significant-figure conventions.
+        </p>
+      `;
+
+      return;
+    }
+
+
+    /*
+      ROUND
+    */
+
+    if (currentMode === "round") {
+
+      const value =
+        document
+          .getElementById("numberInput")
+          .value
+          .trim();
+
+
+      const target =
+        Number(
+          document
+            .getElementById("targetInput")
+            .value
         );
 
 
-      if (!tokens || tokens.length < 2) {
-        return null;
+      if (value === "") {
+
+        showError(
+          "Enter a number",
+          "Please enter a number to round."
+        );
+
+        return;
       }
 
 
-      const reconstructed =
-        tokens.join("");
+      if (!isValidNumberString(value)) {
 
+        showError(
+          "Invalid input",
+          "Please enter a valid number."
+        );
 
-      if (reconstructed !== cleaned) {
-        return null;
-      }
-
-
-      let total = 0;
-
-      let limitingDecimalPlaces = Infinity;
-
-      const details = [];
-
-
-      for (let i = 0; i < tokens.length; i++) {
-
-        const token =
-          tokens[i];
-
-
-        const number =
-          Number(token);
-
-
-        if (!Number.isFinite(number)) {
-          return null;
-        }
-
-
-        const decimalPlaces =
-          getDecimalPlaces(token);
-
-
-        if (decimalPlaces === null) {
-          return null;
-        }
-
-
-        total += number;
-
-
-        limitingDecimalPlaces =
-          Math.min(
-            limitingDecimalPlaces,
-            decimalPlaces
-          );
-
-
-        details.push({
-          token: token,
-          number: number,
-          decimalPlaces: decimalPlaces
-        });
+        return;
       }
 
 
       if (
-        limitingDecimalPlaces === Infinity
+        !Number.isInteger(target) ||
+        target < 1 ||
+        target > 100
       ) {
-        return null;
+
+        showError(
+          "Invalid target",
+          "Enter a whole number from 1 to 100."
+        );
+
+        return;
       }
 
 
       const rounded =
-        roundToDecimalPlaces(
-          total,
-          limitingDecimalPlaces
+        roundToSignificantFigures(
+          value,
+          target
         );
 
 
-      const formatted =
-        formatDecimalResult(
-          rounded,
-          limitingDecimalPlaces
+      if (rounded === null) {
+
+        showError(
+          "Unable to calculate",
+          "Please check the number."
         );
-
-
-      return {
-        result: formatted,
-        decimalPlaces:
-          limitingDecimalPlaces,
-        details: details,
-        rawTotal: total
-      };
-    }
-
-
-    /*
-      ROUNDING EXPLANATION
-    */
-
-    function getRoundingExplanation(
-      value,
-      sigFigs
-    ) {
-
-      const number =
-        Number(value);
-
-
-      if (!Number.isFinite(number)) {
-        return "";
-      }
-
-
-      if (number === 0) {
-
-        return `
-          <div class="why-title">Why?</div>
-          Zero remains zero when rounded to any number
-          of significant figures.
-        `;
-      }
-
-
-      const absNumber =
-        Math.abs(number);
-
-
-      const magnitude =
-        Math.floor(
-          Math.log10(absNumber)
-        );
-
-
-      const decimalPlaces =
-        sigFigs - magnitude - 1;
-
-
-      let rounded;
-
-
-      if (decimalPlaces > 0) {
-
-        rounded =
-          Number(
-            number.toFixed(decimalPlaces)
-          );
-
-      } else {
-
-        const factor =
-          Math.pow(
-            10,
-            -decimalPlaces
-          );
-
-
-        rounded =
-          Math.round(
-            number / factor
-          ) * factor;
-      }
-
-
-      const roundedText =
-        formatRoundedNumber(
-          rounded,
-          decimalPlaces
-        );
-
-
-      let explanation;
-
-
-      if (decimalPlaces >= 0) {
-
-        explanation =
-          "The number is kept to the required significant " +
-          "digits. The next digit determines whether the last " +
-          "kept digit needs to increase.";
-
-      } else {
-
-        explanation =
-          "The number is rounded at the required place value " +
-          "because fewer significant figures are requested " +
-          "than the digits before the decimal point.";
-      }
-
-
-      return `
-        <div class="why-title">Why?</div>
-        ${explanation}
-        Final result: <strong>${roundedText}</strong>.
-      `;
-    }
-
-
-    /*
-      ADDITION/SUBTRACTION EXPLANATION
-    */
-
-    function getAdditionExplanation(
-      calculation
-    ) {
-
-      const decimalPlaces =
-        calculation.decimalPlaces;
-
-
-      let precisionText;
-
-
-      if (decimalPlaces === 0) {
-
-        precisionText =
-          "The least precise value is measured to the ones place.";
-
-      } else if (decimalPlaces === 1) {
-
-        precisionText =
-          "The least precise value is measured to the tenths place.";
-
-      } else {
-
-        precisionText =
-          "The least precise value is measured to " +
-          decimalPlaces +
-          " decimal places.";
-      }
-
-
-      const values =
-        calculation.details
-          .map(function(item) {
-            return item.token;
-          })
-          .join(" + ");
-
-
-      return `
-        <div class="why-title">Why?</div>
-        ${precisionText}
-        For addition and subtraction, the final answer is
-        rounded to the smallest number of decimal places
-        present in the inputs.
-        <br><br>
-        Calculation: <strong>${values}</strong>
-        = <strong>${calculation.rawTotal}</strong>
-        <br>
-        Final result after applying the precision rule:
-        <strong>${calculation.result}</strong>
-      `;
-    }
-
-
-    /*
-      MAIN CALCULATE FUNCTION
-    */
-
-    function calculate() {
-
-      const result =
-        document.getElementById("result");
-
-      const resultNumber =
-        document.getElementById("resultNumber");
-
-      const resultLabel =
-        document.getElementById("resultLabel");
-
-      const explanation =
-        document.getElementById("explanation");
-
-
-      result.style.display = "block";
-
-      result.classList.remove("error");
-
-      explanation.innerHTML = "";
-
-
-      /*
-        COUNT MODE
-      */
-
-      if (currentMode === "count") {
-
-        const input =
-          document.getElementById("numberInput");
-
-        const value =
-          input.value.trim();
-
-
-        if (value === "") {
-
-          showError(
-            "Enter a number",
-            "Please enter a number to calculate."
-          );
-
-          return;
-        }
-
-
-        const answer =
-          countSignificantFigures(value);
-
-
-        if (answer === "invalid") {
-
-          showError(
-            "Invalid input",
-            "Please enter a valid number."
-          );
-
-          return;
-        }
-
-
-        if (answer === "ambiguous") {
-
-          resultNumber.textContent =
-            "Ambiguous";
-
-          resultLabel.textContent =
-            "The number of significant figures is unclear without additional notation.";
-
-          explanation.innerHTML = `
-            <div class="why-title">Why?</div>
-            Whole-number trailing zeros can have different
-            meanings depending on the intended precision.
-            Scientific notation can make the precision explicit.
-          `;
-
-          return;
-        }
-
-
-        resultNumber.textContent =
-          answer;
-
-
-        resultLabel.textContent =
-          answer === 1
-            ? "significant figure"
-            : "significant figures";
-
-
-        explanation.innerHTML = `
-          <div class="why-title">Why?</div>
-          The calculator identifies significant digits according
-          to standard significant-figure rules.
-        `;
-
 
         return;
       }
 
-
-      /*
-        ROUND MODE
-      */
-
-      if (currentMode === "round") {
-
-        const input =
-          document.getElementById("numberInput");
-
-        const targetInput =
-          document.getElementById("targetInput");
-
-
-        const value =
-          input.value.trim();
-
-        const target =
-          Number(targetInput.value);
-
-
-        if (value === "") {
-
-          showError(
-            "Enter a number",
-            "Please enter a number to round."
-          );
-
-          return;
-        }
-
-
-        if (
-          !Number.isInteger(target) ||
-          target < 1 ||
-          target > 100
-        ) {
-
-          showError(
-            "Invalid target",
-            "Enter a whole number from 1 to 100."
-          );
-
-          return;
-        }
-
-
-        const numericValue =
-          Number(value);
-
-
-        if (!Number.isFinite(numericValue)) {
-
-          showError(
-            "Invalid input",
-            "Please enter a valid number."
-          );
-
-          return;
-        }
-
-
-        const rounded =
-          roundToSignificantFigures(
-            value,
-            target
-          );
-
-
-        if (rounded === null) {
-
-          showError(
-            "Unable to calculate",
-            "Please check your input."
-          );
-
-          return;
-        }
-
-
-        resultNumber.textContent =
-          rounded;
-
-
-        resultLabel.textContent =
-          "rounded to " +
-          target +
-          " significant figures";
-
-
-        explanation.innerHTML =
-          getRoundingExplanation(
-            value,
-            target
-          );
-
-
-        return;
-      }
-
-
-      /*
-        ADDITION / SUBTRACTION MODE
-      */
-
-      if (currentMode === "add") {
-
-        const expressionInput =
-          document.getElementById("expressionInput");
-
-
-        const expression =
-          expressionInput.value.trim();
-
-
-        if (expression === "") {
-
-          showError(
-            "Enter an expression",
-            "Example: 12.11 + 18.0"
-          );
-
-          return;
-        }
-
-
-        const calculation =
-          calculateAdditionSubtraction(
-            expression
-          );
-
-
-        if (calculation === null) {
-
-          showError(
-            "Invalid expression",
-            "Use two or more valid numbers separated by + or −."
-          );
-
-          return;
-        }
-
-
-        resultNumber.textContent =
-          calculation.result;
-
-
-        resultLabel.textContent =
-          "addition/subtraction result";
-
-
-        explanation.innerHTML =
-          getAdditionExplanation(
-            calculation
-          );
-
-
-        return;
-      }
-    }
-
-
-    /*
-      ERROR DISPLAY
-    */
-
-    function showError(
-      title,
-      message
-    ) {
-
-      const result =
-        document.getElementById("result");
-
-      const resultNumber =
-        document.getElementById("resultNumber");
-
-      const resultLabel =
-        document.getElementById("resultLabel");
-
-      const explanation =
-        document.getElementById("explanation");
-
-
-      result.style.display = "block";
-
-      result.classList.add("error");
 
       resultNumber.textContent =
-        title;
+        rounded;
+
 
       resultLabel.textContent =
-        message;
+        "rounded to " +
+        target +
+        " significant figures";
 
-      explanation.innerHTML = "";
+
+      why.innerHTML =
+        roundingWhy(
+          value,
+          target
+        );
+
+      return;
     }
 
 
     /*
-      ENTER KEY
+      ADD / SUBTRACT
     */
 
-    document
-      .getElementById("numberInput")
-      .addEventListener(
-        "keydown",
-        function(event) {
+    if (currentMode === "add") {
 
-          if (event.key === "Enter") {
-            calculate();
-          }
+      const expression =
+        document
+          .getElementById("addInput")
+          .value
+          .trim();
 
+
+      const calculation =
+        calculateAddSubtract(
+          expression
+        );
+
+
+      if (!calculation) {
+
+        showError(
+          "Invalid expression",
+          "Use two numbers with + or −, for example: 12.11 + 18.0"
+        );
+
+        return;
+      }
+
+
+      resultNumber.textContent =
+        formatDecimalResult(
+          calculation.result,
+          calculation.limitingPlaces
+        );
+
+
+      resultLabel.textContent =
+        "addition/subtraction result";
+
+
+      why.innerHTML =
+        addWhy(
+          calculation
+        );
+
+      return;
+    }
+
+
+    /*
+      MULTIPLY / DIVIDE
+    */
+
+    if (currentMode === "multiply") {
+
+      const expression =
+        document
+          .getElementById("multiplyInput")
+          .value
+          .trim();
+
+
+      const calculation =
+        calculateMultiplyDivide(
+          expression
+        );
+
+
+      if (
+        calculation === "division-by-zero"
+      ) {
+
+        showError(
+          "Cannot divide by zero",
+          "Please enter a non-zero divisor."
+        );
+
+        return;
+      }
+
+
+      if (!calculation) {
+
+        showError(
+          "Invalid expression",
+          "Use two numbers with ×, *, ÷, or /."
+        );
+
+        return;
+      }
+
+
+      resultNumber.textContent =
+        calculation.result;
+
+
+      resultLabel.textContent =
+        "multiplication/division result";
+
+
+      why.innerHTML =
+        multiplyWhy(
+          calculation
+        );
+
+      return;
+    }
+  }
+
+
+  /*
+    ------------------------------
+    DECIMAL RESULT FORMATTER
+    ------------------------------
+  */
+
+  function formatDecimalResult(
+    number,
+    decimalPlaces
+  ) {
+
+    if (decimalPlaces > 0) {
+
+      return Number(number)
+        .toFixed(decimalPlaces);
+    }
+
+
+    return String(
+      Number(number)
+    );
+  }
+
+
+  /*
+    ------------------------------
+    ENTER KEY SUPPORT
+    ------------------------------
+  */
+
+  document
+    .getElementById("numberInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          calculate();
         }
-      );
+
+      }
+    );
 
 
-    document
-      .getElementById("targetInput")
-      .addEventListener(
-        "keydown",
-        function(event) {
+  document
+    .getElementById("targetInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
 
-          if (event.key === "Enter") {
-            calculate();
-          }
-
+        if (event.key === "Enter") {
+          calculate();
         }
-      );
+
+      }
+    );
 
 
-    document
-      .getElementById("expressionInput")
-      .addEventListener(
-        "keydown",
-        function(event) {
+  document
+    .getElementById("addInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
 
-          if (
-            event.key === "Enter" &&
-            !event.shiftKey
-          ) {
-
-            event.preventDefault();
-
-            calculate();
-          }
-
+        if (event.key === "Enter") {
+          calculate();
         }
-      );
 
-  </script>
+      }
+    );
+
+
+  document
+    .getElementById("multiplyInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          calculate();
+        }
+
+      }
+    );
+
+
+</script>
 
 </body>
 </html>
