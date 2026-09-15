@@ -151,4 +151,806 @@
       margin-top: 4px;
     }
 
-    .ex
+    .explanation {
+      margin-top: 16px;
+      padding-top: 15px;
+      border-top: 1px solid #d1d5db;
+      text-align: left;
+      color: #374151;
+    }
+
+    .why-title {
+      font-weight: bold;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+
+    .error {
+      color: #b91c1c;
+      background: #fef2f2;
+    }
+
+    .info-card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .info-card h2 {
+      margin-top: 0;
+      color: #111827;
+    }
+
+    .examples {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px 18px;
+      background: #111827;
+      color: #d1d5db;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin-top: 25px;
+      }
+
+      .intro h2 {
+        font-size: 25px;
+      }
+
+      .calculator-card,
+      .info-card {
+        padding: 20px;
+      }
+
+      .mode-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <h1>Significant Figures Calculator</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <h2>Significant Figures Calculator</h2>
+
+      <p>
+        Count significant figures or round a number to a chosen number
+        of significant figures.
+      </p>
+    </section>
+
+
+    <section class="calculator-card">
+
+      <div class="mode-buttons">
+
+        <button
+          type="button"
+          id="countModeButton"
+          class="mode-button active"
+          onclick="setMode('count')"
+        >
+          Count Significant Figures
+        </button>
+
+        <button
+          type="button"
+          id="roundModeButton"
+          class="mode-button"
+          onclick="setMode('round')"
+        >
+          Round to Significant Figures
+        </button>
+
+      </div>
+
+
+      <label for="numberInput">
+        Enter a number
+      </label>
+
+      <input
+        type="text"
+        id="numberInput"
+        placeholder="Example: 0.004560"
+        autocomplete="off"
+      >
+
+
+      <div
+        id="targetGroup"
+        class="target-group"
+      >
+
+        <label for="targetInput">
+          Number of significant figures
+        </label>
+
+        <input
+          type="number"
+          id="targetInput"
+          placeholder="Example: 3"
+          min="1"
+          max="100"
+          step="1"
+        >
+
+      </div>
+
+
+      <button
+        type="button"
+        onclick="calculate()"
+      >
+        Calculate
+      </button>
+
+
+      <div
+        id="result"
+        class="result"
+      >
+
+        <div
+          id="resultNumber"
+          class="result-number"
+        ></div>
+
+        <div
+          id="resultLabel"
+          class="result-label"
+        ></div>
+
+        <div
+          id="explanation"
+          class="explanation"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <section class="info-card">
+
+      <h2>What Are Significant Figures?</h2>
+
+      <p>
+        Significant figures are the digits in a number that carry
+        meaningful information about its precision.
+      </p>
+
+      <p>
+        Leading zeros are not significant. Zeros between non-zero digits
+        are significant. Trailing zeros can be significant when the
+        notation makes the intended precision clear.
+      </p>
+
+    </section>
+
+
+    <section class="info-card">
+
+      <h2>Examples</h2>
+
+      <ul class="examples">
+
+        <li>
+          <strong>123</strong> → 3 significant figures
+        </li>
+
+        <li>
+          <strong>0.004560</strong> → 4 significant figures
+        </li>
+
+        <li>
+          <strong>1002</strong> → 4 significant figures
+        </li>
+
+        <li>
+          <strong>100.0</strong> → 4 significant figures
+        </li>
+
+        <li>
+          <strong>1.20e3</strong> → 3 significant figures
+        </li>
+
+        <li>
+          <strong>1234</strong> → 3 SF → <strong>1230</strong>
+        </li>
+
+        <li>
+          <strong>0.004567</strong> → 2 SF → <strong>0.0046</strong>
+        </li>
+
+      </ul>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    © 2026 Significant Figures Calculator
+  </footer>
+
+
+  <script>
+
+    let currentMode = "count";
+
+
+    function setMode(mode) {
+
+      currentMode = mode;
+
+      const countButton =
+        document.getElementById("countModeButton");
+
+      const roundButton =
+        document.getElementById("roundModeButton");
+
+      const targetGroup =
+        document.getElementById("targetGroup");
+
+      const result =
+        document.getElementById("result");
+
+
+      if (mode === "count") {
+
+        countButton.classList.add("active");
+
+        roundButton.classList.remove("active");
+
+        targetGroup.style.display = "none";
+
+      } else {
+
+        countButton.classList.remove("active");
+
+        roundButton.classList.add("active");
+
+        targetGroup.style.display = "block";
+      }
+
+
+      result.style.display = "none";
+    }
+
+
+    function countSignificantFigures(value) {
+
+      let str = value.trim();
+
+
+      if (str === "") {
+        return "invalid";
+      }
+
+
+      // Remove + or -
+      str = str.replace(/^[+-]/, "");
+
+
+      // Scientific notation
+      if (/[eE]/.test(str)) {
+
+        const parts =
+          str.split(/[eE]/);
+
+
+        if (parts.length !== 2) {
+          return "invalid";
+        }
+
+
+        const coefficient = parts[0];
+
+        const exponent = parts[1];
+
+
+        if (!/^[+-]?\d+$/.test(exponent)) {
+          return "invalid";
+        }
+
+
+        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(coefficient)) {
+          return "invalid";
+        }
+
+
+        const digits =
+          coefficient.replace(".", "");
+
+
+        const significantDigits =
+          digits.replace(/^0+/, "");
+
+
+        if (significantDigits === "") {
+          return 1;
+        }
+
+
+        return significantDigits.length;
+      }
+
+
+      // Decimal
+      if (str.includes(".")) {
+
+        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(str)) {
+          return "invalid";
+        }
+
+
+        const digits =
+          str.replace(".", "");
+
+
+        const significantDigits =
+          digits.replace(/^0+/, "");
+
+
+        if (significantDigits === "") {
+          return 1;
+        }
+
+
+        return significantDigits.length;
+      }
+
+
+      // Whole number
+      if (!/^\d+$/.test(str)) {
+        return "invalid";
+      }
+
+
+      const significantDigits =
+        str.replace(/^0+/, "");
+
+
+      if (significantDigits === "") {
+        return 1;
+      }
+
+
+      // Whole-number trailing zeros
+      // are ambiguous without more notation.
+      if (/0+$/.test(significantDigits)) {
+        return "ambiguous";
+      }
+
+
+      return significantDigits.length;
+    }
+
+
+    function roundToSignificantFigures(
+      value,
+      sigFigs
+    ) {
+
+      const number =
+        Number(value);
+
+
+      if (!Number.isFinite(number)) {
+        return null;
+      }
+
+
+      if (number === 0) {
+        return "0";
+      }
+
+
+      const magnitude =
+        Math.floor(
+          Math.log10(Math.abs(number))
+        );
+
+
+      const decimalPlaces =
+        sigFigs - magnitude - 1;
+
+
+      let rounded;
+
+
+      if (decimalPlaces > 0) {
+
+        rounded =
+          Number(
+            number.toFixed(decimalPlaces)
+          );
+
+      } else {
+
+        const factor =
+          Math.pow(
+            10,
+            -decimalPlaces
+          );
+
+
+        rounded =
+          Math.round(
+            number / factor
+          ) * factor;
+      }
+
+
+      return formatRoundedNumber(
+        rounded,
+        decimalPlaces
+      );
+    }
+
+
+    function formatRoundedNumber(
+      number,
+      decimalPlaces
+    ) {
+
+      if (decimalPlaces > 0) {
+
+        return number.toFixed(
+          decimalPlaces
+        );
+      }
+
+
+      return String(number);
+    }
+
+
+    function getRoundingExplanation(
+      value,
+      sigFigs
+    ) {
+
+      const number =
+        Number(value);
+
+
+      if (!Number.isFinite(number)) {
+        return "";
+      }
+
+
+      if (number === 0) {
+
+        return `
+          <div class="why-title">Why?</div>
+          Zero remains zero when rounded to any number
+          of significant figures.
+        `;
+      }
+
+
+      const absNumber =
+        Math.abs(number);
+
+
+      const magnitude =
+        Math.floor(
+          Math.log10(absNumber)
+        );
+
+
+      const decimalPlaces =
+        sigFigs - magnitude - 1;
+
+
+      let rounded;
+
+
+      if (decimalPlaces > 0) {
+
+        rounded =
+          Number(
+            number.toFixed(decimalPlaces)
+          );
+
+      } else {
+
+        const factor =
+          Math.pow(
+            10,
+            -decimalPlaces
+          );
+
+
+        rounded =
+          Math.round(
+            number / factor
+          ) * factor;
+      }
+
+
+      const direction =
+        number < 0 ? "-" : "";
+
+
+      const roundedText =
+        formatRoundedNumber(
+          rounded,
+          decimalPlaces
+        );
+
+
+      let explanation =
+        "The number is rounded to " +
+        sigFigs +
+        " significant figures. ";
+
+
+      if (decimalPlaces >= 0) {
+
+        explanation +=
+          "The digits are kept up to the required precision, " +
+          "and the next digit determines whether rounding is needed.";
+
+      } else {
+
+        explanation +=
+          "The number is rounded at the required place value " +
+          "because fewer significant figures are requested than " +
+          "the number of digits before the decimal point.";
+      }
+
+
+      explanation +=
+        " Final result: " +
+        direction +
+        roundedText +
+        ".";
+
+
+      return `
+        <div class="why-title">Why?</div>
+        ${explanation}
+      `;
+    }
+
+
+    function calculate() {
+
+      const input =
+        document.getElementById("numberInput");
+
+      const result =
+        document.getElementById("result");
+
+      const resultNumber =
+        document.getElementById("resultNumber");
+
+      const resultLabel =
+        document.getElementById("resultLabel");
+
+      const explanation =
+        document.getElementById("explanation");
+
+
+      const value =
+        input.value.trim();
+
+
+      result.style.display = "block";
+
+      result.classList.remove("error");
+
+      explanation.innerHTML = "";
+
+
+      if (value === "") {
+
+        result.classList.add("error");
+
+        resultNumber.textContent =
+          "Enter a number";
+
+        resultLabel.textContent = "";
+
+        return;
+      }
+
+
+      // COUNT MODE
+      if (currentMode === "count") {
+
+        const answer =
+          countSignificantFigures(value);
+
+
+        if (answer === "invalid") {
+
+          result.classList.add("error");
+
+          resultNumber.textContent =
+            "Invalid input";
+
+          resultLabel.textContent =
+            "Please enter a valid number.";
+
+          return;
+        }
+
+
+        if (answer === "ambiguous") {
+
+          resultNumber.textContent =
+            "Ambiguous";
+
+          resultLabel.textContent =
+            "The number of significant figures is unclear without additional notation.";
+
+          explanation.innerHTML = `
+            <div class="why-title">Why?</div>
+            Whole-number trailing zeros can have different
+            meanings depending on the intended precision.
+            Scientific notation can make the precision explicit.
+          `;
+
+          return;
+        }
+
+
+        resultNumber.textContent =
+          answer;
+
+
+        resultLabel.textContent =
+          answer === 1
+            ? "significant figure"
+            : "significant figures";
+
+
+        explanation.innerHTML = `
+          <div class="why-title">Why?</div>
+          The calculator identifies significant digits according
+          to standard significant-figure rules.
+        `;
+
+
+        return;
+      }
+
+
+      // ROUND MODE
+
+      const targetInput =
+        document.getElementById("targetInput");
+
+
+      const target =
+        Number(targetInput.value);
+
+
+      if (
+        !Number.isInteger(target) ||
+        target < 1 ||
+        target > 100
+      ) {
+
+        result.classList.add("error");
+
+        resultNumber.textContent =
+          "Invalid target";
+
+        resultLabel.textContent =
+          "Enter a whole number from 1 to 100.";
+
+        return;
+      }
+
+
+      const numericValue =
+        Number(value);
+
+
+      if (!Number.isFinite(numericValue)) {
+
+        result.classList.add("error");
+
+        resultNumber.textContent =
+          "Invalid input";
+
+        resultLabel.textContent =
+          "Please enter a valid number.";
+
+        return;
+      }
+
+
+      const rounded =
+        roundToSignificantFigures(
+          value,
+          target
+        );
+
+
+      if (rounded === null) {
+
+        result.classList.add("error");
+
+        resultNumber.textContent =
+          "Unable to calculate";
+
+        resultLabel.textContent = "";
+
+        return;
+      }
+
+
+      resultNumber.textContent =
+        rounded;
+
+
+      resultLabel.textContent =
+        "rounded to " +
+        target +
+        " significant figures";
+
+
+      explanation.innerHTML =
+        getRoundingExplanation(
+          value,
+          target
+        );
+    }
+
+
+    // Enter key for main input
+    document
+      .getElementById("numberInput")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            calculate();
+          }
+
+        }
+      );
+
+
+    // Enter key for target input
+    document
+      .getElementById("targetInput")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+            calculate();
+          }
+
+        }
+      );
+
+  </script>
+
+</body>
+  </html>
