@@ -186,4 +186,294 @@
   <main>
 
     <section class="intro">
-      <h2>Sign
+      <h2>Significant Figures Calculator</h2>
+
+      <p>
+        Enter a number to find how many significant figures it contains.
+        Supports decimals, whole numbers, negative numbers, and scientific notation.
+      </p>
+    </section>
+
+    <section class="calculator-card">
+
+      <label for="numberInput">Enter a number</label>
+
+      <input
+        type="text"
+        id="numberInput"
+        placeholder="Example: 0.004560"
+        autocomplete="off"
+      >
+
+      <button onclick="calculateSigFigs()">
+        Calculate
+      </button>
+
+      <div id="result" class="result">
+
+        <div class="result-number" id="resultNumber"></div>
+
+        <div class="result-label" id="resultLabel"></div>
+
+      </div>
+
+    </section>
+
+    <section class="info-card">
+
+      <h2>What Are Significant Figures?</h2>
+
+      <p>
+        Significant figures are the digits in a number that carry meaningful
+        information about its precision.
+      </p>
+
+      <p>
+        Leading zeros are not significant. Zeros between non-zero digits are
+        significant. Trailing zeros can be significant when the notation makes
+        the intended precision clear.
+      </p>
+
+    </section>
+
+    <section class="info-card">
+
+      <h2>Examples</h2>
+
+      <ul class="examples">
+
+        <li><strong>123</strong> → 3 significant figures</li>
+
+        <li><strong>0</strong> → 1 significant figure</li>
+
+        <li><strong>0.0</strong> → 1 significant figure</li>
+
+        <li><strong>0.00</strong> → 1 significant figure</li>
+
+        <li><strong>0.004560</strong> → 4 significant figures</li>
+
+        <li><strong>0.00400</strong> → 3 significant figures</li>
+
+        <li><strong>1002</strong> → 4 significant figures</li>
+
+        <li><strong>100.0</strong> → 4 significant figures</li>
+
+        <li><strong>1.20e3</strong> → 3 significant figures</li>
+
+      </ul>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Significant Figures Calculator
+  </footer>
+
+
+  <script>
+
+    function countSignificantFigures(value) {
+
+      let str = value.trim();
+
+      if (str === "") {
+        return "invalid";
+      }
+
+      // Remove positive or negative sign
+      str = str.replace(/^[+-]/, "");
+
+      // Scientific notation
+      if (/[eE]/.test(str)) {
+
+        const parts = str.split(/[eE]/);
+
+        if (parts.length !== 2) {
+          return "invalid";
+        }
+
+        const coefficient = parts[0];
+        const exponent = parts[1];
+
+        // Validate exponent
+        if (!/^[+-]?\d+$/.test(exponent)) {
+          return "invalid";
+        }
+
+        // Validate coefficient
+        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(coefficient)) {
+          return "invalid";
+        }
+
+        const digits = coefficient.replace(".", "");
+
+        // Remove leading zeros
+        const significantDigits = digits.replace(/^0+/, "");
+
+        // Zero coefficient
+        if (significantDigits === "") {
+          return 1;
+        }
+
+        return significantDigits.length;
+      }
+
+
+      // Decimal number
+      if (str.includes(".")) {
+
+        // Validate decimal format
+        if (!/^(?:\d+\.?\d*|\.\d+)$/.test(str)) {
+          return "invalid";
+        }
+
+        const digits = str.replace(".", "");
+
+        // Remove leading zeros
+        const significantDigits = digits.replace(/^0+/, "");
+
+        /*
+          Examples:
+
+          0.0
+          digits = 00
+          significant digits = ""
+          result = 1
+
+          0.00
+          digits = 000
+          significant digits = ""
+          result = 1
+
+          0.0040
+          digits = 00040
+          significant digits = 40
+          result = 2
+
+          0.00400
+          digits = 000400
+          significant digits = 400
+          result = 3
+        */
+
+        if (significantDigits === "") {
+          return 1;
+        }
+
+        return significantDigits.length;
+      }
+
+
+      // Whole number
+      if (!/^\d+$/.test(str)) {
+        return "invalid";
+      }
+
+      const significantDigits = str.replace(/^0+/, "");
+
+      // Zero
+      if (significantDigits === "") {
+        return 1;
+      }
+
+      /*
+        Whole-number trailing zeros are ambiguous.
+
+        Example:
+        100
+
+        Without additional notation, it is unclear whether
+        the intended precision is 1, 2, or 3 significant figures.
+      */
+
+      if (/0+$/.test(significantDigits)) {
+        return "ambiguous";
+      }
+
+      return significantDigits.length;
+    }
+
+
+    function calculateSigFigs() {
+
+      const input = document.getElementById("numberInput");
+
+      const result = document.getElementById("result");
+
+      const resultNumber = document.getElementById("resultNumber");
+
+      const resultLabel = document.getElementById("resultLabel");
+
+      const value = input.value.trim();
+
+      result.style.display = "block";
+
+      result.classList.remove("error");
+
+
+      if (value === "") {
+
+        result.classList.add("error");
+
+        resultNumber.textContent = "Enter a number";
+
+        resultLabel.textContent = "";
+
+        return;
+      }
+
+
+      const answer = countSignificantFigures(value);
+
+
+      if (answer === "invalid") {
+
+        result.classList.add("error");
+
+        resultNumber.textContent = "Invalid input";
+
+        resultLabel.textContent =
+          "Please enter a valid number.";
+
+        return;
+      }
+
+
+      if (answer === "ambiguous") {
+
+        resultNumber.textContent = "Ambiguous";
+
+        resultLabel.textContent =
+          "The number of significant figures is unclear without additional notation.";
+
+        return;
+      }
+
+
+      resultNumber.textContent = answer;
+
+      resultLabel.textContent =
+        answer === 1
+          ? "significant figure"
+          : "significant figures";
+    }
+
+
+    // Press Enter to calculate
+    document
+      .getElementById("numberInput")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+          calculateSigFigs();
+
+        }
+
+      });
+
+  </script>
+
+</body>
+  </html>
