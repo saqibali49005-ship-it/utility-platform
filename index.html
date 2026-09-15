@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Significant Figures Calculator</title>
+  <title>Significant Figures Calculator – Count Significant Figures</title>
 
   <meta
     name="description"
-    content="Count significant figures in numbers quickly and accurately."
+    content="Count significant figures in decimals, whole numbers, and scientific notation with our free Significant Figures Calculator."
   >
 
   <style>
@@ -20,30 +20,55 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f5f7fa;
-      color: #172033;
+      color: #1f2937;
+      line-height: 1.6;
     }
 
-    .container {
-      width: min(700px, 92%);
-      margin: 50px auto;
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 20px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 18px;
     }
 
     .intro {
       text-align: center;
-      color: #5f6b7a;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
-    .card {
+    .intro h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .intro p {
+      color: #6b7280;
+      margin: 0 auto;
+      max-width: 650px;
+    }
+
+    .calculator-card {
       background: white;
       padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
     }
 
     label {
@@ -56,222 +81,109 @@
       width: 100%;
       padding: 14px;
       font-size: 18px;
-      border: 1px solid #ccd3dd;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2563eb;
     }
 
     button {
       width: 100%;
+      margin-top: 15px;
       padding: 14px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      background: #172033;
-      color: white;
     }
 
     button:hover {
-      opacity: 0.9;
+      background: #1d4ed8;
     }
 
     .result {
       margin-top: 20px;
       padding: 18px;
-      background: #f0f4f8;
       border-radius: 10px;
+      background: #f3f4f6;
+      text-align: center;
       display: none;
     }
 
     .result-number {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: bold;
-      margin-top: 8px;
+      color: #111827;
     }
 
-    .explanation {
-      margin-top: 15px;
-      line-height: 1.6;
+    .result-label {
+      color: #6b7280;
+      margin-top: 4px;
     }
 
     .error {
-      color: #b42318;
-      margin-top: 10px;
-      display: none;
+      color: #b91c1c;
+      background: #fef2f2;
+    }
+
+    .info-card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .info-card h2 {
+      margin-top: 0;
+      color: #111827;
+    }
+
+    .examples {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px 18px;
+      background: #111827;
+      color: #d1d5db;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin-top: 25px;
+      }
+
+      .intro h2 {
+        font-size: 25px;
+      }
+
+      .calculator-card,
+      .info-card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <main class="container">
+  <header>
+    <div class="header-inner">
+      <h1>Significant Figures Calculator</h1>
+    </div>
+  </header>
 
-    <h1>Significant Figures Calculator</h1>
+  <main>
 
-    <p class="intro">
-      Count the significant figures in any number quickly and clearly.
-    </p>
-
-    <section class="card">
-
-      <label for="numberInput">Enter a number</label>
-
-      <input
-        id="numberInput"
-        type="text"
-        placeholder="Example: 0.004560"
-        autocomplete="off"
-      >
-
-      <button onclick="calculateSigFigs()">
-        Calculate
-      </button>
-
-      <p id="error" class="error">
-        Please enter a valid number.
-      </p>
-
-      <div id="result" class="result">
-
-        <div>Significant Figures:</div>
-
-        <div id="resultNumber" class="result-number"></div>
-
-        <div id="explanation" class="explanation"></div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <script>
-    function countSignificantFigures(value) {
-
-      value = value.trim();
-
-      if (!value) {
-        return null;
-      }
-
-      // Remove positive or negative sign
-      value = value.replace(/^[+-]/, "");
-
-      // Check scientific notation
-      const scientificParts = value.split(/[eE]/);
-
-      if (scientificParts.length > 2) {
-        return null;
-      }
-
-      let base = scientificParts[0];
-
-      // Validate the base number
-      if (!/^\d*\.?\d+$/.test(base)) {
-        return null;
-      }
-
-      // Scientific notation
-      if (scientificParts.length === 2) {
-
-        const exponent = scientificParts[1];
-
-        if (!/^[+-]?\d+$/.test(exponent)) {
-          return null;
-        }
-
-        // In scientific notation, every digit in
-        // the mantissa is significant.
-        const digits = base.replace(".", "");
-
-        // Example: 0e3 = 1 significant figure
-        if (/^0+$/.test(digits)) {
-          return 1;
-        }
-
-        return digits.length - (digits.match(/^0+/) || [""])[0].length;
-      }
-
-      // Numbers containing a decimal point
-      if (base.includes(".")) {
-
-        const digits = base.replace(".", "");
-
-        // All-zero decimal values:
-// 0.0 = 1, 0.00 = 2, 0.000 = 3
-if (/^0+$/.test(digits)) {
-  const decimalPlaces = base.split(".")[1].length;
-  return Math.max(1, decimalPlaces);
-}
-
-        // Remove leading zeros
-        const significantDigits = digits.replace(/^0+/, "");
-
-        return significantDigits.length;
-      }
-
-      // Whole number
-      const withoutLeadingZeros = base.replace(/^0+/, "");
-
-      // Zero itself = 1 significant figure
-      if (withoutLeadingZeros === "") {
-        return 1;
-      }
-
-      // Trailing zeros in a whole number are ambiguous
-      if (/0+$/.test(withoutLeadingZeros)) {
-        return "ambiguous";
-      }
-
-      return withoutLeadingZeros.length;
-    }
-
-    function calculateSigFigs() {
-
-      const input = document.getElementById("numberInput").value;
-      const error = document.getElementById("error");
-      const result = document.getElementById("result");
-      const resultNumber = document.getElementById("resultNumber");
-      const explanation = document.getElementById("explanation");
-
-      const count = countSignificantFigures(input);
-
-      if (count === null) {
-        error.style.display = "block";
-        result.style.display = "none";
-        return;
-      }
-
-      error.style.display = "none";
-      result.style.display = "block";
-
-      if (count === "ambiguous") {
-
-        resultNumber.textContent = "Ambiguous";
-
-        explanation.innerHTML =
-          "Trailing zeros in a whole number without a decimal point " +
-          "or scientific notation may be ambiguous.<br><br>" +
-          "For example:<br>" +
-          "1.2 × 10³ = 2 significant figures<br>" +
-          "1.20 × 10³ = 3 significant figures<br>" +
-          "1.200 × 10³ = 4 significant figures";
-
-        return;
-      }
-
-      resultNumber.textContent = count;
-
-      explanation.innerHTML =
-        "This number contains <strong>" +
-        count +
-        "</strong> significant figure" +
-        (count === 1 ? "" : "s") +
-        ".";
-    }
-  </script>
-
-</body>
-</html>
+    <section class="intro">
+      <h2>Sign
