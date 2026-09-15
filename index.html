@@ -200,10 +200,11 @@
         const digits = base.replace(".", "");
 
         // All-zero decimal values:
-        // 0.0 = 1, 0.00 = 2, 0.000 = 3
-        if (/^0+$/.test(digits)) {
-          return digits.length;
-        }
+// 0.0 = 1, 0.00 = 2, 0.000 = 3
+if (/^0+$/.test(digits)) {
+  const decimalPlaces = base.split(".")[1].length;
+  return Math.max(1, decimalPlaces);
+}
 
         // Remove leading zeros
         const significantDigits = digits.replace(/^0+/, "");
