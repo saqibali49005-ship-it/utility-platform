@@ -43,7 +43,7 @@
       background: white;
       padding: 25px;
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
     label {
@@ -156,61 +156,75 @@
         return null;
       }
 
-      // Remove sign
+      // Remove positive or negative sign
       value = value.replace(/^[+-]/, "");
 
-      // Scientific notation
+      // Check scientific notation
       const scientificParts = value.split(/[eE]/);
+
+      if (scientificParts.length > 2) {
+        return null;
+      }
 
       let base = scientificParts[0];
 
+      // Validate the base number
       if (!/^\d*\.?\d+$/.test(base)) {
         return null;
       }
 
-      // If scientific notation is used,
-      // trailing zeros in the mantissa are significant.
+      // Scientific notation
       if (scientificParts.length === 2) {
 
-        if (!/^[+-]?\d+$/.test(scientificParts[1])) {
+        const exponent = scientificParts[1];
+
+        if (!/^[+-]?\d+$/.test(exponent)) {
           return null;
         }
 
-        base = base.replace(".", "");
+        // In scientific notation, every digit in
+        // the mantissa is significant.
+        const digits = base.replace(".", "");
 
-        base = base.replace(/^0+/, "");
-
-        return base.length;
-      }
-
-      // Decimal number
-      if (base.includes(".")) {
-
-        let digits = base.replace(".", "");
-
-        // Remove leading zeros
-        digits = digits.replace(/^0+/, "");
-
-        if (digits.length === 0) {
-          return 0;
+        // Example: 0e3 = 1 significant figure
+        if (/^0+$/.test(digits)) {
+          return 1;
         }
 
-        return digits.length;
+        return digits.length - (digits.match(/^0+/) || [""])[0].length;
       }
 
-      // Whole number without decimal point
-      base = base.replace(/^0+/, "");
+      // Numbers containing a decimal point
+      if (base.includes(".")) {
 
-      if (base.length === 0) {
-        return 0;
+        const digits = base.replace(".", "");
+
+        // All-zero decimal values:
+        // 0.0 = 1, 0.00 = 2, 0.000 = 3
+        if (/^0+$/.test(digits)) {
+          return digits.length;
+        }
+
+        // Remove leading zeros
+        const significantDigits = digits.replace(/^0+/, "");
+
+        return significantDigits.length;
+      }
+
+      // Whole number
+      const withoutLeadingZeros = base.replace(/^0+/, "");
+
+      // Zero itself = 1 significant figure
+      if (withoutLeadingZeros === "") {
+        return 1;
       }
 
       // Trailing zeros in a whole number are ambiguous
-      if (/0+$/.test(base)) {
+      if (/0+$/.test(withoutLeadingZeros)) {
         return "ambiguous";
       }
 
-      return base.length;
+      return withoutLeadingZeros.length;
     }
 
     function calculateSigFigs() {
@@ -259,4 +273,4 @@
   </script>
 
 </body>
-      </html>
+</html>
