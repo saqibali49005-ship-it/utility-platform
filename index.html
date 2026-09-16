@@ -642,6 +642,38 @@ function formatSignificant(value,sigFigs) {
   return sign + String(rounded);
 }
 
+// Formats multiplication/division results in scientific notation when the
+// result's exponent is not zero, so significant figures remain unambiguous.
+// Example: 2.50 × 4.0 = 1.0e1 (2 significant figures).
+function formatMultiplyResult(value,sigFigs) {
+  const number = Number(value);
+
+  if (!Number.isFinite(number) || sigFigs < 1) return null;
+  if (number === 0) return "0";
+
+  const sign = number < 0 ? "-" : "";
+  const abs = Math.abs(number);
+  let exponent = Math.floor(Math.log10(abs));
+
+  // Round the normalized coefficient to the requested significant figures.
+  let coefficient = abs / Math.pow(10,exponent);
+  const places = Math.max(0,sigFigs - 1);
+  coefficient = Number(coefficient.toFixed(places));
+
+  // Rounding can turn 9.99... into 10, so normalize again.
+  if (coefficient >= 10) {
+    coefficient /= 10;
+    exponent += 1;
+  }
+
+  if (exponent === 0) {
+    return formatSignificant(number,sigFigs);
+  }
+
+  const coefficientText = coefficient.toFixed(places);
+  return sign + coefficientText + "e" + exponent;
+}
+
 function parseAddExpression(expression) {
   const value = expression.trim();
 
@@ -733,7 +765,7 @@ function calculateMultiplyDivide(expression) {
   }
 
   const sigFigs = Math.min(sfA,sfB);
-  const formatted = formatSignificant(result,sigFigs);
+  const formatted = formatMultiplyResult(result,sigFigs);
 
   return {
     result:formatted,
