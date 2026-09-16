@@ -280,6 +280,10 @@ footer{
 .skip-link{position:fixed;left:12px;top:-60px;z-index:9999;background:#111827;color:#fff;padding:10px 14px;border-radius:9px;text-decoration:none;font-weight:700}
 .skip-link:focus{top:12px}
 button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:8px}
+.footer-links a{text-decoration:none;color:var(--muted)}
+.footer-links a:hover{text-decoration:underline}
 </style>
 
 <script type="application/ld+json">
@@ -536,13 +540,13 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #2563
 </main>
 
 <footer>
-  <div>© 2026 Utility Calculator</div>
-  <div class="footer-links">
-    <span>About</span>
-    <span>Contact</span>
-    <span>Privacy</span>
-    <span>Terms</span>
-  </div>
+  <div>© 2026 Utility Platform</div>
+  <nav class="footer-links" aria-label="Footer">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </nav>
 </footer>
 
 <script>

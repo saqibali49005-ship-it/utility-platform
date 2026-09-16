@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saqibali49005-ship-it.github.io/utility-platform/sitemap.xml
