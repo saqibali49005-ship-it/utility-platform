@@ -1,18 +1,20 @@
 <!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111827">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#111827" name="theme-color"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <title>Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost</title>
-<meta name="description" content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity.">
-<link rel="canonical" href="https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost">
-<meta property="og:description" content="Plan gravel quantities from project dimensions, material density and an optional allowance. Supports multiple areas and common shapes.">
-<meta property="og:url" content="https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html">
-<meta name="twitter:card" content="summary">
+<meta content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity." name="description"/>
+<link href="https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost" property="og:title"/>
+<meta content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity." property="og:description"/>
+<meta content="https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html" property="og:url"/>
+<meta content="summary" name="twitter:card"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Gravel Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate gravel volume, approximate weight, bags and optional cost for project areas."}
 </script>
@@ -46,92 +48,83 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 @media(max-width:430px){.result-main,.sub-results{grid-template-columns:1fr}.nav{justify-content:flex-start}}
 @media print{header,footer,.actions,.preset-row,.toolbar:first-of-type,.section-list .remove{display:none!important}body{background:#fff}main{max-width:none;padding:0}.panel{box-shadow:none;break-inside:avoid}.area-card{break-inside:avoid}}
 </style>
-<link rel="stylesheet" href="site-design.css">
-</head>
+<link href="site-design.css" rel="stylesheet"/>
+<meta content="index,follow" name="robots"/><meta content="Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost" name="twitter:title"/><meta content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity." name="twitter:description"/></head>
 <body>
-<a href="#main-content" class="skip">Skip to content</a>
+<a class="skip" href="#main-content">Skip to content</a>
 <header><div class="header-inner">
 <div class="brand"><div class="brand-mark">U</div><div>Utility Platform</div></div>
-<nav class="nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a></nav>
+<nav aria-label="Primary navigation" class="nav"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a></nav>
 </div></header>
 <main id="main-content">
 <div class="crumbs"><a href="index.html">Home</a> → <a href="home-construction.html">Home &amp; Construction</a> → Gravel Calculator</div>
 <section class="hero"><h1>Gravel Calculator</h1><p>Plan the amount of gravel you need for driveways, paths, patios, drainage beds and other projects. Build one area or combine several sections, then see volume, approximate weight, bags and optional cost.</p></section>
-
-<section class="panel" aria-labelledby="setup-title"><h2 id="setup-title">1. Set your project</h2><p class="panel-intro">Choose a unit system and a material preset. Preset densities are starting points; use your supplier's figure when you have it.</p>
+<section aria-labelledby="setup-title" class="panel"><h2 id="setup-title">1. Set your project</h2><p class="panel-intro">Choose a unit system and a material preset. Preset densities are starting points; use your supplier's figure when you have it.</p>
 <div class="toolbar">
 <div class="field"><label for="units">Unit system</label><select id="units"><option value="imperial">US / Imperial</option><option value="metric">Metric</option></select></div>
-<div class="field"><label for="material">Gravel / aggregate type</label><select id="material"><option value="pea">Pea gravel</option><option value="57">Crushed stone #57</option><option value="river">River rock</option><option value="base">Paver base / crushed concrete</option><option value="crusher">Crusher run / dense-grade</option><option value="custom">Custom density</option></select><div id="densityHint" class="hint"></div></div>
+<div class="field"><label for="material">Gravel / aggregate type</label><select id="material"><option value="pea">Pea gravel</option><option value="57">Crushed stone #57</option><option value="river">River rock</option><option value="base">Paver base / crushed concrete</option><option value="crusher">Crusher run / dense-grade</option><option value="custom">Custom density</option></select><div class="hint" id="densityHint"></div></div>
 </div>
-<div class="preset-row" aria-label="Project presets">
-<button type="button" class="preset" data-depth="2">Shallow layer · 2 in</button>
-<button type="button" class="preset" data-depth="4">Driveway / path · 4 in</button>
-<button type="button" class="preset" data-depth="6">Deeper base · 6 in</button>
+<div aria-label="Project presets" class="preset-row">
+<button class="preset" data-depth="2" type="button">Shallow layer · 2 in</button>
+<button class="preset" data-depth="4" type="button">Driveway / path · 4 in</button>
+<button class="preset" data-depth="6" type="button">Deeper base · 6 in</button>
 </div>
 </section>
-
-<section class="panel" aria-labelledby="areas-title"><h2 id="areas-title">2. Add project areas</h2><p class="panel-intro">Use one section for a simple area. For an irregular project, split it into rectangles, circles or triangles and add each part.</p>
-<div id="areas" class="section-list"></div>
-<div class="actions"><button id="addArea" type="button" class="btn btn-secondary">+ Add another area</button></div>
+<section aria-labelledby="areas-title" class="panel"><h2 id="areas-title">2. Add project areas</h2><p class="panel-intro">Use one section for a simple area. For an irregular project, split it into rectangles, circles or triangles and add each part.</p>
+<div class="section-list" id="areas"></div>
+<div class="actions"><button class="btn btn-secondary" id="addArea" type="button">+ Add another area</button></div>
 </section>
-
-<section class="panel" aria-labelledby="assumptions-title"><h2 id="assumptions-title">3. Ordering assumptions</h2><p class="panel-intro">An allowance can cover spillage, uneven subgrade and similar field losses. It is not a universal engineering compaction factor.</p>
+<section aria-labelledby="assumptions-title" class="panel"><h2 id="assumptions-title">3. Ordering assumptions</h2><p class="panel-intro">An allowance can cover spillage, uneven subgrade and similar field losses. It is not a universal engineering compaction factor.</p>
 <div class="toolbar">
-<div class="field"><label for="allowance">Extra allowance (%)</label><input id="allowance" type="number" min="0" max="50" step="0.5" value="5"><div class="hint">Use your site's conditions or supplier guidance.</div></div>
-<div class="field"><label for="price">Price per US ton <span class="muted">(optional)</span></label><input id="price" type="number" min="0" step="0.01" placeholder="e.g. 45"><div class="hint">Enter your supplier's price; currency is shown as $ for this demo.</div></div>
-<div class="field"><label for="delivery">Delivery fee <span class="muted">(optional)</span></label><input id="delivery" type="number" min="0" step="0.01" placeholder="e.g. 75"><div class="hint">Added to the material estimate when a price is entered.</div></div>
-<div class="field"><label for="currency">Currency label</label><input id="currency" type="text" maxlength="6" value="$" placeholder="$, €, £, PKR"><div class="hint">Only the displayed label changes; calculation uses your entered numeric price.</div></div>
-<div class="field"><label for="minload">Supplier minimum load, US tons <span class="muted">(optional)</span></label><input id="minload" type="number" min="0" step="0.1" placeholder="e.g. 2"><div class="hint">A minimum affects order quantity/cost, not the measured project volume.</div></div>
+<div class="field"><label for="allowance">Extra allowance (%)</label><input id="allowance" max="50" min="0" step="0.5" type="number" value="5"/><div class="hint">Use your site's conditions or supplier guidance.</div></div>
+<div class="field"><label for="price">Price per US ton <span class="muted">(optional)</span></label><input id="price" min="0" placeholder="e.g. 45" step="0.01" type="number"/><div class="hint">Enter your supplier's price; currency is shown as $ for this demo.</div></div>
+<div class="field"><label for="delivery">Delivery fee <span class="muted">(optional)</span></label><input id="delivery" min="0" placeholder="e.g. 75" step="0.01" type="number"/><div class="hint">Added to the material estimate when a price is entered.</div></div>
+<div class="field"><label for="currency">Currency label</label><input id="currency" maxlength="6" placeholder="$, €, £, PKR" type="text" value="$"/><div class="hint">Only the displayed label changes; calculation uses your entered numeric price.</div></div>
+<div class="field"><label for="minload">Supplier minimum load, US tons <span class="muted">(optional)</span></label><input id="minload" min="0" placeholder="e.g. 2" step="0.1" type="number"/><div class="hint">A minimum affects order quantity/cost, not the measured project volume.</div></div>
 </div>
 <div class="toolbar" style="margin-top:12px">
 <div class="field"><label for="bagVolume">Bag volume</label><select id="bagVolume"><option value="0.5">0.5 cu ft / 14.16 L</option><option value="1">1 cu ft / 28.32 L</option><option value="1.5">1.5 cu ft / 42.48 L</option></select></div>
-<div class="field"><label for="bagPrice">Price per bag <span class="muted">(optional)</span></label><input id="bagPrice" type="number" min="0" step="0.01" placeholder="e.g. 6.50"><div class="hint">Useful for comparing retail bags with bulk material.</div></div>
+<div class="field"><label for="bagPrice">Price per bag <span class="muted">(optional)</span></label><input id="bagPrice" min="0" placeholder="e.g. 6.50" step="0.01" type="number"/><div class="hint">Useful for comparing retail bags with bulk material.</div></div>
 </div>
-<div id="error" class="alert" role="alert"></div>
-<div class="actions"><button id="calculate" type="button" class="btn btn-primary">Calculate gravel</button><button id="reset" type="button" class="btn btn-secondary">Reset</button><button id="copy" type="button" class="btn btn-secondary">Copy result</button><button id="print" type="button" class="btn btn-secondary">Print</button></div>
+<div class="alert" id="error" role="alert"></div>
+<div class="actions"><button class="btn btn-primary" id="calculate" type="button">Calculate gravel</button><button class="btn btn-secondary" id="reset" type="button">Reset</button><button class="btn btn-secondary" id="copy" type="button">Copy result</button><button class="btn btn-secondary" id="print" type="button">Print</button></div>
 </section>
-
-<section class="panel" aria-labelledby="results-title"><h2 id="results-title">Your estimate</h2><p id="resultStatus" class="panel-intro">Enter your project details and calculate to see the estimate.</p>
+<section aria-labelledby="results-title" class="panel"><h2 id="results-title">Your estimate</h2><p class="panel-intro" id="resultStatus">Enter your project details and calculate to see the estimate.</p>
 <div class="results">
 <div class="result-main">
-<div class="result"><div class="label">Compacted volume</div><div id="rVolume" class="value">—</div><small id="rVolumeAlt">—</small></div>
-<div class="result"><div class="label">Estimated weight</div><div id="rWeight" class="value">—</div><small id="rWeightAlt">—</small></div>
-<div class="result"><div class="label">Order quantity</div><div id="rOrder" class="value">—</div><small id="rOrderAlt">Rounded up for ordering</small></div>
-<div class="result"><div class="label">Retail bags</div><div id="rBags" class="value">—</div><small id="rBagsAlt">Based on selected bag size</small></div>
+<div class="result"><div class="label">Compacted volume</div><div class="value" id="rVolume">—</div><small id="rVolumeAlt">—</small></div>
+<div class="result"><div class="label">Estimated weight</div><div class="value" id="rWeight">—</div><small id="rWeightAlt">—</small></div>
+<div class="result"><div class="label">Order quantity</div><div class="value" id="rOrder">—</div><small id="rOrderAlt">Rounded up for ordering</small></div>
+<div class="result"><div class="label">Retail bags</div><div class="value" id="rBags">—</div><small id="rBagsAlt">Based on selected bag size</small></div>
 </div>
-<div class="order-box"><strong>What should I order?</strong><div id="orderText" class="note">Your order recommendation will appear here after calculation.</div></div>
+<div class="order-box"><strong>What should I order?</strong><div class="note" id="orderText">Your order recommendation will appear here after calculation.</div></div>
 <div class="sub-results">
-<div class="result"><div class="label">Material cost</div><div id="rCost" class="value">—</div></div>
-<div class="result"><div class="label">Bulk cost + delivery</div><div id="rDelivered" class="value">—</div></div>
-<div class="result"><div class="label">Bagged cost</div><div id="rBagCost" class="value">—</div></div>
+<div class="result"><div class="label">Material cost</div><div class="value" id="rCost">—</div></div>
+<div class="result"><div class="label">Bulk cost + delivery</div><div class="value" id="rDelivered">—</div></div>
+<div class="result"><div class="label">Bagged cost</div><div class="value" id="rBagCost">—</div></div>
 </div>
 <p class="note">Weight is an estimate from the selected density. Confirm the exact density, sale unit, supplier minimum and final quantity with your supplier before ordering.</p>
 </div>
 </section>
-
-<section class="panel coverage" aria-labelledby="coverage-title"><h2 id="coverage-title">Coverage reference</h2><p class="panel-intro">This table updates for the selected material and shows the approximate surface area one US short ton could cover at common depths.</p>
+<section aria-labelledby="coverage-title" class="panel coverage"><h2 id="coverage-title">Coverage reference</h2><p class="panel-intro">This table updates for the selected material and shows the approximate surface area one US short ton could cover at common depths.</p>
 <table><thead><tr><th>Installed depth</th><th>Coverage per US ton</th><th>Tons per 100 sq ft</th></tr></thead><tbody id="coverageBody"></tbody></table>
 </section>
-
-<section class="panel" aria-labelledby="method-title"><h2 id="method-title">How the gravel math works</h2>
+<section aria-labelledby="method-title" class="panel"><h2 id="method-title">How the gravel math works</h2>
 <div class="info-grid"><div><p><strong>Volume</strong></p><div class="formula">volume = area × installed depth</div><p class="note">For a rectangle, area = length × width. For a circle, area = π × radius². For a triangle, area = base × height ÷ 2. Each section is converted to cubic feet/metres and then summed.</p></div>
 <div><p><strong>Weight</strong></p><div class="formula">weight = volume × material density</div><p class="note">In US units, a density in tons/yd³ converts cubic yards to US short tons. In metric, kg/m³ converts cubic metres to kilograms.</p></div></div>
 <p class="note">Allowance is applied after the measured volume is summed. Keeping the unrounded volume until the final order step avoids unnecessary rounding error.</p>
 </section>
-
-<section class="panel faq" aria-labelledby="faq-title"><h2 id="faq-title">Frequently asked questions</h2>
-<details open><summary>How do I calculate how much gravel I need?</summary><p>Measure the surface area and the installed depth, calculate the volume, then use a supplier or material density to estimate weight. This calculator also lets you combine multiple areas and add an optional ordering allowance.</p></details>
+<section aria-labelledby="faq-title" class="panel faq"><h2 id="faq-title">Frequently asked questions</h2>
+<details open=""><summary>How do I calculate how much gravel I need?</summary><p>Measure the surface area and the installed depth, calculate the volume, then use a supplier or material density to estimate weight. This calculator also lets you combine multiple areas and add an optional ordering allowance.</p></details>
 <details><summary>What density should I use?</summary><p>Use the exact bulk density from your supplier or delivery paperwork when available. Presets here are planning estimates and can vary with stone type, source, moisture and compaction.</p></details>
 <details><summary>How much extra gravel should I order?</summary><p>There is no single percentage that is correct for every site. Use the allowance field for spillage, uneven subgrade and similar losses, based on your project conditions or supplier advice.</p></details>
 <details><summary>Can I calculate an irregular project?</summary><p>Yes. Add sections and split the project into simple shapes. The calculator sums the volumes before applying the common allowance.</p></details>
 <details><summary>Are the tons exact?</summary><p>No. Your measured volume is determined by the dimensions and depth entered. Weight depends on the density assumption, so the final delivered weight may differ from the estimate.</p></details>
 </section>
-
 <section class="panel"><h2>Related tools</h2><div class="related"><a href="pilot-hole-calculator.html">Pilot Hole Size Calculator</a><a href="calculator.html">Significant Figures Calculator</a></div></section>
-
 <section class="panel"><h2>Planning note</h2><p class="warning">This tool is for planning and estimating material quantities. It does not determine an engineered base thickness or drainage design. For structural work, site-specific specifications or professional advice may be required.</p></section>
 </main>
-<footer><div>© 2026 Utility Platform</div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer>
+<footer><div>© 2026 Utility Platform</div><nav aria-label="Footer" class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer>
 <script>
 (function(){
   'use strict';

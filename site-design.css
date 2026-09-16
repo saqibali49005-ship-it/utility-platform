@@ -249,3 +249,4 @@ footer a:hover{color:var(--up-primary)}
   html{scroll-behavior:auto}
   *,*:before,*:after{transition:none !important;animation:none !important}
 }
+\n\n/* ===== Accessibility helpers ===== */\n.sr-only{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0,0,0,0) !important;white-space:nowrap !important;border:0 !important}\n.search-status{min-height:1.35em;margin:8px auto 0;max-width:650px;color:var(--up-muted);font-size:13px;text-align:left}\n
