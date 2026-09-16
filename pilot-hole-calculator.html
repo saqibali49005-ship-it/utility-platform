@@ -243,22 +243,27 @@ function materialLabel(){
 function calc(){
  const s=data[screw.value], m=material.value, h=hole.value, p=preference.value;
  const base=(m==='soft'||m==='ply')?s.soft:s.hard;
- let chosen, title, extra='';
+ let chosen, title, extra='', displaySize, displayBit, secondary='';
  if(h==='clearance'){
    chosen=s.clearance; title='Recommended clearance hole';
- }else{
+   displaySize=chosen; displayBit=near(chosen)[1];
+ }else if(h==='counter'){
    chosen=base;
-   title=h==='counter'?'Recommended pilot hole + countersink':'Recommended pilot hole';
-   if(h==='counter'){
-     if(s.counter!==null){
-       extra='<p>Countersink reference: <strong>'+f(s.counter)+' mm</strong> ('+near(s.counter)[1]+'). Verify the actual screw head geometry.</p>';
-     }else{
-       extra='<p><strong>Countersink:</strong> metric wood-screw head diameters vary by screw design, so measure the head or follow the manufacturer specification rather than inferring it from the screw diameter.</p>';
-     }
+   title='Recommended pilot hole + countersink';
+   displaySize=s.counter!==null?s.counter:chosen;
+   displayBit=s.counter!==null?near(s.counter)[1]:near(chosen)[1];
+   secondary='<p><strong>Pilot hole:</strong> '+f(chosen)+' mm ('+near(chosen)[1]+')</p>';
+   if(s.counter!==null){
+     extra='<p><strong>Countersink reference:</strong> '+f(s.counter)+' mm ('+near(s.counter)[1]+'). Verify the actual screw-head geometry.</p>';
+   }else{
+     extra='<p><strong>Countersink:</strong> metric wood-screw head diameters vary by screw design, so measure the head or follow the manufacturer specification rather than inferring it from the screw diameter.</p>';
    }
+ }else{
+   chosen=base; title='Recommended pilot hole';
+   displaySize=chosen; displayBit=near(chosen)[1];
  }
- const b=near(chosen);
- result.innerHTML='<h2>'+title+'</h2><div class="big">'+(p==='common'?b[1]:f(chosen)+' mm')+'</div><div class="kv"><div><strong>Metric</strong><br>'+f(chosen)+' mm</div><div><strong>Common bit</strong><br>'+b[1]+'</div><div><strong>Screw</strong><br>'+s.name+' · ~'+s.major+' mm</div><div><strong>Material</strong><br>'+materialLabel()+'</div></div>'+extra+'<p class="small">Reference starting point. Screw geometry, wood density and manufacturer guidance can change the ideal size.</p>';
+ const b=near(displaySize);
+ result.innerHTML='<h2>'+title+'</h2><div class="big">'+(p==='common'?displayBit:f(displaySize)+' mm')+'</div><div class="kv"><div><strong>Metric</strong><br>'+f(displaySize)+' mm</div><div><strong>Common bit</strong><br>'+displayBit+'</div><div><strong>Screw</strong><br>'+s.name+' · ~'+s.major+' mm</div><div><strong>Material</strong><br>'+materialLabel()+'</div></div>'+secondary+extra+'<p class="small">Reference starting point. Screw geometry, wood density and manufacturer guidance can change the ideal size.</p>';
 }
 calculate.addEventListener('click',calc);
 reset.addEventListener('click',()=>{
