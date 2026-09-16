@@ -315,6 +315,31 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #2563
   }
   </script>
 
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"What are significant figures?",
+      "acceptedAnswer":{"@type":"Answer","text":"Significant figures indicate the meaningful precision communicated by a measured or calculated number."}
+    },
+    {
+      "@type":"Question",
+      "name":"How do I count significant figures?",
+      "acceptedAnswer":{"@type":"Answer","text":"Count non-zero digits and interior zeros as significant, exclude leading zeros, and treat trailing decimal zeros as significant. Trailing zeros in whole numbers can be ambiguous without notation."}
+    },
+    {
+      "@type":"Question",
+      "name":"What is the rule for multiplication and division?",
+      "acceptedAnswer":{"@type":"Answer","text":"Report the result with the same number of significant figures as the input with the fewest significant figures."}
+    }
+  ]
+}
+</script>
+
 </head>
 
 <body>
@@ -543,6 +568,54 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #2563
     </div>
   </section>
 </main>
+
+
+<section class="seo-guide" aria-labelledby="guide-title">
+  <h2 id="guide-title">Significant Figures: Quick Guide</h2>
+  <p>Significant figures show how much precision a measured or calculated number communicates. This calculator helps you count significant figures, round values, and apply the rules used for addition, subtraction, multiplication, and division.</p>
+
+  <h3>How to count significant figures</h3>
+  <ul>
+    <li>Non-zero digits are significant.</li>
+    <li>Zeros between non-zero digits are significant.</li>
+    <li>Leading zeros are not significant.</li>
+    <li>Trailing zeros after a decimal point are significant.</li>
+    <li>Trailing zeros in a whole number such as <strong>100</strong> can be ambiguous without additional notation.</li>
+  </ul>
+
+  <h3>Rounding to significant figures</h3>
+  <p>Keep the requested number of significant digits and use the next digit to decide whether the last retained digit should increase. Scientific notation can make the intended precision clearer, especially for values ending in zeros.</p>
+
+  <h3>Addition and subtraction</h3>
+  <p>For addition and subtraction, the result is normally limited by the decimal-place precision of the least precise input, rather than simply by the number of significant figures.</p>
+
+  <h3>Multiplication and division</h3>
+  <p>For multiplication and division, the result is normally reported with the same number of significant figures as the input with the fewest significant figures.</p>
+
+  <h3>Examples</h3>
+  <div class="examples-grid">
+    <div class="example-card"><strong>0.00400</strong><span>3 significant figures</span></div>
+    <div class="example-card"><strong>1.20e3</strong><span>3 significant figures</span></div>
+    <div class="example-card"><strong>12.11 + 18.0</strong><span>30.1</span></div>
+    <div class="example-card"><strong>2.50 × 4.0</strong><span>1.0e1</span></div>
+  </div>
+
+  <h3>Why scientific notation helps</h3>
+  <p>Scientific notation makes precision explicit. For example, <strong>1.0e3</strong> communicates two significant figures, while a plain <strong>1000</strong> can be ambiguous.</p>
+</section>
+
+<style>
+.seo-guide{margin:34px auto 0;max-width:820px;padding:22px;background:#fff;border:1px solid #d9dee6;border-radius:16px;line-height:1.65}
+.seo-guide h2{margin:0 0 10px;font-size:25px}
+.seo-guide h3{margin:22px 0 7px;font-size:18px}
+.seo-guide p{color:var(--muted)}
+.seo-guide li{margin:7px 0;color:var(--muted)}
+.examples-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.example-card{padding:13px;border:1px solid #e1e5eb;border-radius:11px;background:#fafbfc}
+.example-card strong{display:block}
+.example-card span{display:block;color:var(--muted);font-size:14px;margin-top:3px}
+@media(max-width:600px){.examples-grid{grid-template-columns:1fr}}
+</style>
 
 <footer>
   <div>© 2026 Utility Platform</div>
