@@ -96,6 +96,20 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 </div>
 </section>
 
+
+<section class="featured" aria-labelledby="featured2-title">
+<h2 id="featured2-title" class="section-title">New tool</h2>
+<p class="section-intro">Find a practical drill-bit starting point for common screws.</p>
+<div class="card featured-card">
+<div>
+<div class="badge">DIY &amp; Woodworking</div>
+<h3>Pilot Hole Size Calculator</h3>
+<p>Find pilot, clearance and countersink drill-bit sizes with metric and imperial results.</p>
+</div>
+<a class="button" href="pilot-hole-calculator.html">Open calculator</a>
+</div>
+</section>
+
 <section class="categories" aria-labelledby="categories-title">
 <h2 id="categories-title" class="section-title">Categories</h2>
 <p class="section-intro">The platform will expand around genuine user problems rather than a large collection of thin duplicate tools.</p>
@@ -137,6 +151,7 @@ input.addEventListener("keydown",e=>{
   if(e.key==="Enter"){
     const q=input.value.toLowerCase().trim();
     if(q.includes("significant")||q.includes("sig fig")||q.includes("precision")) location.href="calculator.html";
+    else if(q.includes("pilot")||q.includes("screw")||q.includes("drill")||q.includes("clearance")||q.includes("countersink")) location.href="pilot-hole-calculator.html";
   }
 });
 </script>
