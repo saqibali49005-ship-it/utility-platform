@@ -1,6 +1,4 @@
 <!doctype html>
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -14,6 +12,10 @@
 <meta content="Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost" property="og:title"/>
 <meta content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity." property="og:description"/>
 <meta content="https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html" property="og:url"/>
+<meta content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png" property="og:image"/>
+<meta content="Utility Platform — Practical Online Tools" property="og:image:alt"/>
+<meta content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png" name="twitter:image"/>
+<meta content="Utility Platform — Practical Online Tools" name="twitter:image:alt"/>
 <meta content="summary" name="twitter:card"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Gravel Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/gravel-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate gravel volume, approximate weight, bags and optional cost for project areas."}
@@ -142,6 +144,7 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
   let sectionCounter=0;
   let lastResult=null;
   function num(v){return Number(v);}
+  function positiveFinite(v){return Number.isFinite(v)&&v>0;}
   function fmt(n,d=2){
     if(!Number.isFinite(n)) return '—';
     return n.toLocaleString('en-US',{maximumFractionDigits:d});
@@ -220,18 +223,18 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
     let area;
     if(shape==='rectangle'){
       const L=num(card.querySelector('[data-role="length"]').value),W=num(card.querySelector('[data-role="width"]').value);
-      if(!(L>0&&W>0)) throw new Error('Every rectangle needs a length and width greater than zero.');
+      if(!(positiveFinite(L)&&positiveFinite(W))) throw new Error('Every rectangle needs a length and width greater than zero.');
       area=metric?toMeters(L,unit)*toMeters(W,unit):toFeet(L,unit)*toFeet(W,unit);
     } else if(shape==='circle'){
-      const D=num(card.querySelector('[data-role="diameter"]').value); if(!(D>0)) throw new Error('Every circle needs a diameter greater than zero.');
+      const D=num(card.querySelector('[data-role="diameter"]').value); if(!positiveFinite(D)) throw new Error('Every circle needs a diameter greater than zero.');
       const d=metric?toMeters(D,unit):toFeet(D,unit); area=Math.PI*Math.pow(d/2,2);
     } else {
       const B=num(card.querySelector('[data-role="base"]').value),H=num(card.querySelector('[data-role="triHeight"]').value);
-      if(!(B>0&&H>0)) throw new Error('Every triangle needs a base and height greater than zero.');
+      if(!(positiveFinite(B)&&positiveFinite(H))) throw new Error('Every triangle needs a base and height greater than zero.');
       area=(metric?toMeters(B,unit):toFeet(B,unit))*(metric?toMeters(H,unit):toFeet(H,unit))/2;
     }
     const depthVal=num(card.querySelector('[data-role="depth"]').value),depthUnit=card.querySelector('[data-role="depthUnit"]').value;
-    if(!(depthVal>0)) throw new Error('Every area needs an installed depth greater than zero.');
+    if(!positiveFinite(depthVal)) throw new Error('Every area needs an installed depth greater than zero.');
     const depth=metric?toDepthMeters(depthVal,depthUnit):toDepthFeet(depthVal,depthUnit);
     return {area,depth,volume:area*depth};
   }
@@ -239,7 +242,7 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
     const metric=unitsEl.value==='metric';
     if(materialEl.value==='custom'){
       const v=num($('customDensity')?.value);
-      if(!(v>0)) throw new Error(metric?'Enter a custom density in kg/m³.':'Enter a custom density in tons/yd³.');
+      if(!positiveFinite(v)) throw new Error(metric?'Enter a custom density in kg/m³.':'Enter a custom density in tons/yd³.');
       return {metric, kgPerM3:metric?v:v*1601.8463, tPerYd3:metric?v/1601.8463:v};
     }
     const m=MATERIALS[materialEl.value]; return {metric,kgPerM3:m.kgPerM3,tPerYd3:m.tPerYd3};
@@ -249,16 +252,19 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
     try{
       const metric=unitsEl.value==='metric'; const density=getDensity(); let rawVol=0;
       [...areaEl.children].forEach(card=>rawVol += areaFromCard(card,metric).volume);
-      const allow=num(allowEl.value); if(!(allow>=0&&allow<=50)) throw new Error('Allowance must be between 0% and 50%.');
+      const allow=num(allowEl.value); if(!(Number.isFinite(allow)&&allow>=0&&allow<=50)) throw new Error('Allowance must be between 0% and 50%.');
       const adjustedVol=rawVol*(1+allow/100);
       const volumeM3=metric?adjustedVol:adjustedVol*0.028316846592;
       const volumeYd3=metric?adjustedVol*1.3079506193:adjustedVol/27;
       const kg=volumeM3*density.kgPerM3; const tonnes=kg/1000; const shortTons=volumeYd3*density.tPerYd3; const lb=shortTons*2000;
-      const minLoad=num(minloadEl.value); const minLoadApplied=minLoad>0?Math.max(shortTons,minLoad):shortTons; const orderTons=Math.ceil(minLoadApplied*10)/10;
-      const bagVolFt3=num(bagVolumeEl.value); const bags=Math.ceil((adjustedVol*(metric?35.3146667215:1))/bagVolFt3);
+      const minLoad=num(minloadEl.value); if(!(Number.isFinite(minLoad)&&minLoad>=0)) throw new Error('Supplier minimum load must be zero or greater.'); const minLoadApplied=minLoad>0?Math.max(shortTons,minLoad):shortTons; const orderTons=Math.ceil(minLoadApplied*10)/10;
+      const bagVolFt3=num(bagVolumeEl.value); if(!positiveFinite(bagVolFt3)) throw new Error('Bag volume must be greater than zero.'); const bags=Math.ceil((adjustedVol*(metric?35.3146667215:1))/bagVolFt3);
       const price=num(priceEl.value); const delivery=num(deliveryEl.value); const bagPrice=num(bagPriceEl.value);
-      const materialCost=price>0?orderTons*price:null; const delivered=(materialCost!==null?materialCost+(delivery>=0?delivery:0):null); const bagCost=bagPrice>0?bags*bagPrice:null; const currency=(currencyEl.value.trim()||'$').slice(0,6);
-      lastResult={metric,rawVol,adjustedVol,volumeM3,volumeYd3,kg,tonnes,shortTons,lb,orderTons,bags,materialCost,delivered,bagCost,allow,bagVolFt3,density,currency,materialName:materialEl.value==='custom'?'Custom density':MATERIALS[materialEl.value].name,areas:[...areaEl.children].length};
+      if(!Number.isFinite(price)||!Number.isFinite(delivery)||!Number.isFinite(bagPrice)) throw new Error('Cost inputs must contain valid numbers.');
+      if(price<0||delivery<0||bagPrice<0) throw new Error('Cost and delivery values cannot be negative.');
+      const materialCost=price>0?orderTons*price:null; const delivered=(materialCost!==null?materialCost+delivery:null); const bagCost=bagPrice>0?bags*bagPrice:null; const currency=(currencyEl.value.trim()||'$').slice(0,6);
+      if(![rawVol,adjustedVol,volumeM3,volumeYd3,kg,tonnes,shortTons,lb,orderTons,bags].every(Number.isFinite)) throw new Error('The estimate is outside the calculator\'s supported numeric range.');
+      lastResult={metric,adjustedVol,rawVol,volumeM3,volumeYd3,kg,tonnes,shortTons,lb,orderTons,bags,materialCost,delivered,bagCost,allow,bagVolFt3,density,currency,materialName:materialEl.value==='custom'?'Custom density':MATERIALS[materialEl.value].name,areas:[...areaEl.children].length};
       render(lastResult); updateCoverage();
     } catch(e){setError(e.message||'Please check your inputs.');}
   }

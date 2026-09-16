@@ -1,6 +1,4 @@
 <!doctype html>
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -13,6 +11,10 @@
 <meta content="UUID Generator, Validator &amp; Inspector — v4 &amp; v7" property="og:title"/>
 <meta content="Generate UUID v4 and UUID v7 values in your browser, validate existing UUIDs, inspect version and variant, decode UUID v7 timestamps, and copy or download batches." property="og:description"/>
 <meta content="https://saqibali49005-ship-it.github.io/utility-platform/uuid-generator-calculator.html" property="og:url"/>
+<meta content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png" property="og:image"/>
+<meta content="Utility Platform — Practical Online Tools" property="og:image:alt"/>
+<meta content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png" name="twitter:image"/>
+<meta content="Utility Platform — Practical Online Tools" name="twitter:image:alt"/>
 <meta content="#0f172a" name="theme-color"/>
 <script type="application/ld+json">
   {
@@ -212,7 +214,7 @@
 
   function variantFromByte(byte) {
     if ((byte & 0x80) === 0x00) return 'NCS compatibility';
-    if ((byte & 0xc0) === 0x80) return 'RFC 9562 / RFC 4122 layout';
+    if ((byte & 0xc0) === 0x80) return 'RFC 9562 variant';
     if ((byte & 0xe0) === 0xc0) return 'Microsoft compatibility';
     return 'Reserved future definition';
   }
@@ -225,7 +227,7 @@
     const variant = variantFromByte(clockSeqByte);
     const canonical = formatUuid(raw, 'standard');
     const out = {valid:true, raw, canonical, version, variant};
-    if ((clockSeqByte & 0x80) !== 0x80) out.note = 'This UUID does not use the RFC 9562 / RFC 4122 variant layout.';
+    if ((clockSeqByte & 0x80) !== 0x80) out.note = 'This UUID does not use the RFC 9562 variant.';
     if (version === 7 && (clockSeqByte & 0xc0) === 0x80) {
       const timestampHex = raw.slice(0,12);
       const ms = Number(BigInt('0x' + timestampHex));
@@ -315,7 +317,7 @@
     const variantClass = result.variant.includes('RFC 9562') ? 'ok' : 'err';
     let extra='';
     if (result.version === 7 && result.timestamp) {
-      extra = `<div class="stats"><div class="stat"><b>UUID v7 time (UTC)</b><span>${escapeHtml(result.timestamp.toISOString())}</span></div><div class="stat"><b>Unix milliseconds</b><span>${result.timestampMs.toLocaleString()}</span></div><div class="stat"><b>Version</b><span>7 — time-ordered</span></div></div>`;
+      extra = `<div class="stats"><div class="stat"><b>UUID v7 time (UTC)</b><span>${escapeHtml(result.timestamp.toISOString())}</span></div><div class="stat"><b>Unix milliseconds</b><span>${result.timestampMs.toLocaleString()}</span></div><div class="stat"><b>Version</b><span>7 — time-ordered</span></div><div class="stat"><b>Variant</b><span class="${variantClass}">${escapeHtml(result.variant)}</span></div><div class="stat"><b>Canonical form</b><span class="mono">${escapeHtml(result.canonical)}</span></div></div>`;
     } else {
       extra = `<div class="stats"><div class="stat"><b>Version</b><span>${result.version >= 1 && result.version <= 8 ? 'v'+result.version : 'Unknown/other'}</span></div><div class="stat"><b>Variant</b><span class="${variantClass}">${escapeHtml(result.variant)}</span></div><div class="stat"><b>Canonical form</b><span class="mono">${escapeHtml(result.canonical)}</span></div></div>`;
     }
