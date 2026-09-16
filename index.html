@@ -122,6 +122,26 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 </article>
 </div>
 </section>
+
+<section class="featured" aria-labelledby="available-tools-title">
+<h2 id="available-tools-title" class="section-title">Available tools</h2>
+<p class="section-intro">Useful tools currently available on Utility Platform.</p>
+<div class="grid">
+<article class="card">
+<div class="badge">Math &amp; Science</div>
+<h3>Pilot Hole Size Calculator</h3>
+<p>Find practical pilot, clearance and countersink drill-bit starting sizes for common screws.</p>
+<a class="button" href="pilot-hole-calculator.html">Open calculator</a>
+</article>
+<article class="card">
+<div class="badge">Digital &amp; Developer</div>
+<h3>UUID Generator &amp; Validator</h3>
+<p>Generate UUIDs, validate existing values, and inspect UUID version and variant information.</p>
+<a class="button" href="uuid-generator-calculator.html">Open tool</a>
+</article>
+</div>
+</section>
+
 </main>
 
 
@@ -143,7 +163,13 @@ const input=document.getElementById("tool-search");
 input.addEventListener("keydown",e=>{
   if(e.key==="Enter"){
     const q=input.value.toLowerCase().trim();
-    if(q.includes("significant")||q.includes("sig fig")||q.includes("precision")) location.href="calculator.html";
+    if(q.includes("significant")||q.includes("sig fig")||q.includes("precision")){
+      location.href="calculator.html";
+    } else if(q.includes("pilot")||q.includes("screw")||q.includes("drill")||q.includes("clearance")||q.includes("countersink")){
+      location.href="pilot-hole-calculator.html";
+    } else if(q.includes("uuid")||q.includes("guid")||q.includes("unique id")||q.includes("identifier")){
+      location.href="uuid-generator-calculator.html";
+    }
   }
 });
 </script>
