@@ -1,0 +1,38 @@
+/* Scoped visual polish layer — preserves the existing design system. */
+#main-content .hero,
+main.wrap > h1{position:relative}
+#main-content .hero::after,
+main.wrap > h1::after{content:"";display:block;width:56px;height:4px;margin:18px auto 0;border-radius:999px;background:linear-gradient(90deg,#2563eb,#0ea5e9);opacity:.9}
+main.wrap > h1::after{margin:16px 0 0}
+#main-content .featured,
+#main-content .categories{margin-bottom:42px}
+#main-content .section-title{font-size:24px;font-weight:850;letter-spacing:-.035em}
+#main-content .section-intro{max-width:720px;line-height:1.65}
+#main-content .tool-grid .card{position:relative;overflow:hidden;padding:24px!important;border-radius:18px!important;background:linear-gradient(180deg,#fff 0%,#fbfdff 100%)!important}
+#main-content .tool-grid .card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#2563eb,#0ea5e9);opacity:.9}
+#main-content .tool-grid .card .badge{margin-bottom:9px}
+#main-content .tool-grid .card h3{font-size:21px;letter-spacing:-.025em;margin-bottom:8px}
+#main-content .tool-grid .card p{max-width:48ch;line-height:1.65}
+#main-content .tool-grid .card .button{margin-top:8px}
+#main-content .categories .card{min-height:170px;display:flex;flex-direction:column}
+#main-content .categories .card h3{letter-spacing:-.02em;margin-bottom:7px}
+#main-content .categories .card a{margin-top:auto;font-weight:800;color:#1d4ed8}
+#main-content .categories .card span{margin-top:auto!important}
+main.wrap{padding-bottom:72px!important}
+main.wrap > h1{font-weight:850;letter-spacing:-.045em;margin-bottom:12px}
+main.wrap > .muted{max-width:720px;font-size:17px;line-height:1.7}
+main.wrap .grid{gap:18px!important;margin-top:28px!important}
+main.wrap .card{position:relative;overflow:hidden;padding:22px!important;border-radius:18px!important;background:linear-gradient(180deg,#fff 0%,#fbfdff 100%)!important}
+main.wrap .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#2563eb,#0ea5e9);opacity:.8}
+main.wrap .card h2{font-size:21px;letter-spacing:-.025em}
+main.wrap .card p{line-height:1.65}
+main.wrap .button{border-radius:999px!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;box-shadow:0 7px 18px rgba(37,99,235,.18)!important;transition:transform .14s ease,box-shadow .14s ease!important}
+main.wrap .button:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(37,99,235,.22)!important}
+@media(max-width:650px){
+ #main-content .hero::after{margin-top:15px}
+ #main-content .tool-grid .card{padding:21px!important}
+ main.wrap{padding-bottom:58px!important}
+ main.wrap .card{padding:20px!important}
+ main.wrap .button{width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){main.wrap .button{transition:none!important}}
