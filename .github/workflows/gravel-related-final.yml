@@ -1,0 +1,33 @@
+name: Final Gravel Related Tools Fix
+on:
+  push:
+    paths:
+      - '_gravel_related_final_trigger.txt'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply isolated related tools CSS
+        run: |
+          cat >> gravel-calculator.html <<'EOF'
+          <style>
+          /* Gravel Related Tools — isolated final mobile/desktop fix */
+          body.tool-page .related-tools .related-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;margin-top:14px!important;width:100%!important}
+          body.tool-page .related-tools .related-item{position:relative!important;display:grid!important;grid-template-columns:48px minmax(0,1fr) 22px!important;grid-template-rows:auto auto!important;align-items:center!important;column-gap:12px!important;row-gap:2px!important;width:100%!important;min-height:78px!important;margin:0!important;padding:12px 14px!important;border:1px solid #dbe3ed!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 16px rgba(15,23,42,.05)!important;color:#0b1220!important;text-decoration:none!important}
+          body.tool-page .related-tools .related-item .related-icon{grid-column:1!important;grid-row:1 / span 2!important;display:grid!important;place-items:center!important;width:48px!important;height:48px!important;min-width:48px!important;margin:0!important;padding:0!important;border-radius:13px!important;background:#eff6ff!important;color:#2563eb!important;font-size:21px!important;font-weight:800!important}
+          body.tool-page .related-tools .related-item .related-copy{grid-column:2!important;grid-row:1 / span 2!important;display:block!important;min-width:0!important;margin:0!important;padding:0!important;color:#0b1220!important}
+          body.tool-page .related-tools .related-item .related-copy strong{display:block!important;margin:0!important;color:#0b1220!important;font-size:16px!important;line-height:1.25!important;font-weight:800!important}
+          body.tool-page .related-tools .related-item .related-copy small{display:block!important;margin:3px 0 0!important;color:#5f6b7a!important;font-size:.82rem!important;font-weight:500!important;line-height:1.35!important}
+          body.tool-page .related-tools .related-item .related-arrow{grid-column:3!important;grid-row:1 / span 2!important;display:block!important;margin:0!important;padding:0!important;font-size:30px!important;line-height:1!important;font-weight:300!important;color:#0f172a!important;text-align:right!important}
+          body.tool-page .related-tools .related-item:hover{border-color:#bfdbfe!important;box-shadow:0 8px 18px rgba(15,23,42,.09)!important;transform:translateY(-1px)!important}
+          </style>
+          EOF
+          rm -f _gravel_related_final_trigger.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add gravel-calculator.html _gravel_related_final_trigger.txt
+          git commit -m 'Fix gravel related tools card layout [skip gravel-related-final]'
+          git push
