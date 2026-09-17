@@ -177,15 +177,26 @@ h2{letter-spacing:-.025em}
 .card:hover{transform:translateY(-2px);box-shadow:var(--up-shadow-lg) !important}
 
 /* ===== Buttons ===== */
-.button,.btn,.primary{
-  background:var(--up-primary) !important;
+.button,.primary{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-height:48px !important;
+  padding:11px 18px !important;
+  background:linear-gradient(135deg,#2563eb,#0ea5e9) !important;
   color:#fff !important;
-  border-color:var(--up-primary) !important;
-  border-radius:11px !important;
-  box-shadow:0 6px 16px rgba(37,99,235,.18);
+  border:1px solid transparent !important;
+  border-radius:999px !important;
+  box-shadow:0 7px 18px rgba(37,99,235,.20);
+  font-size:18px !important;
+  font-weight:650 !important;
+  line-height:1.2 !important;
+  text-decoration:none !important;
   transition:transform .14s ease,background .14s ease,box-shadow .14s ease;
 }
-.button:hover,.btn:hover,.primary:hover{background:var(--up-primary-dark) !important;transform:translateY(-1px);box-shadow:0 9px 20px rgba(37,99,235,.22)}
+.button:hover,.primary:hover{background:linear-gradient(135deg,#1d4ed8,#0284c7) !important;transform:translateY(-1px);box-shadow:0 10px 22px rgba(37,99,235,.24)}
+.primary{width:100% !important;cursor:pointer}
 .secondary,.ghost,.btn-secondary{background:#fff !important;color:#334155 !important;border:1px solid #cbd5e1 !important;box-shadow:none !important}
 .secondary:hover,.ghost:hover,.btn-secondary:hover{background:#f8fafc !important;border-color:#94a3b8 !important}
 
