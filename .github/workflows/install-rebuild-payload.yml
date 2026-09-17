@@ -21,10 +21,9 @@ jobs:
           base64 -d .rebuild-payload.b64 > /tmp/payload.tgz
           tar -xzf /tmp/payload.tgz
           rm -f .rebuild-payload.b64 .rebuild-trigger
-          rm -f .github/workflows/rebuild-four-tools.yml
+          rm -f .github/workflows/rebuild-four-tools.yml .github/workflows/install-rebuild-payload.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add time-calculator.html pilot-hole-calculator.html gravel-calculator.html uuid-generator-calculator.html master-tool-design.css master-related-tools.css master-ui.js MASTER-REFERENCE.md
-          git add -u .github/workflows/rebuild-four-tools.yml .rebuild-payload.b64 .rebuild-trigger
+          git add -A
           git commit -m "Rebuild four tools from locked master"
           git push origin HEAD:${{ github.head_ref }}
