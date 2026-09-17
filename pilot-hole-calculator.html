@@ -54,7 +54,9 @@ details{border-top:1px solid var(--line);padding:12px 0}
 details:first-of-type{border-top:0}
 summary{font-weight:750;cursor:pointer}
 footer{background:#fff;border-top:1px solid var(--line);padding:24px 16px;color:var(--muted);font-size:.9rem;text-align:center}
-.foot{max-width:900px;margin:auto;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
+.foot{max-width:900px;margin:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;text-align:center}
+.foot span{order:-1}
+.foot a{margin:0 7px}
 .source-list{margin:8px 0 0;padding-left:20px}
 .source-list li{margin:5px 0}
 @media(max-width:650px){.grid,.kv{grid-template-columns:1fr}nav{display:none}.card{padding:16px}table{font-size:.84rem}.foot{justify-content:center}}
