@@ -3,11 +3,9 @@ on:
   push:
     paths:
       - '_gravel_related_layout_trigger.txt'
-  workflow_dispatch:
 
 jobs:
   fix:
-    if: ${{ !contains(github.event.head_commit.message, '[skip gravel-related-layout]') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,10 +19,10 @@ jobs:
           s = p.read_text(encoding='utf-8')
           marker = '<style>\nbody:has(.related-tools) .related-tools{margin-top:16px;margin-bottom:18px}'
           start = s.find(marker)
-          if start == -1:
+          if start < 0:
               raise SystemExit('related-tools style block not found')
           end = s.find('</style>', start)
-          if end == -1:
+          if end < 0:
               raise SystemExit('related-tools style block end not found')
           replacement = '''<style>
 body:has(.related-tools) .related-tools{margin-top:16px!important;margin-bottom:18px!important}
@@ -37,8 +35,7 @@ body:has(.related-tools) .related-tools .related-copy strong{display:block!impor
 body:has(.related-tools) .related-tools .related-copy small{display:block!important;margin-top:3px!important;color:#5f6b7a!important;font-size:.82rem!important;font-weight:500!important;line-height:1.35!important}
 body:has(.related-tools) .related-tools .related-arrow{display:block!important;flex:0 0 auto!important;margin-left:auto!important;font-size:28px!important;font-weight:300!important;color:#0f172a!important;line-height:1!important}
 </style>'''
-          s = s[:start] + replacement + s[end+8:]
-          p.write_text(s, encoding='utf-8')
+          p.write_text(s[:start] + replacement + s[end+8:], encoding='utf-8')
           PY
           rm -f _gravel_related_layout_trigger.txt
           git config user.name 'github-actions[bot]'
