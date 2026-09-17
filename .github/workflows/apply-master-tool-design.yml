@@ -32,10 +32,18 @@ jobs:
               if not re.search(r'<body[^>]*class=["\'][^"\']*\btool-page\b', text, re.I):
                   continue
 
-              # The master stylesheet is now the single source of truth for
-              # the shared header/navigation. Remove duplicated page-local
-              # copies so they cannot drift from the Gravel master.
-              cleaned = duplicate_header_style.sub('', text)
+              # Remove any accidental/legacy markup that was appended after
+              # the document's closing html tag. It can override the master
+              # CSS and produces invalid document structure.
+              html_end = re.search(r'</html>\s*', text, re.I)
+              if html_end:
+                  cleaned = text[:html_end.end()]
+              else:
+                  cleaned = text
+
+              # The master stylesheet is the single source of truth for the
+              # shared header/navigation. Remove duplicated page-local copies.
+              cleaned = duplicate_header_style.sub('', cleaned)
 
               # Remove old master links and reinsert them immediately before
               # </head>, making them the final CSS cascade layer.
@@ -63,5 +71,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "Phase 7: normalize all tool pages to master shell"
+          git commit -m "Fix malformed trailing styles in tool pages"
           git push
