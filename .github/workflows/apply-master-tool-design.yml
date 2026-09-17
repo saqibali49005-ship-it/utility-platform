@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Add master design modules to every tool page
+      - name: Put master design modules last on every tool page
         shell: bash
         run: |
           python3 - <<'PY'
@@ -24,29 +24,30 @@ jobs:
           import re
 
           changed = []
+          link_pattern = re.compile(r'\s*<link\s+href=["\']master-(?:tool-design|related-tools)\.css["\']\s+rel=["\']stylesheet["\']\s*/?>', re.I)
+
           for path in sorted(Path('.').glob('*.html')):
               text = path.read_text(encoding='utf-8')
               if not re.search(r'<body[^>]*class=["\'][^"\']*\btool-page\b', text, re.I):
                   continue
 
-              additions = []
-              if 'href="master-tool-design.css"' not in text and "href='master-tool-design.css'" not in text:
-                  additions.append('  <link href="master-tool-design.css" rel="stylesheet"/>')
-              if 'href="master-related-tools.css"' not in text and "href='master-related-tools.css'" not in text:
-                  additions.append('  <link href="master-related-tools.css" rel="stylesheet"/>')
+              # Remove previous copies so the master modules are guaranteed
+              # to be the final CSS cascade layer in <head>.
+              cleaned = link_pattern.sub('', text)
+              additions = (
+                  '  <link href="master-tool-design.css" rel="stylesheet"/>\n'
+                  '  <link href="master-related-tools.css" rel="stylesheet"/>'
+              )
+              new = re.sub(r'(</head>)', additions + '\n\\1', cleaned, count=1, flags=re.I)
 
-              if not additions:
-                  continue
-
-              new = re.sub(r'(</head>)', '\n'.join(additions) + '\n\\1', text, count=1, flags=re.I)
               if new != text:
                   path.write_text(new, encoding='utf-8')
                   changed.append(path.name)
 
-          print('Updated tool pages:', ', '.join(changed) if changed else 'none')
+          print('Master CSS final layer applied to:', ', '.join(changed) if changed else 'none')
           PY
 
-      - name: Commit master-design links
+      - name: Commit master-layer updates
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -56,5 +57,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "Apply canonical master design modules to tool pages"
+          git commit -m "Phase 4: put master design last on tool pages"
           git push
