@@ -1,0 +1,34 @@
+name: Fix calculator footer v2
+on:
+  push:
+    branches: [main]
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Normalize calculator footer styling
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('calculator.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* APPROVED-CALCULATOR-FOOTER-V2 */'
+          css = '''\n/* APPROVED-CALCULATOR-FOOTER-V2 */\n.tool-page > footer:has(.footer-links a[href="calculator.html"]),\n.tool-page > footer:has(.footer-links a[href="about.html"]){\n  width:100vw !important;\n  max-width:none !important;\n  box-sizing:border-box !important;\n  margin:26px 0 0 calc(50% - 50vw) !important;\n  padding:22px 14px 28px !important;\n  background:#fff !important;\n  border-top:1px solid #dfe6ef !important;\n  color:#5f6b7a !important;\n  text-align:center !important;\n  display:flex !important;\n  flex-direction:column !important;\n  align-items:center !important;\n  justify-content:center !important;\n  gap:6px !important;\n  font-size:14px !important;\n  line-height:1.5 !important;\n}\n.tool-page > footer:has(.footer-links a[href="calculator.html"]) > div:first-child,\n.tool-page > footer:has(.footer-links a[href="about.html"]) > div:first-child{\n  display:block !important;\n  margin:0 !important;\n  font-size:15px !important;\n  font-weight:600 !important;\n  color:#0b1220 !important;\n}\n.tool-page > footer:has(.footer-links a[href="calculator.html"]) .footer-links,\n.tool-page > footer:has(.footer-links a[href="about.html"]) .footer-links{\n  display:flex !important;\n  flex-wrap:wrap !important;\n  align-items:center !important;\n  justify-content:center !important;\n  gap:0 !important;\n  width:100% !important;\n  margin:0 !important;\n  padding:0 !important;\n}\n.tool-page > footer:has(.footer-links a[href="calculator.html"]) .footer-links a,\n.tool-page > footer:has(.footer-links a[href="about.html"]) .footer-links a{\n  display:inline-flex !important;\n  align-items:center !important;\n  min-height:28px !important;\n  padding:2px 0 !important;\n  color:#1d4ed8 !important;\n  text-decoration:underline !important;\n  text-underline-offset:2px !important;\n  white-space:nowrap !important;\n}\n.tool-page > footer:has(.footer-links a[href="calculator.html"]) .footer-links a + a::before,\n.tool-page > footer:has(.footer-links a[href="about.html"]) .footer-links a + a::before{\n  content:"·" !important;\n  display:inline-block !important;\n  color:#64748b !important;\n  text-decoration:none !important;\n  margin:0 10px !important;\n}\n@media(max-width:650px){\n  .tool-page > footer:has(.footer-links a[href="calculator.html"]),\n  .tool-page > footer:has(.footer-links a[href="about.html"]){\n    margin-top:24px !important;\n    padding:22px 12px 26px !important;\n  }\n}\n'''
+          if marker not in s:
+              s = s.replace('</style>', css + '</style>', 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit calculator footer fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add calculator.html
+          git diff --cached --quiet || git commit -m 'Fix calculator footer to approved mobile layout'
+          git push
+      - name: Remove one-shot workflow
+        run: |
+          rm -f .github/workflows/fix-calculator-footer-v2.yml
+          git add .github/workflows/fix-calculator-footer-v2.yml
+          git commit -m 'Remove one-shot calculator footer workflow' || true
+          git push || true
