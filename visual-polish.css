@@ -38,3 +38,10 @@ main:not(.wrap) > .card .related-item{transition:transform .14s ease,border-colo
 main:not(.wrap) > .card .related-item:hover{transform:translateY(-1px);border-color:#bfdbfe;box-shadow:0 7px 18px rgba(15,23,42,.06)}
 @media(max-width:650px){#main-content .hero::after{margin-top:15px}#main-content .tool-grid .card{padding:21px!important}main.wrap{padding-bottom:58px!important}main.wrap .card{padding:20px!important}main.wrap .button{width:100%!important}main:not(.wrap) > .hero{padding-bottom:22px}main:not(.wrap) > .card{padding:16px}}
 @media(prefers-reduced-motion:reduce){main.wrap .button,main:not(.wrap) > .card .related-item{transition:none!important}}
+
+/* Time Calculator: keep the page surfaces aligned on narrow screens. */
+body:has(.mode-tabs) .related{display:block!important}
+body:has(.mode-tabs) .related-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px!important;margin-top:14px!important;align-items:stretch!important}
+body:has(.mode-tabs) .related-item{min-width:0!important;box-sizing:border-box!important}
+body:has(.mode-tabs) footer .foot{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex-wrap:wrap!important;line-height:1.5!important;padding-left:14px!important;padding-right:14px!important;box-sizing:border-box!important}
+@media(max-width:650px){body:has(.mode-tabs) main{box-sizing:border-box!important;max-width:100%!important}body:has(.mode-tabs) .related-grid{grid-template-columns:1fr!important}body:has(.mode-tabs) footer .foot{row-gap:2px!important;column-gap:7px!important}}
