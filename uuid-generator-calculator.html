@@ -207,9 +207,9 @@
     if (s.toLowerCase().startsWith('urn:uuid:')) s = s.slice(9);
     if (s.startsWith('{') && s.endsWith('}')) s = s.slice(1,-1);
     s = s.replace(/\s+/g, '');
-    const compact = s.replace(/-/g, '');
-    if (!/^[0-9a-fA-F]{32}$/.test(compact)) return null;
-    return compact.toLowerCase();
+    if (/^[0-9a-fA-F]{32}$/.test(s)) return s.toLowerCase();
+    if (!/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(s)) return null;
+    return s.replace(/-/g, '').toLowerCase();
   }
 
   function variantFromByte(byte) {
@@ -221,7 +221,7 @@
 
   function inspectUuid(input) {
     const raw = normalizeUuid(input);
-    if (!raw) return {valid:false, message:'Enter a valid 32-hex-digit UUID, with optional hyphens, braces, or urn:uuid: prefix.'};
+    if (!raw) return {valid:false, message:'Enter a valid UUID: 32 hex digits, or the standard 8-4-4-4-12 form with optional braces or urn:uuid: prefix.'};
     const version = parseInt(raw[12], 16);
     const clockSeqByte = parseInt(raw.slice(16,18), 16);
     const variant = variantFromByte(clockSeqByte);
