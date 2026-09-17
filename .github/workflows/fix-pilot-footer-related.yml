@@ -1,0 +1,40 @@
+name: Fix pilot footer and related tools
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply approved pilot page polish
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('pilot-hole-calculator.html')
+          s=p.read_text(encoding='utf-8')
+          marker='/* APPROVED-PILOT-FOOTER-RELATED-2026-09-17 */'
+          css='''\n/* APPROVED-PILOT-FOOTER-RELATED-2026-09-17 */\n.tool-page > main > section.card:last-child{margin-bottom:0!important}\n.tool-page > main > section.card:last-child > p{margin:0!important}\n.tool-page > main > section.card:last-child > p > a{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:76px!important;padding:14px 16px!important;border:1px solid #dbe3ed!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 16px rgba(15,23,42,.05)!important;color:#0b1220!important;font-weight:750!important;text-decoration:none!important}\n.tool-page > main > section.card:last-child > p > a::before{content:"▦"!important;display:grid!important;place-items:center!important;flex:0 0 50px!important;width:50px!important;height:50px!important;margin-right:13px!important;border-radius:14px!important;background:#eff6ff!important;color:#2563eb!important;font-size:23px!important;font-weight:700!important}\n.tool-page > main > section.card:last-child > p > a::after{content:"›"!important;margin-left:auto!important;font-size:30px!important;font-weight:300!important;color:#0f172a!important}\n.tool-page > footer{width:100vw!important;max-width:none!important;box-sizing:border-box!important;margin:26px 0 0 calc(50% - 50vw)!important;padding:22px 14px 28px!important;background:#fff!important;border-top:1px solid #dfe6ef!important;color:#5f6b7a!important;text-align:center!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;font-size:14px!important;line-height:1.5!important}\n.tool-page > footer .foot{width:100%!important;max-width:900px!important;margin:0 auto!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;justify-content:center!important;gap:0!important}\n.tool-page > footer .foot span{display:block!important;flex-basis:100%!important;order:-1!important;margin:0 0 6px!important;font-size:15px!important;font-weight:600!important;color:#0b1220!important}\n.tool-page > footer .foot a{display:inline-flex!important;align-items:center!important;min-height:28px!important;padding:2px 0!important;margin:0!important;color:#1d4ed8!important;text-decoration:underline!important;text-underline-offset:2px!important;white-space:nowrap!important}\n.tool-page > footer .foot a+a::before{content:"·"!important;display:inline-block!important;color:#64748b!important;text-decoration:none!important;margin:0 10px!important}\n@media(max-width:650px){\n.tool-page > main > section.card:last-child > p > a{min-height:72px!important;padding:12px 14px!important}\n.tool-page > footer{margin-top:24px!important;padding:22px 12px 26px!important}\n}\n'''
+          if marker not in s:
+              s=s.replace('</style>',css+'\n</style>',1)
+          s=re.sub(r'<section class="card"><h2>Related tools</h2><p><a href="calculator\.html">Significant Figures Calculator</a> — useful when working with measured dimensions and precision\.</p></section>', '<section class="card"><h2>Related tools</h2><p><a href="calculator.html"><span>Significant Figures Calculator</span></a></p></section>', s, count=1)
+          s=re.sub(r'<footer><div class="foot">[\s\S]*?</div></footer>', '<footer><div class="foot"><span>© 2026 Utility Platform</span><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></footer>', s, count=1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add pilot-hole-calculator.html
+          git diff --cached --quiet || git commit -m 'Fix pilot related tools and footer layout'
+          git push
+      - name: Remove one-shot workflow
+        run: |
+          git rm -f .github/workflows/fix-pilot-footer-related.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove pilot footer workflow'
+          git push
