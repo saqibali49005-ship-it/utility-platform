@@ -331,21 +331,18 @@ body>header:not(.site-header) .nav a{
 }
 body>header:not(.site-header) .nav a:hover{background:#fff !important;border-color:#d7e0eb !important;color:var(--up-text) !important}
 
-/* Pilot Hole: the page has no .hero wrapper, so apply the hero glow to its top area only. */
+/* Pilot Hole: use a direct background on this page's main area so the top glow is visible reliably. */
 body:has(.crumb a[href="math-science.html"]) main{
   position:relative !important;
   isolation:isolate;
+  background-color:var(--up-bg) !important;
+  background-image:radial-gradient(circle at 50% 4%,rgba(37,99,235,.20),transparent 68%) !important;
+  background-repeat:no-repeat !important;
+  background-position:center top !important;
+  background-size:100% 360px !important;
 }
 body:has(.crumb a[href="math-science.html"]) main::before{
-  content:"" !important;
-  position:absolute !important;
-  left:0 !important;
-  right:0 !important;
-  top:0 !important;
-  height:300px !important;
-  background:radial-gradient(circle at 50% 4%,rgba(37,99,235,.16),transparent 70%) !important;
-  pointer-events:none !important;
-  z-index:-1 !important;
+  display:none !important;
 }
 
 /* Related tools: turn the existing plain links into compact tool cards. */
