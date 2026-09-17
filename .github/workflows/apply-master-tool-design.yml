@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Put master design modules last on every tool page
+      - name: Normalize every tool page to the master visual shell
         shell: bash
         run: |
           python3 - <<'PY'
@@ -25,15 +25,21 @@ jobs:
 
           changed = []
           link_pattern = re.compile(r'\s*<link\s+href=["\']master-(?:tool-design|related-tools)\.css["\']\s+rel=["\']stylesheet["\']\s*/?>', re.I)
+          duplicate_header_style = re.compile(r'\s*<style>\s*/\*\s*MASTER HEADER\s+—\s+matches calculator\.html\s*\*/.*?</style>', re.I | re.S)
 
           for path in sorted(Path('.').glob('*.html')):
               text = path.read_text(encoding='utf-8')
               if not re.search(r'<body[^>]*class=["\'][^"\']*\btool-page\b', text, re.I):
                   continue
 
-              # Remove previous copies so the master modules are guaranteed
-              # to be the final CSS cascade layer in <head>.
-              cleaned = link_pattern.sub('', text)
+              # The master stylesheet is now the single source of truth for
+              # the shared header/navigation. Remove duplicated page-local
+              # copies so they cannot drift from the Gravel master.
+              cleaned = duplicate_header_style.sub('', text)
+
+              # Remove old master links and reinsert them immediately before
+              # </head>, making them the final CSS cascade layer.
+              cleaned = link_pattern.sub('', cleaned)
               additions = (
                   '  <link href="master-tool-design.css" rel="stylesheet"/>\n'
                   '  <link href="master-related-tools.css" rel="stylesheet"/>'
@@ -44,10 +50,10 @@ jobs:
                   path.write_text(new, encoding='utf-8')
                   changed.append(path.name)
 
-          print('Master CSS final layer applied to:', ', '.join(changed) if changed else 'none')
+          print('Master shell normalized:', ', '.join(changed) if changed else 'none')
           PY
 
-      - name: Commit master-layer updates
+      - name: Commit master-shell updates
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -57,5 +63,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "Phase 4: put master design last on tool pages"
+          git commit -m "Phase 7: normalize all tool pages to master shell"
           git push
