@@ -1,0 +1,51 @@
+name: Apply master tool layout
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/master-layout-apply.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply visual-only master layout
+        shell: python
+        run: |
+          from pathlib import Path
+          pages = [
+              'calculator.html',
+              'time-calculator.html',
+              'pilot-hole-calculator.html',
+              'gravel-calculator.html',
+              'uuid-generator-calculator.html',
+          ]
+          css = '<link href="tool-layout.css" rel="stylesheet"/>'
+          for name in pages:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              s = p.read_text(encoding='utf-8')
+              if 'class="tool-page"' not in s and "class='tool-page'" not in s:
+                  s = s.replace('<body>', '<body class="tool-page">', 1)
+              if 'href="tool-layout.css"' not in s:
+                  s = s.replace('</head>', css + '\n</head>', 1)
+              if name == 'calculator.html' and '→ <a href="math-science.html">Math &amp; Science</a> → Significant Figures Calculator' not in s:
+                  marker = '<main id="main-content">'
+                  crumb = '<div class="crumb"> <a href="index.html">Home</a> → <a href="math-science.html">Math &amp; Science</a> → Significant Figures Calculator</div>'
+                  s = s.replace(marker, marker + '\n' + crumb, 1)
+              p.write_text(s, encoding='utf-8')
+
+      - name: Commit visual changes and remove one-shot workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tool-layout.css calculator.html time-calculator.html pilot-hole-calculator.html gravel-calculator.html uuid-generator-calculator.html .github/workflows/master-layout-apply.yml
+          git rm .github/workflows/master-layout-apply.yml
+          git commit -m "Unify tool pages with master calculator layout"
+          git push
