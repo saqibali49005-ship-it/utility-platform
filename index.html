@@ -46,7 +46,9 @@ h1{font-size:clamp(31px,7vw,48px);line-height:1.1;letter-spacing:-1px;margin:0 0
 .card a{font-weight:800;text-decoration:none}
 .card a:hover{text-decoration:underline}
 .featured{margin-bottom:34px}
-.tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tool-grid .card{display:flex;flex-direction:column}
+.tool-grid .button{margin-top:auto;align-self:flex-start}
 .badge{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px}
 .button{display:inline-block;background:var(--accent);color:#fff;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:800;white-space:nowrap}
 .categories{margin-bottom:34px}
@@ -55,7 +57,6 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 .footer-links a{text-decoration:none}
 .skip-link{position:fixed;left:12px;top:-60px;z-index:9999;background:#111827;color:#fff;padding:10px 14px;border-radius:9px;font-weight:700}
 .skip-link:focus{top:12px}
-@media(max-width:850px){.tool-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){.grid,.tool-grid{grid-template-columns:1fr}.card{padding:18px}.button{margin-top:8px}}
 </style>
 <link href="site-design.css" rel="stylesheet"/>
