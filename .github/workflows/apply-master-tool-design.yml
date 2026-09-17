@@ -1,4 +1,4 @@
-name: Apply Master Tool Design
+name: One-time master cleanup
 
 on:
   push:
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  apply-master-design:
+  cleanup-master:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,60 +16,59 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Normalize every tool page to the master visual shell
+      - name: Clean Significant Figures master page
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import re
 
-          changed = []
-          link_pattern = re.compile(r'\s*<link\s+href=["\']master-(?:tool-design|related-tools)\.css["\']\s+rel=["\']stylesheet["\']\s*/?>', re.I)
-          duplicate_header_style = re.compile(r'\s*<style>\s*/\*\s*MASTER HEADER\s+—\s+matches calculator\.html\s*\*/.*?</style>', re.I | re.S)
+          path = Path('calculator.html')
+          text = path.read_text(encoding='utf-8')
+          original = text
 
-          for path in sorted(Path('.').glob('*.html')):
-              text = path.read_text(encoding='utf-8')
-              if not re.search(r'<body[^>]*class=["\'][^"\']*\btool-page\b', text, re.I):
-                  continue
+          # The Significant Figures master is self-contained. Remove the
+          # unused Related Tools stylesheet dependency so it cannot affect
+          # this page or create a second CSS cascade.
+          text = re.sub(
+              r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']master-related-tools\.css["\']\s*/?>',
+              '', text, flags=re.I
+          )
 
-              # Remove any accidental/legacy markup that was appended after
-              # the document's closing html tag. It can override the master
-              # CSS and produces invalid document structure.
-              html_end = re.search(r'</html>\s*', text, re.I)
-              if html_end:
-                  cleaned = text[:html_end.end()]
-              else:
-                  cleaned = text
+          # Lock the master footer alignment in its own CSS. No external
+          # stylesheet should be responsible for the master page footer.
+          text = text.replace(
+              '.footer-inner{padding:20px 16px;flex-direction:column;align-items:flex-start}',
+              '.footer-inner{padding:20px 16px;flex-direction:column;align-items:center}'
+          )
+          text = text.replace(
+              '.copyright{text-align:left;padding-left:16px;padding-right:16px}',
+              '.copyright{text-align:center;padding-left:16px;padding-right:16px}'
+          )
 
-              # The master stylesheet is the single source of truth for the
-              # shared header/navigation. Remove duplicated page-local copies.
-              cleaned = duplicate_header_style.sub('', cleaned)
-
-              # Remove old master links and reinsert them immediately before
-              # </head>, making them the final CSS cascade layer.
-              cleaned = link_pattern.sub('', cleaned)
-              additions = (
-                  '  <link href="master-tool-design.css" rel="stylesheet"/>\n'
-                  '  <link href="master-related-tools.css" rel="stylesheet"/>'
-              )
-              new = re.sub(r'(</head>)', additions + '\n\\1', cleaned, count=1, flags=re.I)
-
-              if new != text:
-                  path.write_text(new, encoding='utf-8')
-                  changed.append(path.name)
-
-          print('Master shell normalized:', ', '.join(changed) if changed else 'none')
+          if text != original:
+              path.write_text(text, encoding='utf-8')
+              print('Master cleanup applied.')
+          else:
+              print('Master cleanup already applied.')
           PY
 
-      - name: Commit master-shell updates
+      - name: Commit final master lock
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html'
+          git add calculator.html
           if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
+            echo "No master changes to commit."
+          else
+            git commit -m "Finalize and lock calculator master"
+            git push
           fi
-          git commit -m "Fix malformed trailing styles in tool pages"
+
+      - name: Remove obsolete auto-override workflow
+        shell: bash
+        run: |
+          git rm .github/workflows/apply-master-tool-design.yml
+          git commit -m "Remove obsolete master override workflow"
           git push
