@@ -9,22 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fix Pilot Hole icon color
+      - name: Fix icon color
         run: sed -i 's/background:#fff7ed!important;color:#ea580c!important/background:#eff6ff!important;color:#2563eb!important/g' tool-layout.css
-      - name: Add final Gravel related CSS
-        run: |
-          cat >> gravel-calculator.html <<'EOF'
-<style>
-.tool-page>main#main-content>.panel.related-tools{display:block!important;width:100%!important}
-.tool-page>main#main-content>.panel.related-tools .related-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;margin-top:14px!important}
-.tool-page>main#main-content>.panel.related-tools .related-item{display:flex!important;align-items:center!important;gap:12px!important;min-height:76px!important;width:100%!important;padding:14px 16px!important;border:1px solid #dbe3ed!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 16px rgba(15,23,42,.05)!important;color:#0b1220!important;font-weight:750!important;text-decoration:none!important}
-.tool-page>main#main-content>.panel.related-tools .related-icon{display:grid!important;place-items:center!important;flex:0 0 48px!important;width:48px!important;height:48px!important;border-radius:13px!important;background:#eff6ff!important;color:#2563eb!important;font-size:21px!important;font-weight:800!important;line-height:1!important}
-.tool-page>main#main-content>.panel.related-tools .related-copy{display:block!important;min-width:0!important;flex:1 1 auto!important}
-.tool-page>main#main-content>.panel.related-tools .related-copy strong{display:block!important;line-height:1.25!important;color:#0b1220!important}
-.tool-page>main#main-content>.panel.related-tools .related-copy small{display:block!important;margin-top:3px!important;color:#5f6b7a!important;font-size:.82rem!important;font-weight:500!important;line-height:1.35!important}
-.tool-page>main#main-content>.panel.related-tools .related-arrow{display:block!important;flex:0 0 auto!important;margin-left:auto!important;font-size:28px!important;font-weight:300!important;color:#0f172a!important;line-height:1!important}
-</style>
-EOF
+      - name: Fix Gravel card layout
+        run: echo 'PHN0eWxlPmJvZHk6aGFzKC5yZWxhdGVkLXRvb2xzKSAucmVsYXRlZC10b29scyB7bWFyZ2luLXRvcDoxNnB4IWltcG9ydGFudDttYXJnaW4tYm90dG9tOjE4cHghaW1wb3J0YW50fQpib2R5OmhhcygucmVsYXRlZC10b29scykgLnJlbGF0ZWQtdG9vbHMgLnJlbGF0ZWQtZ3JpZHtkaXNwbGF5OmdyaWQhaW1wb3J0YW50O2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnIhaW1wb3J0YW50O2dhcDoxMnB4IWltcG9ydGFudDttYXJnaW4tdG9wOjE0cHghaW1wb3J0YW50fQpib2R5OmhhcygucmVsYXRlZC10b29scykgLnJlbGF0ZWQtdG9vbHMgLnJlbGF0ZWQtaXRlbXtkaXNwbGF5OmZsZXghaW1wb3J0YW50O2FsaWduLWl0ZW1zOmNlbnRlciFpbXBvcnRhbnQ7Z2FwOjEycHghaW1wb3J0YW50O21pbi1oZWlnaHQ6NzZweCFpbXBvcnRhbnQ7d2lkdGg6MTAwJSEtaW1wb3J0YW50O3BhZGRpbmc6MTRweCAxNnB4IWltcG9ydGFudDtiYWNrZ3JvdW5kOiNmZmYhaW1wb3J0YW50O2JvcmRlcjoxcHggc29saWQgI2RiZTNlZCFpbXBvcnRhbnQ7Ym9yZGVyLXJhZGl1czoxNnB4IWltcG9ydGFudDtiYXJnY2dyb3VuZC1jb2xvcjojZmZmIWltcG9ydGFudDtib3gtc2hhZG93OjAgNXB4IDE2cHggcmdiYSgxNSwyMyw0MiwuMDUpIWltcG9ydGFudDtjb2xvcjojMGIxMjIwIWltcG9ydGFudDtmb250LXdlaWdodDo3NTBpI2ltcG9ydGFudDt0ZXh0LWRlY29yYXRpb246bm9uZSFpbXBvcnRhbnR9CmJvZHk6aGFzKC5yZWxhdGVkLXRvb2xzKSAucmVsYXRlZC10b29scyAucmVsYXRlZC1pY29ue2Rpc3BsYXk6Z3JpZCFpbXBvcnRhbnQ7cGxhY2UtaXRlbXM6Y2VudGVyIWltcG9ydGFudDtmZXg6MCAwIDQ4cHghaW1wb3J0YW50O3dpZHRoOjQ4cHghaW1wb3J0YW50O2hlaWdodDo0OHB4IWltcG9ydGFudDtiYWNrZ3JvdW5kOiNlZmY2ZmYyIWltcG9ydGFudDtjb2xvcjojMjU2M2ViIWltcG9ydGFudDtmb250LXNpemU6MjFweCFpbXBvcnRhbnQ7Zm9udC13ZWlnaHQ6ODAwIWltcG9ydGFudDtsaW5lLWhlaWdodDoxIWltcG9ydGFudH0KYm9keTpoYXMoLnJlbGF0ZWQtdG9vbHMpIC5yZWxhdGVkLXRvb2xzIC5yZWxhdGVkLWNvcHl7ZGlzcGxheTpibG9jayFpbXBvcnRhbnQ7bWluLXdpZHRoOjAhaW1wb3J0YW50O2ZsZXg6MSAxIGF1dG8haW1wb3J0YW50fQpib2R5OmhhcygucmVsYXRlZC10b29scykgLnJlbGF0ZWQtdG9vbHMgLnJlbGF0ZWQtY29weSBzdHJvbmcge2Rpc3BsYXk6YmxvY2shaW1wb3J0YW50O2xpbmUtaGVpZ2h0OjEuMjUhaW1wb3J0YW50O2NvbG9yOiMwYjEyMjAhaW1wb3J0YW50fQpib2R5OmhhcygucmVsYXRlZC10b29scykgLnJlbGF0ZWQtdG9vbHMgLnJlbGF0ZWQtY29weSBzbWFsbHtkaXNwbGF5OmJsb2NrIWltcG9ydGFudDttYXJnaW4tdG9wOjNweCFpbXBvcnRhbnQ7Y29sb3I6IzVmNmI3YSFpbXBvcnRhbnQ7Zm9udC1zaXplOi44MnJlbSFpbXBvcnRhbnQ7Zm9udC13ZWlnaHQ6NTAwIWltcG9ydGFudDtsaW5lLWhlaWdodDoxLjM1IWltcG9ydGFudH0KYm9keTpoYXMoLnJlbGF0ZWQtdG9vbHMpIC5yZWxhdGVkLXRvb2xzIC5yZWxhdGVkLWFycm93e2Rpc3BsYXk6YmxvY2shaW1wb3J0YW50O2ZsZXg6MCAwIGF1dG8haW1wb3J0YW50O21hcmdpbi1sZWZ0OmF1dG8haW1wb3J0YW50O2ZvbnQtc2l6ZToyOHB4IWltcG9ydGFudDtmb250LXdlaWdodDozMDAhaW1wb3J0YW50O2NvbG9yOiMwZjE3MmEhaW1wb3J0YW50O2xpbmUtaGVpZ2h0OjEhaW1wb3J0YW50fQo8L3N0eWxlPgo=' | base64 -d >> gravel-calculator.html
       - name: Commit fix
         run: |
           rm -f _gravel_related_layout_trigger.txt
