@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Add master design to every tool page
+      - name: Add master design modules to every tool page
         shell: bash
         run: |
           python3 - <<'PY'
@@ -28,15 +28,17 @@ jobs:
               text = path.read_text(encoding='utf-8')
               if not re.search(r'<body[^>]*class=["\'][^"\']*\btool-page\b', text, re.I):
                   continue
-              if 'href="master-tool-design.css"' in text or "href='master-tool-design.css'" in text:
+
+              additions = []
+              if 'href="master-tool-design.css"' not in text and "href='master-tool-design.css'" not in text:
+                  additions.append('  <link href="master-tool-design.css" rel="stylesheet"/>')
+              if 'href="master-related-tools.css"' not in text and "href='master-related-tools.css'" not in text:
+                  additions.append('  <link href="master-related-tools.css" rel="stylesheet"/>')
+
+              if not additions:
                   continue
-              new = re.sub(
-                  r'(</head>)',
-                  '  <link href="master-tool-design.css" rel="stylesheet"/>\n\\1',
-                  text,
-                  count=1,
-                  flags=re.I,
-              )
+
+              new = re.sub(r'(</head>)', '\n'.join(additions) + '\n\\1', text, count=1, flags=re.I)
               if new != text:
                   path.write_text(new, encoding='utf-8')
                   changed.append(path.name)
@@ -54,5 +56,5 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "Apply Time Calculator master design to tool pages"
+          git commit -m "Apply master design modules to tool pages"
           git push
