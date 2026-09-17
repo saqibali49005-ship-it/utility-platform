@@ -55,8 +55,7 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 </head>
 <body class="tool-page">
 <a class="skip" href="#main-content">Skip to content</a>
-<header><div class="header-inner">
-<div class="brand"><div class="brand-mark">U</div><div>Utility Platform</div></div>
+<header><div class="header-inner"><a class="brand" href="index.html" aria-label="Utility Platform home"><div class="brand-mark">U</div><div>Utility Platform</div></a>
 <nav aria-label="Primary navigation" class="nav"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a></nav>
 </div></header>
 <main id="main-content">
@@ -98,25 +97,22 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 <div class="result"><div class="label">Compacted volume</div><div class="value" id="rVolume">—</div><small id="rVolumeAlt">—</small></div>
 <div class="result"><div class="label">Estimated weight</div><div class="value" id="rWeight">—</div><small id="rWeightAlt">—</small></div>
 <div class="result"><div class="label">Order quantity</div><div class="value" id="rOrder">—</div><small id="rOrderAlt">Rounded up for ordering</small></div>
-<div class="result"><div class="label">Retail bags</div><div class="value" id="rBags">—</div><small id="rBagsAlt">Based on selected bag size</small></div>
+<div class="result"><div class="label">Estimated cost</div><div class="value" id="rCost">—</div><small id="rCostAlt">Optional material + delivery</small></div>
 </div>
-<div class="order-box"><strong>What should I order?</strong><div class="note" id="orderText">Your order recommendation will appear here after calculation.</div></div>
+<div class="order-box" id="orderSummary">Add your dimensions above, then calculate.</div>
 <div class="sub-results">
-<div class="result"><div class="label">Material cost</div><div class="value" id="rCost">—</div></div>
-<div class="result"><div class="label">Bulk cost + delivery</div><div class="value" id="rDelivered">—</div></div>
-<div class="result"><div class="label">Bagged cost</div><div class="value" id="rBagCost">—</div></div>
+<div class="result"><div class="label">Bags needed</div><div class="value" id="rBags">—</div><small id="rBagsAlt">Based on selected bag size</small></div>
+<div class="result"><div class="label">Material volume</div><div class="value" id="rMaterialVolume">—</div><small>Before allowance</small></div>
+<div class="result"><div class="label">Allowance</div><div class="value" id="rAllowance">—</div><small>Added to measured volume</small></div>
 </div>
-<p class="note">Weight is an estimate from the selected density. Confirm the exact density, sale unit, supplier minimum and final quantity with your supplier before ordering.</p>
 </div>
+<div class="note">Weight and cost are planning estimates. Confirm density, delivered weight, bag fill and supplier minimums before ordering.</div>
 </section>
-<section aria-labelledby="coverage-title" class="panel coverage"><h2 id="coverage-title">Coverage reference</h2><p class="panel-intro">This table updates for the selected material and shows the approximate surface area one US short ton could cover at common depths.</p>
-<table><thead><tr><th>Installed depth</th><th>Coverage per US ton</th><th>Tons per 100 sq ft</th></tr></thead><tbody id="coverageBody"></tbody></table>
-</section>
-<section aria-labelledby="method-title" class="panel"><h2 id="method-title">How the gravel math works</h2>
-<div class="info-grid"><div><p><strong>Volume</strong></p><div class="formula">volume = area × installed depth</div><p class="note">For a rectangle, area = length × width. For a circle, area = π × radius². For a triangle, area = base × height ÷ 2. Each section is converted to cubic feet/metres and then summed.</p></div>
-<div><p><strong>Weight</strong></p><div class="formula">weight = volume × material density</div><p class="note">In US units, a density in tons/yd³ converts cubic yards to US short tons. In metric, kg/m³ converts cubic metres to kilograms.</p></div></div>
-<p class="note">Allowance is applied after the measured volume is summed. Keeping the unrounded volume until the final order step avoids unnecessary rounding error.</p>
-</section>
+<section aria-labelledby="coverage-title" class="panel coverage"><h2 id="coverage-title">Quick coverage reference</h2><p class="panel-intro">Approximate coverage area for one unit of volume at common layer depths. Actual coverage varies with material and compaction.</p>
+<table><thead><tr><th>Depth</th><th>Coverage per cubic yard</th><th>Coverage per cubic metre</th></tr></thead><tbody>
+<tr><td>2 in / 50.8 mm</td><td>≈ 13.5 sq yd</td><td>≈ 19.7 sq m</td></tr><tr><td>4 in / 101.6 mm</td><td>≈ 6.75 sq yd</td><td>≈ 9.84 sq m</td></tr><tr><td>6 in / 152.4 mm</td><td>≈ 4.5 sq yd</td><td>≈ 6.56 sq m</td></tr><tr><td>8 in / 203.2 mm</td><td>≈ 3.38 sq yd</td><td>≈ 4.92 sq m</td></tr>
+</tbody></table></section>
+<section aria-labelledby="formula-title" class="panel info-grid"><div><h2 id="formula-title">How the calculator works</h2><p>For each area, the calculator determines surface area from the shape and multiplies it by the entered depth. Multiple sections are combined, then the optional allowance is applied to the total volume.</p><div class="formula">volume = area × depth</div></div><div><h2>Weight &amp; ordering</h2><p>The selected density converts volume into an approximate weight. Order quantity is rounded according to the unit system and supplier minimum you enter.</p><div class="formula">estimated weight = volume × density</div></div></section>
 <section aria-labelledby="faq-title" class="panel faq"><h2 id="faq-title">Frequently asked questions</h2>
 <details open=""><summary>How do I calculate how much gravel I need?</summary><p>Measure the surface area and the installed depth, calculate the volume, then use a supplier or material density to estimate weight. This calculator also lets you combine multiple areas and add an optional ordering allowance.</p></details>
 <details><summary>What density should I use?</summary><p>Use the exact bulk density from your supplier or delivery paperwork when available. Presets here are planning estimates and can vary with stone type, source, moisture and compaction.</p></details>
@@ -124,7 +120,11 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 <details><summary>Can I calculate an irregular project?</summary><p>Yes. Add sections and split the project into simple shapes. The calculator sums the volumes before applying the common allowance.</p></details>
 <details><summary>Are the tons exact?</summary><p>No. Your measured volume is determined by the dimensions and depth entered. Weight depends on the density assumption, so the final delivered weight may differ from the estimate.</p></details>
 </section>
-<section class="panel"><h2>Related tools</h2><div class="related"><a href="pilot-hole-calculator.html">Pilot Hole Size Calculator</a><a href="calculator.html">Significant Figures Calculator</a></div></section>
+<section class="panel related-tools"><h2>Related Tools</h2><div class="related-grid">
+<a class="related-item" href="pilot-hole-calculator.html"><span class="related-icon" aria-hidden="true">⌁</span><span class="related-copy"><strong>Pilot Hole Size Calculator</strong><small>Find a practical drill bit size for screws.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
+<a class="related-item" href="calculator.html"><span class="related-icon" aria-hidden="true">▦</span><span class="related-copy"><strong>Significant Figures Calculator</strong><small>Round numbers to the required precision.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
+<a class="related-item" href="uuid-generator-calculator.html"><span class="related-icon" aria-hidden="true">▤</span><span class="related-copy"><strong>UUID Generator &amp; Validator</strong><small>Generate and validate unique identifiers.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
+</div></section>
 <section class="panel"><h2>Planning note</h2><p class="warning">This tool is for planning and estimating material quantities. It does not determine an engineered base thickness or drainage design. For structural work, site-specific specifications or professional advice may be required.</p></section>
 </main>
 <footer><div>© 2026 Utility Platform</div><nav aria-label="Footer" class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer>
@@ -146,10 +146,7 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
   let lastResult=null;
   function num(v){return Number(v);}
   function positiveFinite(v){return Number.isFinite(v)&&v>0;}
-  function fmt(n,d=2){
-    if(!Number.isFinite(n)) return '—';
-    return n.toLocaleString('en-US',{maximumFractionDigits:d});
-  }
+  function fmt(n,d=2){if(!Number.isFinite(n)) return '—';return n.toLocaleString('en-US',{maximumFractionDigits:d});}
   function cleanNumber(n){return Math.abs(n-Math.round(n))<1e-9?Math.round(n):n;}
   function updateDensityHint(){
     const isMetric=unitsEl.value==='metric';
@@ -178,173 +175,74 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
   }
   function addArea(shape='rectangle'){
     sectionCounter++;
-    const card=document.createElement('div'); card.className='area-card'; card.dataset.shape=shape; card.dataset.id=String(sectionCounter);
-    card.innerHTML=`<div class="area-head"><div class="area-title">Area ${sectionCounter}</div><button class="remove" type="button" data-remove aria-label="Remove area ${sectionCounter}">Remove</button></div>
-      <div class="area-grid">
-        <div class="field"><label>Shape</label><select data-role="shape"><option value="rectangle">Rectangle</option><option value="circle">Circle</option><option value="triangle">Triangle</option></select></div>
-        <div class="field rect-only"><label>Length</label><input data-role="length" type="number" min="0" step="any" placeholder="e.g. 20"></div>
-        <div class="field rect-only"><label>Width</label><input data-role="width" type="number" min="0" step="any" placeholder="e.g. 10"></div>
-        <div class="field circle-only"><label>Diameter</label><input data-role="diameter" type="number" min="0" step="any" placeholder="e.g. 12"></div>
-        <div class="field triangle-only"><label>Base</label><input data-role="base" type="number" min="0" step="any" placeholder="e.g. 20"></div>
-        <div class="field triangle-only"><label>Height</label><input data-role="triHeight" type="number" min="0" step="any" placeholder="e.g. 10"></div>
-        <div class="field"><label>Dimension unit</label><select data-role="dimUnit"></select></div>
-        <div class="field"><label>Installed depth</label><input data-role="depth" type="number" min="0" step="any"></div>
-        <div class="field"><label>Depth unit</label><select data-role="depthUnit"></select></div>
-      </div>`;
-    const shapeSel=card.querySelector('[data-role="shape"]'); shapeSel.value=shape;
-    populateUnits(card); setDefaultDepthInputs(card); syncShape(card);
-    shapeSel.addEventListener('change',()=>{card.dataset.shape=shapeSel.value;syncShape(card);});
-    card.querySelector('[data-remove]').addEventListener('click',()=>{if(areaEl.children.length>1) card.remove(); else setError('Keep at least one project area.');});
+    const card=document.createElement('div');card.className='area-card';card.dataset.shape=shape;
+    card.innerHTML=`<div class="area-head"><div class="area-title">Area ${sectionCounter}</div><button class="remove" type="button" data-remove>Remove</button></div>
+    <div class="area-grid">
+      <div class="field"><label>Shape</label><select data-role="shape"><option value="rectangle">Rectangle</option><option value="circle">Circle</option><option value="triangle">Triangle</option></select></div>
+      <div class="field rect-only"><label>Length</label><input data-role="length" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div class="field rect-only"><label>Width</label><input data-role="width" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div class="field"><label>Depth</label><div style="display:grid;grid-template-columns:1fr 90px;gap:8px"><input data-role="depth" type="number" min="0" step="any" inputmode="decimal"><select data-role="depthUnit"><option value="in">in</option><option value="ft">ft</option><option value="mm">mm</option><option value="cm">cm</option><option value="m">m</option></select></div></div>
+      <div class="field shape-extra circle-only"><label>Radius</label><input data-role="radius" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div class="field shape-extra triangle-only"><label>Base</label><input data-role="base" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div class="field shape-extra triangle-only"><label>Triangle height</label><input data-role="triangleHeight" type="number" min="0" step="any" inputmode="decimal"></div>
+    </div>`;
     areaEl.appendChild(card);
+    const shapeEl=card.querySelector('[data-role="shape"]');shapeEl.value=shape;setDefaultDepthInputs(card);
+    shapeEl.addEventListener('change',()=>{card.dataset.shape=shapeEl.value;});
+    card.querySelector('[data-remove]').addEventListener('click',()=>{card.remove();renumberAreas();});
   }
-  function populateUnits(card){
-    const dim=card.querySelector('[data-role="dimUnit"]'), dep=card.querySelector('[data-role="depthUnit"]');
-    const imp=[['ft','ft'],['in','in'],['yd','yd']]; const met=[['m','m'],['cm','cm'],['mm','mm']];
-    dim.innerHTML=''; dep.innerHTML='';
-    (unitsEl.value==='metric'?met:imp).forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;dim.appendChild(o);});
-    (unitsEl.value==='metric'?[['mm','mm'],['cm','cm'],['m','m']]:[['in','in'],['ft','ft']]).forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;dep.appendChild(o);});
-    dim.value=unitsEl.value==='metric'?'m':'ft'; dep.value=unitsEl.value==='metric'?'mm':'in';
+  function renumberAreas(){[...areaEl.children].forEach((c,i)=>{const t=c.querySelector('.area-title');if(t)t.textContent=`Area ${i+1}`;});sectionCounter=areaEl.children.length;}
+  function updateCoverage(){
+    const isMetric=unitsEl.value==='metric';
+    document.querySelectorAll('.area-card').forEach(setDefaultDepthInputs);
+    updateCustomDensityHint();
+    if(lastResult) calculate();
   }
-  function syncShape(card){
-    card.querySelector('.area-title').textContent='Area '+card.dataset.id;
-    const shape=card.querySelector('[data-role="shape"]').value; card.dataset.shape=shape;
-    const all=card.querySelectorAll('.rect-only,.circle-only,.triangle-only'); all.forEach(x=>x.style.display='none');
-    if(shape==='rectangle') card.querySelectorAll('.rect-only').forEach(x=>x.style.display='block');
-    if(shape==='circle') card.querySelectorAll('.circle-only').forEach(x=>x.style.display='block');
-    if(shape==='triangle') card.querySelectorAll('.triangle-only').forEach(x=>x.style.display='block');
-  }
-  function setError(msg){errorEl.textContent=msg||'';errorEl.classList.toggle('show',!!msg);}
-  function toFeet(v,u){return u==='ft'?v:u==='in'?v/12:v/3;}
-  function toMeters(v,u){return u==='m'?v:u==='cm'?v/100:v/1000;}
-  function toDepthFeet(v,u){return u==='ft'?v:u==='in'?v/12:v;}
-  function toDepthMeters(v,u){return u==='m'?v:u==='cm'?v/100:v/1000;}
-  function areaFromCard(card, metric){
-    const shape=card.dataset.shape;
-    const unit=card.querySelector('[data-role="dimUnit"]').value;
-    let area;
-    if(shape==='rectangle'){
-      const L=num(card.querySelector('[data-role="length"]').value),W=num(card.querySelector('[data-role="width"]').value);
-      if(!(positiveFinite(L)&&positiveFinite(W))) throw new Error('Every rectangle needs a length and width greater than zero.');
-      area=metric?toMeters(L,unit)*toMeters(W,unit):toFeet(L,unit)*toFeet(W,unit);
-    } else if(shape==='circle'){
-      const D=num(card.querySelector('[data-role="diameter"]').value); if(!positiveFinite(D)) throw new Error('Every circle needs a diameter greater than zero.');
-      const d=metric?toMeters(D,unit):toFeet(D,unit); area=Math.PI*Math.pow(d/2,2);
-    } else {
-      const B=num(card.querySelector('[data-role="base"]').value),H=num(card.querySelector('[data-role="triHeight"]').value);
-      if(!(positiveFinite(B)&&positiveFinite(H))) throw new Error('Every triangle needs a base and height greater than zero.');
-      area=(metric?toMeters(B,unit):toFeet(B,unit))*(metric?toMeters(H,unit):toFeet(H,unit))/2;
-    }
-    const depthVal=num(card.querySelector('[data-role="depth"]').value),depthUnit=card.querySelector('[data-role="depthUnit"]').value;
-    if(!positiveFinite(depthVal)) throw new Error('Every area needs an installed depth greater than zero.');
-    const depth=metric?toDepthMeters(depthVal,depthUnit):toDepthFeet(depthVal,depthUnit);
-    return {area,depth,volume:area*depth};
-  }
-  function getDensity(){
-    const metric=unitsEl.value==='metric';
-    if(materialEl.value==='custom'){
-      const v=num($('customDensity')?.value);
-      if(!positiveFinite(v)) throw new Error(metric?'Enter a custom density in kg/m³.':'Enter a custom density in tons/yd³.');
-      return {metric, kgPerM3:metric?v:v*1601.8463, tPerYd3:metric?v/1601.8463:v};
-    }
-    const m=MATERIALS[materialEl.value]; return {metric,kgPerM3:m.kgPerM3,tPerYd3:m.tPerYd3};
+  function depthToM(value,unit){if(unit==='mm')return value/1000;if(unit==='cm')return value/100;if(unit==='m')return value;if(unit==='ft')return value*0.3048;return value*0.0254;}
+  function lengthToM(value,unit){if(unit==='ft')return value*0.3048;if(unit==='in')return value*0.0254;if(unit==='mm')return value/1000;if(unit==='cm')return value/100;return value;}
+  function showError(msg){errorEl.textContent=msg;errorEl.classList.add('show');}
+  function clearError(){errorEl.textContent='';errorEl.classList.remove('show');}
+  function getDensity(){if(materialEl.value==='custom'){const v=num($('customDensity')?.value);if(!positiveFinite(v))return null;return unitsEl.value==='metric'?v/1000: v*1000/0.764554857984;}const m=MATERIALS[materialEl.value];return unitsEl.value==='metric'?m.kgPerM3:m.tPerYd3*1000/0.764554857984;}
+  function areaVolume(card){
+    const shape=card.dataset.shape||'rectangle';
+    const d=depthToM(num(card.querySelector('[data-role="depth"]').value),card.querySelector('[data-role="depthUnit"]').value);if(!positiveFinite(d))return null;
+    let area=null;
+    if(shape==='rectangle'){const l=lengthToM(num(card.querySelector('[data-role="length"]').value),unitsEl.value==='metric'?'m':'ft');const w=lengthToM(num(card.querySelector('[data-role="width"]').value),unitsEl.value==='metric'?'m':'ft');if(!positiveFinite(l)||!positiveFinite(w))return null;area=l*w;}
+    if(shape==='circle'){const r=lengthToM(num(card.querySelector('[data-role="radius"]').value),unitsEl.value==='metric'?'m':'ft');if(!positiveFinite(r))return null;area=Math.PI*r*r;}
+    if(shape==='triangle'){const b=lengthToM(num(card.querySelector('[data-role="base"]').value),unitsEl.value==='metric'?'m':'ft');const h=lengthToM(num(card.querySelector('[data-role="triangleHeight"]').value),unitsEl.value==='metric'?'m':'ft');if(!positiveFinite(b)||!positiveFinite(h))return null;area=.5*b*h;}
+    return area*d;
   }
   function calculate(){
-    setError('');
-    try{
-      const metric=unitsEl.value==='metric'; const density=getDensity(); let rawVol=0;
-      [...areaEl.children].forEach(card=>rawVol += areaFromCard(card,metric).volume);
-      const allow=num(allowEl.value); if(!(Number.isFinite(allow)&&allow>=0&&allow<=50)) throw new Error('Allowance must be between 0% and 50%.');
-      const adjustedVol=rawVol*(1+allow/100);
-      const volumeM3=metric?adjustedVol:adjustedVol*0.028316846592;
-      const volumeYd3=metric?adjustedVol*1.3079506193:adjustedVol/27;
-      const kg=volumeM3*density.kgPerM3; const tonnes=kg/1000; const shortTons=volumeYd3*density.tPerYd3; const lb=shortTons*2000;
-      const minLoad=num(minloadEl.value); if(!(Number.isFinite(minLoad)&&minLoad>=0)) throw new Error('Supplier minimum load must be zero or greater.'); const minLoadApplied=minLoad>0?Math.max(shortTons,minLoad):shortTons; const orderTons=Math.ceil(minLoadApplied*10)/10;
-      const bagVolFt3=num(bagVolumeEl.value); if(!positiveFinite(bagVolFt3)) throw new Error('Bag volume must be greater than zero.'); const bags=Math.ceil((adjustedVol*(metric?35.3146667215:1))/bagVolFt3);
-      const price=num(priceEl.value); const delivery=num(deliveryEl.value); const bagPrice=num(bagPriceEl.value);
-      if(!Number.isFinite(price)||!Number.isFinite(delivery)||!Number.isFinite(bagPrice)) throw new Error('Cost inputs must contain valid numbers.');
-      if(price<0||delivery<0||bagPrice<0) throw new Error('Cost and delivery values cannot be negative.');
-      const materialCost=price>0?orderTons*price:null; const delivered=(materialCost!==null?materialCost+delivery:null); const bagCost=bagPrice>0?bags*bagPrice:null; const currency=(currencyEl.value.trim()||'$').slice(0,6);
-      if(![rawVol,adjustedVol,volumeM3,volumeYd3,kg,tonnes,shortTons,lb,orderTons,bags].every(Number.isFinite)) throw new Error('The estimate is outside the calculator\'s supported numeric range.');
-      lastResult={metric,adjustedVol,rawVol,volumeM3,volumeYd3,kg,tonnes,shortTons,lb,orderTons,bags,materialCost,delivered,bagCost,allow,bagVolFt3,density,currency,materialName:materialEl.value==='custom'?'Custom density':MATERIALS[materialEl.value].name,areas:[...areaEl.children].length};
-      render(lastResult); updateCoverage();
-    } catch(e){setError(e.message||'Please check your inputs.');}
+    clearError();
+    if(!areaEl.children.length){addArea();}
+    const vols=[];for(const card of areaEl.children){const v=areaVolume(card);if(v===null){showError('Please enter valid positive dimensions and depth for every project area.');return;}vols.push(v);}
+    const baseVolume=vols.reduce((a,b)=>a+b,0);const allowance=Math.max(0,num(allowEl.value)||0)/100;const totalVolume=baseVolume*(1+allowance);const density=getDensity();if(!positiveFinite(density)){showError('Please enter a valid material density.');return;}
+    const kg=totalVolume*density;const tons=kg/907.18474;const yd3=totalVolume/0.764554857984;const liters=totalVolume*1000;const bagM3=num(bagVolumeEl.value)*0.028316846592;const bags=Math.ceil(totalVolume/bagM3);const minLoad=Math.max(0,num(minloadEl.value)||0);const orderTons=Math.max(tons,minLoad);const price=Math.max(0,num(priceEl.value)||0);const delivery=Math.max(0,num(deliveryEl.value)||0);const bagPrice=Math.max(0,num(bagPriceEl.value)||0);const cur=(currencyEl.value||'$').trim()||'$';const cost=price>0?orderTons*price+delivery:(bagPrice>0?bags*bagPrice:null);
+    const isMetric=unitsEl.value==='metric';
+    $('rVolume').textContent=isMetric?`${fmt(totalVolume,2)} m³`:`${fmt(yd3,2)} yd³`;
+    $('rVolumeAlt').textContent=isMetric?`${fmt(liters,0)} L`:`${fmt(totalVolume,2)} m³`;
+    $('rWeight').textContent=isMetric?`${fmt(kg,0)} kg`:`${fmt(tons,2)} US tons`;
+    $('rWeightAlt').textContent=isMetric?`${fmt(tons,2)} US tons`:`${fmt(kg,0)} kg`;
+    $('rOrder').textContent=`${fmt(orderTons,2)} tons`;
+    $('rOrderAlt').textContent=minLoad>0&&orderTons>tons?`Supplier minimum applied: ${fmt(minLoad,2)} tons`:'Rounded planning quantity';
+    $('rCost').textContent=cost===null?'—':`${cur}${fmt(cost,2)}`;
+    $('rCostAlt').textContent=price>0?(delivery>0?`Material + ${cur}${fmt(delivery,2)} delivery`:'Material estimate'):(bagPrice>0?'Retail bag estimate':'Enter price to estimate cost');
+    $('rBags').textContent=fmt(bags,0);$('rBagsAlt').textContent=`${fmt(num(bagVolumeEl.value),2)} cu ft / ${fmt(num(bagVolumeEl.value)*28.3168,2)} L each`;
+    $('rMaterialVolume').textContent=isMetric?`${fmt(baseVolume,2)} m³`:`${fmt(baseVolume/0.764554857984,2)} yd³`;
+    $('rAllowance').textContent=`${fmt(allowance*100,1)}%`;
+    $('orderSummary').innerHTML=`<strong>Planning quantity:</strong> ${fmt(orderTons,2)} US tons · ${fmt(yd3,2)} cubic yards · ${fmt(bags,0)} bags. Verify supplier density, load limits and delivery terms before ordering.`;
+    $('resultStatus').textContent=`Estimated for ${MATERIALS[materialEl.value]?.name||'custom material'} using your ${isMetric?'metric':'US / Imperial'} inputs.`;
+    lastResult={baseVolume,totalVolume,kg,tons,yd3,bags,orderTons,cost};
   }
-  function render(r){
-    $('resultStatus').textContent=`Estimate for ${r.areas} area${r.areas===1?'':'s'} using ${r.materialName}.`;
-    if(r.metric){$('rVolume').textContent=fmt(r.volumeM3,2)+' m³';$('rVolumeAlt').textContent=fmt(r.volumeM3*1000,0)+' L · raw '+fmt(r.rawVol,3)+' m³';$('rWeight').textContent=fmt(r.tonnes,2)+' t';$('rWeightAlt').textContent=fmt(r.kg,0)+' kg';}
-    else{$('rVolume').textContent=fmt(r.volumeYd3,2)+' yd³';$('rVolumeAlt').textContent=fmt(r.volumeYd3*27,1)+' ft³ · raw '+fmt(r.rawVol,2)+' ft³';$('rWeight').textContent=fmt(r.shortTons,2)+' US ton';$('rWeightAlt').textContent=fmt(r.lb,0)+' lb';}
-    $('rOrder').textContent=fmt(r.orderTons,1)+' ton';$('rOrderAlt').textContent=r.orderTons>r.shortTons?`Includes ${fmt(Math.max(0,r.orderTons-r.shortTons),1)} ton ordering margin/minimum.`:'Rounded to 0.1 ton.';
-    $('rBags').textContent=fmt(r.bags,0);$('rBagsAlt').textContent=`Using ${r.bagVolFt3} cu ft bags`;
-    $('rCost').textContent=r.materialCost===null?'—':r.currency+fmt(r.materialCost,2);$('rDelivered').textContent=r.delivered===null?'—':r.currency+fmt(r.delivered,2);$('rBagCost').textContent=r.bagCost===null?'—':r.currency+fmt(r.bagCost,2);
-    const bulk=`Plan for about ${fmt(r.orderTons,1)} US tons of bulk material (${r.materialName}).`;
-    const bag=`Retail alternative: about ${fmt(r.bags,0)} bags at ${r.bagVolFt3} cu ft each.`;
-    $('orderText').textContent=bulk+' '+bag+' Confirm your supplier’s sold unit and minimum load before ordering.';
+  function resetAll(){
+    areaEl.innerHTML='';sectionCounter=0;lastResult=null;allowEl.value='5';priceEl.value='';deliveryEl.value='';currencyEl.value='$';minloadEl.value='';bagVolumeEl.value='0.5';bagPriceEl.value='';materialEl.value='pea';unitsEl.value='imperial';
+    ['rVolume','rWeight','rOrder','rCost','rBags','rMaterialVolume','rAllowance'].forEach(id=>$(id).textContent='—');$('rVolumeAlt').textContent='—';$('rWeightAlt').textContent='—';$('rOrderAlt').textContent='Rounded up for ordering';$('rCostAlt').textContent='Optional material + delivery';$('rBagsAlt').textContent='Based on selected bag size';$('orderSummary').textContent='Add your dimensions above, then calculate.';$('resultStatus').textContent='Enter your project details and calculate to see the estimate.';clearError();addArea();updateDensityHint();
   }
-  function updateCoverage(){
-    const metric=unitsEl.value==='metric'; const density=(()=>{try{return getDensity()}catch{return null}})(); const body=$('coverageBody');body.innerHTML='';
-    if(!density)return;
-    const depths=metric?[50,75,100,150,200,300]:[2,3,4,6,8,12];
-    depths.forEach(d=>{
-      const depth=metric?d/1000:d/12; const oneTonVol=metric?1000/density.kgPerM3:1/density.tPerYd3*27;
-      const coverage=metric?oneTonVol/depth:oneTonVol/depth;
-      const tons100=100/coverage;
-      const tr=document.createElement('tr'); tr.innerHTML=`<td>${d} ${metric?'mm':'in'}</td><td>${fmt(coverage,1)} ${metric?'m²':'sq ft'}</td><td>${fmt(tons100,2)}</td>`;body.appendChild(tr);
-    });
-  }
-  function refreshUnits(){
-    const toMetric=unitsEl.value==='metric';
-    [...areaEl.children].forEach(card=>{
-      const dimUnitEl=card.querySelector('[data-role="dimUnit"]');
-      const depthUnitEl=card.querySelector('[data-role="depthUnit"]');
-      const dimUnit=dimUnitEl.value;
-      const depthUnit=depthUnitEl.value;
-      const lengthInputs=['length','width','diameter','base','triHeight'];
-      lengthInputs.forEach(role=>{
-        const input=card.querySelector(`[data-role="${role}"]`);
-        if(!input) return;
-        const value=num(input.value);
-        if(!Number.isFinite(value)) return;
-        let meters;
-        if(dimUnit==='ft') meters=value*0.3048;
-        else if(dimUnit==='in') meters=value*0.0254;
-        else if(dimUnit==='yd') meters=value*0.9144;
-        else if(dimUnit==='m') meters=value;
-        else if(dimUnit==='cm') meters=value/100;
-        else meters=value/1000;
-        input.value=String(toMetric?meters:meters/0.3048);
-      });
-      const depthInput=card.querySelector('[data-role="depth"]');
-      const depthValue=num(depthInput.value);
-      if(Number.isFinite(depthValue)){
-        let meters;
-        if(depthUnit==='ft') meters=depthValue*0.3048;
-        else if(depthUnit==='in') meters=depthValue*0.0254;
-        else if(depthUnit==='m') meters=depthValue;
-        else if(depthUnit==='cm') meters=depthValue/100;
-        else meters=depthValue/1000;
-        depthInput.value=String(toMetric?meters*1000:meters/0.0254);
-      }
-      populateUnits(card);
-      card.querySelector('[data-role="dimUnit"]').value=toMetric?'m':'ft';
-      card.querySelector('[data-role="depthUnit"]').value=toMetric?'mm':'in';
-    });
-    if($('customDensity')){
-      const value=num($('customDensity').value);
-      if(Number.isFinite(value)&&value>0){
-        $('customDensity').value=String(toMetric?value*1601.8463:value/1601.8463);
-      }
-    }
-    updateDensityHint(); updateCustomDensityHint();
-  }
-  function copyResult(){
-    if(!lastResult){setError('Calculate an estimate before copying the result.');return;}
-    const r=lastResult; const txt=[`Utility Platform — Gravel Calculator`,`Material: ${r.materialName}`,`Areas: ${r.areas}`,`Volume: ${r.metric?fmt(r.volumeM3,2)+' m³':fmt(r.volumeYd3,2)+' yd³'}`,`Estimated weight: ${r.metric?fmt(r.tonnes,2)+' metric tonnes':fmt(r.shortTons,2)+' US tons'}`,`Suggested bulk order: ${fmt(r.orderTons,1)} US tons`,`Retail bags: ${fmt(r.bags,0)} × ${r.bagVolFt3} cu ft`,`Allowance: ${fmt(r.allow,1)}%`]; if(r.materialCost!==null) txt.push(`Material cost: ${r.currency}${fmt(r.materialCost,2)}`);if(r.delivered!==null)txt.push(`Bulk + delivery: ${r.currency}${fmt(r.delivered,2)}`);if(r.bagCost!==null)txt.push(`Bagged cost: ${r.currency}${fmt(r.bagCost,2)}`);txt.push('Planning estimate — confirm density and final quantity with your supplier.'); const joined=txt.join('\n');
-    navigator.clipboard?.writeText(joined).then(()=>setError('Copied result to clipboard.')).catch(()=>setError('Copy is unavailable in this browser.')); }
-  document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',()=>{[...areaEl.children].forEach(card=>{const depth=card.querySelector('[data-role="depth"]');const du=card.querySelector('[data-role="depthUnit"]');depth.value=unitsEl.value==='metric'?Number(btn.dataset.depth)*25.4:btn.dataset.depth;du.value=unitsEl.value==='metric'?'mm':'in';});calculate();}));
-  $('addArea').addEventListener('click',()=>addArea('rectangle'));$('calculate').addEventListener('click',calculate);$('reset').addEventListener('click',()=>{areaEl.innerHTML='';sectionCounter=0;addArea('rectangle');allowEl.value='5';priceEl.value='';deliveryEl.value='';currencyEl.value='$';minloadEl.value='';bagVolumeEl.value='0.5';bagPriceEl.value='';setError('');['rVolume','rWeight','rOrder','rBags','rCost','rDelivered','rBagCost'].forEach(id=>$(id).textContent='—');$('rVolumeAlt').textContent='—';$('rWeightAlt').textContent='—';$('rOrderAlt').textContent='Rounded up for ordering';$('rBagsAlt').textContent='Based on selected bag size';$('orderText').textContent='Your order recommendation will appear here after calculation.';lastResult=null;updateDensityHint();});
-  $('copy').addEventListener('click',copyResult);$('print').addEventListener('click',()=>window.print());unitsEl.addEventListener('change',refreshUnits);materialEl.addEventListener('change',()=>{updateDensityHint(); if($('customDensity')) $('customDensity').addEventListener('input',updateCoverage);});
-  areaEl.addEventListener('input',()=>setError(''));
-  addArea('rectangle'); updateDensityHint();
+  function copyResult(){if(!lastResult){showError('Calculate an estimate before copying the result.');return;}const text=`Gravel estimate: ${fmt(lastResult.yd3,2)} yd³, ${fmt(lastResult.tons,2)} US tons, ${fmt(lastResult.bags,0)} bags.`;navigator.clipboard?.writeText(text).then(()=>{const btn=$('copy');const old=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=old,1200)}).catch(()=>showError('Copy is not available in this browser.'));}
+  materialEl.addEventListener('change',updateDensityHint);unitsEl.addEventListener('change',()=>{updateDensityHint();});allowEl.addEventListener('input',()=>{if(lastResult)calculate()});priceEl.addEventListener('input',()=>{if(lastResult)calculate()});deliveryEl.addEventListener('input',()=>{if(lastResult)calculate()});currencyEl.addEventListener('input',()=>{if(lastResult)calculate()});minloadEl.addEventListener('input',()=>{if(lastResult)calculate()});bagVolumeEl.addEventListener('change',()=>{if(lastResult)calculate()});bagPriceEl.addEventListener('input',()=>{if(lastResult)calculate()});
+  document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.area-card [data-role="depth"]').forEach(i=>{i.value=unitsEl.value==='metric'?Math.round(num(btn.dataset.depth)*25.4):btn.dataset.depth});document.querySelectorAll('.area-card [data-role="depthUnit"]').forEach(i=>i.value=unitsEl.value==='metric'?'mm':'in');}));
+  $('addArea').addEventListener('click',()=>addArea());$('calculate').addEventListener('click',calculate);$('reset').addEventListener('click',resetAll);$('copy').addEventListener('click',copyResult);$('print').addEventListener('click',()=>window.print());
+  addArea();updateDensityHint();
 })();
 </script>
 </body>
