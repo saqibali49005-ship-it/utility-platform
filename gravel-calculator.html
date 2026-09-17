@@ -52,6 +52,19 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 </style>
 <link href="site-design.css" rel="stylesheet"/>
 <meta content="index,follow" name="robots"/><meta content="Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost" name="twitter:title"/><meta content="Estimate gravel quantity for driveways, paths, patios, drainage and other projects. Calculate cubic yards or metres, approximate weight, bags, optional cost and a practical order quantity." name="twitter:description"/><link href="tool-layout.css" rel="stylesheet"/>
+<style>
+body:has(.related-tools) .related-tools{margin-top:16px;margin-bottom:18px}
+body:has(.related-tools) .related-tools .related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+body:has(.related-tools) .related-tools .related-item{display:flex;align-items:center;gap:12px;min-height:76px;padding:14px 16px;border:1px solid #dbe3ed;border-radius:16px;background:#fff;box-shadow:0 5px 16px rgba(15,23,42,.05);color:#0b1220;font-weight:750;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+body:has(.related-tools) .related-tools .related-item:hover{border-color:#bfdbfe;box-shadow:0 8px 18px rgba(15,23,42,.09);transform:translateY(-1px)}
+body:has(.related-tools) .related-tools .related-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:13px;background:#eff6ff;color:#2563eb;font-size:21px;font-weight:800}
+body:has(.related-tools) .related-tools .related-copy{min-width:0;flex:1}
+body:has(.related-tools) .related-tools .related-copy strong{display:block;line-height:1.25}
+body:has(.related-tools) .related-tools .related-copy small{display:block;margin-top:3px;color:#5f6b7a;font-size:.82rem;font-weight:500;line-height:1.35}
+body:has(.related-tools) .related-tools .related-arrow{flex:0 0 auto;font-size:28px;font-weight:300;color:#0f172a;line-height:1}
+@media(max-width:650px){body:has(.related-tools) .related-tools .related-grid{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body class="tool-page">
 <a class="skip" href="#main-content">Skip to content</a>
@@ -122,8 +135,6 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
 </section>
 <section class="panel related-tools"><h2>Related Tools</h2><div class="related-grid">
 <a class="related-item" href="pilot-hole-calculator.html"><span class="related-icon" aria-hidden="true">⌁</span><span class="related-copy"><strong>Pilot Hole Size Calculator</strong><small>Find a practical drill bit size for screws.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
-<a class="related-item" href="calculator.html"><span class="related-icon" aria-hidden="true">▦</span><span class="related-copy"><strong>Significant Figures Calculator</strong><small>Round numbers to the required precision.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
-<a class="related-item" href="uuid-generator-calculator.html"><span class="related-icon" aria-hidden="true">▤</span><span class="related-copy"><strong>UUID Generator &amp; Validator</strong><small>Generate and validate unique identifiers.</small></span><span class="related-arrow" aria-hidden="true">›</span></a>
 </div></section>
 <section class="panel"><h2>Planning note</h2><p class="warning">This tool is for planning and estimating material quantities. It does not determine an engineered base thickness or drainage design. For structural work, site-specific specifications or professional advice may be required.</p></section>
 </main>
