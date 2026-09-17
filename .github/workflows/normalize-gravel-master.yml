@@ -18,31 +18,24 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
+          import re
           p = Path('gravel-calculator.html')
           s = p.read_text(encoding='utf-8')
-          # Remove the old emergency header override that competed with the locked master CSS.
-          start = s.find('<style id="gravel-header-final-size-align">')
-          if start != -1:
-              end = s.find('</style>', start)
-              if end == -1:
-                  raise SystemExit('header override style is malformed')
-              s = s[:start] + s[end + len('</style>'):]
-          # The current master does not use the generic related-tools stylesheet on this page.
-          s = s.replace('<link rel="stylesheet" href="master-related-tools.css">\n', '')
-          # Remove the forced related-tool card: it is not a genuine direct-use relationship.
-          old_related = '<section class="card related-tools"><h2>Related Tools</h2><div class="related-grid"><a class="related-item" href="pilot-hole-calculator.html"><div><strong>Pilot Hole Size Calculator</strong><span>Choose practical wood-screw drill-bit starting sizes.</span></div><span aria-hidden="true">›</span></a></div></section>'
-          s = s.replace(old_related, '')
-          # Remove the duplicated paragraph/closing section accidentally left after the hero.
-          duplicate = '<p>Plan the amount of gravel you need for driveways, paths, patios, drainage beds and other projects. Build one area or combine several sections, then see volume, approximate weight, bags and optional cost.</p></section>\n'
-          s = s.replace(duplicate, '\n', 1)
-          # Match the locked master theme color.
-          s = s.replace('<meta content="#111827" name="theme-color"/>', '<meta content="#0b2f66" name="theme-color"/>')
+          s = re.sub(r'<style\s+id=["\']gravel-header-final-size-align["\'][\s\S]*?</style>\s*', '', s, count=1)
+          s = re.sub(r'\s*<link[^>]+href=["\']master-related-tools\.css["\'][^>]*>', '', s, count=1)
+          s = re.sub(r'\s*<section[^>]*class=["\']card related-tools["\'][\s\S]*?Pilot Hole Size Calculator[\s\S]*?</section>', '', s, count=1)
+          s = re.sub(r'(</section>\s*)<p>Plan the amount of gravel you need[\s\S]*?</p>\s*</section>', r'\1', s, count=1)
+          s = s.replace('meta content="#111827" name="theme-color"', 'meta content="#0b2f66" name="theme-color"')
+          s = s.replace('body.gravel-tool{ }', '')
           p.write_text(s, encoding='utf-8')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add gravel-calculator.html
-          git add -u .github/workflows/normalize-gravel-master.yml
+          git add -u .github/workflows/normalize-gravel-master.yml .rebuild-gravel-trigger
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
           git commit -m "Align gravel calculator with locked master"
           git push
-          rm -f .github/workflows/normalize-gravel-master.yml
