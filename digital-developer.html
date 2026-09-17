@@ -13,9 +13,10 @@
 .wrap{max-width:900px;margin:auto;padding:28px 16px 60px}a{color:inherit}
 .nav{display:flex;gap:18px;margin-bottom:28px;font-weight:700;font-size:14px;flex-wrap:wrap}
 h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:20px;box-shadow:0 8px 28px rgba(15,23,42,.07)}
-.card h2{margin-top:0}.button{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:800}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:20px;box-shadow:0 8px 28px rgba(15,23,42,.07);display:flex;flex-direction:column;min-height:220px}
+.card h2{margin-top:0}.button{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:800;align-self:flex-start;margin-top:auto}
 footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
+@media(max-width:650px){.wrap{padding-top:22px}.card{min-height:0;padding:17px}.button{width:100%;text-align:center}}
 </style>
 <link href="site-design.css" rel="stylesheet"/>
 <meta content="index,follow" name="robots"/><meta content="website" property="og:type"/><meta content="Digital &amp; Developer Tools | Utility Platform" property="og:title"/><meta content="Developer and digital utilities from Utility Platform, starting with a UUID generator, validator and inspector." property="og:description"/><meta content="https://saqibali49005-ship-it.github.io/utility-platform/digital-developer.html" property="og:url"/>
