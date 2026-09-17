@@ -1,0 +1,77 @@
+name: Fix Gravel Related Tools
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-gravel:
+    if: ${{ !contains(github.event.head_commit.message, '[skip gravel-fix]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply targeted Gravel related-tools fix
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('gravel-calculator.html')
+          text = path.read_text(encoding='utf-8')
+
+          old = '''<section class="panel"><h2>Related tools</h2><div class="related"><a href="pilot-hole-calculator.html">Pilot Hole Size Calculator</a><a href="calculator.html">Significant Figures Calculator</a></div></section>'''
+          new = '''<section class="panel related-tools"><h2>Related Tools</h2><div class="related">
+          <a class="related-link" href="pilot-hole-calculator.html"><span class="related-icon" aria-hidden="true">⌁</span><span class="related-copy"><span class="related-title">Pilot Hole Size Calculator</span><span class="related-desc">Choose a practical pilot hole size for screws and fasteners.</span></span><span class="related-arrow" aria-hidden="true">→</span></a>
+          </div></section>'''
+
+          if old not in text:
+              raise SystemExit('Expected Gravel related-tools block was not found; no changes made.')
+
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
+
+      - name: Add page-scoped visual styling
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('gravel-calculator.html')
+          text = path.read_text(encoding='utf-8')
+
+          marker = '<link href="tool-layout.css" rel="stylesheet"/>'
+          css = '''<style>
+          body:has(.related-tools) .related-tools{margin-top:16px;margin-bottom:18px}
+          body:has(.related-tools) .related-tools .related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+          body:has(.related-tools) .related-tools .related-link{display:flex;align-items:center;gap:12px;min-height:76px;padding:14px 16px;border:1px solid #dbe3ed;border-radius:16px;background:#fff;box-shadow:0 5px 16px rgba(15,23,42,.05);color:#0b1220;font-weight:750;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+          body:has(.related-tools) .related-tools .related-link:hover{border-color:#bfdbfe;box-shadow:0 8px 18px rgba(15,23,42,.09);transform:translateY(-1px)}
+          body:has(.related-tools) .related-tools .related-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:13px;background:#eff6ff;color:#2563eb;font-size:21px;font-weight:800}
+          body:has(.related-tools) .related-tools .related-copy{min-width:0;flex:1}
+          body:has(.related-tools) .related-tools .related-title{display:block;line-height:1.25}
+          body:has(.related-tools) .related-tools .related-desc{display:block;margin-top:3px;color:#5f6b7a;font-size:.82rem;font-weight:500;line-height:1.35}
+          body:has(.related-tools) .related-tools .related-arrow{flex:0 0 auto;font-size:28px;font-weight:300;color:#0f172a;line-height:1}
+          @media(max-width:650px){body:has(.related-tools) .related-tools .related{grid-template-columns:1fr}}
+          </style>
+          '''
+
+          if css not in text:
+              if marker not in text:
+                  raise SystemExit('Expected stylesheet marker was not found; no changes made.')
+              text = text.replace(marker, marker + '\n' + css, 1)
+              path.write_text(text, encoding='utf-8')
+
+      - name: Commit targeted change
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gravel-calculator.html
+          if git diff --cached --quiet; then
+            echo "No Gravel changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: polish Gravel related tools [skip gravel-fix]"
+          git push
