@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="#111827" name="theme-color"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <title>Gravel Calculator | Tons, Cubic Yards, Bags &amp; Cost</title>
@@ -291,9 +291,48 @@ main{max-width:1040px;margin:auto;padding:24px 16px 64px}.crumbs{font-size:13px;
     });
   }
   function refreshUnits(){
-    [...areaEl.children].forEach(card=>populateUnits(card));
-    if(unitsEl.value==='metric'){ [...areaEl.children].forEach(card=>{card.querySelector('[data-role="depth"]').value='100';card.querySelector('[data-role="depthUnit"]').value='mm';}); }
-    else { [...areaEl.children].forEach(card=>{card.querySelector('[data-role="depth"]').value='4';card.querySelector('[data-role="depthUnit"]').value='in';}); }
+    const toMetric=unitsEl.value==='metric';
+    [...areaEl.children].forEach(card=>{
+      const dimUnitEl=card.querySelector('[data-role="dimUnit"]');
+      const depthUnitEl=card.querySelector('[data-role="depthUnit"]');
+      const dimUnit=dimUnitEl.value;
+      const depthUnit=depthUnitEl.value;
+      const lengthInputs=['length','width','diameter','base','triHeight'];
+      lengthInputs.forEach(role=>{
+        const input=card.querySelector(`[data-role="${role}"]`);
+        if(!input) return;
+        const value=num(input.value);
+        if(!Number.isFinite(value)) return;
+        let meters;
+        if(dimUnit==='ft') meters=value*0.3048;
+        else if(dimUnit==='in') meters=value*0.0254;
+        else if(dimUnit==='yd') meters=value*0.9144;
+        else if(dimUnit==='m') meters=value;
+        else if(dimUnit==='cm') meters=value/100;
+        else meters=value/1000;
+        input.value=String(toMetric?meters:meters/0.3048);
+      });
+      const depthInput=card.querySelector('[data-role="depth"]');
+      const depthValue=num(depthInput.value);
+      if(Number.isFinite(depthValue)){
+        let meters;
+        if(depthUnit==='ft') meters=depthValue*0.3048;
+        else if(depthUnit==='in') meters=depthValue*0.0254;
+        else if(depthUnit==='m') meters=depthValue;
+        else if(depthUnit==='cm') meters=depthValue/100;
+        else meters=depthValue/1000;
+        depthInput.value=String(toMetric?meters*1000:meters/0.0254);
+      }
+      populateUnits(card);
+      card.querySelector('[data-role="dimUnit"]').value=toMetric?'m':'ft';
+      card.querySelector('[data-role="depthUnit"]').value=toMetric?'mm':'in';
+    });
+    if($('customDensity')){
+      const value=num($('customDensity').value);
+      if(Number.isFinite(value)&&value>0){
+        $('customDensity').value=String(toMetric?value*1601.8463:value/1601.8463);
+      }
+    }
     updateDensityHint(); updateCustomDensityHint();
   }
   function copyResult(){
