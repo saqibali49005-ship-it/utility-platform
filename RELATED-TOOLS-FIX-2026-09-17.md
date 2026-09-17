@@ -12,3 +12,6 @@ The sitewide Related Tools styling was corrected without changing the approved f
 
 ## Commit
 The fix was applied to `visual-polish.css` in the commit immediately preceding this checkpoint.
+
+## Deployment refresh
+A harmless documentation-only change was made to trigger a fresh GitHub Pages deployment after verifying the UUID page source contains the intended Time Calculator, Significant Figures Calculator, and Browse All Tools cards.
