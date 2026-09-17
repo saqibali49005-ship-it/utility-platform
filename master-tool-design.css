@@ -41,3 +41,38 @@ body.tool-page .footer-links{display:flex!important;justify-content:center!impor
 @media(max-width:430px){.tool-page .result-main,.tool-page .sub-results{grid-template-columns:1fr!important}.tool-page .mode-grid{grid-template-columns:1fr!important}.tool-page .related-item,.tool-page .related-link,.tool-page .uuid-related-link{min-height:72px!important}}
 @media print{body.tool-page>header,body.tool-page>footer,body.tool-page .site-footer,body.tool-page .actions,body.tool-page .preset-row,body.tool-page .remove{display:none!important}body.tool-page{background:#fff!important}body.tool-page>main{max-width:none!important;padding:0!important}.tool-page .card,.tool-page .panel{box-shadow:none!important;break-inside:avoid!important}.tool-page .area-card{break-inside:avoid!important}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tool-page *{transition:none!important;animation:none!important}}
+
+/* PHASE 2 — MASTER COMPONENT LOCK
+   This final layer is intentionally high-specificity and !important so legacy
+   page CSS cannot silently change the shared visual components. */
+body.tool-page>main .related,
+body.tool-page>main .related-grid,
+body.tool-page>main .related-list,
+body.tool-page>main .uuid-related-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin-top:14px!important}
+body.tool-page>main .related-item,
+body.tool-page>main .related-link,
+body.tool-page>main .uuid-related-link,
+body.tool-page>main .related>a{box-sizing:border-box!important;position:relative!important;min-width:0!important;min-height:76px!important;display:flex!important;align-items:center!important;gap:12px!important;padding:14px 16px!important;border:1px solid #dbe3ed!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 16px rgba(15,23,42,.05)!important;color:#0b1220!important;text-decoration:none!important;font-weight:750!important}
+body.tool-page>main .related-item strong,
+body.tool-page>main .related-link strong,
+body.tool-page>main .uuid-related-link strong{display:block!important;margin:0!important;color:#0b1220!important;line-height:1.25!important}
+body.tool-page>main .related-item span,
+body.tool-page>main .related-item small,
+body.tool-page>main .related-link span,
+body.tool-page>main .related-link small{display:block!important;margin-top:3px!important;color:var(--master-muted)!important;font-size:.82rem!important;font-weight:500!important;line-height:1.35!important}
+body.tool-page>main .related-item:hover,
+body.tool-page>main .related-link:hover,
+body.tool-page>main .uuid-related-link:hover,
+body.tool-page>main .related>a:hover{border-color:#bfdbfe!important;box-shadow:0 8px 18px rgba(15,23,42,.09)!important;transform:translateY(-1px)!important}
+body.tool-page>main .related-tools,
+body.tool-page>main .uuid-related-tools{margin-top:16px!important;margin-bottom:18px!important}
+body.tool-page>main .related-icon,
+body.tool-page>main .uuid-related-icon{display:grid!important;place-items:center!important;flex:0 0 48px!important;width:48px!important;height:48px!important;border-radius:13px!important;background:#eff6ff!important;color:#2563eb!important;font-size:21px!important;font-weight:800!important}
+body.tool-page>main .related-arrow,
+body.tool-page>main .uuid-related-arrow{flex:0 0 auto!important;font-size:28px!important;font-weight:300!important;color:#0f172a!important;line-height:1!important}
+@media(max-width:650px){
+ body.tool-page>main .related,
+ body.tool-page>main .related-grid,
+ body.tool-page>main .related-list,
+ body.tool-page>main .uuid-related-list{grid-template-columns:1fr!important}
+}
