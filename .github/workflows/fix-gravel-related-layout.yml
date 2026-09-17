@@ -1,0 +1,48 @@
+name: Fix Gravel Related Layout
+on:
+  push:
+    paths:
+      - '_gravel_related_layout_trigger.txt'
+  workflow_dispatch:
+
+jobs:
+  fix:
+    if: ${{ !contains(github.event.head_commit.message, '[skip gravel-related-layout]') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix related tools CSS
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('gravel-calculator.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<style>\nbody:has(.related-tools) .related-tools{margin-top:16px;margin-bottom:18px}'
+          start = s.find(marker)
+          if start == -1:
+              raise SystemExit('related-tools style block not found')
+          end = s.find('</style>', start)
+          if end == -1:
+              raise SystemExit('related-tools style block end not found')
+          replacement = '''<style>
+body:has(.related-tools) .related-tools{margin-top:16px!important;margin-bottom:18px!important}
+body:has(.related-tools) .related-tools .related-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;margin-top:14px!important}
+body:has(.related-tools) .related-tools .related-item{display:flex!important;align-items:center!important;gap:12px!important;min-height:76px!important;width:100%!important;padding:14px 16px!important;border:1px solid #dbe3ed!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 16px rgba(15,23,42,.05)!important;color:#0b1220!important;font-weight:750!important;text-decoration:none!important;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease!important}
+body:has(.related-tools) .related-tools .related-item:hover{border-color:#bfdbfe!important;box-shadow:0 8px 18px rgba(15,23,42,.09)!important;transform:translateY(-1px)!important}
+body:has(.related-tools) .related-tools .related-icon{display:grid!important;place-items:center!important;flex:0 0 48px!important;width:48px!important;height:48px!important;border-radius:13px!important;background:#eff6ff!important;color:#2563eb!important;font-size:21px!important;font-weight:800!important;line-height:1!important}
+body:has(.related-tools) .related-tools .related-copy{display:block!important;min-width:0!important;flex:1 1 auto!important}
+body:has(.related-tools) .related-tools .related-copy strong{display:block!important;line-height:1.25!important}
+body:has(.related-tools) .related-tools .related-copy small{display:block!important;margin-top:3px!important;color:#5f6b7a!important;font-size:.82rem!important;font-weight:500!important;line-height:1.35!important}
+body:has(.related-tools) .related-tools .related-arrow{display:block!important;flex:0 0 auto!important;margin-left:auto!important;font-size:28px!important;font-weight:300!important;color:#0f172a!important;line-height:1!important}
+</style>'''
+          s = s[:start] + replacement + s[end+8:]
+          p.write_text(s, encoding='utf-8')
+          PY
+          rm -f _gravel_related_layout_trigger.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add gravel-calculator.html _gravel_related_layout_trigger.txt
+          git commit -m 'Fix gravel related tools layout [skip gravel-related-layout]'
+          git push
