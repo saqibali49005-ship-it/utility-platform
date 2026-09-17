@@ -53,11 +53,11 @@ th{background:#f8fafc}
 details{border-top:1px solid var(--line);padding:12px 0}
 details:first-of-type{border-top:0}
 summary{font-weight:750;cursor:pointer}
-footer{background:#fff;border-top:1px solid var(--line);padding:24px 16px;color:var(--muted);font-size:.9rem}
-.foot{max-width:900px;margin:auto;display:flex;gap:14px;flex-wrap:wrap}
+footer{background:#fff;border-top:1px solid var(--line);padding:24px 16px;color:var(--muted);font-size:.9rem;text-align:center}
+.foot{max-width:900px;margin:auto;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
 .source-list{margin:8px 0 0;padding-left:20px}
 .source-list li{margin:5px 0}
-@media(max-width:650px){.grid,.kv{grid-template-columns:1fr}nav{display:none}.card{padding:16px}table{font-size:.84rem}}
+@media(max-width:650px){.grid,.kv{grid-template-columns:1fr}nav{display:none}.card{padding:16px}table{font-size:.84rem}.foot{justify-content:center}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Pilot Hole Size Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/pilot-hole-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Practical pilot-hole, clearance-hole and countersink starting-size tool for common wood screws.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -86,200 +86,31 @@ footer{background:#fff;border-top:1px solid var(--line);padding:24px 16px;color:
 <section class="card">
 <h2>Find your drill-bit size</h2>
 <div class="grid">
-<div>
-<label for="screw">Screw size</label>
-<select id="screw">
-<option value="6">#6 (3.5 mm)</option>
-<option selected="" value="8">#8 (4.2 mm)</option>
-<option value="10">#10 (4.8 mm)</option>
-<option value="12">#12 (5.5 mm)</option>
-<option value="14">#14 (6.1 mm)</option>
-<option value="m30">3.0 mm wood screw</option>
-<option value="m35">3.5 mm wood screw</option>
-<option value="m40">4.0 mm wood screw</option>
-<option value="m45">4.5 mm wood screw</option>
-<option value="m50">5.0 mm wood screw</option>
-<option value="m60">6.0 mm wood screw</option>
-</select>
+<div><label for="screw">Screw size</label><select id="screw"><option value="6">#6 (3.5 mm)</option><option selected="" value="8">#8 (4.2 mm)</option><option value="10">#10 (4.8 mm)</option><option value="12">#12 (5.5 mm)</option><option value="14">#14 (6.1 mm)</option><option value="m30">3.0 mm wood screw</option><option value="m35">3.5 mm wood screw</option><option value="m40">4.0 mm wood screw</option><option value="m45">4.5 mm wood screw</option><option value="m50">5.0 mm wood screw</option><option value="m60">6.0 mm wood screw</option></select></div>
+<div><label for="material">Material</label><select id="material"><option value="soft">Softwood / pine</option><option selected="" value="hard">Hardwood</option><option value="ply">Plywood</option><option value="mdf">MDF / particleboard</option></select></div>
+<div><label for="hole">Hole type</label><select id="hole"><option selected="" value="pilot">Pilot hole</option><option value="clearance">Clearance hole</option><option value="counter">Pilot + countersink</option></select></div>
+<div><label for="preference">Bit display</label><select id="preference"><option selected="" value="common">Common practical bit</option><option value="calculated">Calculated size first</option></select></div>
 </div>
-<div>
-<label for="material">Material</label>
-<select id="material">
-<option value="soft">Softwood / pine</option>
-<option selected="" value="hard">Hardwood</option>
-<option value="ply">Plywood</option>
-<option value="mdf">MDF / particleboard</option>
-</select>
-</div>
-<div>
-<label for="hole">Hole type</label>
-<select id="hole">
-<option selected="" value="pilot">Pilot hole</option>
-<option value="clearance">Clearance hole</option>
-<option value="counter">Pilot + countersink</option>
-</select>
-</div>
-<div>
-<label for="preference">Bit display</label>
-<select id="preference">
-<option selected="" value="common">Common practical bit</option>
-<option value="calculated">Calculated size first</option>
-</select>
-</div>
-</div>
-<div class="actions">
-<button id="calculate" type="button">Calculate</button>
-<button class="secondary" id="reset" type="button">Reset</button>
-</div>
+<div class="actions"><button id="calculate" type="button">Calculate</button><button class="secondary" id="reset" type="button">Reset</button></div>
 <div aria-live="polite" class="result" id="result" role="status"></div>
 </section>
-<section class="card">
-<h2>I don't know my screw size</h2>
-<p class="small">Measure the screw's outside/major diameter with a ruler or caliper. If possible, also measure the threaded root diameter. The measurement result is a starting point, not a manufacturer specification.</p>
-<div class="grid">
-<div><label for="major">Major diameter (mm)</label><input id="major" inputmode="decimal" min=".5" placeholder="e.g. 4.2" step=".1" type="number"/></div>
-<div><label for="root">Root diameter (mm, optional)</label><input id="root" inputmode="decimal" min=".2" placeholder="e.g. 2.8" step=".1" type="number"/></div>
-</div>
-<div class="actions"><button id="measure" type="button">Calculate from measurements</button></div>
-<div aria-live="polite" class="small" id="measureResult"></div>
-</section>
-<section class="card">
-<h2>Understand the three hole types</h2>
-<div class="note"><strong>Pilot hole:</strong> a smaller hole in the receiving piece that helps the screw enter with less splitting and driving resistance.</div>
-<div class="note" style="margin-top:10px"><strong>Clearance hole:</strong> a hole through the upper piece that lets the screw shank pass through so the joint can clamp.</div>
-<div class="note" style="margin-top:10px"><strong>Countersink:</strong> a recess for a compatible flat/countersunk screw head. The correct diameter depends on the actual screw head, not just the screw's nominal diameter.</div>
-<div class="warn" style="margin-top:12px"><strong>Important:</strong> there is no single universal pilot-hole size. Screw design, wood density, grain direction and the manufacturer's installation guidance can change the recommendation. Structural/self-drilling screws may be designed for different installation methods.</div>
-</section>
-<section class="card">
-<h2>Reference method</h2>
-<p>For the common #6–#14 wood-screw options, the calculator now uses a fixed reference table rather than the previous arbitrary material-factor formula. Plywood follows the softwood reference and MDF/particleboard follows the hardwood reference as a practical starting convention. Metric options use a separate metric wood-screw reference table; they are deliberately labelled by diameter rather than “M” because an M-size can also refer to a machine-thread fastener, which is a different application.</p>
-<p class="small">Published references do not agree perfectly on every screw design, so these values are presented as starting references rather than guaranteed specifications.</p>
-</section>
-<section class="card">
-<h2>Common wood-screw reference</h2>
-<div style="overflow:auto">
-<table>
-<thead><tr><th>Screw</th><th>Softwood</th><th>Hardwood</th><th>Clearance</th><th>Countersink*</th></tr></thead>
-<tbody>
-<tr><td>#6</td><td>5/64" · 2.0 mm</td><td>3/32" · 2.4 mm</td><td>9/64" · 3.6 mm</td><td>9/32" · 7.1 mm</td></tr>
-<tr><td>#8</td><td>7/64" · 2.8 mm</td><td>1/8" · 3.2 mm</td><td>11/64" · 4.4 mm</td><td>5/16" · 8.0 mm</td></tr>
-<tr><td>#10</td><td>1/8" · 3.2 mm</td><td>9/64" · 3.6 mm</td><td>3/16" · 4.8 mm</td><td>3/8" · 9.5 mm</td></tr>
-<tr><td>#12</td><td>9/64" · 3.6 mm</td><td>5/32" · 4.0 mm</td><td>7/32" · 5.6 mm</td><td>7/16" · 11.0 mm</td></tr>
-<tr><td>#14</td><td>5/32" · 4.0 mm</td><td>11/64" · 4.4 mm</td><td>1/4" · 6.4 mm</td><td>1/2" · 12.7 mm</td></tr>
-</tbody>
-</table>
-</div>
-<p class="small">*Countersink values are reference values for compatible flat/countersunk heads; actual screw-head geometry should take priority.</p>
-</section>
-<section class="card">
-<h2>How to use the calculator</h2>
-<ol>
-<li>Select the screw closest to your fastener.</li>
-<li>Select the material.</li>
-<li>Choose pilot, clearance or pilot + countersink.</li>
-<li>Use the displayed metric and imperial value to select a practical bit.</li>
-<li>For an important joint, test on scrap of the same material and verify the fastener manufacturer's instructions.</li>
-</ol>
-</section>
-<section class="card">
-<h2>Frequently asked questions</h2>
-<details><summary>What size pilot hole does a #8 wood screw need?</summary><p>The reference table uses 2.8 mm (7/64") in softwood and 3.2 mm (1/8") in hardwood. Different screw designs and wood species can require adjustment.</p></details>
-<details><summary>Why is the hardwood pilot larger?</summary><p>Denser wood generally gives the screw less room to displace fibers, so a larger pilot can reduce splitting and driving resistance.</p></details>
-<details><summary>Is a clearance hole the same as a pilot hole?</summary><p>No. A clearance hole is intended to let the screw shank pass through the upper piece, while the pilot hole is for the receiving piece where the threads engage.</p></details>
-<details><summary>Should I always use the exact calculated size?</summary><p>No. Treat the result as a reference starting point. Fastener geometry, wood species, grain direction, proximity to an edge and manufacturer guidance can change the appropriate size.</p></details>
-<details><summary>What about modern self-drilling or structural screws?</summary><p>Some engineered fasteners are specifically designed to reduce or eliminate pre-drilling in certain wood applications. Follow the instructions for the exact fastener instead of assuming this chart applies.</p></details>
-</section>
-<section class="card">
-<h2>Sources &amp; methodology</h2>
-<p class="small">The reference table is based on published wood-screw pilot/clearance charts and is intentionally presented as a practical starting reference rather than a universal standard. Manufacturer-specific instructions take priority.</p>
-<ul class="source-list">
-<li><a href="https://workshopcalc.com/reference/pilot-hole-chart" rel="nofollow">WorkshopCalc — Wood Screw Pilot Hole Chart</a></li>
-<li><a href="https://www.engbench.com/calc.php?w=pilot-holes" rel="nofollow">EngBench — Wood Screw Pilot &amp; Clearance Hole Chart</a></li>
-<li><a href="https://spax.us/customer-service" rel="nofollow">SPAX — pre-drill recommendations for specific fasteners</a></li>
-</ul>
-</section>
-<section class="card">
-<h2>Related tools</h2>
-<p><a href="calculator.html">Significant Figures Calculator</a> — useful when working with measured dimensions and precision.</p>
-</section>
+<section class="card"><h2>I don't know my screw size</h2><p class="small">Measure the screw's outside/major diameter with a ruler or caliper. If possible, also measure the threaded root diameter. The measurement result is a starting point, not a manufacturer specification.</p><div class="grid"><div><label for="major">Major diameter (mm)</label><input id="major" inputmode="decimal" min=".5" placeholder="e.g. 4.2" step=".1" type="number"/></div><div><label for="root">Root diameter (mm, optional)</label><input id="root" inputmode="decimal" min=".2" placeholder="e.g. 2.8" step=".1" type="number"/></div></div><div class="actions"><button id="measure" type="button">Calculate from measurements</button></div><div aria-live="polite" class="small" id="measureResult"></div></section>
+<section class="card"><h2>Understand the three hole types</h2><div class="note"><strong>Pilot hole:</strong> a smaller hole in the receiving piece that helps the screw enter with less splitting and driving resistance.</div><div class="note" style="margin-top:10px"><strong>Clearance hole:</strong> a hole through the upper piece that lets the screw shank pass through so the joint can clamp.</div><div class="note" style="margin-top:10px"><strong>Countersink:</strong> a recess for a compatible flat/countersunk screw head. The correct diameter depends on the actual screw head, not just the screw's nominal diameter.</div><div class="warn" style="margin-top:12px"><strong>Important:</strong> there is no single universal pilot-hole size. Screw design, wood density, grain direction and the manufacturer's installation guidance can change the recommendation. Structural/self-drilling screws may be designed for different installation methods.</div></section>
+<section class="card"><h2>Reference method</h2><p>For the common #6–#14 wood-screw options, the calculator now uses a fixed reference table rather than the previous arbitrary material-factor formula. Plywood follows the softwood reference and MDF/particleboard follows the hardwood reference as a practical starting convention. Metric options use a separate metric wood-screw reference table; they are deliberately labelled by diameter rather than “M” because an M-size can also refer to a machine-thread fastener, which is a different application.</p><p class="small">Published references do not agree perfectly on every screw design, so these values are presented as starting references rather than guaranteed specifications.</p></section>
+<section class="card"><h2>Common wood-screw reference</h2><div style="overflow:auto"><table><thead><tr><th>Screw</th><th>Softwood</th><th>Hardwood</th><th>Clearance</th><th>Countersink*</th></tr></thead><tbody><tr><td>#6</td><td>5/64" · 2.0 mm</td><td>3/32" · 2.4 mm</td><td>9/64" · 3.6 mm</td><td>9/32" · 7.1 mm</td></tr><tr><td>#8</td><td>7/64" · 2.8 mm</td><td>1/8" · 3.2 mm</td><td>11/64" · 4.4 mm</td><td>5/16" · 8.0 mm</td></tr><tr><td>#10</td><td>1/8" · 3.2 mm</td><td>9/64" · 3.6 mm</td><td>3/16" · 4.8 mm</td><td>3/8" · 9.5 mm</td></tr><tr><td>#12</td><td>9/64" · 3.6 mm</td><td>5/32" · 4.0 mm</td><td>7/32" · 5.6 mm</td><td>7/16" · 11.0 mm</td></tr><tr><td>#14</td><td>5/32" · 4.0 mm</td><td>11/64" · 4.4 mm</td><td>1/4" · 6.4 mm</td><td>1/2" · 12.7 mm</td></tr></tbody></table></div><p class="small">*Countersink values are reference values for compatible flat/countersunk heads; actual screw-head geometry should take priority.</p></section>
+<section class="card"><h2>How to use the calculator</h2><ol><li>Select the screw closest to your fastener.</li><li>Select the material.</li><li>Choose pilot, clearance or pilot + countersink.</li><li>Use the displayed metric and imperial value to select a practical bit.</li><li>For an important joint, test on scrap of the same material and verify the fastener manufacturer's instructions.</li></ol></section>
+<section class="card"><h2>Frequently asked questions</h2><details><summary>What size pilot hole does a #8 wood screw need?</summary><p>The reference table uses 2.8 mm (7/64") in softwood and 3.2 mm (1/8") in hardwood. Different screw designs and wood species can require adjustment.</p></details><details><summary>Why is the hardwood pilot larger?</summary><p>Denser wood generally gives the screw less room to displace fibers, so a larger pilot can reduce splitting and driving resistance.</p></details><details><summary>Is a clearance hole the same as a pilot hole?</summary><p>No. A clearance hole is intended to let the screw shank pass through the upper piece, while the pilot hole is for the receiving piece where the threads engage.</p></details><details><summary>Should I always use the exact calculated size?</summary><p>No. Treat the result as a reference starting point. Fastener geometry, wood species, grain direction, proximity to an edge and manufacturer guidance can change the appropriate size.</p></details><details><summary>What about modern self-drilling or structural screws?</summary><p>Some engineered fasteners are specifically designed to reduce or eliminate pre-drilling in certain wood applications. Follow the instructions for the exact fastener instead of assuming this chart applies.</p></details></section>
+<section class="card"><h2>Sources &amp; methodology</h2><p class="small">The reference table is based on published wood-screw pilot/clearance charts and is intentionally presented as a practical starting reference rather than a universal standard. Manufacturer-specific instructions take priority.</p><ul class="source-list"><li><a href="https://workshopcalc.com/reference/pilot-hole-chart" rel="nofollow">WorkshopCalc — Wood Screw Pilot Hole Chart</a></li><li><a href="https://www.engbench.com/calc.php?w=pilot-holes" rel="nofollow">EngBench — Wood Screw Pilot &amp; Clearance Hole Chart</a></li><li><a href="https://spax.us/customer-service" rel="nofollow">SPAX — pre-drill recommendations for specific fasteners</a></li></ul></section>
+<section class="card"><h2>Related tools</h2><p><a href="calculator.html">Significant Figures Calculator</a> — useful when working with measured dimensions and precision.</p></section>
 </main>
 <footer><div class="foot"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><span>© 2026 Utility Platform</span></div></footer>
 <script>
 const $=id=>document.getElementById(id);
-const data={
-"6":{name:"#6",major:3.5,soft:2.0,hard:2.4,clearance:3.6,counter:7.1},
-"8":{name:"#8",major:4.2,soft:2.8,hard:3.2,clearance:4.4,counter:8.0},
-"10":{name:"#10",major:4.8,soft:3.2,hard:3.6,clearance:4.8,counter:9.5},
-"12":{name:"#12",major:5.5,soft:3.6,hard:4.0,clearance:5.6,counter:11.0},
-"14":{name:"#14",major:6.1,soft:4.0,hard:4.4,clearance:6.4,counter:12.7},
-"m30":{name:"3.0 mm wood screw",major:3.0,soft:1.5,hard:2.0,clearance:3.5,counter:null},
-"m35":{name:"3.5 mm wood screw",major:3.5,soft:2.0,hard:2.5,clearance:4.0,counter:null},
-"m40":{name:"4.0 mm wood screw",major:4.0,soft:2.5,hard:3.0,clearance:4.5,counter:null},
-"m45":{name:"4.5 mm wood screw",major:4.5,soft:3.0,hard:3.5,clearance:5.0,counter:null},
-"m50":{name:"5.0 mm wood screw",major:5.0,soft:3.0,hard:3.5,clearance:5.5,counter:null},
-"m60":{name:"6.0 mm wood screw",major:6.0,soft:4.0,hard:4.5,clearance:6.5,counter:null}
-};
-const bits=[
-[1.5,'1/16"'],[2,'5/64"'],[2.4,'3/32"'],[2.5,'3/32"'],[2.8,'7/64"'],
-[3,'1/8"'],[3.2,'1/8"'],[3.5,'9/64"'],[3.6,'9/64"'],[4,'5/32"'],
-[4.4,'11/64"'],[4.5,'11/64"'],[4.8,'3/16"'],[5,'13/64"'],[5.5,'7/32"'],
-[5.6,'7/32"'],[6.4,'1/4"'],[6.5,'1/4"'],[7.1,'9/32"'],[8,'5/16"'],
-[9.5,'3/8"'],[11,'7/16"'],[12.7,'1/2"']
-];
-function near(mm){
- return bits.reduce((a,b)=>Math.abs(b[0]-mm)<Math.abs(a[0]-mm)?b:a,bits[0]);
-}
-function f(n){
- return Number(n.toFixed(2)).toString();
-}
-function materialLabel(){
- return material.selectedOptions[0].text;
-}
-function calc(){
- const s=data[screw.value], m=material.value, h=hole.value, p=preference.value;
- const base=(m==='soft'||m==='ply')?s.soft:s.hard;
- let chosen, title, extra='', displaySize, displayBit, secondary='';
- if(h==='clearance'){
-   chosen=s.clearance; title='Recommended clearance hole';
-   displaySize=chosen; displayBit=near(chosen)[1];
- }else if(h==='counter'){
-   chosen=base;
-   title='Recommended pilot hole + countersink';
-   displaySize=s.counter!==null?s.counter:chosen;
-   displayBit=s.counter!==null?near(s.counter)[1]:near(chosen)[1];
-   secondary='<p><strong>Pilot hole:</strong> '+f(chosen)+' mm ('+near(chosen)[1]+')</p>';
-   if(s.counter!==null){
-     extra='<p><strong>Countersink reference:</strong> '+f(s.counter)+' mm ('+near(s.counter)[1]+'). Verify the actual screw-head geometry.</p>';
-   }else{
-     extra='<p><strong>Countersink:</strong> metric wood-screw head diameters vary by screw design, so measure the head or follow the manufacturer specification rather than inferring it from the screw diameter.</p>';
-   }
- }else{
-   chosen=base; title='Recommended pilot hole';
-   displaySize=chosen; displayBit=near(chosen)[1];
- }
- const b=near(displaySize);
- result.innerHTML='<h2>'+title+'</h2><div class="big">'+(p==='common'?displayBit:f(displaySize)+' mm')+'</div><div class="kv"><div><strong>Metric</strong><br>'+f(displaySize)+' mm</div><div><strong>Common bit</strong><br>'+displayBit+'</div><div><strong>Screw</strong><br>'+s.name+' · ~'+s.major+' mm</div><div><strong>Material</strong><br>'+materialLabel()+'</div></div>'+secondary+extra+'<p class="small">Reference starting point. Screw geometry, wood density and manufacturer guidance can change the ideal size.</p>';
-}
-$('calculate').addEventListener('click',calc);
-$('reset').addEventListener('click',()=>{
- screw.value='8';material.value='hard';hole.value='pilot';preference.value='common';
- calc();
-});
-$('measure').addEventListener('click',()=>{
- const a=parseFloat(major.value), r=parseFloat(root.value);
- if(!a||a<=0){
-   measureResult.textContent='Enter a valid major diameter.';
-   return;
- }
- if(r&&r>=a){
-   measureResult.textContent='Root diameter should be smaller than the major diameter.';
-   return;
- }
- const x=r&&r>0?r:a*0.7;
- const b=near(x);
- measureResult.innerHTML='Suggested starting pilot: <strong>'+f(x)+' mm</strong> ('+b[1]+' common bit). '+(r?'Your measured root diameter was used as the starting value.':'No root diameter was supplied, so an approximate 70% starting value was used.')+' Test on scrap first and verify the screw manufacturer’s guidance.';
-});
-calc();
+const data={"6":{name:"#6",major:3.5,soft:2.0,hard:2.4,clearance:3.6,counter:7.1},"8":{name:"#8",major:4.2,soft:2.8,hard:3.2,clearance:4.4,counter:8.0},"10":{name:"#10",major:4.8,soft:3.2,hard:3.6,clearance:4.8,counter:9.5},"12":{name:"#12",major:5.5,soft:3.6,hard:4.0,clearance:5.6,counter:11.0},"14":{name:"#14",major:6.1,soft:4.0,hard:4.4,clearance:6.4,counter:12.7},"m30":{name:"3.0 mm wood screw",major:3.0,soft:1.5,hard:2.0,clearance:3.5,counter:null},"m35":{name:"3.5 mm wood screw",major:3.5,soft:2.0,hard:2.5,clearance:4.0,counter:null},"m40":{name:"4.0 mm wood screw",major:4.0,soft:2.5,hard:3.0,clearance:4.5,counter:null},"m45":{name:"4.5 mm wood screw",major:4.5,soft:3.0,hard:3.5,clearance:5.0,counter:null},"m50":{name:"5.0 mm wood screw",major:5.0,soft:3.0,hard:3.5,clearance:5.5,counter:null},"m60":{name:"6.0 mm wood screw",major:6.0,soft:4.0,hard:4.5,clearance:6.5,counter:null}};
+const bits=[[1.5,'1/16"'],[2,'5/64"'],[2.4,'3/32"'],[2.5,'3/32"'],[2.8,'7/64"'],[3,'1/8"'],[3.2,'1/8"'],[3.5,'9/64"'],[3.6,'9/64"'],[4,'5/32"'],[4.4,'11/64"'],[4.5,'11/64"'],[4.8,'3/16"'],[5,'13/64"'],[5.5,'7/32"'],[5.6,'7/32"'],[6.4,'1/4"'],[6.5,'1/4"'],[7.1,'9/32"'],[8,'5/16"'],[9.5,'3/8"'],[11,'7/16"'],[12.7,'1/2"']];
+function near(mm){return bits.reduce((a,b)=>Math.abs(b[0]-mm)<Math.abs(a[0]-mm)?b:a,bits[0])} function f(n){return Number(n.toFixed(2)).toString()} function materialLabel(){return material.selectedOptions[0].text}
+function calc(){const s=data[screw.value],m=material.value,h=hole.value,p=preference.value;const base=(m==='soft'||m==='ply')?s.soft:s.hard;let chosen,title,extra='',displaySize,displayBit,secondary='';if(h==='clearance'){chosen=s.clearance;title='Recommended clearance hole';displaySize=chosen;displayBit=near(chosen)[1]}else if(h==='counter'){chosen=base;title='Recommended pilot hole + countersink';displaySize=s.counter!==null?s.counter:chosen;displayBit=s.counter!==null?near(s.counter)[1]:near(chosen)[1];secondary='<p><strong>Pilot hole:</strong> '+f(chosen)+' mm ('+near(chosen)[1]+')</p>';if(s.counter!==null){extra='<p><strong>Countersink reference:</strong> '+f(s.counter)+' mm ('+near(s.counter)[1]+'). Verify the actual screw-head geometry.</p>'}else{extra='<p><strong>Countersink:</strong> metric wood-screw head diameters vary by screw design, so measure the head or follow the manufacturer specification rather than inferring it from the screw diameter.</p>'}}else{chosen=base;title='Recommended pilot hole';displaySize=chosen;displayBit=near(chosen)[1]}result.innerHTML='<h2>'+title+'</h2><div class="big">'+(p==='common'?displayBit:f(displaySize)+' mm')+'</div><div class="kv"><div><strong>Metric</strong><br>'+f(displaySize)+' mm</div><div><strong>Common bit</strong><br>'+displayBit+'</div><div><strong>Screw</strong><br>'+s.name+' · ~'+s.major+' mm</div><div><strong>Material</strong><br>'+materialLabel()+'</div></div>'+secondary+extra+'<p class="small">Reference starting point. Screw geometry, wood density and manufacturer guidance can change the ideal size.</p>'}
+$('calculate').addEventListener('click',calc);$('reset').addEventListener('click',()=>{screw.value='8';material.value='hard';hole.value='pilot';preference.value='common';calc()});$('measure').addEventListener('click',()=>{const a=parseFloat(major.value),r=parseFloat(root.value);if(!a||a<=0){measureResult.textContent='Enter a valid major diameter.';return}if(r&&r>=a){measureResult.textContent='Root diameter should be smaller than the major diameter.';return}const x=r&&r>0?r:a*0.7,b=near(x);measureResult.innerHTML='Suggested starting pilot: <strong>'+f(x)+' mm</strong> ('+b[1]+' common bit). '+(r?'Your measured root diameter was used as the starting value.':'No root diameter was supplied, so an approximate 70% starting value was used.')+' Test on scrap first and verify the screw manufacturer’s guidance.'});calc();
 </script>
 </body>
 </html>
