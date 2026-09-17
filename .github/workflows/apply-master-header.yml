@@ -1,15 +1,17 @@
 name: Apply Master Tool Header
 on:
-  push:
-    paths:
-      - '_apply_master_header.txt'
+  pull_request:
+    types: [opened, synchronize]
 permissions:
   contents: write
 jobs:
   apply:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
       - name: Add master header stylesheet to every tool page
         shell: bash
         run: |
@@ -36,5 +38,5 @@ PY
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add '*.html'
             git commit -m 'Apply calculator header style to all tool pages'
-            git push
+            git push origin HEAD:${{ github.head_ref }}
           fi
