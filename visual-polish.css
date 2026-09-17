@@ -45,3 +45,12 @@ body:has(.mode-tabs) .related-grid{display:grid!important;grid-template-columns:
 body:has(.mode-tabs) .related-item{min-width:0!important;box-sizing:border-box!important}
 body:has(.mode-tabs) footer .foot{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex-wrap:wrap!important;line-height:1.5!important;padding-left:14px!important;padding-right:14px!important;box-sizing:border-box!important}
 @media(max-width:650px){body:has(.mode-tabs) main{box-sizing:border-box!important;max-width:100%!important}body:has(.mode-tabs) .related-grid{grid-template-columns:1fr!important}body:has(.mode-tabs) footer .foot{row-gap:2px!important;column-gap:7px!important}}
+
+/* Stronger Time Calculator mobile alignment overrides. */
+body:has(.mode-tabs) section.card.related{display:block!important;grid-template-columns:none!important;width:100%!important;box-sizing:border-box!important}
+body:has(.mode-tabs) section.card.related > h2{display:block!important;width:100%!important;margin:0 0 16px!important}
+body:has(.mode-tabs) section.card.related > .related-grid{display:grid!important;width:100%!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important}
+body:has(.mode-tabs) section.card.related > .related-grid > .related-item{display:block!important;width:100%!important;box-sizing:border-box!important;margin:0!important}
+body:has(.mode-tabs) footer{width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
+body:has(.mode-tabs) footer .foot{width:100%!important;max-width:100%!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:6px 8px!important;padding:14px 12px!important;margin:0!important;line-height:1.45!important;overflow-wrap:anywhere!important}
+@media(max-width:650px){body:has(.mode-tabs) section.card.related{overflow:visible!important}body:has(.mode-tabs) section.card.related > .related-grid{grid-template-columns:1fr!important;gap:10px!important}body:has(.mode-tabs) section.card.related > .related-grid > .related-item{min-height:0!important}body:has(.mode-tabs) footer .foot{font-size:14px!important;gap:4px 7px!important;padding-left:10px!important;padding-right:10px!important}body:has(.mode-tabs) footer .foot > span{flex:0 0 100%!important;text-align:center!important}body:has(.mode-tabs) footer .foot > a{white-space:nowrap!important}}
