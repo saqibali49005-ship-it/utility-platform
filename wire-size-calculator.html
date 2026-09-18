@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#0b2f66">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Wire Size &amp; Voltage Drop Calculator | AC, DC, Solar &amp; Inverter</title>
-<meta name="description" content="Calculate wire size from load, voltage, distance and voltage-drop target. Supports DC, single-phase AC and three-phase planning with metric mm² and AWG results.">
+<meta name="description" content="Calculate wire size and voltage drop for DC, single-phase AC and three-phase circuits. Enter voltage, current or power, one-way distance, material and target drop to get a planning-level cable size.">\n<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://saqibali49005-ship-it.github.io/utility-platform/wire-size-calculator.html">
 <meta property="og:type" content="website"><meta property="og:title" content="Wire Size &amp; Voltage Drop Calculator"><meta property="og:description" content="Find a planning-level cable size from voltage, load, distance and voltage-drop target for DC, AC, solar and inverter wiring."><meta property="og:url" content="https://saqibali49005-ship-it.github.io/utility-platform/wire-size-calculator.html"><meta property="og:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png"><meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-tool-design.css">\n<link rel="stylesheet" href="master-related-tools.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Wire Size & Voltage Drop Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/wire-size-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level wire size and voltage drop calculator for DC, single-phase AC and three-phase circuits."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://saqibali49005-ship-it.github.io/utility-platform/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html"},{"@type":"ListItem","position":3,"name":"Wire Size & Voltage Drop Calculator","item":"https://saqibali49005-ship-it.github.io/utility-platform/wire-size-calculator.html"}]}</script>
 <style>
@@ -44,12 +44,12 @@
 
 <div class="section-label">1. Circuit type</div>
 <div class="choice-grid" role="group" aria-label="Circuit type">
-<button class="choice active" data-circuit="dc" type="button">DC</button><button class="choice" data-circuit="single" type="button">AC Single-Phase</button><button class="choice" data-circuit="three" type="button">AC 3-Phase</button>
+<button class="choice active" data-circuit="dc" aria-pressed="true" type="button">DC</button><button class="choice" data-circuit="single" aria-pressed="false" type="button">AC Single-Phase</button><button class="choice" data-circuit="three" aria-pressed="false" type="button">AC 3-Phase</button>
 </div>
 
 <div class="section-label">2. Load</div>
 <div class="choice-grid" role="group" aria-label="Load input type">
-<button class="choice active" data-load="amps" type="button">I know Amps</button><button class="choice" data-load="watts" type="button">I know Watts</button><button class="choice" data-load="power" type="button">Power + PF</button>
+<button class="choice active" data-load="amps" aria-pressed="true" type="button">I know Amps</button><button class="choice" data-load="watts" aria-pressed="false" type="button">I know Watts</button><button class="choice" data-load="power" aria-pressed="false" type="button">Power + PF</button>
 </div>
 
 <div class="field"><label for="voltage">System voltage (V)</label><input id="voltage" type="number" min="0.1" step="any" value="48" inputmode="decimal"><div class="hint">Use the nominal source voltage. For solar PV, use the actual string/system voltage used for the run.</div></div>
@@ -81,6 +81,8 @@
 </aside>
 </section>
 
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid"><a class="related-item" href="gravel-calculator.html"><div><strong>Gravel Calculator</strong><span>Plan aggregate quantities for home and construction projects.</span></div><span aria-hidden="true">›</span></a><a class="related-item" href="home-construction.html"><div><strong>Home &amp; Construction Tools</strong><span>Browse practical construction and project-planning calculators.</span></div><span aria-hidden="true">›</span></a></div></section>
+
 <section class="support-grid">
 <article class="card"><h2>What the Calculator Does</h2><p>It converts your load into current when needed, calculates conductor resistance from material and cross-sectional area, applies the correct circuit path factor, and selects the smallest standard metric size that meets your chosen voltage-drop target.</p></article>
 <article class="card"><h2>Useful for Solar &amp; Inverters</h2><p>DC mode is suited to planning runs such as solar-array wiring, battery-to-inverter cables and other low-voltage DC loads. One-way length is doubled internally for the outgoing and return conductors.</p></article>
@@ -96,7 +98,7 @@
 <div class="faq"><button type="button"><span>Are the AWG and mm² values exact equivalents?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. AWG and metric cross-sectional sizes are different standards. The calculator shows an approximate AWG equivalent for the selected metric size; use the actual cable datasheet and applicable standard when purchasing or specifying cable.</div></div>
 </section>
 </main>
-<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark">UP</div><div><strong>Utility Platform</strong><span>Smart Tools for a Smarter You</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
 <script src="master-ui.js"></script>
 <script>
 (function(){
@@ -136,8 +138,8 @@ function calculate(){
 }
 function preset(name){
  const p={solar:{c:'dc',l:'amps',v:400,a:12,len:30,unit:'m',mat:'cu',t:2},battery:{c:'dc',l:'watts',v:48,w:3000,len:2,unit:'m',mat:'cu',t:2},home:{c:'single',l:'amps',v:230,a:16,len:25,unit:'m',mat:'cu',t:3},three:{c:'three',l:'amps',v:400,a:25,len:40,unit:'m',mat:'cu',t:3}}[name];if(!p)return;setCircuit(p.c);setLoad(p.l);$('voltage').value=p.v;$('amps').value=p.a||'';$('watts').value=p.w||'';$('length').value=p.len;$('lengthUnit').value=p.unit;$('material').value=p.mat;$('target').value=p.t;calculate()}
-document.querySelectorAll('[data-circuit]').forEach(b=>b.onclick=()=>{setCircuit(b.dataset.circuit);calculate()});
-document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);calculate()});
+document.querySelectorAll('[data-circuit]').forEach(b=>b.onclick=()=>{setCircuit(b.dataset.circuit);document.querySelectorAll('[data-circuit]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.circuit===b.dataset.circuit));calculate()});
+document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);document.querySelectorAll('[data-load]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.load===b.dataset.load));calculate()});
 document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));
 $('calculateBtn').onclick=calculate;
 $('clearBtn').onclick=()=>{location.reload()};
