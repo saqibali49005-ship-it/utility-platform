@@ -196,7 +196,7 @@
   function lengthToM(value,unit){if(unit==='ft')return value*0.3048;if(unit==='in')return value*0.0254;if(unit==='mm')return value/1000;if(unit==='cm')return value/100;return value;}
   function showError(msg){errorEl.textContent=msg;errorEl.classList.add('show');}
   function clearError(){errorEl.textContent='';errorEl.classList.remove('show');}
-  function getDensity(){if(materialEl.value==='custom'){const v=num($('customDensity')?.value);if(!positiveFinite(v))return null;return unitsEl.value==='metric'?v/1000: v*1000/0.764554857984;}const m=MATERIALS[materialEl.value];return unitsEl.value==='metric'?m.kgPerM3:m.tPerYd3*1000/0.764554857984;}
+  function getDensity(){if(materialEl.value==='custom'){const v=num($('customDensity')?.value);if(!positiveFinite(v))return null;return unitsEl.value==='metric'?v:v*1000/0.764554857984;}const m=MATERIALS[materialEl.value];return unitsEl.value==='metric'?m.kgPerM3:m.tPerYd3*1000/0.764554857984;}
   function areaVolume(card){
     const shape=card.dataset.shape||'rectangle';
     const d=depthToM(num(card.querySelector('[data-role="depth"]').value),card.querySelector('[data-role="depthUnit"]').value);if(!positiveFinite(d))return null;
