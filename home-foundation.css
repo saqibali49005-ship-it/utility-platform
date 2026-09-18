@@ -11,10 +11,11 @@
 .home-hero h1::after{content:"";display:block;width:56px;height:4px;margin:18px auto 0;border-radius:999px;background:linear-gradient(90deg,#2563eb,#0ea5e9);opacity:.9}
 .home-hero p{max-width:740px;margin:0 auto;color:var(--up-muted,#5f6b7a)!important;font-size:17px;line-height:1.7}
 .home-search{max-width:650px;margin:22px auto 0;position:relative}
-.home-search input{width:100%;min-height:56px;padding:13px 15px 13px 44px!important;border:1px solid #cbd5e1!important;border-radius:11px!important;background:#fff!important;color:var(--up-text)!important;box-shadow:0 8px 22px rgba(15,23,42,.06)!important;font-size:16px!important}
+.home-search input{width:100%;min-height:56px;padding:13px 96px 13px 44px!important;border:1px solid #cbd5e1!important;border-radius:11px!important;background:#fff!important;color:var(--up-text)!important;box-shadow:0 8px 22px rgba(15,23,42,.06)!important;font-size:16px!important}
+.home-search input::-webkit-search-decoration,.home-search input::-webkit-search-cancel-button,.home-search input::-webkit-search-results-button,.home-search input::-webkit-search-results-decoration{display:none}
 .home-search input:focus{outline:3px solid rgba(37,99,235,.13)!important;border-color:#2563eb!important}
-.home-search .search-icon{position:absolute;left:16px;top:50%;width:18px;height:18px;transform:translateY(-50%);display:grid;place-items:center;color:#64748b!important;pointer-events:none;z-index:2}
-.home-search .search-icon svg{display:block;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.home-search .search-icon{position:absolute;left:16px;top:50%;width:20px;height:20px;transform:translateY(-50%);display:grid;place-items:center;color:#64748b!important;pointer-events:none;z-index:3}
+.home-search .search-icon svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round}
 .home-search .search-go{position:absolute;right:8px;top:50%;bottom:auto;transform:translateY(-50%);height:40px;min-width:72px;display:inline-flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;border:0;border-radius:999px;padding:0 16px!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;font-weight:750!important;line-height:1!important;white-space:nowrap;box-shadow:0 7px 18px rgba(37,99,235,.18);cursor:pointer}
 .home-search .search-go:hover{color:#fff!important}
 .home-search .search-go:focus-visible{outline:3px solid rgba(37,99,235,.22);outline-offset:2px}
