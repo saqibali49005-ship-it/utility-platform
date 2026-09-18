@@ -125,6 +125,7 @@ input.addEventListener("keydown",e=>{if(e.key!=="Enter")return;const q=input.val
 if(q.includes("significant")||q.includes("sig fig")||q.includes("precision")) location.href="calculator.html";
 else if(q.includes("pilot")||q.includes("screw")||q.includes("drill")||q.includes("clearance")||q.includes("countersink")) location.href="pilot-hole-calculator.html";
 else if(q.includes("uuid")||q.includes("guid")||q.includes("unique id")||q.includes("identifier")) location.href="uuid-generator-calculator.html";
+else if(q.includes("time")||q.includes("duration")||q.includes("hours")||q.includes("minutes")||q.includes("seconds")) location.href="time-calculator.html";
 else if(q.includes("gravel")||q.includes("aggregate")||q.includes("stone")||q.includes("tons of gravel")||q.includes("cubic yards")) location.href="gravel-calculator.html";
 else if(q.includes("wire")||q.includes("cable")||q.includes("voltage drop")||q.includes("awg")||q.includes("solar cable")||q.includes("inverter cable")) location.href="wire-size-calculator.html";
 else status.textContent="No matching tool yet. Try significant figures, pilot hole, time, UUID, gravel, wire size, voltage drop, solar cable, or inverter cable.";});
