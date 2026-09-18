@@ -50,11 +50,14 @@
 .paint-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
 .paint-tool .faq details{border-top:1px solid var(--line);padding:12px 0}.paint-tool .faq details:first-child{border-top:0}
 .paint-tool .tool-grid > .field{min-width:0}
-.paint-tool .room-card .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.paint-tool .room-card .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
 .paint-tool .room-card .field{min-width:0}
-.paint-tool .room-card input,.paint-tool .room-card select,.paint-tool .field select{width:100%;min-width:0}
-.paint-tool .room-card .hint{display:block;line-height:1.4}
-@media(max-width:700px){.paint-tool .room-card .tool-grid{grid-template-columns:1fr}}
+.paint-tool .room-card input,.paint-tool .room-card select,.paint-tool .room-card .unit-row{width:100%;min-width:0;box-sizing:border-box}
+.paint-tool .room-card .field label{min-height:20px}
+.paint-tool .room-card .hint{display:block;line-height:1.4;margin-top:6px}
+.paint-tool .room-card .room-head{min-height:38px}
+.paint-tool .room-card .remove-room{flex:0 0 auto;white-space:nowrap}
+@media(max-width:700px){.paint-tool .room-card .tool-grid{grid-template-columns:1fr}.paint-tool .room-card .field label{min-height:0}}
 .paint-tool .small{color:var(--muted);font-size:13px}
 @media(max-width:700px){.paint-tool .tool-grid{grid-template-columns:1fr}.paint-tool .result-list{grid-template-columns:1fr}.paint-tool .unit-row{grid-template-columns:1fr}.paint-tool .actions{flex-direction:column;align-items:stretch}.paint-tool .actions button{width:100%}}
 </style>
