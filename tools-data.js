@@ -2,6 +2,7 @@
    Add each new live tool here once. Higher addedOrder = newer.
    Homepage and tools.html use this single registry for cards, search, and category counts. */
 window.UTILITY_TOOLS = [
+  {slug:"text-cleaner",title:"Text Cleaner Online",href:"text-cleaner.html",category:"digital-developer",description:"Clean messy text by trimming lines, removing extra spaces, blank lines and duplicate lines, and normalizing line breaks.",addedOrder:10,keywords:["text cleaner","clean text","text formatter","remove extra spaces","remove blank lines","remove duplicate lines","line breaks","whitespace"]},
   {slug:"conduit-fill",title:"Conduit Fill Calculator",href:"conduit-fill-calculator.html",category:"energy-electrical",description:"Check raceway fill for mixed conductors and find the smallest practical conduit size.",addedOrder:8,keywords:["conduit","raceway","fill","NEC","EMT","PVC"]},
   {slug:"wire-size",title:"Wire Size & Voltage Drop Calculator",href:"wire-size-calculator.html",category:"energy-electrical",description:"Plan cable size from load, voltage, distance, material and voltage-drop target.",addedOrder:7,keywords:["wire","cable","AWG","voltage drop","solar cable","inverter cable"]},
   {slug:"paint",title:"Paint Calculator",href:"paint-calculator.html",category:"home-construction",description:"Estimate paint needed for walls and ceilings, subtract openings, choose coats and coverage, and convert gallons and litres.",addedOrder:9,keywords:["paint","paint calculator","how much paint do I need","paint coverage","gallons","litres","walls","ceiling"]},
