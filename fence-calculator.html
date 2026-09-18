@@ -28,16 +28,17 @@
 </script>
 <link rel="stylesheet" href="master-tool-design.css">
 <style>
-.fence-tool{min-width:0;overflow-x:hidden}
-.fence-tool main{width:100%;max-width:1180px}
-.fence-tool .hero-shell,.fence-tool .hero,.fence-tool .info-callout,.fence-tool .layout{width:100%;max-width:100%;min-width:0}
-.fence-tool .hero>div{min-width:0}
+body.fence-tool{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+.fence-tool main,.fence-tool section,.fence-tool article,.fence-tool aside,.fence-tool .hero-shell,.fence-tool .hero,.fence-tool .info-callout,.fence-tool .layout,.fence-tool .card{width:100%;max-width:100%;min-width:0}
+.fence-tool main{box-sizing:border-box}
+.fence-tool .hero>div,.fence-tool .hero>div:last-child,.fence-tool .info-callout>div:last-child,.fence-tool .field,.fence-tool .tool-grid,.fence-tool .result-grid{min-width:0;max-width:100%}
 .fence-tool .info-callout{display:grid;grid-template-columns:32px minmax(0,1fr);align-items:start}
-.fence-tool .info-callout>div:last-child{min-width:0}
 .fence-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.fence-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;outline:none;font:inherit;font-size:17px}
+.fence-tool input,.fence-tool select,.fence-tool button{max-width:100%;box-sizing:border-box}
+.fence-tool select{width:100%;min-width:0;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;outline:none;font:inherit;font-size:17px}
 .fence-tool select:focus{border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}
 .fence-tool select:disabled{background:#f4f7fa;color:#7b8da1;cursor:not-allowed}
+.fence-tool input{min-width:0}
 .fence-tool .field{min-width:0}
 .fence-tool .field.full{grid-column:1/-1}
 .fence-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4}
@@ -75,11 +76,23 @@
 .fence-tool .status-error{color:#9a3412;font-weight:800;margin-top:10px}
 .fence-tool .copy-status{margin-left:4px;color:var(--muted);font-size:13px}
 @media(max-width:700px){
-  .fence-tool .tool-grid,.fence-tool .result-grid{grid-template-columns:1fr}
-  .fence-tool .run-row{grid-template-columns:1fr}
+  .fence-tool .hero{grid-template-columns:60px minmax(0,1fr);gap:13px;align-items:start}
+  .fence-tool .tool-grid,.fence-tool .result-grid{grid-template-columns:1fr;width:100%}
+  .fence-tool .run-row{grid-template-columns:1fr;width:100%;min-width:0}
+  .fence-tool .run-row>div{min-width:0}
   .fence-tool .run-row .remove-run{width:100%}
-  .fence-tool .actions{flex-direction:column;align-items:stretch}
+  .fence-tool .actions{flex-direction:column;align-items:stretch;width:100%}
   .fence-tool .actions button{width:100%}
+  .fence-tool .card{width:100%}
+  .fence-tool .info-callout{width:100%;grid-template-columns:32px minmax(0,1fr)}
+}
+@media(max-width:430px){
+  .fence-tool .hero{grid-template-columns:52px minmax(0,1fr);gap:11px}
+  .fence-tool .tool-icon{width:52px;height:52px;border-radius:15px;font-size:24px}
+  .fence-tool .hero h1{font-size:27px;line-height:1.08}
+  .fence-tool .hero p{font-size:14px;line-height:1.45}
+  .fence-tool .info-callout{padding:13px}
+  .fence-tool .card{padding:18px 16px}
 }
 </style>
 <link rel="stylesheet" href="master-related-tools.css">
