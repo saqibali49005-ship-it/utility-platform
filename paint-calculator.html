@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0b2f66"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<title>Paint Calculator | How Much Paint Do I Need?</title>
+<meta name="description" content="Use this free paint calculator to estimate how much paint you need for walls, ceilings and multiple rooms. Subtract doors and windows, choose coats and coverage, and get gallons and litres."/>
+<link rel="canonical" href="https://saqibali49005-ship-it.github.io/utility-platform/paint-calculator.html"/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Paint Calculator | How Much Paint Do I Need?"/>
+<meta property="og:description" content="Estimate paint needed for walls and ceilings, subtract doors and windows, choose coats and coverage, and see gallons and litres."/>
+<meta property="og:url" content="https://saqibali49005-ship-it.github.io/utility-platform/paint-calculator.html"/>
+<meta property="og:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png"/>
+<meta property="og:image:alt" content="Utility Platform — Practical Online Tools"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paint Calculator | How Much Paint Do I Need?"/>
+<meta name="twitter:description" content="Estimate paint needed for walls and ceilings, subtract doors and windows, choose coats and coverage, and see gallons and litres."/>
+<meta name="twitter:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Paint Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/paint-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Estimate paint quantity from wall and ceiling dimensions, openings, coats and coverage.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://saqibali49005-ship-it.github.io/utility-platform/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html"},{"@type":"ListItem","position":3,"name":"Paint Calculator","item":"https://saqibali49005-ship-it.github.io/utility-platform/paint-calculator.html"}]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css"/>
+<link rel="stylesheet" href="master-related-tools.css"/>
+<style>
+.paint-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.paint-tool .result-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.paint-tool .metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px}
+.paint-tool .metric strong{display:block;font-size:12px;color:#35536f;text-transform:uppercase;letter-spacing:.05em}
+.paint-tool .metric span{display:block;margin-top:4px;font-size:22px;font-weight:900;color:#123a63;overflow-wrap:anywhere}
+.paint-tool .unit-row{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:9px;align-items:end}
+.paint-tool .room-list{display:grid;gap:12px}
+.paint-tool .room-card{padding:14px;border:1px solid var(--line);border-radius:14px;background:#f8fbff}
+.paint-tool .room-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+.paint-tool .room-head strong{font-size:15px}
+.paint-tool .remove-room{min-height:38px;padding:7px 11px;border:1px solid #c6d7e8;border-radius:10px;background:#fff;color:#49667f;font-weight:800;cursor:pointer}
+.paint-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.paint-tool .preset{min-height:38px;padding:8px 11px;border:1px solid #c6d7e8;border-radius:10px;background:#fff;color:#315676;font-weight:800;cursor:pointer}
+.paint-tool .preset:hover{background:#f7fbff;border-color:#8db3db}
+.paint-tool .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.paint-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.paint-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.paint-tool .note{padding:13px 14px;border:1px solid #cfe2f8;border-radius:12px;background:#eff7ff;color:#244c73;margin-top:10px}
+.paint-tool .warn{padding:13px 14px;border:1px solid #efd59a;border-radius:12px;background:#fff9e9;color:#745000;margin-top:10px}
+.paint-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
+.paint-tool .faq details{border-top:1px solid var(--line);padding:12px 0}.paint-tool .faq details:first-child{border-top:0}
+.paint-tool .small{color:var(--muted);font-size:13px}
+@media(max-width:700px){.paint-tool .tool-grid{grid-template-columns:1fr}.paint-tool .result-list{grid-template-columns:1fr}.paint-tool .unit-row{grid-template-columns:1fr}.paint-tool .actions{flex-direction:column;align-items:stretch}.paint-tool .actions button{width:100%}}
+</style>
+</head>
+<body class="tool-page paint-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="index.html"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="index.html" data-nav="home">Home</a><a href="math-science.html" data-nav="math">Math &amp; Science</a><a href="digital-developer.html" data-nav="digital">Digital &amp; Developer</a><a href="home-construction.html" aria-current="page">Home &amp; Construction</a></nav>
+<div class="header-actions"><button class="icon-btn" id="searchBtn" type="button" aria-label="Search" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button><button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div>
+</div>
+<div class="search-panel" id="searchPanel"><form id="siteSearchForm" role="search"><input id="siteSearch" type="search" placeholder="Search Utility Platform" aria-label="Search Utility Platform"/><button type="submit">Search</button></form></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html" aria-current="page">Home &amp; Construction</a></nav>
+</header>
+<main id="main-content">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="crumb-sep">›</span><a href="home-construction.html">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Paint Calculator</span></nav>
+<section class="hero-shell"><div class="hero"><div class="tool-icon" aria-hidden="true">🎨</div><div><h1>Paint Calculator</h1><p>Estimate how much paint you need for walls and ceilings, account for doors and windows, choose the number of coats, and convert the result between gallons and litres.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Use your paint can's coverage when available</strong>Coverage varies by product, surface, texture and application method. The default coverage is a planning estimate; use the manufacturer's label or technical data for a product-specific result. Sherwin-Williams notes that coverage is commonly around 350–400 sq ft per gallon, while actual requirements vary. citeturn818140search0turn818140search1</div></div></section>
+
+<section class="layout" aria-label="Paint calculator">
+<article class="card tool-card">
+<h2>Calculate Paint Needed</h2>
+<p class="hint">Enter room dimensions in your chosen unit system. Add additional rooms or spaces when needed.</p>
+<div class="tool-grid">
+<div class="field"><label for="units">Measurement system</label><select id="units"><option value="imperial" selected>Imperial (ft)</option><option value="metric">Metric (m)</option></select></div>
+<div class="field"><label for="coverage">Coverage per coat</label><div class="unit-row"><input id="coverage" type="number" min="1" step="1" value="375" inputmode="decimal"/><select id="coverageUnit" aria-label="Coverage unit"><option value="sqft" selected>sq ft / gallon</option><option value="sqm">m² / litre</option></select></div><span class="hint">Adjust this to the coverage shown on your paint product. Default: 375 sq ft/gal.</span></div>
+<div class="field"><label for="coats">Number of coats</label><input id="coats" type="number" min="1" max="10" step="1" value="2" inputmode="numeric"/></div>
+<div class="field"><label for="waste">Planning overage (%)</label><input id="waste" type="number" min="0" max="50" step="1" value="5" inputmode="decimal"/><span class="hint">A small allowance can cover touch-ups and field losses; it is optional.</span></div>
+</div>
+<div class="field"><p style="margin:12px 0 8px;font-weight:800">Rooms / spaces</p><div id="roomList" class="room-list"></div><button type="button" class="preset" id="addRoom">+ Add another room</button></div>
+<div class="actions"><button type="button" id="calculate">Calculate Paint Needed →</button><button type="button" class="secondary" id="reset">Reset</button></div>
+</article>
+
+<aside class="card result-card" aria-live="polite"><h2>Paint Needed</h2><div class="result-main"><div class="result-label">Estimated paint</div><div class="result-value" id="paintResult">—</div><div class="result-sub" id="resultSub">Enter your room details and calculate.</div></div>
+<div class="result-list">
+<div class="metric"><strong>Paint volume</strong><span id="paintLitres">—</span></div>
+<div class="metric"><strong>Covered area</strong><span id="coveredArea">—</span></div>
+<div class="metric"><strong>Coat-adjusted area</strong><span id="coatedArea">—</span></div>
+<div class="metric"><strong>Planning overage</strong><span id="overageResult">—</span></div>
+</div>
+<div class="note" id="orderNote">Round the purchase quantity to the available can size and verify product coverage before buying.</div></aside>
+</section>
+
+<section class="card"><h2>How to use the Paint Calculator</h2><ol><li>Choose Imperial or Metric units.</li><li>Enter each room's length, width and wall height.</li><li>Subtract doors and windows; ceiling area can be included when needed.</li><li>Set the number of coats and replace the default coverage with the coverage printed on your paint product.</li><li>Calculate and use the result as a planning estimate, then round to the available container sizes.</li></ol></section>
+
+<section class="support-grid">
+<article class="card"><h2>What the calculation includes</h2><ul><li>Four wall surfaces for each room.</li><li>Optional ceiling area.</li><li>Doors and windows deducted from paintable area.</li><li>Multiple rooms combined into one estimate.</li></ul></article>
+<article class="card"><h2>Paint coverage matters</h2><p>There is no universal coverage number for every paint. Sherwin-Williams says a gallon typically covers about 350–400 square feet, but surface texture, application method and the product itself can change requirements. citeturn818140search0turn818140search1</p></article>
+<article class="card"><h2>Simple formula</h2><div class="formula">Wall area = 2 × (length + width) × wall height<br/>Paintable area = wall area + ceiling (optional) − openings<br/>Coat area = paintable area × coats<br/>Paint = coat area ÷ coverage × (1 + overage)</div></article>
+</section>
+
+<section class="card faq"><h2>Frequently Asked Questions</h2>
+<details><summary>How much paint does one gallon cover?</summary><p>Sherwin-Williams says a gallon of paint typically covers about 350–400 square feet, but product, surface condition and application method can change the actual amount needed. Check the product label or technical data for the paint you are using. citeturn818140search0turn818140search1</p></details>
+<details><summary>Should I subtract doors and windows?</summary><p>Yes. Deducting significant openings gives a closer estimate of the actual paintable surface. Small openings and trim can be handled differently depending on the project.</p></details>
+<details><summary>Do two coats double the paint?</summary><p>As a planning calculation, two coats are treated as twice the coated area. Actual product requirements can differ because hiding, substrate condition and application technique affect coverage.</p></details>
+<details><summary>Should I add extra paint?</summary><p>A modest planning allowance can help with touch-ups and measurement uncertainty, but the appropriate amount depends on the project. Product-specific guidance should take priority.</p></details>
+<details><summary>Can I use litres instead of gallons?</summary><p>Yes. The calculator supports metric dimensions and litre-based coverage as well as imperial dimensions and square-feet-per-gallon coverage.</p></details>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
+<a class="related-item" href="gravel-calculator.html"><div><strong>Gravel Calculator</strong><span>Estimate gravel volume, weight, bags and ordering quantity for project areas.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="fence-calculator.html"><div><strong>Fence Material Calculator</strong><span>Estimate fence posts, rails, pickets or panels and concrete needs.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="pilot-hole-calculator.html"><div><strong>Pilot Hole Size Calculator</strong><span>Find practical drill-bit starting sizes for common wood screws.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="home-construction.html"><div><strong>Home &amp; Construction Tools</strong><span>Browse more practical construction and project-planning calculators.</span></div><span aria-hidden="true">›</span></a>
+</div></section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="master-ui.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const roomList=$('roomList');
+let rooms=0,lastResult=null;
+function addRoom(){
+ rooms++;
+ const card=document.createElement('div'); card.className='room-card'; card.dataset.room=String(rooms);
+ card.innerHTML=`<div class="room-head"><strong>Room ${rooms}</strong><button type="button" class="remove-room" data-remove>Remove</button></div>
+ <div class="tool-grid">
+   <div class="field"><label>Length</label><input data-r="length" type="number" min="0" step="any" inputmode="decimal" value="12"></div>
+   <div class="field"><label>Width</label><input data-r="width" type="number" min="0" step="any" inputmode="decimal" value="10"></div>
+   <div class="field"><label>Wall height</label><input data-r="height" type="number" min="0" step="any" inputmode="decimal" value="8"></div>
+   <div class="field"><label>Ceiling?</label><select data-r="ceiling"><option value="yes" selected>Include ceiling</option><option value="no">Walls only</option></select></div>
+   <div class="field"><label>Doors</label><input data-r="doors" type="number" min="0" step="1" inputmode="numeric" value="1"></div>
+   <div class="field"><label>Windows</label><input data-r="windows" type="number" min="0" step="1" inputmode="numeric" value="2"></div>
+   <div class="field"><label>Standard door area</label><input data-r="doorArea" type="number" min="0" step="any" inputmode="decimal" value="20"><span class="hint">Default uses 20 sq ft per door in Imperial mode; metric inputs use converted area.</span></div>
+   <div class="field"><label>Standard window area</label><input data-r="windowArea" type="number" min="0" step="any" inputmode="decimal" value="12"><span class="hint">Default uses 12 sq ft per window in Imperial mode; metric inputs use converted area.</span></div>
+ </div>`;
+ roomList.appendChild(card);
+ card.querySelector('[data-remove]').addEventListener('click',()=>{card.remove();renumber();});
+}
+function renumber(){[...roomList.children].forEach((c,i)=>c.querySelector('.room-head strong').textContent='Room '+(i+1));}
+function parse(v){return Number(v);}
+function fmt(n,d=2){return Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';}
+function toM(v,metric){return metric?v:v*0.3048;}
+function areaToM2(v,metric){return metric?v:v*0.09290304;}
+function calc(){
+ const metric=$('units').value==='metric';
+ const coats=Math.max(1,Math.min(10,parse($('coats').value)||1));
+ const waste=Math.max(0,Math.min(50,parse($('waste').value)||0))/100;
+ const covInput=parse($('coverage').value);
+ const covUnit=$('coverageUnit').value;
+ let coverageM2PerL;
+ if(covUnit==='sqm') coverageM2PerL=covInput;
+ else coverageM2PerL=covInput*0.09290304/3.785411784;
+ if(!(coverageM2PerL>0)){alert('Enter a valid paint coverage value.');return;}
+ let wallArea=0, openings=0, ceiling=0;
+ for(const card of roomList.children){
+   const l=parse(card.querySelector('[data-r="length"]').value),w=parse(card.querySelector('[data-r="width"]').value),h=parse(card.querySelector('[data-r="height"]').value);
+   const doors=Math.max(0,parse(card.querySelector('[data-r="doors"]').value)||0),windows=Math.max(0,parse(card.querySelector('[data-r="windows"]').value)||0);
+   const doorArea=areaToM2(parse(card.querySelector('[data-r="doorArea"]').value)||0,metric);
+   const windowArea=areaToM2(parse(card.querySelector('[data-r="windowArea"]').value)||0,metric);
+   if(!(l>0&&w>0&&h>0)){alert('Enter positive room dimensions for every room.');return;}
+   const lm=toM(l,metric),wm=toM(w,metric),hm=toM(h,metric);
+   wallArea += 2*(lm+wm)*hm;
+   openings += doors*doorArea+windows*windowArea;
+   if(card.querySelector('[data-r="ceiling"]').value==='yes') ceiling += lm*wm;
+ }
+ const paintable=Math.max(0,wallArea+ceiling-openings);
+ const coated=paintable*coats;
+ const paintLitres=coated/coverageM2PerL*(1+waste);
+ const gallons=paintLitres/3.785411784;
+ const areaDisplay=metric?paintable:paintable/0.09290304;
+ const coatedDisplay=metric?coated:coated/0.09290304;
+ $('paintResult').textContent=metric?fmt(paintLitres,1)+' L · '+fmt(gallons,2)+' gal':fmt(gallons,2)+' gal · '+fmt(paintLitres,1)+' L';
+ $('paintLitres').textContent=fmt(paintLitres,1)+' L';
+ $('coveredArea').textContent=fmt(areaDisplay,1)+(metric?' m²':' sq ft');
+ $('coatedArea').textContent=fmt(coatedDisplay,1)+(metric?' m²':' sq ft');
+ $('overageResult').textContent=fmt(waste*100,0)+'%';
+ $('resultSub').textContent=fmt(paintable,1)+' '+(metric?'m²':'sq ft')+' of paintable surface before coats and overage.';
+ $('orderNote').textContent='Plan to buy about '+fmt(gallons,2)+' US gallons ('+fmt(paintLitres,1)+' litres). Round to the available container size and verify the exact product coverage.';
+ lastResult={paintLitres,gallons,paintable,coated,waste};
+}
+function reset(){
+ roomList.innerHTML='';rooms=0;lastResult=null;$('coverage').value='375';$('coverageUnit').value='sqft';$('coats').value='2';$('waste').value='5';$('units').value='imperial';
+ $('paintResult').textContent='—';$('paintLitres').textContent='—';$('coveredArea').textContent='—';$('coatedArea').textContent='—';$('overageResult').textContent='—';$('resultSub').textContent='Enter your room details and calculate.';$('orderNote').textContent='Round the purchase quantity to the available can size and verify product coverage before buying.';addRoom();
+}
+$('addRoom').addEventListener('click',addRoom);$('calculate').addEventListener('click',calc);$('reset').addEventListener('click',reset);
+addRoom();
+})();
+</script>
+</body>
+</html>
