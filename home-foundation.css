@@ -100,3 +100,11 @@
   .future-main{grid-column:auto}
 }
 @media(prefers-reduced-motion:reduce){.quick-links a,.latest-card,.category-card{transition:none}}
+
+/* Homepage search hard reset: remove browser-native search chrome and lock both controls to the field center. */
+.home-search{height:56px!important}
+.home-search input,.home-search input[type="text"]{appearance:none!important;-webkit-appearance:none!important;-moz-appearance:none!important;width:100%!important;height:56px!important;min-height:56px!important;box-sizing:border-box!important;padding:13px 100px 13px 48px!important;color:#0b1220!important;-webkit-text-fill-color:#0b1220!important;background:#fff!important}
+.home-search input::placeholder{color:#64748b!important;-webkit-text-fill-color:#64748b!important;opacity:1!important}
+.home-search .search-icon{left:16px!important;top:28px!important;width:20px!important;height:20px!important;transform:translateY(-50%)!important;color:#64748b!important}
+.home-search .search-go{right:8px!important;top:8px!important;width:72px!important;height:40px!important;min-width:72px!important;min-height:40px!important;padding:0!important;margin:0!important;transform:none!important;appearance:none!important;-webkit-appearance:none!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:center!important;display:flex!important;align-items:center!important;justify-content:center!important;font-family:inherit!important;font-size:13px!important;line-height:1!important}
+@media(max-width:650px){.home-search{height:56px!important}.home-search input,.home-search input[type="text"]{padding-right:16px!important}}
