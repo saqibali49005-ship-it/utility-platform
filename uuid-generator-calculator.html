@@ -50,6 +50,11 @@
 <section class="card"><h2>FAQ</h2><details><summary>Are generated UUIDs sent to a server?</summary><p>No. Generation, formatting and inspection happen locally in the browser. This page does not need a server upload for these operations.</p></details><details><summary>How many UUIDs can I generate?</summary><p>You can generate up to 1,000 UUIDs per batch in this page.</p></details><details><summary>Can the inspector validate every UUID version?</summary><p>It validates standard 128-bit UUID syntax and reports the version and variant encoded in the value. Version-specific timestamp decoding is provided for v7.</p></details><details><summary>Why does UUID v7 reveal a time?</summary><p>RFC 9562 defines the most significant 48 bits of UUID v7 as the Unix timestamp in milliseconds. That supports time-ordered identifiers, but it also means the creation time can be derived from a valid v7 value.</p></details></section>
 
 
+
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
+<a class="related-item" href="case-converter.html"><div><strong>Case Converter</strong><span>Convert identifier text to common developer naming styles.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="find-replace.html"><div><strong>Find & Replace</strong><span>Edit or replace repeated identifier text.</span></div><span aria-hidden="true">›</span></a>
+</div></section>
 </main>
 <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer><script src="master-ui.js"></script>
 <script>
