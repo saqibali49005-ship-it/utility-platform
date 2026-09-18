@@ -145,7 +145,7 @@ function calculate(){
 function preset(name){
  const p={solar:{c:'dc',l:'amps',v:400,a:12,len:30,unit:'m',mat:'cu',t:2},battery:{c:'dc',l:'watts',v:48,w:3000,len:2,unit:'m',mat:'cu',t:2},home:{c:'single',l:'amps',v:230,a:16,len:25,unit:'m',mat:'cu',t:3},three:{c:'three',l:'amps',v:400,a:25,len:40,unit:'m',mat:'cu',t:3}}[name];if(!p)return;setCircuit(p.c);setLoad(p.l);$('voltage').value=p.v;$('amps').value=p.a||'';$('watts').value=p.w||'';$('length').value=p.len;$('lengthUnit').value=p.unit;$('material').value=p.mat;$('target').value=p.t;calculate()}
 document.querySelectorAll('[data-circuit]').forEach(b=>b.onclick=()=>{setCircuit(b.dataset.circuit);document.querySelectorAll('[data-circuit]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.circuit===b.dataset.circuit));calculate()});
-document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);document.querySelectorAll('[data-load]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.load===b.dataset.circuit));calculate()});
+document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);document.querySelectorAll('[data-load]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.load===b.dataset.load));calculate()});
 document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));
 $('calculateBtn').onclick=calculate;
 $('clearBtn').onclick=()=>{location.reload()};
