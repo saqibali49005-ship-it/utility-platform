@@ -108,3 +108,16 @@
 .home-search .search-icon{left:16px!important;top:28px!important;width:20px!important;height:20px!important;transform:translateY(-50%)!important;color:#64748b!important}
 .home-search .search-go{right:8px!important;top:8px!important;width:72px!important;height:40px!important;min-width:72px!important;min-height:40px!important;padding:0!important;margin:0!important;transform:none!important;appearance:none!important;-webkit-appearance:none!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:center!important;display:flex!important;align-items:center!important;justify-content:center!important;font-family:inherit!important;font-size:13px!important;line-height:1!important}
 @media(max-width:650px){.home-search{height:56px!important}.home-search input,.home-search input[type="text"]{padding-right:16px!important}}
+
+/* Search alignment correction: controls are positioned against the 56px field, not the whole form. */
+.home-search{height:auto!important}
+.home-search .search-field{position:relative;width:100%;height:56px!important}
+.home-search .search-field .search-icon{position:absolute!important;left:16px!important;top:28px!important;width:20px!important;height:20px!important;transform:translateY(-50%)!important;display:grid!important;place-items:center!important;z-index:3!important}
+.home-search .search-field .search-icon svg{display:block!important;width:20px!important;height:20px!important;stroke:currentColor!important;fill:none!important;stroke-width:2.25!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.home-search .search-field input{position:relative!important;display:block!important;width:100%!important;height:56px!important;min-height:56px!important;padding:13px 100px 13px 48px!important}
+.home-search .search-field .search-go{position:absolute!important;right:8px!important;top:8px!important;bottom:auto!important;width:72px!important;min-width:72px!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0!important;transform:none!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;line-height:1!important}
+.home-search .home-search-status{position:relative!important}
+@media(max-width:650px){
+  .home-search .search-field input{padding-right:16px!important}
+  .home-search .search-field .search-go{display:none!important}
+}
