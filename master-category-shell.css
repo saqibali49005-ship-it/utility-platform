@@ -21,3 +21,16 @@
 .site-header + .wrap footer a{color:#4e6178;text-decoration:none}
 .site-header ~ .wrap footer a:hover,
 .site-header + .wrap footer a:hover{color:#1667e8;text-decoration:underline}
+
+
+/* Shared informational-page shell. */
+.info-page{max-width:900px;margin:auto;padding:28px 16px 60px}
+.info-page h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px;color:#0b2347}
+.info-page .lead{color:#5f7188;font-size:17px}
+.info-page .card{background:#fff;border:1px solid #d8e5f3;border-radius:16px;padding:18px;margin-top:20px;box-shadow:0 8px 28px rgba(15,23,42,.07)}
+.info-page .card h2{margin-top:0;color:#0b2347}
+.info-page .muted{color:#5f7188}
+.info-page footer{margin-top:40px;padding:20px 0 0;border-top:1px solid #d8e5f3;color:#5f7188;font-size:14px;text-align:center}
+.info-page footer a{color:#4e6178;text-decoration:none}
+.info-page footer a:hover{color:#1667e8;text-decoration:underline}
+@media(max-width:650px){.info-page{padding:22px 14px 48px}.info-page .card{padding:17px}}
