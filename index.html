@@ -94,6 +94,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 <article class="card"><div class="badge">Digital &amp; Developer</div><h3>UUID Generator &amp; Validator</h3><p>Generate UUIDs, validate existing values, and inspect UUID version and variant information.</p><a class="button" href="uuid-generator-calculator.html">Open tool</a></article>
 <article class="card"><div class="badge">Home &amp; Construction</div><h3>Gravel Quantity &amp; Ordering Planner</h3><p>Estimate gravel volume, weight, bags, cost, and a practical quantity to order for simple or multi-area projects.</p><a class="button" href="gravel-calculator.html">Open calculator</a></article>
 <article class="card"><div class="badge">Energy &amp; Electrical</div><h3>Wire Size &amp; Voltage Drop Calculator</h3><p>Size a cable from load, voltage, one-way distance, conductor material and a voltage-drop target for DC, AC and three-phase planning.</p><a class="button" href="wire-size-calculator.html">Open calculator</a></article>
+<article class="card"><div class="badge">Home &amp; Construction</div><h3>Fence Material Calculator</h3><p>Estimate fence posts, rails, pickets or panels, concrete bags and optional material cost for practical fence projects.</p><a class="button" href="fence-calculator.html">Open calculator</a></article>
 
 </div>
 </section>
@@ -128,7 +129,8 @@ else if(q.includes("uuid")||q.includes("guid")||q.includes("unique id")||q.inclu
 else if(q.includes("time")||q.includes("duration")||q.includes("hours")||q.includes("minutes")||q.includes("seconds")) location.href="time-calculator.html";
 else if(q.includes("gravel")||q.includes("aggregate")||q.includes("stone")||q.includes("tons of gravel")||q.includes("cubic yards")) location.href="gravel-calculator.html";
 else if(q.includes("wire")||q.includes("cable")||q.includes("voltage drop")||q.includes("awg")||q.includes("solar cable")||q.includes("inverter cable")) location.href="wire-size-calculator.html";
-else status.textContent="No matching tool yet. Try significant figures, pilot hole, time, UUID, gravel, wire size, voltage drop, solar cable, or inverter cable.";});
+else if(q.includes("fence")||q.includes("picket")||q.includes("gate")||q.includes("fence posts")||q.includes("fence materials")) location.href="fence-calculator.html";
+else status.textContent="No matching tool yet. Try significant figures, pilot hole, time, UUID, gravel, fence, wire size, voltage drop, solar cable, or inverter cable.";});
 </script>
 <noscript><div style="padding:16px;text-align:center">JavaScript is only used for tool search. Direct links remain available without JavaScript.</div></noscript>
 </body>
