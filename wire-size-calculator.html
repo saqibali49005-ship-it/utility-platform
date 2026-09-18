@@ -123,7 +123,7 @@ function pathFactor(){return circuit==='three'?Math.sqrt(3):2}
 function awgForArea(area){for(let i=0;i<awg.length;i++)if(awg[i][1]>=area)return awg[i][0];return '4/0+'}
 function calculate(){
  const V=Number($('voltage').value), I=current(), L=lengthM(), target=Number($('target').value), material=$('material').value;
- if(!(V>0)||!(I>0)||!(L>=0)||!(target>0)){ $('status').className='status warn';$('status').textContent='Enter valid positive voltage, load, length and target values.';return}
+ if(!(V>0)||!(I>0)||!(L>0)||!(target>0)){ $('status').className='status warn';$('status').textContent='Enter valid positive voltage, load, length and target values.';return}
  const allowed=V*target/100, minArea=(rho[material]*L*pathFactor()*I)/allowed;
  const size=metric.find(x=>x>=minArea)||metric[metric.length-1];
  const R=rho[material]/size, drop=I*R*L*pathFactor(), pct=drop/V*100, loadV=V-drop, loss=I*I*R*L*pathFactor();
