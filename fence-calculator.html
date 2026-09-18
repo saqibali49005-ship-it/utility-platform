@@ -222,7 +222,7 @@
 <div class="metric"><strong>Materials</strong><span>Posts, rails, pickets/panels</span></div>
 <div class="metric"><strong>Foundations</strong><span>Hole-volume concrete estimate</span></div>
 </div>
-<div class="note"><strong>Why the project view matters:</strong> a fence is rarely just one uninterrupted line. Stronger planning tools account for runs, corners, gates and the physical post-hole geometry instead of returning only a single picket count. Current fence calculators show this broader direction, including multiple runs and concrete calculations based on hole geometry. citeturn612000search2turn612000search8</div>
+<div class="note"><strong>Why the project view matters:</strong> a fence is rarely just one uninterrupted line. Stronger planning tools account for runs, corners, gates and the physical post-hole geometry instead of returning only a single picket count. Current fence calculators show this broader direction, including multiple runs and concrete calculations based on hole geometry.</div>
 </section>
 
 <section class="card">
@@ -241,8 +241,8 @@ Concrete = (hole volume − post displacement) × total posts
 <section class="card">
 <h2>Fence planning notes</h2>
 <ul class="small-list">
-<li>For common wood fence layouts, post spacing is often planned in the 6–8 ft range, but the specific fence system and local requirements should take priority. citeturn655416search0turn655416search39</li>
-<li>Concrete quantity is based on the geometry you enter. Published product data gives different bag yields; this calculator uses selectable reference yields of 0.375 ft³ for 50 lb, 0.45 ft³ for 60 lb and 0.60 ft³ for 80 lb bags. Always verify the exact product label. citeturn655416search36turn655416search1</li>
+<li>For common wood fence layouts, post spacing is often planned in the 6–8 ft range, but the specific fence system and local requirements should take priority.</li>
+<li>Concrete quantity is based on the geometry you enter. Published product data gives different bag yields; this calculator uses selectable reference yields of 0.375 ft³ for 50 lb, 0.45 ft³ for 60 lb and 0.60 ft³ for 80 lb bags. Always verify the exact product label.</li>
 <li>A gate opening needs its own framing and hardware. This calculator identifies the two gate-post positions per gate but does not price hinges, latches, gate frames or specialty hardware.</li>
 <li>Fence posts and holes are site-dependent. Soil, wind exposure, frost depth, drainage and the fence system can require different dimensions. Treat these results as a planning estimate, not an installation specification.</li>
 </ul>
@@ -316,6 +316,8 @@ function renderRunInputs(){
     const remove=document.createElement('button'); remove.type='button'; remove.className='remove-run'; remove.textContent='Remove';
     remove.disabled=state.runs===1;
     remove.addEventListener('click',function(){if(state.runs<=1)return;state.runs--;renderRunInputs();calculate();});
+    const input=wrap.querySelector('input[data-run]');
+    input.addEventListener('input',calculate);
     row.appendChild(wrap); row.appendChild(remove); runList.appendChild(row);
   }
 }
@@ -375,8 +377,9 @@ function calcValues(){
   const shared=Math.max(0,Math.floor(val('sharedCorners')||0));
   const rawSections=runValues.filter(n=>n>0).reduce((sum,n)=>sum+Math.ceil((n*rToFt)/spacingFt),0);
   const rawPosts=runValues.filter(n=>n>0).length+rawSections;
-  const totalPosts=Math.max(0,rawPosts-shared);
-  const gatePosts=Math.min(totalPosts,gateCount*2);
+  const layoutPosts=Math.max(0,rawPosts-shared);
+  const gatePosts=gateCount*2;
+  const totalPosts=Math.max(layoutPosts,gatePosts);
   const linePosts=Math.max(0,totalPosts-gatePosts);
   const materialSections=coveredFt>0?Math.ceil(coveredFt/spacingFt):0;
   const railsPerSection=parseInt($('railsPerSection').value,10);
@@ -444,7 +447,7 @@ function calculate(){
     : '<tr><th>Pickets / boards</th><td>'+fmt(o.cladding)+'</td><td>'+fmt(o.claddingBase)+' base + '+Math.round(o.waste*100)+'% waste</td></tr>';
   const result=$('result');
   result.innerHTML='<h2>Project material estimate</h2><div class="result-grid">'
-    +'<div class="metric"><strong>Total fence runs</strong><span>'+fmt(o.totalRunFt,1)+' ft</span></div>'
+    +'<div class="metric"><strong>Total fence runs</strong><span>'+dualLength(o.totalRunFt)+'</span></div>'
     +'<div class="metric"><strong>Covered fence</strong><span>'+dualLength(o.coveredFt)+'</span></div>'
     +'<div class="metric"><strong>Total posts</strong><span>'+fmt(o.totalPosts)+'</span></div>'
     +'<div class="metric"><strong>Concrete bags</strong><span>'+fmt(o.concreteBags)+'</span></div>'
@@ -483,7 +486,11 @@ $('addRun').addEventListener('click',function(){if(state.runs>=6)return;state.ru
 $('fenceForm').addEventListener('submit',function(e){e.preventDefault();calculate()});
 $('reset').addEventListener('click',reset);
 $('units').addEventListener('change',function(){changeUnits();});
-$('style').addEventListener('change',function(){toggleStyle();calculate()});
+$('style').addEventListener('change',function(){
+  if(this.value==='privacy' && $('picketWidth').value==='3.5' && $('picketGap').value==='1.5'){ $('picketWidth').value='5.5'; $('picketGap').value='0'; }
+  if(this.value==='picket' && $('picketWidth').value==='5.5' && $('picketGap').value==='0'){ $('picketWidth').value='3.5'; $('picketGap').value='1.5'; }
+  toggleStyle();calculate();
+});
 document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',function(){
   const id=this.dataset.target;$(id).value=$('units').value==='metric'?this.dataset.metric:this.dataset.imperial;calculate();
 }));
