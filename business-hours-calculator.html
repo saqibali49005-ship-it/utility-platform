@@ -316,32 +316,17 @@
   function exportText(){
     const x=state.lastExport;if(!x)return;
     let textOut;
-    if(x.mode==='between')textOut='Utility Platform — Business Hours Calculator
-
-Mode: Business hours between dates
-Start: '+x.start+'
-End: '+x.end+'
-Business time: '+x.business+' minutes ('+x.decimal+' hours)
-Calendar elapsed: '+x.elapsed+' minutes
-Non-working time: '+x.nonWorking+' minutes
-Business days touched: '+x.businessDays+'
-Holidays excluded: '+x.holidayCount+'
-';
-    else textOut='Utility Platform — Business Hours Calculator
-
-Mode: Add / subtract business time
-Start: '+x.base+'
-Operation: '+x.operation+'
-Business time: '+x.hours+' hours '+x.minutes+' minutes
-Result: '+x.result+'
-';
+    if(x.mode==='between'){
+      textOut='Utility Platform — Business Hours Calculator\n\nMode: Business hours between dates\nStart: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nCalendar elapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHolidays excluded: '+x.holidayCount+'\n';
+    }else{
+      textOut='Utility Platform — Business Hours Calculator\n\nMode: Add / subtract business time\nStart: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.result+'\n';
+    }
     const blob=new Blob([textOut],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
   function exportCsv(){
     const x=state.lastExport;if(!x)return;
     const rows=x.mode==='between'?[['Field','Value'],['Mode','Business hours between dates'],['Start',x.start],['End',x.end],['Business minutes',x.business],['Business hours',x.decimal],['Calendar elapsed minutes',x.elapsed],['Non-working minutes',x.nonWorking],['Business days touched',x.businessDays],['Holidays excluded',x.holidayCount]]:[['Field','Value'],['Mode','Add / subtract business time'],['Start',x.base],['Operation',x.operation],['Business hours',x.hours],['Business minutes',x.minutes],['Result',x.result]];
-    const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('
-');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+    const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
   function resetSchedule(){
     DAYS.forEach((_,i)=>{
