@@ -270,7 +270,7 @@ function calculate(){
     const implied=spacingIn/12;
     const expectedJoists=Math.max(2,Math.ceil(runFt/implied)+1);
     const diff=expectedJoists-joists;
-    runNote='<div class="note"><strong>Run-length check:</strong> '+fmt(runFt,2)+' ft at '+fmt(spacingIn,1)+' in OC implies about '+fmt(expectedJoists)+' joists using a simple spacing check. Your entered count is '+fmt(joists)+(diff===0?' and matches that check.':diff>0?' lower by '+fmt(diff)+' joist'+(diff===1?'':'s')+'.':' higher by '+fmt(Math.abs(diff))+' joist'+(Math.abs(diff)===1?'':'s')+'.')+' The calculator keeps your entered joist count as the controlling quantity.</div>';
+    runNote='<div class="note"><strong>Run-length check:</strong> '+(m?fmt(runFt*0.3048,2)+' m':fmt(runFt,2)+' ft')+' at '+(m?fmt(spacingIn*25.4,1)+' mm':fmt(spacingIn,1)+' in')+' OC implies about '+fmt(expectedJoists)+' joists using a simple spacing check. Your entered count is '+fmt(joists)+(diff===0?' and matches that check.':diff>0?' lower by '+fmt(diff)+' joist'+(diff===1?'':'s')+'.':' higher by '+fmt(Math.abs(diff))+' joist'+(Math.abs(diff)===1?'':'s')+'.')+' The calculator keeps your entered joist count as the controlling quantity.</div>';
   }
   const unitCut=m?fmt(cutIn*25.4,1)+' mm · '+fmt(cutIn/39.37007874,3)+' m':fmt(cutIn,2)+' in · '+fmt(cutIn/12,2)+' ft';
   const unitRequired=m?fmt(requiredFt*0.3048,2)+' m · '+fmt(requiredFt,2)+' ft':fmt(requiredFt,2)+' ft · '+fmt(requiredFt*0.3048,2)+' m';
