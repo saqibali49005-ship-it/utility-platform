@@ -205,11 +205,11 @@ const input=$('inputText'),output=$('outputText'),copyBtn=$('copyBtn'),status=$(
 const checks=['trimLines','extraSpaces','blankLines','duplicateLines','lineBreaks','collapseBlank'];
 function normalizeEnds(text){return String(text||'').replace(/\r\n?/g,'\n')}
 function cleanText(){
- let text=normalizeEnds(input.value),original=text;
+ let text=input.value,original=text;
  if($('lineBreaks').checked)text=normalizeEnds(text);
  let lines=text.split('\n');
- if($('trimLines').checked)lines=lines.map(line=>line.replace(/[ \t]+$/g,'').replace(/^[ \t]+/g,''));
- if($('extraSpaces').checked)lines=lines.map(line=>line.replace(/[ \t]+/g,' ').trim());
+ if($('trimLines').checked)lines=lines.map(line=>line.replace(/^[ \t]+|[ \t]+$/g,''));
+ if($('extraSpaces').checked)lines=lines.map(line=>line.replace(/[ \t]+/g,' '));
  if($('duplicateLines').checked){const seen=new Set();lines=lines.filter(line=>{if(seen.has(line))return false;seen.add(line);return true})}
  if($('blankLines').checked)lines=lines.filter(line=>line.trim()!=='');else if($('collapseBlank').checked){const out=[];let previousBlank=false;for(const line of lines){const blank=line.trim()==='';if(blank&&previousBlank)continue;out.push(line);previousBlank=blank}lines=out}
  text=lines.join('\n');output.value=text;copyBtn.disabled=!text;updateStats();
