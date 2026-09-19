@@ -22,3 +22,12 @@ button[id^="download"]:hover:not(:disabled),a[id^="download"]:hover,a[download]:
 button[id^="download"]:active:not(:disabled),a[id^="download"]:active,a[download]:active{transform:translateY(0)}
 button[id^="download"]:disabled{opacity:.58;cursor:not-allowed;box-shadow:none}
 @media(max-width:430px){button[id^="download"],a[id^="download"],a[download]{min-height:40px;padding:8px 12px;font-size:14px}}
+
+
+/* ZEMTOOLS LOGO — visual-only replacement; existing header structure stays unchanged. */
+.site-header .brand{position:relative!important;display:flex!important;align-items:center!important;min-width:0!important;text-decoration:none!important;}
+.site-header .brand .brand-mark,
+.site-header .brand .brand-copy,
+.site-header .brand > div:last-child{display:none!important;}
+.site-header .brand::before{content:"";display:block;width:190px;height:48px;background:url('zemtools-logo.webp') center/contain no-repeat;background-repeat:no-repeat;flex:0 0 auto;}
+@media(max-width:650px){.site-header .brand::before{width:158px;height:42px;}}
