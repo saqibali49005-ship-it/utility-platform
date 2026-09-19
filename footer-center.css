@@ -1,3 +1,0 @@
-/* Sitewide centered footer for every non-home page. */
-footer{display:flex ;flex-direction:row ;align-items:center ;justify-content:center ;text-align:center ;gap:18px ;margin-top:12px ;}
-footer .footer-links{display:flex ;justify-content:center ;align-items:center ;flex-wrap:wrap ;gap:18px ;margin-top:0 ;}
