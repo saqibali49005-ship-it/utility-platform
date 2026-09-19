@@ -35,6 +35,13 @@ This document defines the rules that should remain stable while the platform gro
 - Categories are generated from the central catalog.
 - Do not turn the homepage into a full tool directory.
 
+## 6. Navigation and user wayfinding
+- Every major page should keep the main destinations easy to reach: Home, All Tools, and the live category pages.
+- Tool pages should expose search plus category/directory navigation.
+- Mobile navigation must provide the same essential destinations as desktop navigation.
+- Do not add navigation links that point to unrelated categories solely to increase internal-link count.
+- A user should not need to remember a page URL or backtrack repeatedly to discover the main tool library.
+
 ## 6. Search and directory
 - `tools.html` remains the central searchable directory.
 - Homepage search may send an exact/clear match directly to its tool; otherwise it should fall back to the directory query.
