@@ -5,38 +5,11 @@ function syncNav(el){if(!el)return;const current=location.pathname.split('/').po
 syncNav(document.querySelector('.top-nav'));syncNav(n);
 function initBranding(){
  document.title=document.title.replace(/Utility Platform/g,'ZemTools');
- document.querySelectorAll('meta').forEach(m=>{
-  if(m.hasAttribute('content'))m.content=m.content.replace(/Utility Platform/g,'ZemTools');
- });
+ document.querySelectorAll('meta').forEach(m=>{if(m.hasAttribute('content'))m.content=m.content.replace(/Utility Platform/g,'ZemTools');});
  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
  const nodes=[];let node;while(node=walker.nextNode())nodes.push(node);
- nodes.forEach(t=>{if(t.nodeValue.includes('Utility Platform'))t.nodeValue=t.nodeValue.replace(/Utility Platform/g,'ZemTools');});
- const mark='<svg class="zemtools-mark-svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 13h31L17 46h25l-7 8H7l22-33H8z" fill="#1677f0"/><path d="M29 19h28l-7 8H43v25H31V28H22z" fill="#17212b"/><path d="M15 49h27l-7 7H8z" fill="#0bb7e8"/></svg>';
- const style='.brand-mark,.footer-mark{display:grid!important;place-items:center!important;background:transparent!important;box-shadow:none!important}.zemtools-mark-svg{width:100%;height:100%;display:block}.footer-mark .zemtools-mark-svg{width:34px;height:34px}.brand-wordmark{display:inline-flex;align-items:baseline;letter-spacing:-.35px;font-weight:900}.brand-wordmark .zem{color:#17212b}.brand-wordmark .tools{color:#1677f0}';
- if(!document.getElementById('zemtoolsBrandStyle')){const s=document.createElement('style');s.id='zemtoolsBrandStyle';s.textContent=style;document.head.appendChild(s);}
- document.querySelectorAll('.brand-mark').forEach(m=>{m.innerHTML=mark;m.setAttribute('aria-label','ZemTools logo');});
- document.querySelectorAll('.footer-mark').forEach(m=>{m.innerHTML=mark;m.setAttribute('aria-label','ZemTools logo');});
- document.querySelectorAll('.brand').forEach(b=>{
-  const copy=b.querySelector('.brand-copy');
-  if(copy){const strong=copy.querySelector('strong');if(strong){strong.innerHTML='<span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span>';}}
-  else{
-   const textNodes=[...b.childNodes].filter(x=>x.nodeType===Node.TEXT_NODE&&x.nodeValue.trim());
-   textNodes.forEach(t=>{if(t.nodeValue.includes('ZemTools'))t.remove();});
-   if(!b.querySelector('.brand-wordmark'))b.insertAdjacentHTML('beforeend','<span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span>');
-  }
- });
- document.querySelectorAll('.footer-brand').forEach(b=>{
-  const strong=b.querySelector('strong');if(strong)strong.innerHTML='<span class="brand-wordmark"><span class="zem" style="color:#fff">Zem</span><span class="tools" style="color:#54b5ff">Tools</span></span>';
- });
- document.querySelectorAll('footer').forEach(f=>{
-  if(f.querySelector('.footer-brand'))return;
-  const brand=document.createElement('div');brand.className='zemtools-footer-brand';
-  brand.innerHTML='<span class="zemtools-footer-mark">'+mark+'</span><span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span>';
-  const links=f.querySelector('.footer-links'); if(links) f.insertBefore(brand,links); else f.insertBefore(brand,f.firstChild);
- });
- const sf='.zemtools-footer-brand{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 10px;font-weight:900}.zemtools-footer-mark{width:34px;height:34px;display:grid;place-items:center}.zemtools-footer-mark .zemtools-mark-svg{width:34px;height:34px}.zemtools-footer-brand .zem{color:#17212b}.zemtools-footer-brand .tools{color:#1677f0}footer:not([style]) .zemtools-footer-brand{}';
- if(!document.getElementById('zemtoolsFooterBrandStyle')){const s=document.createElement('style');s.id='zemtoolsFooterBrandStyle';s.textContent=sf;document.head.appendChild(s);}
- document.querySelectorAll('.copyright').forEach(c=>{c.textContent=c.textContent.replace(/Utility Platform/g,'ZemTools')});
+ nodes.forEach(t=>{if(t.nodeValue.includes('Utility Platform'))t.nodeValue=t.nodeValue.replace(/Utility Platform/g,'ZemTools');if(t.nodeValue.trim()==='UP')t.nodeValue='Z'});
+ document.querySelectorAll('.brand-mark,.footer-mark').forEach(m=>{m.textContent='Z';m.setAttribute('aria-label','ZemTools logo');});
 }
 initBranding();
 
