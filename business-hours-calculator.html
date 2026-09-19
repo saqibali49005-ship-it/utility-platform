@@ -287,7 +287,7 @@
     for(let guard=0;guard<4000;guard++){
       const intervals=workMinutesOnDay(p,sched,hset).slice().reverse();
       for(const [s,e] of intervals){
-        if(t>s){
+        if(t>=s){
           if(t>e)t=e;
           const avail=t-s;
           if(remaining<=avail)return {p,minutes:t-remaining};
