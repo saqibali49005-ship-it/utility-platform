@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Deck Joist Blocking Calculator - Pieces, Lumber &amp; Boards</title>
+<meta name="description" content="Calculate deck or floor joist blocking pieces, cut length, total lumber and stock boards from joist count, spacing and blocking rows. Includes waste, fastener planning, imperial and metric units.">
+<link rel="canonical" href="https://saqibali49005-ship-it.github.io/utility-platform/deck-joist-blocking-calculator.html">
+<meta property="og:title" content="Deck Joist Blocking Calculator - Pieces, Lumber &amp; Boards">
+<meta property="og:description" content="Plan deck or floor joist blocking with piece count, cut length, total lumber, stock boards, waste and optional fasteners.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://saqibali49005-ship-it.github.io/utility-platform/deck-joist-blocking-calculator.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png">
+<meta property="og:image:alt" content="Utility Platform — Practical Online Tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deck Joist Blocking Calculator - Pieces, Lumber &amp; Boards">
+<meta name="twitter:description" content="Calculate blocking pieces, cut length, total lumber, stock boards, waste and optional fasteners for joist layouts.">
+<meta name="twitter:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Deck Joist Blocking Calculator","url":"https://saqibali49005-ship-it.github.io/utility-platform/deck-joist-blocking-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Calculate joist blocking quantities, cut length, blocking lumber, stock boards, waste and optional fasteners for deck or floor framing layouts.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How many blocking pieces do I need between joists?","acceptedAnswer":{"@type":"Answer","text":"For a simple row of blocking, the planning count is one piece between each adjacent joist pair. That means joist count minus one pieces per row, multiplied by the number of blocking rows, plus any extra pieces you enter for openings or layout details."}},
+{"@type":"Question","name":"How long should joist blocking pieces be?","acceptedAnswer":{"@type":"Answer","text":"For this material estimate, cut length is calculated as joist spacing minus the actual joist thickness entered. Measure the framing material when possible because nominal lumber dimensions and actual dimensions are not always the same."}},
+{"@type":"Question","name":"Does 16 inch or 24 inch joist spacing determine blocking requirements?","acceptedAnswer":{"@type":"Answer","text":"Joist spacing affects the material quantity and cut length, but it does not by itself determine every structural blocking requirement. Blocking requirements can depend on the framing design, member dimensions, loads and applicable code or guide."}},
+{"@type":"Question","name":"How do I calculate blocking lumber?","acceptedAnswer":{"@type":"Answer","text":"Multiply the number of blocking pieces by the cut length to get required blocking length. Add the selected waste allowance for a purchase-planning length, then divide by your stock board length and round up to whole boards."}},
+{"@type":"Question","name":"How many fasteners do I need for joist blocking?","acceptedAnswer":{"@type":"Answer","text":"Enter the number of fasteners you plan to use per blocking piece. The calculator multiplies that planning value by the total blocking-piece count. Connection details should follow the framing plan, connector instructions and applicable requirements."}}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://saqibali49005-ship-it.github.io/utility-platform/"},
+{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html"},
+{"@type":"ListItem","position":3,"name":"Deck Joist Blocking Calculator","item":"https://saqibali49005-ship-it.github.io/utility-platform/deck-joist-blocking-calculator.html"}
+]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-related-tools.css">
+<style>
+.block-tool{width:100%;max-width:none;min-width:0;overflow-x:hidden}
+.block-tool .site-header,.block-tool main,.block-tool section,.block-tool article,.block-tool .hero-shell,.block-tool .hero,.block-tool .layout,.block-tool .card{width:100%;max-width:100%;min-width:0}
+.block-tool .header-inner{width:100%;max-width:1180px;box-sizing:border-box}
+.block-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.block-tool .field,.block-tool .tool-grid>*{min-width:0}
+.block-tool .field.full{grid-column:1/-1}
+.block-tool input,.block-tool select,.block-tool button{max-width:100%;box-sizing:border-box}
+.block-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;font:inherit;font-size:17px}
+.block-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4}
+.block-tool .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.block-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.block-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.block-tool .result{background:linear-gradient(180deg,#fbfffd,#f2fff7)}
+.block-tool .result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.block-tool .metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.block-tool .metric strong{display:block;color:#102f54;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.block-tool .metric span{display:block;margin-top:3px;font-size:18px;font-weight:900;color:#102f54;overflow-wrap:anywhere}
+.block-tool .table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.block-tool table{width:100%;min-width:570px;border-collapse:collapse}
+.block-tool th,.block-tool td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.block-tool th{background:#f7fbff;font-weight:850}
+.block-tool .note,.block-tool .warn,.block-tool .ok{padding:13px 14px;border-radius:12px;margin-top:12px}
+.block-tool .note{border:1px solid #cfe2f8;background:#eff7ff;color:#244c73}
+.block-tool .warn{border:1px solid #efd59a;background:#fff9e9;color:#745000}
+.block-tool .ok{border:1px solid #c9ecd8;background:#f2fff7;color:#1e6240}
+.block-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
+.block-tool .small-list{padding-left:20px}
+.block-tool .small-list li{margin:6px 0}
+.block-tool .status-error{color:#9a3412;font-weight:800;margin-top:10px}
+.block-tool .copy-status{color:var(--muted);font-size:13px}
+.block-tool .source-links{padding-left:20px}
+.block-tool .source-links li{margin:6px 0}
+@media(max-width:700px){
+  .block-tool .tool-grid,.block-tool .result-grid{grid-template-columns:1fr}
+  .block-tool .actions{flex-direction:column;align-items:stretch}
+  .block-tool .actions button{width:100%}
+  .block-tool .card{width:100%}
+}
+@media(max-width:430px){
+  .block-tool .hero h1{font-size:27px;line-height:1.08}
+  .block-tool .hero p{font-size:14px;line-height:1.45}
+  .block-tool .card{padding:18px 16px}
+}
+</style>
+</head>
+<body class="tool-page block-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="index.html"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html" aria-current="page">Home &amp; Construction</a></nav>
+<div class="header-actions"><button class="icon-btn" id="searchBtn" type="button" aria-label="Search" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button><button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div>
+</div>
+<div class="search-panel" id="searchPanel"><form id="siteSearchForm" role="search"><input id="siteSearch" type="search" placeholder="Search Utility Platform" aria-label="Search Utility Platform"><button type="submit">Search</button></form></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html" aria-current="page">Home &amp; Construction</a></nav>
+</header>
+
+<main id="main-content">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="crumb-sep">›</span><a href="home-construction.html">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Deck Joist Blocking Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">▦</div><div><h1>Deck Joist Blocking Calculator</h1><p>Calculate blocking pieces, cut length, total blocking lumber and stock boards from your joist count, spacing and blocking rows. Add waste and optional fasteners for a practical material-planning estimate.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Plan material without guessing the cut length</strong>Enter the actual joist thickness and on-center spacing so the tool calculates a planning cut length. Use the blocking-row input for the layout or framing plan you are following; this calculator does not decide structural requirements for your project.</div></div>
+</section>
+
+<section class="layout" aria-label="Deck joist blocking calculator">
+<article class="card tool-card">
+<h2>Build Your Blocking Plan</h2>
+<p class="hint">Enter the joists first. Everything else is optional but helps turn the piece count into a shopping estimate.</p>
+<form id="blockForm">
+<div class="tool-grid">
+<div class="field"><label for="units">Measurement system</label><select id="units"><option value="imperial" selected>Imperial (in / ft)</option><option value="metric">Metric (mm / m)</option></select><span class="field-help">Use the units that match your framing measurements.</span></div>
+<div class="field"><label for="joistCount">Number of joists</label><input id="joistCount" type="number" min="2" step="1" value="13" inputmode="numeric"><span class="field-help">Count the joists that create the bays where blocking will be installed.</span></div>
+<div class="field"><label for="joistSpacing">Joist spacing, on center <span class="small-unit">(in)</span></label><input id="joistSpacing" type="number" min="0.1" step="0.1" value="16" inputmode="decimal"><span class="field-help">Enter the actual on-center spacing used by your framing layout.</span></div>
+<div class="field"><label for="blockingRows">Blocking rows</label><input id="blockingRows" type="number" min="1" step="1" value="1" inputmode="numeric"><span class="field-help">Enter the number of rows in your framing plan. Add extra rows only when your design calls for them.</span></div>
+<div class="field"><label for="joistThickness">Actual joist thickness <span class="small-unit">(in)</span></label><input id="joistThickness" type="number" min="0.1" step="0.01" value="1.5" inputmode="decimal"><span class="field-help">For typical surfaced 2× lumber this is often 1.5 in, but measure your material when possible.</span></div>
+<div class="field"><label for="extraBlocks">Extra blocking pieces</label><input id="extraBlocks" type="number" min="0" step="1" value="0" inputmode="numeric"><span class="field-help">Optional pieces for openings, corners, hardware areas or other layout-specific details.</span></div>
+<div class="field"><label for="stockLength">Stock board length <span class="length-unit">(ft)</span></label><input id="stockLength" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"><span class="field-help">Used to estimate how many full boards to buy from the required blocking length.</span></div>
+<div class="field"><label for="waste">Waste / overage allowance (%)</label><input id="waste" type="number" min="0" max="50" step="1" value="10" inputmode="numeric"><span class="field-help">Covers offcuts, mistakes and layout changes. It is applied to the required blocking length.</span></div>
+<div class="field"><label for="fastenersPerBlock">Fasteners per blocking piece</label><input id="fastenersPerBlock" type="number" min="0" step="1" value="0" inputmode="numeric"><span class="field-help">Optional planning value. Leave 0 when your framing plan uses a connection method you do not want estimated here.</span></div>
+<div class="field"><label for="stockPrice">Stock board price <span class="currency-label">($)</span></label><input id="stockPrice" type="number" min="0" step="0.01" value="" inputmode="decimal"><span class="field-help">Optional. Enter the price per stock board to estimate lumber cost.</span></div>
+<div class="field"><label for="joistRun">Optional joist run length <span class="length-unit">(ft)</span></label><input id="joistRun" type="number" min="0" step="0.1" value="" inputmode="decimal"><span class="field-help">Informational only. It is used to check the entered joist count against the spacing, not to override your count.</span></div>
+<div class="field full"><div class="actions"><button type="submit">Calculate Blocking</button><button type="button" class="secondary" id="reset">Reset</button><span id="error" class="status-error"></span></div></div>
+</div>
+</form>
+</article>
+
+<article class="card result" id="result">
+<h2>Your blocking estimate</h2>
+<p class="hint">Enter your framing details and calculate.</p>
+</article>
+</section>
+
+<section class="card">
+<h2>How the Blocking Calculation Works</h2>
+<div class="formula">
+Bays per row = joist count − 1<br>
+Blocking pieces = (bays per row × blocking rows) + extra pieces<br>
+Block cut length = joist spacing − actual joist thickness<br>
+Required blocking length = blocking pieces × cut length<br>
+Purchase-planning length = required length × (1 + waste allowance)<br>
+Stock boards = ceil(purchase-planning length ÷ stock board length)
+</div>
+<p class="small">The arithmetic is a material-planning model. It does not determine whether blocking is structurally required, where it must be located, or which connection detail is permitted for a particular deck or floor system.</p>
+</section>
+
+<section class="card">
+<h2>How to Use This Joist Blocking Calculator</h2>
+<ol class="small-list">
+<li>Count the joists that create the bays you need to block. One uninterrupted row normally has one blocking position between each adjacent pair.</li>
+<li>Enter the on-center joist spacing and the actual joist thickness. The tool uses those values to estimate the cut length instead of assuming a fixed lumber dimension.</li>
+<li>Enter the number of blocking rows from your design or framing plan. The calculator multiplies the row count by the number of joist bays.</li>
+<li>Add extra pieces for openings, hardware areas or other project-specific blocking details.</li>
+<li>Enter stock board length and a waste allowance when you want a shopping quantity. The result rounds the purchase estimate up to whole boards.</li>
+</ol>
+</section>
+
+<section class="card">
+<h2>Understanding Joist Blocking Requirements</h2>
+<p>Blocking can serve different purposes in wood framing, including helping stabilize joists and transferring or resisting forces in specific configurations. The correct number and location of blocking pieces depend on the framing design, joist dimensions, span, loads, connections and applicable requirements.</p>
+<p>For that reason, this calculator asks you to enter the number of blocking rows you intend to plan for rather than automatically declaring a universal code requirement. A published American Wood Council FAQ notes that lateral-stability blocking requirements can depend on the joist or rafter depth-to-width ratio, not simply whether spacing is 16 or 24 inches on center.</p>
+<div class="warn"><strong>Important:</strong> Use your approved plans, local code, engineer or qualified framing guidance for structural requirements and connection details. This page estimates material quantities only.</div>
+</section>
+
+<section class="card">
+<h2>Blocking Lumber Planning Tips</h2>
+<ul class="small-list">
+<li><strong>Use actual dimensions when possible.</strong> Cut length depends on the real gap between joist faces, so measuring the installed lumber is more reliable than assuming a nominal label.</li>
+<li><strong>Separate required length from purchase length.</strong> The calculator shows the blocking length before waste and the stock-board quantity after waste so the shopping estimate stays auditable.</li>
+<li><strong>Do not confuse a material estimate with a structural prescription.</strong> A blocking count can be mechanically correct while still being inappropriate for a particular load path or connection detail.</li>
+<li><strong>Check special layouts separately.</strong> Openings, beam intersections, hardware areas and irregular framing can need extra pieces that a simple repeated row cannot represent.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Deck Joist Blocking FAQs</h2>
+<details><summary>How many blocking pieces do I need between joists?</summary><p>For a simple repeated row, the planning count is one piece between each adjacent joist pair. That is joist count minus one pieces per row, multiplied by the number of rows, plus any extra pieces you enter.</p></details>
+<details><summary>How long should joist blocking pieces be?</summary><p>For this material model, cut length equals the entered on-center spacing minus the actual joist thickness. A 16 in spacing with 1.5 in thick joists produces a 14.5 in planning cut length.</p></details>
+<details><summary>Should blocking be the same depth as the joists?</summary><p>Blocking dimensions and connection details should follow the framing design and applicable requirements. This calculator does not choose a structural block size; it uses spacing and actual joist thickness only to estimate the length of a block that fits between the joists.</p></details>
+<details><summary>Does 16 in or 24 in spacing determine blocking requirements?</summary><p>Spacing changes the material calculation, but it does not by itself determine every structural blocking requirement. Requirements can depend on the framing system, member dimensions, loads and applicable guidance.</p></details>
+<details><summary>How do I calculate blocking lumber?</summary><p>Multiply blocking pieces by the cut length to get required blocking length. Apply the waste allowance for a purchase-planning length, divide by the stock board length and round up to whole boards.</p></details>
+<details><summary>How many fasteners do I need for joist blocking?</summary><p>Enter your planned fastener count per blocking piece. The calculator multiplies that value by the total number of blocking pieces. Connection details should follow your framing plan and the product or code requirements that apply to your project.</p></details>
+</section>
+
+<section class="card">
+<h2>Reference &amp; Methodology</h2>
+<p class="small">This page uses a transparent quantity-planning model rather than presenting one blocking rule as universal. For deck-specific prescriptive guidance, consult the applicable published guide and your local requirements.</p>
+<ul class="source-links small">
+<li><a href="https://awc.org/faq/does-it-matter-if-the-joist-spacing-is-16-or-24-o-c-for-the-blocking/" rel="nofollow noopener">American Wood Council — blocking and joist spacing FAQ</a></li>
+<li><a href="https://awc.org/wp-content/uploads/2022/02/AWC-DCA62015-DeckGuide-1804.pdf" rel="nofollow noopener">American Wood Council — DCA 6 Prescriptive Residential Wood Deck Construction Guide</a></li>
+</ul>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title">
+<h2 id="related-title">Related Tools</h2>
+<div class="related-grid">
+<a class="related-item" href="pilot-hole-calculator.html"><div><strong>Pilot Hole Size Calculator</strong><span>Choose practical pilot and clearance-hole starting sizes for common wood-screw work.</span></div><span aria-hidden="true">›</span></a>
+</div>
+</section>
+
+<section class="card">
+<h2>More Home &amp; Construction Planning</h2>
+<p class="small">Continue to the full construction-tool collection for other material and project-planning utilities.</p>
+<a class="secondary" href="home-construction.html">Browse Home &amp; Construction Tools</a>
+</section>
+</main>
+
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+
+<script src="master-ui.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function metric(){return $('units').value==='metric'}
+function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
+function setLabels(){
+  const m=metric();
+  document.querySelectorAll('.small-unit').forEach(e=>e.textContent=m?' (mm)':' (in)');
+  document.querySelectorAll('.length-unit').forEach(e=>e.textContent=m?' (m)':' (ft)');
+}
+function convertField(id,ratio,dec=2){
+  const el=$(id), n=parseFloat(el.value);
+  if(Number.isFinite(n)) el.value=Number((n*ratio).toFixed(dec));
+}
+$('units').addEventListener('change',function(){
+  const toMetric=this.value==='metric';
+  const lenRatio=toMetric?0.3048:3.280839895;
+  const smallRatio=toMetric?25.4:1/25.4;
+  ['joistSpacing','joistThickness'].forEach(id=>convertField(id,smallRatio,toMetric?1:2));
+  ['stockLength','joistRun'].forEach(id=>convertField(id,lenRatio,2));
+  setLabels();
+  calculate();
+});
+function calculate(){
+  const err=$('error'); err.textContent='';
+  const joists=Math.floor(parseFloat($('joistCount').value)||0);
+  const spacingRaw=parseFloat($('joistSpacing').value)||0;
+  const rows=Math.floor(parseFloat($('blockingRows').value)||0);
+  const thicknessRaw=parseFloat($('joistThickness').value)||0;
+  const extra=Math.floor(parseFloat($('extraBlocks').value)||0);
+  const stockRaw=parseFloat($('stockLength').value)||0;
+  const wastePct=Math.max(0,Math.min(50,parseFloat($('waste').value)||0));
+  const fasteners=Math.max(0,Math.floor(parseFloat($('fastenersPerBlock').value)||0));
+  const price=parseFloat($('stockPrice').value);
+  const runRaw=parseFloat($('joistRun').value);
+  const m=metric();
+  const inchPerSmall=m?1/25.4:1;
+  const ftPerLength=m?0.3048:1;
+  const spacingIn=spacingRaw*inchPerSmall;
+  const thicknessIn=thicknessRaw*inchPerSmall;
+  const stockFt=stockRaw*ftPerLength;
+  const runFt=Number.isFinite(runRaw)?runRaw*ftPerLength:null;
+  if(joists<2){err.textContent='Enter at least 2 joists.';return}
+  if(spacingIn<=0){err.textContent='Enter a joist spacing greater than 0.';return}
+  if(rows<1){err.textContent='Enter at least 1 blocking row.';return}
+  if(thicknessIn<=0){err.textContent='Enter an actual joist thickness greater than 0.';return}
+  if(stockFt<=0){err.textContent='Enter a stock board length greater than 0.';return}
+  if(extra<0 || wastePct<0 || wastePct>50 || fasteners<0){err.textContent='Check the quantity and waste inputs.';return}
+  const cutIn=spacingIn-thicknessIn;
+  if(cutIn<=0){err.textContent='Joist spacing must be greater than actual joist thickness.';return}
+  const bays=joists-1;
+  const basePieces=bays*rows;
+  const totalPieces=basePieces+extra;
+  const requiredFt=(totalPieces*cutIn)/12;
+  const purchaseFt=requiredFt*(1+wastePct/100);
+  const boards=Math.ceil(purchaseFt/stockFt);
+  const stockCapacityFt=boards*stockFt;
+  const leftoverFt=Math.max(0,stockCapacityFt-purchaseFt);
+  const fastenerCount=totalPieces*fasteners;
+  const estimatedCost=Number.isFinite(price)&&price>=0?boards*price:null;
+  let runNote='';
+  if(runFt!==null){
+    const implied=spacingIn/12;
+    const expectedJoists=Math.max(2,Math.ceil(runFt/implied)+1);
+    const diff=expectedJoists-joists;
+    runNote='<div class="note"><strong>Run-length check:</strong> '+fmt(runFt,2)+' ft at '+fmt(spacingIn,1)+' in OC implies about '+fmt(expectedJoists)+' joists using a simple spacing check. Your entered count is '+fmt(joists)+(diff===0?' and matches that check.':diff>0?' lower by '+fmt(diff)+' joist'+(diff===1?'':'s')+'.':' higher by '+fmt(Math.abs(diff))+' joist'+(Math.abs(diff)===1?'':'s')+'.')+' The calculator keeps your entered joist count as the controlling quantity.</div>';
+  }
+  const unitCut=m?fmt(cutIn*25.4,1)+' mm · '+fmt(cutIn/39.37007874,3)+' m':fmt(cutIn,2)+' in · '+fmt(cutIn/12,2)+' ft';
+  const unitRequired=m?fmt(requiredFt*0.3048,2)+' m · '+fmt(requiredFt,2)+' ft':fmt(requiredFt,2)+' ft · '+fmt(requiredFt*0.3048,2)+' m';
+  const unitPurchase=m?fmt(purchaseFt*0.3048,2)+' m · '+fmt(purchaseFt,2)+' ft':fmt(purchaseFt,2)+' ft · '+fmt(purchaseFt*0.3048,2)+' m';
+  const unitStock=m?fmt(stockFt*0.3048,2)+' m':fmt(stockFt,2)+' ft';
+  const unitLeft=m?fmt(leftoverFt*0.3048,2)+' m':fmt(leftoverFt,2)+' ft';
+  const cost=estimatedCost===null?'Not entered':fmt(estimatedCost,2);
+  const fastenerRow=fasteners>0?'<tr><th>Fasteners</th><td>'+fmt(fastenerCount)+'</td><td>'+fmt(fasteners)+' per blocking piece</td></tr>':'';
+  $('result').innerHTML='<h2>Your blocking estimate</h2><div class="result-grid">'
+    +'<div class="metric"><strong>Blocking pieces</strong><span>'+fmt(totalPieces)+'</span></div>'
+    +'<div class="metric"><strong>Cut length</strong><span>'+unitCut+'</span></div>'
+    +'<div class="metric"><strong>Required lumber</strong><span>'+unitRequired+'</span></div>'
+    +'<div class="metric"><strong>Stock boards</strong><span>'+fmt(boards)+' × '+unitStock+'</span></div>'
+    +'</div><div class="table-wrap"><table><thead><tr><th>Item</th><th>Quantity</th><th>Planning detail</th></tr></thead><tbody>'
+    +'<tr><th>Blocking</th><td>'+fmt(totalPieces)+'</td><td>'+fmt(rows)+' row'+(rows===1?'':'s')+' × '+fmt(bays)+' joist bays + '+fmt(extra)+' extra</td></tr>'
+    +'<tr><th>Required lumber</th><td>'+unitRequired+'</td><td>'+fmt(totalPieces)+' pieces × '+unitCut+'</td></tr>'
+    +'<tr><th>Purchase lumber</th><td>'+unitPurchase+'</td><td>'+fmt(wastePct,0)+'% waste allowance</td></tr>'
+    +'<tr><th>Stock boards</th><td>'+fmt(boards)+'</td><td>'+fmt(boards)+' × '+unitStock+'; about '+unitLeft+' remains after the planning allowance</td></tr>'
+    +fastenerRow
+    +'<tr><th>Estimated lumber cost</th><td>'+cost+'</td><td>Based only on the price per stock board you entered</td></tr>'
+    +'</tbody></table></div>'
+    +'<div class="note"><strong>Method:</strong> '+fmt(bays)+' bays per row × '+fmt(rows)+' rows = '+fmt(basePieces)+' base pieces; '+fmt(extra)+' extra pieces gives '+fmt(totalPieces)+' total. Cut length uses spacing minus actual joist thickness.</div>'
+    +runNote
+    +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy material summary</button><span id="copyStatus" class="copy-status"></span></div>';
+  $('copyResult').addEventListener('click',async function(){
+    const text='Deck joist blocking estimate\nBlocking pieces: '+totalPieces+'\nCut length: '+unitCut+'\nRequired lumber: '+unitRequired+'\nStock boards: '+boards+' x '+unitStock+'\nWaste allowance: '+wastePct+'%\nFasteners: '+(fasteners>0?fastenerCount:'not entered')+'\nEstimated lumber cost: '+cost;
+    try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
+  });
+}
+$('blockForm').addEventListener('submit',e=>{e.preventDefault();calculate()});
+$('reset').addEventListener('click',function(){
+  $('units').value='imperial';$('joistCount').value='13';$('joistSpacing').value='16';$('blockingRows').value='1';$('joistThickness').value='1.5';$('extraBlocks').value='0';$('stockLength').value='8';$('waste').value='10';$('fastenersPerBlock').value='0';$('stockPrice').value='';$('joistRun').value='';setLabels();calculate();
+});
+['joistCount','joistSpacing','blockingRows','joistThickness','extraBlocks','stockLength','waste','fastenersPerBlock','stockPrice','joistRun'].forEach(id=>$(id).addEventListener('input',calculate));
+setLabels();calculate();
+})();
+</script>
+</body>
+</html>
