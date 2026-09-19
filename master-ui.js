@@ -3,6 +3,18 @@ const m=document.getElementById('menuBtn'),n=document.getElementById('mobileNav'
 const navItems=[['index.html','Home'],['tools.html','All Tools'],['math-science.html','Math & Science'],['digital-developer.html','Digital & Developer'],['home-construction.html','Home & Construction'],['energy-electrical.html','Energy & Electrical']];
 function syncNav(el){if(!el)return;const current=location.pathname.split('/').pop()||'index.html';el.innerHTML=navItems.map(([href,label])=>'<a '+(href===current?'aria-current="page" ':'')+'href="'+href+'">'+label+'</a>').join('');}
 syncNav(document.querySelector('.top-nav'));syncNav(n);
+function initBranding(){
+ document.title=document.title.replace(/Utility Platform/g,'ZemTools');
+ document.querySelectorAll('meta').forEach(m=>{
+  if(m.hasAttribute('content'))m.content=m.content.replace(/Utility Platform/g,'ZemTools');
+ });
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ const nodes=[];let node;while(node=walker.nextNode())nodes.push(node);
+ nodes.forEach(t=>{if(t.nodeValue.includes('Utility Platform'))t.nodeValue=t.nodeValue.replace(/Utility Platform/g,'ZemTools');if(t.nodeValue.trim()==='UP')t.nodeValue='Z'});
+ const marks=document.querySelectorAll('.brand-mark,.footer-mark');marks.forEach(m=>{m.textContent='Z';m.setAttribute('aria-label','ZemTools logo');});
+}
+initBranding();
+
 if(m&&n)m.onclick=()=>{const o=n.classList.toggle('open');m.setAttribute('aria-expanded',o)};
 if(s&&p)s.onclick=()=>{const o=p.classList.toggle('open');s.setAttribute('aria-expanded',o);if(o&&i)i.focus();if(n)n.classList.remove('open')};
 
