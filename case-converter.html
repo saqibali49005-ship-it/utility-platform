@@ -50,32 +50,44 @@ body.case-tool .editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
 <script src="master-ui.js"></script>
 <script>
-(()=>{'use strict';const $=id=>document.getElementById(id);let active='upper';
-const normalize=s=>String(s||'').replace(/\r
-/g,'
-').replace(/\r/g,'
-');
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+let active='upper';
+const normalize=s=>String(s||'').replace(/\r\n?/g,'\n');
 function words(s){return normalize(s).split(/\s+/).filter(Boolean)}
 function tokens(s){return words(s).map(x=>x.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu,'')).filter(Boolean)}
 function sentence(s){return normalize(s).toLowerCase().replace(/(^|[.!?]\s+)(\p{L})/gu,(m,p,c)=>p+c.toUpperCase())}
 function title(s){return normalize(s).toLowerCase().replace(/\b(\p{L})([\p{L}\p{N}]*)/gu,(m,a,b)=>a.toUpperCase()+b)}
 function identLine(s,kind){const t=tokens(s).map(x=>x.toLowerCase());if(!t.length)return '';if(kind==='camel')return t[0]+t.slice(1).map(x=>x.charAt(0).toUpperCase()+x.slice(1)).join('');if(kind==='pascal')return t.map(x=>x.charAt(0).toUpperCase()+x.slice(1)).join('');if(kind==='snake')return t.join('_');if(kind==='kebab')return t.join('-');return t.join('_').toUpperCase()}
 function convert(){
- const input=normalize($('inputText').value), lines=input.split('
-');
- let out=lines.map(line=>{switch(active){case'upper':return line.toLocaleUpperCase();case'lower':return line.toLocaleLowerCase();case'title':return title(line);case'sentence':return sentence(line);default:return identLine(line,active)}}).join('
-');
- $('outputText').value=out;$('copyBtn').disabled=!out;$('useBtn').disabled=!out;updateStats();$('status').textContent='Converted to '+document.querySelector('.case-btn.active').firstChild.textContent+'. Review acronyms and proper nouns when needed.';
+ const input=normalize($('inputText').value),lines=input.split('\n');
+ const out=lines.map(line=>{switch(active){case'upper':return line.toLocaleUpperCase();case'lower':return line.toLocaleLowerCase();case'title':return title(line);case'sentence':return sentence(line);default:return identLine(line,active)}}).join('\n');
+ $('outputText').value=out;
+ $('copyBtn').disabled=!out;$('useBtn').disabled=!out;
+ updateStats();
+ $('status').textContent='Converted to '+document.querySelector('.case-btn.active').firstChild.textContent+'. Review acronyms and proper nouns when needed.';
 }
-function updateStats(){const a=$('inputText').value,b=$('outputText').value;const st=s=>s?normalize(s).split('
-').length:0;const wc=s=>words(s).length;$('inputStats').textContent=a.length.toLocaleString()+' characters · '+wc(a).toLocaleString()+' words · '+st(a).toLocaleString()+' lines';$('outputStats').textContent=b.length.toLocaleString()+' characters · '+wc(b).toLocaleString()+' words · '+st(b).toLocaleString()+' lines'}
-async function copy(){const t=$('outputText').value;if(!t)return;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(t);else{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}const b=$('copyBtn'),o=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=o,1000)}catch{$('status').textContent='Copy was not available. Select the result and copy it manually.'}}
+function updateStats(){
+ const a=$('inputText').value,b=$('outputText').value;
+ const st=s=>s?normalize(s).split('\n').length:0;
+ const wc=s=>words(s).length;
+ $('inputStats').textContent=a.length.toLocaleString()+' characters · '+wc(a).toLocaleString()+' words · '+st(a).toLocaleString()+' lines';
+ $('outputStats').textContent=b.length.toLocaleString()+' characters · '+wc(b).toLocaleString()+' words · '+st(b).toLocaleString()+' lines'
+}
+async function copy(){
+ const t=$('outputText').value;if(!t)return;
+ try{
+  if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(t);
+  else{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
+  const b=$('copyBtn'),o=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=o,1000)
+ }catch{$('status').textContent='Copy was not available. Select the result and copy it manually.'}
+}
 document.querySelectorAll('.case-btn').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.case;document.querySelectorAll('.case-btn').forEach(x=>x.classList.toggle('active',x===b));if($('inputText').value)convert()}));
-$('convertBtn').addEventListener('click',convert);$('copyBtn').addEventListener('click',copy);$('useBtn').addEventListener('click',()=>{if($('outputText').value){$('inputText').value=$('outputText').value;convert();$('inputText').focus()}});
+$('convertBtn').addEventListener('click',convert);
+$('copyBtn').addEventListener('click',copy);
+$('useBtn').addEventListener('click',()=>{if($('outputText').value){$('inputText').value=$('outputText').value;convert();$('inputText').focus()}});
 $('clearBtn').addEventListener('click',()=>{$('inputText').value='';$('outputText').value='';$('copyBtn').disabled=true;$('useBtn').disabled=true;updateStats();$('status').textContent='Cleared. Paste text above, then convert.';$('inputText').focus()});
-$('sampleBtn').addEventListener('click',()=>{$('inputText').value='user profile name
-UTILITY PLATFORM
-hello world from pdf';active='camel';document.querySelectorAll('.case-btn').forEach(x=>x.classList.toggle('active',x.dataset.case==='camel'));convert()});
+$('sampleBtn').addEventListener('click',()=>{$('inputText').value='user profile name\nUTILITY PLATFORM\nhello world from pdf';active='camel';document.querySelectorAll('.case-btn').forEach(x=>x.classList.toggle('active',x.dataset.case==='camel'));convert()});
 $('inputText').addEventListener('input',()=>{if($('inputText').value)convert();else $('clearBtn').click()});
 document.querySelectorAll('.faq button').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.parentElement,open=item.classList.toggle('open');btn.querySelector('.faq-icon').textContent=open?'−':'+'}));
 updateStats();
