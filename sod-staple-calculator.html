@@ -138,7 +138,6 @@ Packages = ceil(planning total ÷ staples per package)
 <section class="card related-tools" aria-labelledby="related-title">
 <h2 id="related-title">Related Tools</h2>
 <div class="related-grid">
-<a class="related-item" href="paver-edge-restraint-calculator.html"><div><strong>Paver Edge Restraint Calculator</strong><span>Estimate paver edging sections and spikes for hardscape edge restraint.</span></div><span aria-hidden="true">›</span></a>
 </div>
 </section>
 </main>
@@ -188,7 +187,13 @@ function calculate(){
   +'<div class="note"><strong>Planning breakdown:</strong> '+fmt(base)+' base + '+fmt(edge)+' edge + '+fmt(seam)+' seam = '+fmt(subtotal)+' before '+fmt(extra*100)+'% extra allowance. Purchase quantity rounds up to whole packages.</div>'
   +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy staple summary</button><span id="copyStatus" class="copy-status"></span></div>';
  const copy=$('copyResult');copy.addEventListener('click',async function(){
-   const text='Sod staple estimate\nTotal staples: '+total+'\nPackages: '+packages+' x '+pack+'\nBase: '+base+'\nEdge: '+edge+'\nSeams: '+seam+'\nExtra allowance: '+fmt(extra*100)+'%';
+   const text='Sod staple estimate
+Total staples: '+total+'
+Packages: '+packages+' x '+pack+'
+Base: '+base+'
+Edge: '+edge+'
+Seams: '+seam+'
+Extra allowance: '+fmt(extra*100)+'%';
    try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
  });
 }
