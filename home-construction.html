@@ -5,6 +5,16 @@
 <title>Home &amp; Construction Tools | Utility Platform</title><meta name="description" content="Useful home and construction calculators for gravel, fence materials, joist blocking, pilot holes, paint, sod installation and practical project planning."><link href="https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html" rel="canonical"/>
 <style>:root{--bg:#f6f7f9;--card:#fff;--text:#111827;--muted:#5b6472;--line:#d9dee6;--accent:#111827}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}.wrap{max-width:900px;margin:auto;padding:28px 16px 60px}a{color:inherit}h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:20px;box-shadow:0 8px 28px rgba(15,23,42,.07);display:flex;flex-direction:column;min-height:220px}.card h2{margin-top:0}.button{display:inline-block;background:var(--accent);color:#fff;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:800;align-self:flex-start;margin-top:auto}footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}@media(max-width:650px){.wrap{padding-top:22px}.card{min-height:0;padding:17px}.button{width:100%;text-align:center}}</style><link href="site-design.css" rel="stylesheet"/><link href="visual-polish.css" rel="stylesheet"/><meta content="index,follow" name="robots"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Home & Construction Tools | Utility Platform","url":"https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html","description":"Useful home and construction calculators for gravel, fence materials, joist blocking, wire sizing, conduit fill, pilot holes, and practical project planning.","isPartOf":{"@type":"WebSite","name":"Utility Platform","url":"https://saqibali49005-ship-it.github.io/utility-platform/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://saqibali49005-ship-it.github.io/utility-platform/"},{"@type":"ListItem","position":2,"name":"Home & Construction Tools","item":"https://saqibali49005-ship-it.github.io/utility-platform/home-construction.html"}]}</script>
+
+<style>
+.catalog-sync-card{display:grid;gap:14px}
+.catalog-sync-card h2{margin-bottom:0}
+.catalog-sync-card>div{display:grid;gap:14px}
+.catalog-sync-item{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.catalog-sync-item h3{margin:0 0 7px;font-size:19px}
+.catalog-sync-item p{margin:0 0 13px;color:var(--muted)}
+.catalog-sync-item .button{margin-top:0}
+</style>
 </head>
 <body class="tool-page home-construction-tool"><header class="site-header"><div class="header-inner"><a class="brand" href="index.html"><div class="brand-mark">U</div><div>Utility Platform</div></a><nav aria-label="Primary navigation" class="top-nav"><a href="index.html">Home</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a aria-current="page" href="home-construction.html">Home &amp; Construction</a></nav></div></header>
 <main class="wrap"><h1>Home &amp; Construction Tools</h1><p class="muted">Practical utilities for material quantities, measurements, project planning and construction decisions.</p>
@@ -16,4 +26,26 @@
 <section class="card"><h2>Sod Staple Spacing Guide</h2><p class="muted">Learn how to plan staple spacing for main sod areas, exposed edges, seams and site conditions before calculating quantities.</p><a class="button" href="sod-staple-spacing-guide.html">Read guide</a></section>
 <section class="card"><h2>Pilot Hole Size Calculator</h2><p class="muted">Find practical pilot, clearance and countersink drill-bit starting sizes for common wood screws and framing work.</p><a class="button" href="pilot-hole-calculator.html">Open calculator</a></section>
 <section class="card"><h2>Paint Calculator</h2><p class="muted">Estimate paint needed for walls and ceilings, subtract doors and windows, choose coats and coverage, and get gallons or litres.</p><a class="button" href="paint-calculator.html">Open calculator</a></section>
-<p class="muted" style="margin-top:24px">For electrical planning tools, visit <a href="energy-electrical.html">Energy &amp; Electrical Tools</a>.</p><footer><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer></main></body></html>
+<p class="muted" style="margin-top:24px">For electrical planning tools, visit <a href="energy-electrical.html">Energy &amp; Electrical Tools</a>.</p><footer><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer>
+<section class="card catalog-sync-card" id="catalog-sync-home-construction" aria-label="Additional home-construction tools" hidden>
+<h2>More tools</h2>
+<div id="catalog-sync-grid-home-construction"></div>
+</section>
+<script src="tools-data.js"></script>
+<script>
+(function(){
+'use strict';
+const CATEGORY="home-construction";
+const registry=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+const host=document.getElementById('catalog-sync-grid-'+CATEGORY);
+const shell=document.getElementById('catalog-sync-'+CATEGORY);
+if(!host||!shell)return;
+const existing=new Set(Array.from(document.querySelectorAll('a[href]')).map(a=>a.getAttribute('href')));
+const missing=registry.filter(t=>t.category===CATEGORY&&!existing.has(t.href)).sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0));
+if(!missing.length)return;
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+host.innerHTML=missing.map(t=>'<article class="catalog-sync-item"><h3>'+escapeHtml(t.title)+'</h3><p>'+escapeHtml(t.description)+'</p><a class="button" href="'+escapeHtml(t.href)+'">Open tool</a></article>').join('');
+shell.hidden=false;
+})();
+</script>
+</main></body></html>
