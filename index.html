@@ -99,7 +99,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
   }
   search.addEventListener('submit',e=>{e.preventDefault();goSearch(input.value);});
 
-  quick.innerHTML=categories.slice(0,6).map(c=>'<a href="tools.html?category='+encodeURIComponent(c.id)+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');
+  quick.innerHTML=categories.slice(0,6).map(c=>'<a href="'+(c.href||('tools.html?category='+encodeURIComponent(c.id)))+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');
 
   const sorted=tools.sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0));
   latest.innerHTML=sorted.slice(0,6).map((t,i)=>{
