@@ -26,6 +26,16 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
 <meta content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png" name="twitter:image"/><meta content="Utility Platform — Practical Online Tools" name="twitter:image:alt"/><meta content="summary" name="twitter:card"/><meta content="Digital &amp; Developer Tools | Utility Platform" name="twitter:title"/><meta content="Developer, text and digital utilities from Utility Platform, including a UUID generator, validator and online text cleaner." name="twitter:description"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Digital & Developer Tools | Utility Platform","url":"https://saqibali49005-ship-it.github.io/utility-platform/digital-developer.html","description":"Practical digital and developer tools including generators, validators, text utilities and other focused utilities for common technical tasks.","isPartOf":{"@type":"WebSite","name":"Utility Platform","url":"https://saqibali49005-ship-it.github.io/utility-platform/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://saqibali49005-ship-it.github.io/utility-platform/"},{"@type":"ListItem","position":2,"name":"Digital & Developer Tools","item":"https://saqibali49005-ship-it.github.io/utility-platform/digital-developer.html"}]}</script>
+
+<style>
+.catalog-sync-card{display:grid;gap:14px}
+.catalog-sync-card h2{margin-bottom:0}
+.catalog-sync-card>div{display:grid;gap:14px}
+.catalog-sync-item{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.catalog-sync-item h3{margin:0 0 7px;font-size:19px}
+.catalog-sync-item p{margin:0 0 13px;color:var(--muted)}
+.catalog-sync-item .button{margin-top:0}
+</style>
 </head>
 <body class="category-page">
 <header class="site-header"><div class="header-inner">
@@ -82,4 +92,26 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
 </section>
 
 <footer><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer>
+
+<section class="card catalog-sync-card" id="catalog-sync-digital-developer" aria-label="Additional digital-developer tools" hidden>
+<h2>More tools</h2>
+<div id="catalog-sync-grid-digital-developer"></div>
+</section>
+<script src="tools-data.js"></script>
+<script>
+(function(){
+'use strict';
+const CATEGORY="digital-developer";
+const registry=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+const host=document.getElementById('catalog-sync-grid-'+CATEGORY);
+const shell=document.getElementById('catalog-sync-'+CATEGORY);
+if(!host||!shell)return;
+const existing=new Set(Array.from(document.querySelectorAll('a[href]')).map(a=>a.getAttribute('href')));
+const missing=registry.filter(t=>t.category===CATEGORY&&!existing.has(t.href)).sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0));
+if(!missing.length)return;
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+host.innerHTML=missing.map(t=>'<article class="catalog-sync-item"><h3>'+escapeHtml(t.title)+'</h3><p>'+escapeHtml(t.description)+'</p><a class="button" href="'+escapeHtml(t.href)+'">Open tool</a></article>').join('');
+shell.hidden=false;
+})();
+</script>
 </main></body></html>
