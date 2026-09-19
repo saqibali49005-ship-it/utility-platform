@@ -24,7 +24,7 @@ window.UTILITY_TOOLS = [
 window.UTILITY_CATEGORIES = [
   {id:"math-science",title:"Math & Science",description:"Calculators for precision, measurements, scientific and everyday math.",icon:"∑"},
   {id:"home-construction",title:"Home & Construction",description:"Material, measuring, estimating and project-planning utilities.",icon:"⌂"},
-  {id:"energy-electrical",title:"Energy & Electrical",description:"Wire sizing, voltage drop, conduit fill and future circuit tools.",icon:"ϟ"},
+  {id:"energy-electrical",title:"Energy & Electrical",description:"Wire sizing, voltage drop, conduit fill and practical circuit planning.",icon:"ϟ",href:"energy-electrical.html"},
   {id:"digital-developer",title:"Digital & Developer",description:"Identifiers, formats and practical developer workflow utilities.",icon:"<>"},
   {id:"finance",title:"Finance",description:"Financial planning and money utilities as the platform expands.",icon:"$"},
   {id:"converters",title:"Converters",description:"Unit and format conversion tools for common real-world tasks.",icon:"↔"}
