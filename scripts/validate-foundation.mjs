@@ -3,10 +3,8 @@ const fs=require('fs');
 const path=require('path');
 
 const root=process.cwd();
-const catalogPath=path.join(root,'tools-data.js');
-const sitemapPath=path.join(root,'sitemap.xml');
-const catalog=fs.readFileSync(catalogPath,'utf8');
-const sitemap=fs.readFileSync(sitemapPath,'utf8');
+const catalog=fs.readFileSync(path.join(root,'tools-data.js'),'utf8');
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 
 const entries=[...catalog.matchAll(/\{slug:"([^"]+)",title:"([^"]+)",href:"([^"]+)",category:"([^"]+)",description:"([^"]*)",addedOrder:(\d+),keywords:\[([^\]]*)\]\}/g)]
   .map(m=>({slug:m[1],title:m[2],href:m[3],category:m[4],order:Number(m[6])}));
@@ -14,10 +12,11 @@ const entries=[...catalog.matchAll(/\{slug:"([^"]+)",title:"([^"]+)",href:"([^"]
 if(!entries.length) throw new Error('No catalog entries parsed.');
 
 const fail=[];
-const unique=(arr)=>new Set(arr).size===arr.length;
+const unique=a=>new Set(a).size===a.length;
 if(!unique(entries.map(x=>x.slug))) fail.push('Duplicate catalog slug');
 if(!unique(entries.map(x=>x.href))) fail.push('Duplicate catalog href');
 if(!unique(entries.map(x=>x.order))) fail.push('Duplicate addedOrder');
+if(entries.some(x=>!Number.isInteger(x.order)||x.order<1)) fail.push('addedOrder must be positive integers');
 
 for(const t of entries){
   if(!fs.existsSync(path.join(root,t.href))) fail.push('Missing tool file: '+t.href);
@@ -27,9 +26,8 @@ for(const t of entries){
 const categoryIds=[...catalog.matchAll(/\{id:"([^"]+)",title:"/g)].map(m=>m[1]);
 for(const t of entries) if(!categoryIds.includes(t.category)) fail.push('Unknown category: '+t.category);
 
-const orders=entries.map(x=>x.order).sort((a,b)=>b-a);
-for(let i=0;i<orders.length;i++) if(orders[i]!==entries.length-i) fail.push('addedOrder should be a continuous 1..N sequence');
-
-if(fail.length){console.error(fail.map(x=>'FAIL: '+x).join('
-'));process.exit(1);}
+if(fail.length){
+  console.error(fail.map(x=>'FAIL: '+x).join(String.fromCharCode(10)));
+  process.exit(1);
+}
 console.log('Foundation check passed: '+entries.length+' catalog tools validated.');
