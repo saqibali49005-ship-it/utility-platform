@@ -28,6 +28,14 @@ function initBranding(){
  document.querySelectorAll('.footer-brand').forEach(b=>{
   const strong=b.querySelector('strong');if(strong)strong.innerHTML='<span class="brand-wordmark"><span class="zem" style="color:#fff">Zem</span><span class="tools" style="color:#54b5ff">Tools</span></span>';
  });
+ document.querySelectorAll('footer').forEach(f=>{
+  if(f.querySelector('.footer-brand'))return;
+  const brand=document.createElement('div');brand.className='zemtools-footer-brand';
+  brand.innerHTML='<span class="zemtools-footer-mark">'+mark+'</span><span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span>';
+  const links=f.querySelector('.footer-links'); if(links) f.insertBefore(brand,links); else f.insertBefore(brand,f.firstChild);
+ });
+ const sf='.zemtools-footer-brand{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 10px;font-weight:900}.zemtools-footer-mark{width:34px;height:34px;display:grid;place-items:center}.zemtools-footer-mark .zemtools-mark-svg{width:34px;height:34px}.zemtools-footer-brand .zem{color:#17212b}.zemtools-footer-brand .tools{color:#1677f0}footer:not([style]) .zemtools-footer-brand{}';
+ if(!document.getElementById('zemtoolsFooterBrandStyle')){const s=document.createElement('style');s.id='zemtoolsFooterBrandStyle';s.textContent=sf;document.head.appendChild(s);}
  document.querySelectorAll('.copyright').forEach(c=>{c.textContent=c.textContent.replace(/Utility Platform/g,'ZemTools')});
 }
 initBranding();
