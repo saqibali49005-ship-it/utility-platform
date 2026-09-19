@@ -131,6 +131,7 @@
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
+const state={lastExport:null};
 function num(id){const n=Number($(id).value);return Number.isFinite(n)&&n>0?n:null}
 function gcd(a,b){a=Math.round(Math.abs(a));b=Math.round(Math.abs(b));while(b){const t=a%b;a=b;b=t}return a||1}
 function ratio(a,b){const g=gcd(a,b);return (a/g)+':'+(b/g)}
@@ -139,21 +140,21 @@ function validPair(a,b){return a!==null&&b!==null}
 function calcRatio(){
  const w=num('width'),h=num('height');if(!validPair(w,h)){set($('ratioResult'),'<strong>Enter positive width and height values.</strong>');return}
  const r=ratio(w,h),dec=(w/h).toFixed(4);
- set($('ratioResult'),'<div class="big">'+r+'</div><div class="result-grid"><div class="stat"><span>Width</span><strong>'+w.toLocaleString()+'</strong></div><div class="stat"><span>Height</span><strong>'+h.toLocaleString()+'</strong></div><div class="stat"><span>Simplified</span><strong>'+r+'</strong></div><div class="stat"><span>Decimal</span><strong>'+dec+':1</strong></div></div>');
+ state.lastExport={ratio:r,width:w,height:h,source:'Find ratio'};set($('ratioResult'),'<div class="big">'+r+'</div><div class="result-grid"><div class="stat"><span>Width</span><strong>'+w.toLocaleString()+'</strong></div><div class="stat"><span>Height</span><strong>'+h.toLocaleString()+'</strong></div><div class="stat"><span>Simplified</span><strong>'+r+'</strong></div><div class="stat"><span>Decimal</span><strong>'+dec+':1</strong></div></div>');
  updatePreview(w/h,r)
 }
 function solve(){
  const rw=num('ratioW'),rh=num('ratioH'),known=num('knownValue');if(!validPair(rw,rh)||known===null){set($('sizeResult'),'<strong>Enter valid ratio and dimension values.</strong>');return}
  let w,h;if($('knownDimension').value==='width'){w=known;h=known*rh/rw}else{h=known;w=known*rw/rh}
  w=Math.round(w);h=Math.round(h);const r=ratio(rw,rh);
- set($('sizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>At <strong>'+r+'</strong>, '+$('knownDimension').value+' '+known.toLocaleString()+' px gives a matching '+($('knownDimension').value==='width'?'height':'width')+' of '+($('knownDimension').value==='width'?h:w).toLocaleString()+' px.</p>');
+ state.lastExport={ratio:r,width:w,height:h,source:'Missing dimension'};set($('sizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>At <strong>'+r+'</strong>, '+$('knownDimension').value+' '+known.toLocaleString()+' px gives a matching '+($('knownDimension').value==='width'?'height':'width')+' of '+($('knownDimension').value==='width'?h:w).toLocaleString()+' px.</p>');
  updatePreview(rw/rh,r)
 }
 function resize(){
  const ow=num('origW'),oh=num('origH'),target=num('targetValue');if(!validPair(ow,oh)||target===null){set($('resizeResult'),'<strong>Enter valid original and target dimensions.</strong>');return}
  let w,h;if($('targetDimension').value==='width'){w=Math.round(target);h=Math.round(target*oh/ow)}else{h=Math.round(target);w=Math.round(target*ow/oh)}
  const r=ratio(ow,oh),scale=$('targetDimension').value==='width'?w/ow:h/oh;
- set($('resizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>Original ratio: <strong>'+r+'</strong> · Scale: <strong>'+(scale*100).toFixed(2)+'%</strong></p>');
+ state.lastExport={ratio:r,width:w,height:h,source:'Resize'};set($('resizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>Original ratio: <strong>'+r+'</strong> · Scale: <strong>'+(scale*100).toFixed(2)+'%</strong></p>');
  updatePreview(w/h,r)
 }
 function updatePreview(value,label){$('previewInner').style.aspectRatio=value; $('previewInner').textContent=label;$('previewLabel').textContent=label;$('previewText').textContent='Illustrative preview of the '+label+' shape.'}
@@ -161,7 +162,7 @@ document.querySelectorAll('[data-ratio]').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('[data-solve]').forEach(b=>b.addEventListener('click',()=>{const [w,h]=b.dataset.solve.split(':');$('ratioW').value=w;$('ratioH').value=h;solve()}));
 $('findRatio').addEventListener('click',calcRatio);$('swap').addEventListener('click',()=>{$('width').value=Number($('height').value);$('height').value=Number($('width').value);calcRatio()});
 $('solveSize').addEventListener('click',solve);$('resize').addEventListener('click',resize);
-function download(type){const ratioLabel=$('previewLabel').textContent;const width=$('width').value||'';const height=$('height').value||'';const decimal=((Number(width)||0)/(Number(height)||1)).toFixed(4);const text=type==='csv'?['Field,Value','Tool,Aspect Ratio Calculator','Ratio,'+ratioLabel,'Width,'+width,'Height,'+height,'Decimal ratio,'+decimal+':1'].join('\n')+'\n':['Aspect Ratio Calculator','Ratio: '+ratioLabel,'Width: '+width,'Height: '+height,'Ratio decimal: '+decimal+':1'].join('\n')+'\n';const blob=new Blob([text],{type:type==='csv'?'text/csv;charset=utf-8':'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aspect-ratio-result.'+(type==='csv'?'csv':'txt');a.click();setTimeout(()=>URL.revokeObjectURL(a.href),100)}
+function download(type){const x=state.lastExport||{ratio:$('previewLabel').textContent,width:$('width').value||'',height:$('height').value||''};const ratioLabel=x.ratio;const width=x.width;const height=x.height;const decimal=((Number(width)||0)/(Number(height)||1)).toFixed(4);const text=type==='csv'?['Field,Value','Tool,Aspect Ratio Calculator','Ratio,'+ratioLabel,'Width,'+width,'Height,'+height,'Decimal ratio,'+decimal+':1'].join('\n')+'\n':['Aspect Ratio Calculator','Ratio: '+ratioLabel,'Width: '+width,'Height: '+height,'Ratio decimal: '+decimal+':1'].join('\n')+'\n';const blob=new Blob([text],{type:type==='csv'?'text/csv;charset=utf-8':'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aspect-ratio-result.'+(type==='csv'?'csv':'txt');a.click();setTimeout(()=>URL.revokeObjectURL(a.href),100)}
 $('downloadTxt').addEventListener('click',()=>download('txt'));$('downloadCsv').addEventListener('click',()=>download('csv'));calcRatio();
 })();
 </script>
