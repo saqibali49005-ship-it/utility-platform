@@ -30,5 +30,6 @@ for(const t of entries) if(!categoryIds.includes(t.category)) fail.push('Unknown
 const orders=entries.map(x=>x.order).sort((a,b)=>b-a);
 for(let i=0;i<orders.length;i++) if(orders[i]!==entries.length-i) fail.push('addedOrder should be a continuous 1..N sequence');
 
-if(fail.length){console.error(fail.map(x=>'FAIL: '+x).join('\n'));process.exit(1);}
+if(fail.length){console.error(fail.map(x=>'FAIL: '+x).join('
+'));process.exit(1);}
 console.log('Foundation check passed: '+entries.length+' catalog tools validated.');
