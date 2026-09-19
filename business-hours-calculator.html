@@ -14,7 +14,7 @@
 <meta property="og:description" content="Calculate working hours between two dates, exclude holidays, customize weekly work hours, and add or subtract business hours from a date and time.">
 <meta property="og:url" content="https://saqibali49005-ship-it.github.io/utility-platform/business-hours-calculator.html">
 <meta property="og:image" content="https://saqibali49005-ship-it.github.io/utility-platform/social-preview.png">
-<meta property="og:image:alt" content="Utility Platform — Practical Online Tools">
+<meta property="og:image:alt" content="ZemTools — Practical Online Tools">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Business Hours Calculator | Working Hours Between Dates">
 <meta name="twitter:description" content="Calculate business hours between dates with custom schedules and holidays, or find a business-time deadline.">
@@ -72,19 +72,20 @@
   .business-tool .schedule-table{font-size:13px}
 }
 </style>
+<style>.brand-mark{background:transparent!important;box-shadow:none!important;width:42px;height:42px}.zemtools-mark-svg{width:100%;height:100%;display:block}.brand-wordmark{display:inline-flex;align-items:baseline;letter-spacing:-.35px;font-weight:900}.brand-wordmark .zem{color:#fff}.brand-wordmark .tools{color:#1677f0}</style>
 </head>
 <body class="tool-page business-tool">
 <a class="skip-link" href="#main-content">Skip to calculator</a>
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="index.html"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+    <a class="brand" href="index.html"><div class="brand-mark"><svg class="zemtools-mark-svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 13h31L17 46h25l-7 8H7l22-33H8z" fill="#fff"/><path d="M29 19h28l-7 8H43v25H31V28H22z" fill="#1677f0"/><path d="M15 49h27l-7 7H8z" fill="#0bb7e8"/></svg></div><div class="brand-copy"><strong><span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span></strong></div></a>
     <nav class="top-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a><a href="energy-electrical.html">Energy &amp; Electrical</a></nav>
     <div class="header-actions">
       <button class="icon-btn" id="searchBtn" type="button" aria-label="Search" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button>
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
     </div>
   </div>
-  <div class="search-panel" id="searchPanel"><form id="siteSearchForm" role="search"><input id="siteSearch" type="search" placeholder="Search Utility Platform" aria-label="Search Utility Platform"><button type="submit">Search</button></form></div>
+  <div class="search-panel" id="searchPanel"><form id="siteSearchForm" role="search"><input id="siteSearch" type="search" placeholder="Search ZemTools" aria-label="Search ZemTools"><button type="submit">Search</button></form></div>
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a><a href="energy-electrical.html">Energy &amp; Electrical</a></nav>
 </header>
 
@@ -184,7 +185,7 @@
 </section>
 </main>
 
-<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark"><svg class="zemtools-mark-svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 13h31L17 46h25l-7 8H7l22-33H8z" fill="#fff"/><path d="M29 19h28l-7 8H43v25H31V28H22z" fill="#1677f0"/><path d="M15 49h27l-7 7H8z" fill="#0bb7e8"/></svg></div><div><strong><span class="brand-wordmark"><span class="zem">Zem</span><span class="tools">Tools</span></span></strong></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
 
 <script src="master-ui.js"></script>
 <script>
@@ -317,9 +318,9 @@
     const x=state.lastExport;if(!x)return;
     let textOut;
     if(x.mode==='between'){
-      textOut='Utility Platform — Business Hours Calculator\n\nMode: Business hours between dates\nStart: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nCalendar elapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHolidays excluded: '+x.holidayCount+'\n';
+      textOut='ZemTools — Business Hours Calculator\n\nMode: Business hours between dates\nStart: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nCalendar elapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHolidays excluded: '+x.holidayCount+'\n';
     }else{
-      textOut='Utility Platform — Business Hours Calculator\n\nMode: Add / subtract business time\nStart: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.result+'\n';
+      textOut='ZemTools — Business Hours Calculator\n\nMode: Add / subtract business time\nStart: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.result+'\n';
     }
     const blob=new Blob([textOut],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
