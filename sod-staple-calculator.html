@@ -158,7 +158,7 @@ function updateLabels(){
 function convert(oldMetric,newMetric){
  const areaRatio=newMetric?0.09290304:10.7639104167;
  const lengthRatio=newMetric?0.3048:3.280839895;
- ['area'].forEach(id=>{$(id).value=(parseFloat($(id).value)||0)*areaRatio});
+ $('area').value=(parseFloat($('area').value)||0)*areaRatio;
  ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=((parseFloat($(id).value)||0)*lengthRatio).toFixed(2)});
 }
 function calculate(){
@@ -173,10 +173,7 @@ function calculate(){
  const base=Math.ceil(areaFt/(spacingFt*spacingFt));
  const edge=edgeFt>0?Math.ceil(edgeFt/edgeSpacingFt):0;
  const seam=seamFt>0?Math.ceil(seamFt/seamSpacingFt):0;
- const subtotal=base+edge+seam;
- const total=Math.ceil(subtotal*(1+extra));
- const packages=Math.ceil(total/pack);
- const equivalentAreaPerStaple=spacingFt*spacingFt;
+ const subtotal=base+edge+seam, total=Math.ceil(subtotal*(1+extra)), packages=Math.ceil(total/pack);
  const r=$('result');
  r.innerHTML='<h2>Your sod staple estimate</h2><div class="result-grid">'
   +'<div class="metric"><strong>Total staples</strong><span>'+fmt(total)+'</span></div>'
@@ -186,24 +183,14 @@ function calculate(){
   +'</div>'
   +'<div class="note"><strong>Planning breakdown:</strong> '+fmt(base)+' base + '+fmt(edge)+' edge + '+fmt(seam)+' seam = '+fmt(subtotal)+' before '+fmt(extra*100)+'% extra allowance. Purchase quantity rounds up to whole packages.</div>'
   +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy staple summary</button><span id="copyStatus" class="copy-status"></span></div>';
- const copy=$('copyResult');copy.addEventListener('click',async function(){
-   const text='Sod staple estimate
-Total staples: '+total+'
-Packages: '+packages+' x '+pack+'
-Base: '+base+'
-Edge: '+edge+'
-Seams: '+seam+'
-Extra allowance: '+fmt(extra*100)+'%';
-   try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
+ $('copyResult').addEventListener('click',async function(){
+   const text='Sod staple estimate\nTotal staples: '+total+'\nPackages: '+packages+' x '+pack+'\nBase: '+base+'\nEdge: '+edge+'\nSeams: '+seam+'\nExtra allowance: '+fmt(extra*100)+'%';
+   try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
  });
 }
-$('units').addEventListener('change',function(){
- const nowMetric=this.value==='metric';convert(!nowMetric,nowMetric);updateLabels();calculate();
-});
+$('units').addEventListener('change',function(){const nowMetric=this.value==='metric';convert(!nowMetric,nowMetric);updateLabels();calculate()});
 $('sodForm').addEventListener('submit',e=>{e.preventDefault();calculate()});
-$('reset').addEventListener('click',function(){
- $('units').value='imperial';$('area').value='1000';$('spacing').value='5';$('edgeSpacing').value='1';$('edgeLength').value='0';$('seamSpacing').value='1';$('seamLength').value='0';$('extra').value='10';$('packSize').value='100';updateLabels();calculate();
-});
+$('reset').addEventListener('click',function(){$('units').value='imperial';$('area').value='1000';$('spacing').value='5';$('edgeSpacing').value='1';$('edgeLength').value='0';$('seamSpacing').value='1';$('seamLength').value='0';$('extra').value='10';$('packSize').value='100';updateLabels();calculate()});
 ['area','spacing','edgeSpacing','edgeLength','seamSpacing','seamLength','extra','packSize'].forEach(id=>$(id).addEventListener('input',calculate));
 updateLabels();calculate();
 })();
