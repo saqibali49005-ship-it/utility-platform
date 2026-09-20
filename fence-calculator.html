@@ -112,6 +112,27 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
   <div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a><a href="energy-electrical.html">Energy &amp; Electrical</a></nav>
 </div>
 </header>
+<script>
+(function(){
+  var s=document.getElementById('toolHeaderSearch'),p=document.getElementById('toolHeaderSearchPanel'),i=document.getElementById('toolHeaderSearchInput'),r=document.getElementById('toolHeaderSearchResults'),m=document.getElementById('toolHeaderMenu'),n=document.getElementById('toolHeaderMenuPanel');
+  if(!s||!p||!m||!n)return;
+  function closeSearch(){p.classList.remove('open');s.setAttribute('aria-expanded','false')}
+  function closeMenu(){n.classList.remove('is-open');m.setAttribute('aria-expanded','false')}
+  function render(q){
+    if(!r)return;
+    var term=String(q||'').trim().toLowerCase(),data=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+    var matches=(term?data.filter(function(t){return (String(t.title||'')+' '+String(t.description||'')+' '+(Array.isArray(t.keywords)?t.keywords.join(' '):'')).toLowerCase().indexOf(term)>-1}):data).slice(0,8);
+    r.innerHTML=matches.length?matches.map(function(t){return '<a href="'+t.href+'">'+t.title+'</a>'}).join(''):'<div class="tool-header-empty">No matching tool found.</div>';
+  }
+  s.onclick=function(e){e.preventDefault();e.stopPropagation();var open=!p.classList.contains('open');closeMenu();if(open){p.classList.add('open');s.setAttribute('aria-expanded','true');if(i)i.focus()}else closeSearch()};
+  m.onclick=function(e){e.preventDefault();e.stopPropagation();var open=!n.classList.contains('is-open');closeSearch();if(open){n.classList.add('is-open');m.setAttribute('aria-expanded','true')}else closeMenu()};
+  if(i)i.oninput=function(){render(i.value)};
+  var form=document.getElementById('toolHeaderSearchForm');
+  if(form)form.onsubmit=function(e){e.preventDefault();var q=i.value.trim();if(q)window.location.href='tools.html?q='+encodeURIComponent(q)};
+  document.addEventListener('click',function(e){if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu()});
+  render('');
+})();
+</script>
 <main id="main-content">
 <section class="hero-shell">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="crumb-sep">›</span><a href="home-construction.html">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Fence Material Calculator</span></nav>
