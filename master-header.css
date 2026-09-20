@@ -37,3 +37,59 @@
   .category-page .site-header .mobile-nav.is-open a{display:block!important}
 }
 @media(min-width:821px){.category-page .site-header .menu-btn{display:none!important}.category-page .site-header .mobile-nav{display:none!important}}
+
+
+/* TOOLS PAGE MOBILE MENU — clean white dropdown; prevent dark/black side column from legacy CSS. */
+@media(max-width:820px){
+  .tools-page .site-header .mobile-nav.is-open{
+    display:grid!important;
+    visibility:visible!important;
+    position:absolute!important;
+    left:12px!important;
+    right:12px!important;
+    top:100%!important;
+    width:auto!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:calc(100vh - 82px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding:8px!important;
+    margin:0!important;
+    gap:5px!important;
+    background:#fff!important;
+    background-image:none!important;
+    color:#334155!important;
+    border:1px solid #dfe6ef!important;
+    border-radius:14px!important;
+    box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .tools-page .site-header .mobile-nav.is-open::before,
+  .tools-page .site-header .mobile-nav.is-open::after{
+    display:none!important;
+    content:none!important;
+  }
+  .tools-page .site-header .mobile-nav.is-open a{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:11px 12px!important;
+    background:#fff!important;
+    background-image:none!important;
+    color:#334155!important;
+    border:1px solid transparent!important;
+    border-radius:9px!important;
+    box-shadow:none!important;
+    text-decoration:none!important;
+  }
+  .tools-page .site-header .mobile-nav.is-open a:hover,
+  .tools-page .site-header .mobile-nav.is-open a:focus-visible,
+  .tools-page .site-header .mobile-nav.is-open a[aria-current="page"]{
+    background:#f1f5f9!important;
+    color:#1d4ed8!important;
+  }
+}
