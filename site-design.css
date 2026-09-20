@@ -127,3 +127,9 @@ main>section.card:last-of-type p:has(> a:nth-of-type(2)){display:grid!important;
 .site-header .brand > div:last-child{display:block!important;}
 .site-header .brand .brand-mark{width:38px!important;height:38px!important;flex:0 0 38px!important;place-items:center!important;border-radius:12px!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;font-weight:900!important;font-size:18px!important;box-shadow:0 7px 18px rgba(37,99,235,.20)!important;}
 .site-header .brand::before,.site-header .brand::after{content:none!important;display:none!important;}
+
+/* HEADER BRAND REMOVAL — reserved clean space for next logo implementation. */
+@media(max-width:820px){
+  .home-page .site-header .header-inner{display:block!important;min-height:0!important;padding:0 12px!important;}
+  .home-page .site-header .top-nav{width:100%!important;margin:0!important;}
+}
