@@ -4,9 +4,9 @@ function initHeader(){
  const m=document.getElementById('menuBtn'),n=document.getElementById('mobileNav'),s=document.getElementById('searchBtn'),p=document.getElementById('searchPanel'),i=document.getElementById('siteSearch');
  if(n){
   n.innerHTML=[['index.html','Home'],['tools.html','All Tools'],['math-science.html','Math & Science'],['digital-developer.html','Digital & Developer'],['home-construction.html','Home & Construction'],['energy-electrical.html','Energy & Electrical']].map(([h,l])=>'<a href="'+h+'">'+l+'</a>').join('');
-  n.style.setProperty('display','none','important');
+  n.classList.remove('is-open');
  }
- if(m&&n){m.onclick=function(e){e.preventDefault();e.stopPropagation();const open=n.style.display!=='block';n.style.setProperty('display',open?'block':'none','important');m.setAttribute('aria-expanded',String(open));if(open&&p){p.style.setProperty('display','none','important');s&&s.setAttribute('aria-expanded','false');}};}
+ if(m&&n){m.onclick=function(e){e.preventDefault();e.stopPropagation();const open=!n.classList.contains('is-open');n.classList.toggle('is-open',open);m.setAttribute('aria-expanded',String(open));m.setAttribute('aria-label',open?'Close menu':'Open menu');if(open&&p){p.style.setProperty('display','none','important');s&&s.setAttribute('aria-expanded','false');}};}
  if(s&&p){s.onclick=function(e){e.preventDefault();e.stopPropagation();const open=p.style.display!=='block';p.style.setProperty('display',open?'block':'none','important');s.setAttribute('aria-expanded',String(open));if(open&&i)i.focus();if(open&&n){n.style.setProperty('display','none','important');m&&m.setAttribute('aria-expanded','false');}};}
 }
 initHeader();
