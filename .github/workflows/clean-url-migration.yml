@@ -1,0 +1,111 @@
+name: Clean URL Migration
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/clean-url-migration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Convert public HTML pages to clean directory URLs
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re, subprocess
+
+          root = Path('.')
+          pages = sorted(
+              p for p in root.glob('*.html')
+              if p.name not in {'index.html', '404.html'}
+          )
+          names = [p.stem for p in pages]
+          print("Migrating:", names)
+
+          # First move each public page to /page-name/index.html.
+          for p in pages:
+              target = root / p.stem / 'index.html'
+              target.parent.mkdir(parents=True, exist_ok=True)
+              subprocess.run(['git','mv',str(p),str(target)], check=True)
+
+          # Add a site-root base to moved pages so their existing relative
+          # CSS/JS/image/navigation references continue to resolve correctly.
+          for name in names:
+              p = root / name / 'index.html'
+              s = p.read_text(encoding='utf-8')
+              if '<base href=' not in s.lower():
+                  s = re.sub(r'(<head[^>]*>)', r'\1\n<base href="https://zemtools.com/">', s, count=1, flags=re.I)
+              p.write_text(s, encoding='utf-8')
+
+          # Remove .html from public page URLs everywhere in the site.
+          replacements = {'index.html': '/'}
+          for name in names:
+              replacements[name + '.html'] = name + '/'
+          replacements['404.html'] = '404.html'
+
+          text_ext = {'.html','.js','.xml','.md','.txt','.json','.css'}
+          for p in root.rglob('*'):
+              if not p.is_file() or '.git' in p.parts or p.suffix.lower() not in text_ext:
+                  continue
+              try:
+                  s = p.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              old = s
+              # Absolute production URLs: canonical/OG/schema/sitemap.
+              s = s.replace('https://saqibali49005-ship-it.github.io/utility-platform/', 'https://zemtools.com/')
+              # Public page references, including query-string JS assignments.
+              for oldref, newref in replacements.items():
+                  if oldref == 'index.html':
+                      s = s.replace(oldref, newref)
+                  elif oldref != '404.html':
+                      s = re.sub(r'(?<![A-Za-z0-9_-])' + re.escape(oldref) + r'(?=([?#"\'<>\s)&]|$))', newref, s)
+              if s != old:
+                  p.write_text(s, encoding='utf-8')
+
+          # Ensure clean canonical URLs on migrated pages.
+          for name in names:
+              p = root / name / 'index.html'
+              s = p.read_text(encoding='utf-8')
+              s = re.sub(r'(https://zemtools\.com/' + re.escape(name) + r')/?(?=")', r'\1/', s)
+              p.write_text(s, encoding='utf-8')
+
+          # Make sitemap use the new clean URLs.
+          sm = root / 'sitemap.xml'
+          if sm.exists():
+              s = sm.read_text(encoding='utf-8')
+              s = s.replace('https://saqibali49005-ship-it.github.io/utility-platform/', 'https://zemtools.com/')
+              for name in names:
+                  s = s.replace(name + '.html', name + '/')
+              sm.write_text(s, encoding='utf-8')
+
+          # Add legacy .html -> clean URL handling to the existing custom 404 page.
+          p = root / '404.html'
+          s = p.read_text(encoding='utf-8')
+          marker = '/* CLEAN_URL_LEGACY_REDIRECT */'
+          if marker not in s:
+              mapping = ','.join([repr('/'+n+'.html')+':'+repr('/'+n+'/') for n in names])
+              js = f'''<script>{marker}
+          (function(){{var m={{{mapping}}};var p=location.pathname.replace(/\\/+$/,'');if(m[p]){{location.replace(m[p]+location.search+location.hash);}}}})();
+          </script>'''
+              s = s.replace('</head>', js + '\n</head>') if '</head>' in s else js + s
+              p.write_text(s, encoding='utf-8')
+
+          # Remove this one-time workflow so it cannot run again.
+          subprocess.run(['git','rm','.github/workflows/clean-url-migration.yml'], check=True)
+
+          subprocess.run(['git','config','user.name','github-actions[bot]'], check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git','add','-A'], check=True)
+          subprocess.run(['git','commit','-m','Remove .html extensions with clean URLs'], check=True)
+          subprocess.run(['git','push'], check=True)
+          PY
