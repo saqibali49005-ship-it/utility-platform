@@ -60,6 +60,16 @@
 @media(max-width:700px){.paint-tool .room-card .tool-grid{grid-template-columns:1fr}.paint-tool .room-card .field label{min-height:0}}
 .paint-tool .small{color:var(--muted);font-size:13px}
 @media(max-width:700px){.paint-tool .tool-grid{grid-template-columns:1fr}.paint-tool .result-list{grid-template-columns:1fr}.paint-tool .unit-row{grid-template-columns:1fr}.paint-tool .actions{flex-direction:column;align-items:stretch}.paint-tool .actions button{width:100%}}
+
+.paint-tool .hero-shell{width:100%;min-width:0}
+.paint-tool .info-callout{box-sizing:border-box;width:100%;min-width:0}
+.paint-tool .layout{align-items:start}
+.paint-tool .tool-card,.paint-tool .result-card{min-width:0}
+.paint-tool .room-card{box-sizing:border-box;min-width:0;overflow:hidden}
+.paint-tool .room-card .tool-grid{width:100%;box-sizing:border-box}
+.paint-tool .room-card input,.paint-tool .room-card select{max-width:100%}
+.paint-tool .result-main{min-width:0}
+.paint-tool .result-value,.paint-tool .result-sub{overflow-wrap:anywhere}
 </style>
 </head>
 <body class="tool-page paint-tool">
@@ -74,7 +84,7 @@
 <main id="main-content">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="crumb-sep">›</span><a href="home-construction.html">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Paint Calculator</span></nav>
 <section class="hero-shell"><div class="hero"><div class="tool-icon" aria-hidden="true">🎨</div><div><h1>Paint Calculator</h1><p>Estimate how much paint you need for walls and ceilings, account for doors and windows, choose the number of coats, and convert the result between gallons and litres.</p></div></div>
-<div class="info-callout"><div class="info-icon">i</div><div><strong>Use your paint can's coverage when available</strong>Coverage varies by product, surface, texture and application method. The default coverage is a planning estimate; use the manufacturer's label or technical data for a product-specific result. Sherwin-Williams notes that coverage is commonly around 350–400 sq ft per gallon, while actual requirements vary. citeturn818140search0turn818140search1</div></div></section>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Use your paint can's coverage when available</strong>Coverage varies by product, surface, texture and application method. The default coverage is a planning estimate; use the manufacturer's label or technical data for a product-specific result. Sherwin-Williams notes that coverage is commonly around 350–400 sq ft per gallon, while actual requirements vary.</div></div></section>
 
 <section class="layout" aria-label="Paint calculator">
 <article class="card tool-card">
@@ -104,12 +114,12 @@
 
 <section class="support-grid">
 <article class="card"><h2>What the calculation includes</h2><ul><li>Four wall surfaces for each room.</li><li>Optional ceiling area.</li><li>Doors and windows deducted from paintable area.</li><li>Multiple rooms combined into one estimate.</li></ul></article>
-<article class="card"><h2>Paint coverage matters</h2><p>There is no universal coverage number for every paint. Sherwin-Williams says a gallon typically covers about 350–400 square feet, but surface texture, application method and the product itself can change requirements. citeturn818140search0turn818140search1</p></article>
+<article class="card"><h2>Paint coverage matters</h2><p>There is no universal coverage number for every paint. Sherwin-Williams says a gallon typically covers about 350–400 square feet, but surface texture, application method and the product itself can change requirements.</p></article>
 <article class="card"><h2>Simple formula</h2><div class="formula">Wall area = 2 × (length + width) × wall height<br/>Paintable area = wall area + ceiling (optional) − openings<br/>Coat area = paintable area × coats<br/>Paint = coat area ÷ coverage × (1 + overage)</div></article>
 </section>
 
 <section class="card faq"><h2>Frequently Asked Questions</h2>
-<details><summary>How much paint does one gallon cover?</summary><p>Sherwin-Williams says a gallon of paint typically covers about 350–400 square feet, but product, surface condition and application method can change the actual amount needed. Check the product label or technical data for the paint you are using. citeturn818140search0turn818140search1</p></details>
+<details><summary>How much paint does one gallon cover?</summary><p>Sherwin-Williams says a gallon of paint typically covers about 350–400 square feet, but product, surface condition and application method can change the actual amount needed. Check the product label or technical data for the paint you are using.</p></details>
 <details><summary>Should I subtract doors and windows?</summary><p>Yes. Deducting significant openings gives a closer estimate of the actual paintable surface. Small openings and trim can be handled differently depending on the project.</p></details>
 <details><summary>Do two coats double the paint?</summary><p>As a planning calculation, two coats are treated as twice the coated area. Actual product requirements can differ because hiding, substrate condition and application technique affect coverage.</p></details>
 <details><summary>Should I add extra paint?</summary><p>A modest planning allowance can help with touch-ups and measurement uncertainty, but the appropriate amount depends on the project. Product-specific guidance should take priority.</p></details>
