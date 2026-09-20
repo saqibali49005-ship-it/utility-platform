@@ -33,3 +33,71 @@ button[id^="download"]:disabled{opacity:.58;cursor:not-allowed;box-shadow:none}
  .site-header .brand::before{width:36px!important;height:36px!important;flex-basis:36px!important;border-radius:11px!important;font-size:17px!important;}
  .site-header .brand::after{font-size:15.5px!important;}
 }
+
+
+/* TOOL PAGES — reliable mobile header/menu geometry. */
+@media(max-width:820px){
+  .tool-page .site-header .header-inner{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    flex-wrap:nowrap!important;
+    gap:8px!important;
+    min-height:64px!important;
+    padding:9px 12px!important;
+  }
+  .tool-page .site-header .brand{
+    order:1!important;
+    min-width:0!important;
+    flex:0 0 auto!important;
+  }
+  .tool-page .site-header .header-actions{
+    order:2!important;
+    margin-left:auto!important;
+    flex:0 0 auto!important;
+  }
+  .tool-page .site-header .top-nav{
+    display:none!important;
+    visibility:hidden!important;
+    width:0!important;
+    height:0!important;
+    overflow:hidden!important;
+  }
+  .tool-page .site-header .menu-btn{
+    display:grid!important;
+    visibility:visible!important;
+  }
+  .tool-page .site-header .mobile-nav.is-open{
+    display:grid!important;
+    position:absolute!important;
+    left:12px!important;
+    right:12px!important;
+    top:100%!important;
+    width:auto!important;
+    max-width:none!important;
+    padding:8px!important;
+    margin:0!important;
+    gap:5px!important;
+    background:#fff!important;
+    border:1px solid #dfe6ef!important;
+    border-radius:14px!important;
+    box-shadow:0 12px 28px rgba(15,23,42,.12)!important;
+    z-index:1001!important;
+    pointer-events:auto!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  .tool-page .site-header .mobile-nav.is-open a{
+    display:block!important;
+    width:100%!important;
+    margin:0!important;
+    padding:11px 12px!important;
+    background:#fff!important;
+    border:1px solid transparent!important;
+    border-radius:9px!important;
+    color:#334155!important;
+    text-decoration:none!important;
+    box-shadow:none!important;
+  }
+}
