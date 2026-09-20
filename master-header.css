@@ -21,3 +21,6 @@
 .site-header .mobile-nav a:hover,.site-header .mobile-nav a[aria-current="page"]{background:#f1f5f9!important;color:#1d4ed8!important}
 @media(max-width:820px){.site-header .header-inner{max-width:none!important;padding:9px 12px!important;gap:8px!important;flex-wrap:nowrap!important}.site-header .brand{order:1!important}.site-header .header-actions{order:2!important;margin-left:auto!important}.site-header .top-nav{display:none!important}.site-header .menu-btn{display:grid!important}.site-header .search-panel{padding:0 12px 10px!important}.site-header .mobile-nav{top:100%!important}}
 @media(max-width:650px){.site-header .brand{font-size:15.5px!important}.site-header .brand .brand-mark{width:36px!important;height:36px!important;flex-basis:36px!important;border-radius:11px!important;font-size:17px!important}.site-header .top-nav a{min-height:36px!important;padding:7px 10px!important;font-size:12px!important}.site-header .icon-btn{width:38px!important;height:38px!important}}
+
+/* Mobile menu reliability: class-driven open state */
+@media(max-width:820px){.site-header .mobile-nav.is-open{display:grid!important;gap:5px!important}.site-header .mobile-nav{pointer-events:none!important}.site-header .mobile-nav.is-open{pointer-events:auto!important}.site-header .mobile-nav a{display:block!important}}
