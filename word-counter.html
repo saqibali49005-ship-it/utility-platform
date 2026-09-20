@@ -38,7 +38,7 @@ body.counter-tool textarea{width:100%;min-height:330px;resize:vertical;border:1p
 </section>
 </main>
 <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
-<script src="master-ui.js?v=20260920-10"></script>
+<script src="master-ui.js?v=20260920-11"></script>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id);let limit=0;
 function count(){const t=$('inputText').value,trim=t.trim(),words=trim?trim.split(/\s+/u).length:0;const chars=t.length,no=t.replace(/[ \t]/g,'').length,sent=trim?(trim.match(/[.!?]+(?=\s|$)/g)||[]).length:0,paras=trim?trim.split(/\n\s*\n/).filter(Boolean).length:0,lines=t?String(t).replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n').length:0;[['words',words],['chars',chars],['noSpaces',no],['sentences',sent],['paragraphs',paras],['lines',lines]].forEach(([id,v])=>$(id).textContent=v.toLocaleString());$('readTime').textContent=words?Math.max(1,Math.ceil(words/200))+' min':'0 min';$('speakTime').textContent=words?Math.max(1,Math.ceil(words/130))+' min':'0 min';if(limit){const diff=limit-chars;$('limitStatus').textContent=diff>=0?diff.toLocaleString()+' characters remaining':'Over limit by '+Math.abs(diff).toLocaleString()+' characters';$('limitStatus').style.color=diff>=0?'#1767e7':'#b42318'}else $('limitStatus').textContent='No limit selected';$('copyBtn').disabled=!t}
