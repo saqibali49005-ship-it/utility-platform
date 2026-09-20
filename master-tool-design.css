@@ -24,10 +24,12 @@ button[id^="download"]:disabled{opacity:.58;cursor:not-allowed;box-shadow:none}
 @media(max-width:430px){button[id^="download"],a[id^="download"],a[download]{min-height:40px;padding:8px 12px;font-size:14px}}
 
 
-/* ZEMTOOLS LOGO — visual-only replacement; existing header structure stays unchanged. */
-.site-header .brand{position:relative!important;display:flex!important;align-items:center!important;min-width:0!important;text-decoration:none!important;}
-.site-header .brand .brand-mark,
-.site-header .brand .brand-copy,
-.site-header .brand > div:last-child{display:none!important;}
-.site-header .brand::before{content:"";display:block;width:190px;height:48px;background:url('zemtools-logo.webp') center/contain no-repeat;background-repeat:no-repeat;flex:0 0 auto;}
-@media(max-width:650px){.site-header .brand::before{width:158px;height:42px;}}
+/* ZEMTOOLS HEADER VISIBILITY FIX — preserve existing header geometry/alignment. */
+.site-header .brand{display:flex!important;align-items:center!important;gap:10px!important;min-width:0!important;text-decoration:none!important;}
+.site-header .brand .brand-mark,.site-header .brand .brand-copy,.site-header .brand > div:last-child{display:none!important;}
+.site-header .brand::before{content:"Z";display:grid!important;place-items:center!important;width:38px!important;height:38px!important;flex:0 0 38px!important;border-radius:12px!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;font-weight:900!important;font-size:18px!important;box-shadow:0 7px 18px rgba(37,99,235,.20)!important;}
+.site-header .brand::after{content:"ZEMTOOLS";display:block!important;color:#111827!important;font-weight:850!important;font-size:16px!important;letter-spacing:-.25px!important;white-space:nowrap!important;}
+@media(max-width:650px){
+ .site-header .brand::before{width:36px!important;height:36px!important;flex-basis:36px!important;border-radius:11px!important;font-size:17px!important;}
+ .site-header .brand::after{font-size:15.5px!important;}
+}
