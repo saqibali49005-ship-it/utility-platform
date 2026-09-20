@@ -1,0 +1,11 @@
+/* ZEMTOOLS NEW HEADER — isolated namespaced system. */
+.zem-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.97);border-bottom:1px solid #dfe6ef;box-shadow:0 5px 22px rgba(15,23,42,.055);backdrop-filter:saturate(160%) blur(10px)}
+.zem-header__inner{max-width:1120px;margin:0 auto;min-height:64px;padding:9px 16px;display:flex;align-items:center;gap:14px}
+.zem-header__actions{margin-left:auto;display:flex;align-items:center;gap:7px}
+.zem-header__button{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid #dbe3ed;border-radius:12px;background:#fff;color:#334155;cursor:pointer}
+.zem-header__button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.zem-header__button:focus-visible{outline:3px solid rgba(37,99,235,.18);outline-offset:2px}
+.zem-header__search{display:none;max-width:1120px;margin:0 auto;padding:0 16px 10px}.zem-header__search.is-open{display:block}
+.zem-header__search form{display:flex;gap:8px}.zem-header__search input{flex:1;min-width:0;min-height:44px;padding:9px 12px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;color:#0b1220;font:inherit}.zem-header__search button{min-height:44px;padding:9px 16px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;color:#111827;font:inherit;cursor:pointer}
+.zem-header__mobile{display:none}.zem-header__mobile.is-open{display:grid;gap:5px;position:absolute;left:12px;right:12px;top:100%;padding:8px;background:#fff;border:1px solid #dfe6ef;border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.12);z-index:1001}.zem-header__mobile a{display:block;padding:11px 12px;border-radius:9px;color:#334155;text-decoration:none;font-weight:700}.zem-header__mobile a:hover,.zem-header__mobile a:focus-visible{background:#f1f5f9;color:#1d4ed8}
+@media(max-width:820px){.zem-header__inner{min-height:64px;padding:9px 12px}.zem-header__mobile{pointer-events:none}.zem-header__mobile.is-open{pointer-events:auto}}@media(min-width:821px){.zem-header__mobile{display:none!important}}
