@@ -53,7 +53,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
 @media(max-width:820px){.category-page .site-header .header-inner{max-width:none!important;padding:9px 12px!important;gap:8px!important;flex-wrap:wrap!important}.category-page .site-header .brand{order:1!important}.category-page .site-header .header-actions{order:2!important;margin-left:auto!important}.category-page .site-header .top-nav{order:3!important;flex:1 1 100%!important;width:100%!important;justify-content:flex-start!important}}
 @media(max-width:650px){.category-page .site-header .top-nav a{min-height:36px!important;padding:7px 10px!important;font-size:12px!important}.category-page .site-header .icon-btn{width:38px!important;height:38px!important}}
 </style>
-<link rel="stylesheet" href="master-header.css?v=20260920-3">
+<link rel="stylesheet" href="master-header.css?v=20260920-4">
 <script src="master-ui.js?v=20260920-9" defer></script>
 </head>
 <body class="category-page tool-page">
@@ -65,7 +65,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
     </nav>
     <div class="header-actions">
       <button class="icon-btn" id="searchBtn" type="button" aria-label="Open search" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="(function(b){var n=document.getElementById('mobileNav'),o=n.classList.toggle('is-open');b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" onclick="(function(b){var n=document.getElementById('mobileNav'),o=!n.classList.contains('is-open');n.classList.toggle('is-open',o);n.style.setProperty('display',o?'grid':'none','important');b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
     </div>
   </div>
   <div class="search-panel" id="searchPanel"><form id="siteSearchForm"><input id="siteSearch" type="search" placeholder="Search tools..." aria-label="Search Utility Platform tools" autocomplete="off"><button type="submit">Search</button></form></div>
