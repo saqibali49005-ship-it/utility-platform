@@ -1,4 +1,5 @@
 (function(){'use strict';
+const p=document.getElementById('searchPanel'),i=document.getElementById('siteSearch'),f=document.getElementById('siteSearchForm');
 function initHeader(){
  const m=document.getElementById('menuBtn'),n=document.getElementById('mobileNav'),s=document.getElementById('searchBtn'),p=document.getElementById('searchPanel'),i=document.getElementById('siteSearch');
  if(n){
