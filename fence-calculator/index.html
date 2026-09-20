@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#111827"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<title>Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete</title>
+<meta name="description" content="Estimate fence posts, rails, pickets or panels, concrete bags, post length and optional material cost for a fence project. Supports multiple runs, gates, metric and imperial units."/>
+<link href="https://zemtools.com/fence-calculator/" rel="canonical"/>
+<meta content="Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete" property="og:title"/>
+<meta content="Estimate fence materials, concrete and optional cost for practical wood fence projects with multiple runs, gates, metric and imperial units." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://zemtools.com/fence-calculator/" property="og:url"/>
+<meta content="https://zemtools.com/social-preview.png" property="og:image"/>
+<meta content="Utility Platform — Practical Online Tools" property="og:image:alt"/>
+<meta content="https://zemtools.com/social-preview.png" name="twitter:image"/>
+<meta content="Utility Platform — Practical Online Tools" name="twitter:image:alt"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete" name="twitter:title"/>
+<meta content="Estimate fence materials, concrete and optional cost for practical wood fence projects with multiple runs, gates, metric and imperial units." name="twitter:description"/>
+<meta content="index,follow" name="robots"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Fence Material Calculator","url":"https://zemtools.com/fence-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate fence posts, rails, pickets or panels, concrete and optional material cost for a fence project.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<link rel="stylesheet" href="master-tool-design.css">
+<style>
+body.fence-tool{width:100%;max-width:none;min-width:0;overflow-x:hidden}
+body.fence-tool .site-header .search-panel{position:absolute;left:12px;right:12px;top:100%;width:auto;max-width:none;margin:0;padding:10px 12px 12px;background:#fff;border:1px solid #dfe6ef;border-top:0;border-radius:0 0 14px 14px;box-shadow:0 12px 28px rgba(15,23,42,.12);z-index:1002}
+body.fence-tool .site-header .search-panel.open{display:block}
+body.fence-tool .site-header .search-panel form{display:flex;gap:8px}
+body.fence-tool .site-header .search-panel input{min-width:0;flex:1}
+body.fence-tool .site-header #toolHeaderSearchResults{display:grid;gap:6px;margin-top:8px;max-height:55vh;overflow:auto}
+body.fence-tool .site-header #toolHeaderSearchResults a{display:block;padding:9px 10px;border-radius:9px;color:#243b57;background:#f7fafe;text-decoration:none;font-weight:650}
+body.fence-tool .site-header #toolHeaderSearchResults a:hover{background:#eaf2ff;color:#1759c9}
+body.fence-tool .site-header #toolHeaderSearchResults .tool-header-empty{padding:9px 10px;color:#64748b}
+@media(max-width:700px){
+ body.fence-tool .site-header .search-panel{left:8px;right:8px;padding:9px 10px 11px}
+ body.fence-tool .site-header .search-panel form{flex-direction:column}
+ body.fence-tool .site-header .search-panel button{width:100%}
+}
+
+body.fence-tool .site-header{width:100%;max-width:none;min-width:0}
+body.fence-tool .header-inner{width:100%;max-width:1180px;box-sizing:border-box}
+body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:border-box}
+.fence-tool main,.fence-tool section,.fence-tool article,.fence-tool aside,.fence-tool .hero-shell,.fence-tool .hero,.fence-tool .info-callout,.fence-tool .layout,.fence-tool .card{width:100%;max-width:100%;min-width:0}
+.fence-tool main{box-sizing:border-box}
+.fence-tool .hero>div,.fence-tool .hero>div:last-child,.fence-tool .info-callout>div:last-child,.fence-tool .field,.fence-tool .tool-grid,.fence-tool .result-grid{min-width:0;max-width:100%}
+.fence-tool .info-callout{display:grid;grid-template-columns:32px minmax(0,1fr);align-items:start}
+.fence-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.fence-tool input,.fence-tool select,.fence-tool button{max-width:100%;box-sizing:border-box}
+.fence-tool select{width:100%;min-width:0;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;outline:none;font:inherit;font-size:17px}
+.fence-tool select:focus{border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}
+.fence-tool select:disabled{background:#f4f7fa;color:#7b8da1;cursor:not-allowed}
+.fence-tool input{min-width:0}
+.fence-tool .field{min-width:0}
+.fence-tool .field.full{grid-column:1/-1}
+.fence-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4}
+.fence-tool .unit-row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+.fence-tool .unit-row>div{flex:1 1 180px}
+.fence-tool .section-label{margin:0 0 9px;font-size:15px;font-weight:850;color:var(--text)}
+.fence-tool .run-list{display:grid;gap:10px}
+.fence-tool .run-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;padding:12px;border:1px solid var(--line);border-radius:14px;background:#f9fcff}
+.fence-tool .run-row .remove-run{min-height:46px;padding:10px 12px;border:1px solid #bcd2ea;border-radius:11px;background:#fff;color:#3b5d80;font-weight:800;cursor:pointer}
+.fence-tool .add-run{margin-top:10px;min-height:44px;padding:9px 14px;border:1px dashed #aac6e3;border-radius:11px;background:#f7fbff;color:#1b5fad;font-weight:850;cursor:pointer}
+.fence-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.fence-tool .preset{min-height:38px;padding:8px 11px;border:1px solid #c8d9eb;border-radius:10px;background:#fff;color:#315676;font-weight:800;cursor:pointer}
+.fence-tool .preset:hover{border-color:#8db3db;background:#f7fbff}
+.fence-tool .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.fence-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.fence-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.fence-tool .result{background:linear-gradient(180deg,#fbfffd,#f2fff7)}
+.fence-tool .result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.fence-tool .metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.fence-tool .metric strong{display:block;color:#102f54;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.fence-tool .metric span{display:block;margin-top:3px;font-size:18px;font-weight:900;color:#102f54}
+.fence-tool .table-wrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fence-tool table{width:100%;min-width:650px;border-collapse:collapse}
+.fence-tool th,.fence-tool td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.fence-tool th{background:#f7fbff;font-weight:850}
+.fence-tool .note{padding:13px 14px;border:1px solid #cfe2f8;border-radius:12px;background:#eff7ff;color:#244c73;margin-top:12px}
+.fence-tool .warn{padding:13px 14px;border:1px solid #efd59a;border-radius:12px;background:#fff9e9;color:#745000;margin-top:12px}
+.fence-tool .ok{padding:13px 14px;border:1px solid #c9ecd8;border-radius:12px;background:#f2fff7;color:#1e6240;margin-top:12px}
+.fence-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
+.fence-tool .small-list{padding-left:20px}
+.fence-tool .small-list li{margin:6px 0}
+.fence-tool .source-list{padding-left:20px}
+.fence-tool .source-list li{margin:6px 0}
+.fence-tool .hidden{display:none!important}
+.fence-tool .status-error{color:#9a3412;font-weight:800;margin-top:10px}
+.fence-tool .copy-status{margin-left:4px;color:var(--muted);font-size:13px}
+@media(max-width:700px){
+  body.fence-tool .site-header{width:100vw;max-width:100vw}
+  body.fence-tool .header-inner{width:100%;max-width:none}
+
+  .fence-tool .hero{grid-template-columns:60px minmax(0,1fr);gap:13px;align-items:start}
+  .fence-tool .tool-grid,.fence-tool .result-grid{grid-template-columns:1fr;width:100%}
+  .fence-tool .run-row{grid-template-columns:1fr;width:100%;min-width:0}
+  .fence-tool .run-row>div{min-width:0}
+  .fence-tool .run-row .remove-run{width:100%}
+  .fence-tool .actions{flex-direction:column;align-items:stretch;width:100%}
+  .fence-tool .actions button{width:100%}
+  .fence-tool .card{width:100%}
+  .fence-tool .info-callout{width:100%;grid-template-columns:32px minmax(0,1fr)}
+}
+@media(max-width:430px){
+  .fence-tool .hero{grid-template-columns:52px minmax(0,1fr);gap:11px}
+  .fence-tool .tool-icon{width:52px;height:52px;border-radius:15px;font-size:24px}
+  .fence-tool .hero h1{font-size:27px;line-height:1.08}
+  .fence-tool .hero p{font-size:14px;line-height:1.45}
+  .fence-tool .info-callout{padding:13px}
+  .fence-tool .card{padding:18px 16px}
+}
+</style>
+<link rel="stylesheet" href="master-related-tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},{"@type":"ListItem","position":3,"name":"Fence Material Calculator","item":"https://zemtools.com/fence-calculator/"}]}</script>
+</head>
+<body class="tool-page fence-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/" aria-current="page">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel">
+<form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form>
+<div id="toolHeaderSearchResults"></div>
+</div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation">
+<a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a>
+</nav>
+</div>
+</header>
+<main id="main-content">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="home-construction/">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Fence Material Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🪵</div><div><h1>Fence Material Calculator</h1><p>Plan a fence project with posts, rails, pickets or panels, concrete and an optional material-cost estimate — with support for multiple runs and gates.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Built for project planning, not just a single length</strong>Enter each fence run, account for gates and shared corners, choose your construction style, and get a practical material takeoff. Final quantities should be checked against your fence design, site conditions, local requirements and product instructions.</div></div>
+</section>
+
+<section class="layout" aria-label="Fence material calculator">
+<article class="card tool-card">
+<h2>Build Your Fence Plan</h2>
+<p class="hint">Start with one run. Add more runs when your fence changes direction or has separate straight sections.</p>
+<form id="fenceForm">
+<div class="tool-grid">
+<div class="field">
+<label for="units">Measurement system</label>
+<select id="units"><option value="imperial" selected>Imperial (ft / in)</option><option value="metric">Metric (m / mm)</option></select>
+<span class="field-help">The calculator converts the result between both systems.</span>
+</div>
+<div class="field">
+<label for="style">Fence style</label>
+<select id="style"><option value="privacy" selected>Privacy / solid-board fence</option><option value="picket">Open picket fence</option><option value="panel">Pre-made fence panels</option></select>
+<span class="field-help">Picket/privacy uses board width + gap. Panels use panel width.</span>
+</div>
+
+<div class="field full">
+<p class="section-label">Fence runs</p>
+<div id="runList" class="run-list"></div>
+<button id="addRun" class="add-run" type="button">+ Add another run</button>
+<span class="field-help">For an L- or multi-sided layout, enter each straight run separately. Shared corners are counted once.</span>
+</div>
+
+<div class="field">
+<label for="sharedCorners">Shared corners between runs</label>
+<input id="sharedCorners" type="number" min="0" step="1" value="0" inputmode="numeric"/>
+<span class="field-help">Example: two runs meeting at one corner = 1 shared corner.</span>
+</div>
+<div class="field">
+<label for="fenceHeight">Finished fence height <span class="unit-height"> (ft)</span></label>
+<input id="fenceHeight" type="number" min="0.1" step="0.1" value="6" inputmode="decimal"/>
+</div>
+
+<div class="field">
+<label for="postSpacing">Maximum post spacing <span class="unit-run">(ft)</span></label>
+<input id="postSpacing" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"/>
+<div class="preset-row"><button type="button" class="preset" data-target="postSpacing" data-imperial="6" data-metric="1.8">6 ft</button><button type="button" class="preset" data-target="postSpacing" data-imperial="8" data-metric="2.4">8 ft</button></div>
+</div>
+<div class="field">
+<label for="railsPerSection">Rails per fence section</label>
+<select id="railsPerSection"><option value="2">2 rails</option><option value="3" selected>3 rails</option><option value="4">4 rails</option></select>
+<span class="field-help">Panel fencing does not use this field.</span>
+</div>
+
+<div class="field">
+<label for="railPieceLength">Rail piece length <span class="unit-run">(ft)</span></label>
+<input id="railPieceLength" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"/>
+</div>
+<div class="field">
+<label for="gates">Number of gate openings</label>
+<input id="gates" type="number" min="0" step="1" value="0" inputmode="numeric"/>
+</div>
+<div class="field">
+<label for="gateWidth">Gate opening width <span class="unit-run">(ft)</span></label>
+<input id="gateWidth" type="number" min="0" step="0.1" value="4" inputmode="decimal"/>
+<span class="field-help">Used to remove gate openings from rails, pickets or panels.</span>
+</div>
+<div class="field">
+<label for="waste">Material waste / overage (%)</label>
+<input id="waste" type="number" min="0" max="50" step="1" value="10" inputmode="decimal"/>
+<span class="field-help">Applied to rails and pickets or panels. Posts are not percentage-inflated.</span>
+</div>
+
+<div id="claddingFields" class="field full">
+<p class="section-label">Pickets / boards</p>
+<div class="tool-grid">
+<div class="field"><label for="picketWidth">Board / picket width <span class="unit-small">(in)</span></label><input id="picketWidth" type="number" min="0.1" step="0.1" value="5.5" inputmode="decimal"/></div>
+<div class="field"><label for="picketGap">Gap between pickets <span class="unit-small">(in)</span></label><input id="picketGap" type="number" min="0" step="0.1" value="0" inputmode="decimal"/><span class="field-help">0 in is a solid/privacy layout. For an open picket fence, enter the actual gap.</span></div>
+</div>
+</div>
+
+<div id="panelFields" class="field full hidden">
+<p class="section-label">Pre-made panels</p>
+<div class="tool-grid">
+<div class="field"><label for="panelWidth">Panel width <span class="unit-run">(ft)</span></label><input id="panelWidth" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"/></div>
+<div class="field"><span class="field-help">Panel count is rounded up so the last bay is not left uncovered. The calculation does not include cut-down panels or gate-specific framing.</span></div>
+</div>
+</div>
+
+<div class="field full">
+<p class="section-label">Post-hole concrete</p>
+<div class="tool-grid">
+<div class="field"><label for="holeDiameter">Post-hole diameter <span class="unit-small">(in)</span></label><input id="holeDiameter" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"/></div>
+<div class="field"><label for="holeDepth">Post-hole depth <span class="unit-small">(in)</span></label><input id="holeDepth" type="number" min="0.1" step="0.1" value="36" inputmode="decimal"/></div>
+<div class="field"><label for="gravelBase">Gravel base depth <span class="unit-small">(in)</span></label><input id="gravelBase" type="number" min="0" step="0.1" value="3" inputmode="decimal"/><span class="field-help">Removed from the concrete depth; set to 0 when you are not using a gravel base.</span></div>
+<div class="field"><label for="postWidth">Post width / diameter <span class="unit-small">(in)</span></label><input id="postWidth" type="number" min="0.1" step="0.1" value="3.5" inputmode="decimal"/></div>
+<div class="field"><label for="postShape">Post shape</label><select id="postShape"><option value="square" selected>Square / rectangular</option><option value="round">Round</option></select></div>
+<div class="field"><label for="bagYield">Concrete bag yield</label><select id="bagYield"><option value="0.375">50 lb / 22.6 kg — 0.375 ft³</option><option value="0.45" selected>60 lb / 27.2 kg — 0.45 ft³</option><option value="0.60">80 lb / 36.2 kg — 0.60 ft³</option></select></div>
+</div>
+</div>
+
+<div class="field full">
+<p class="section-label">Optional material prices</p>
+<div class="tool-grid">
+<div class="field"><label for="pricePost">Price per post</label><input id="pricePost" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
+<div class="field"><label for="priceRail">Price per rail</label><input id="priceRail" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
+<div class="field"><label for="priceCladding">Price per picket / panel</label><input id="priceCladding" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
+<div class="field"><label for="priceBag">Price per concrete bag</label><input id="priceBag" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
+</div>
+<span class="field-help">Enter prices in one currency. The tool does not assume a currency symbol.</span>
+</div>
+</div>
+
+<div id="error" class="status-error" role="alert"></div>
+<div class="actions"><button id="calculate" type="submit">Calculate Fence Materials →</button><button id="reset" class="secondary" type="button">Reset</button></div>
+</form>
+</article>
+
+<aside class="card result-card" aria-live="polite">
+<div id="result" class="result"></div>
+</aside>
+</section>
+
+<section class="card">
+<h2>What this fence calculator estimates</h2>
+<p>Use it as a planning worksheet for a wood fence project. It turns the fence runs you enter into a practical material takeoff, then separates the effect of gate openings from the covered fence length.</p>
+<div class="result-grid">
+<div class="metric"><strong>Layout</strong><span>Multiple runs + corners</span></div>
+<div class="metric"><strong>Coverage</strong><span>Gates removed from cladding</span></div>
+<div class="metric"><strong>Materials</strong><span>Posts, rails, pickets/panels</span></div>
+<div class="metric"><strong>Foundations</strong><span>Hole-volume concrete estimate</span></div>
+</div>
+<div class="note"><strong>Why the project view matters:</strong> a fence is rarely just one uninterrupted line. Stronger planning tools account for runs, corners, gates and the physical post-hole geometry instead of returning only a single picket count. Current fence calculators show this broader direction, including multiple runs and concrete calculations based on hole geometry.</div>
+</section>
+
+<section class="card">
+<h2>How the calculation works</h2>
+<div class="formula">
+Posts = sum(ceil(run length ÷ max post spacing) + 1) − shared corners<br>
+Covered fence length = total run length − (gate count × gate width)<br>
+Material sections = ceil(covered fence length ÷ max post spacing)<br>
+Rails = material sections × rails per section<br>
+Pickets = ceil(covered length in inches ÷ (picket width + gap))<br>
+Concrete = (hole volume − post displacement) × total posts
+</div>
+<p class="small">The formulas are intentionally visible so you can audit the result. Rounding, the exact position of gates, slopes, cut-down panels and local installation requirements can change the final purchase quantity.</p>
+</section>
+
+<section class="card">
+<h2>Fence planning notes</h2>
+<ul class="small-list">
+<li>For common wood fence layouts, post spacing is often planned in the 6–8 ft range, but the specific fence system and local requirements should take priority.</li>
+<li>Concrete quantity is based on the geometry you enter. Published product data gives different bag yields; this calculator uses selectable reference yields of 0.375 ft³ for 50 lb, 0.45 ft³ for 60 lb and 0.60 ft³ for 80 lb bags. Always verify the exact product label.</li>
+<li>A gate opening needs its own framing and hardware. This calculator identifies the two gate-post positions per gate but does not price hinges, latches, gate frames or specialty hardware.</li>
+<li>Fence posts and holes are site-dependent. Soil, wind exposure, frost depth, drainage and the fence system can require different dimensions. Treat these results as a planning estimate, not an installation specification.</li>
+</ul>
+<div class="warn"><strong>Before you buy:</strong> confirm the exact panel/picket dimensions, post dimensions, gate design, hole depth and concrete product yield with the manufacturer's instructions and your local requirements.</div>
+</section>
+
+<section class="card">
+<h2>Frequently asked questions</h2>
+<details><summary>How many fence posts do I need for a 100 ft fence?</summary><p>At an 8 ft maximum spacing, one straight 100 ft run produces 13 sections after rounding up and 14 post positions. The actual layout can require shorter bays at gates, corners or obstacles, so use the calculator with your individual runs for a more practical estimate.</p></details>
+<details><summary>How does adding a second fence run affect posts?</summary><p>Each run has its own end positions, so the calculator adds the post requirement for each run and then subtracts shared corners that represent one physical post used by two connected runs.</p></details>
+<details><summary>How does a gate affect pickets or panels?</summary><p>The gate opening is removed from the covered fence length before the calculator estimates rails, pickets or panels. Gate hardware and the exact gate-frame material are outside the material takeoff.</p></details>
+<details><summary>How is concrete estimated?</summary><p>The tool calculates the volume of the cylindrical hole, subtracts the volume occupied by the post within the concrete depth, multiplies by the number of posts and divides by the selected bag yield. It then rounds up to whole bags.</p></details>
+<details><summary>Can I use this for chain-link or metal fencing?</summary><p>This version is intended for common wood picket/privacy layouts and pre-made fence panels. Chain-link and metal systems use different components and installation rules, so they are not treated as interchangeable with this material model.</p></details>
+</section>
+
+<section class="card">
+<h2>Sources &amp; methodology</h2>
+<p class="small">The calculator is a planning model. Source material is used for general installation and concrete-yield references; the calculator does not claim a single universal fence standard.</p>
+<ul class="source-list">
+<li><a href="https://www.homedepot.com/c/ah/how-to-build-a-fence/9ba683603be9fa5395fab90a485b4ce" rel="nofollow noopener">The Home Depot — How to Build a Fence</a></li>
+<li><a href="https://www.homedepot.com/catalog/pdfImages/75/75294fe5-ef8b-4c89-88e6-688644da7c5a.pdf" rel="nofollow noopener">The Home Depot — Wood Fence Bill of Materials / Installation Guide</a></li>
+<li><a href="https://www.quikrete.com/pdfs/data_sheet-concrete%20mix%201101.pdf" rel="nofollow noopener">QUIKRETE — Concrete Mix technical data and bag yields</a></li>
+<li><a href="https://www.sakrete.com/product/5000-plus-concrete-mix/" rel="nofollow noopener">Sakrete — Concrete Mix product yields</a></li>
+</ul>
+</section>
+
+
+<section class="card related-tools" aria-labelledby="related-title">
+<h2 id="related-title">Related Tools</h2>
+<div class="related-grid">
+<a class="related-item" href="pilot-hole-calculator/"><div><strong>Pilot Hole Size Calculator</strong><span>Choose a practical starting drill-bit size for wood-screw fence work.</span></div><span aria-hidden="true">›</span></a>
+</div>
+</section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const state={runs:1};
+const runList=$('runList');
+
+function cfg(){
+  return $('units').value==='metric'
+    ? {length:'m',small:'mm',ft:3.280839895,inch:25.4}
+    : {length:'ft',small:'in',ft:1,inch:1};
+}
+function val(id){return parseFloat($(id).value)}
+function setValue(el,number,decimals){el.value=Number.isFinite(number)?String(Number(number.toFixed(decimals))):''}
+function convertField(id,ratio,decimals){
+  const el=$(id); const n=parseFloat(el.value);
+  if(Number.isFinite(n)) setValue(el,n*ratio,decimals);
+}
+function updateUnitLabels(){
+  const metric=$('units').value==='metric';
+  document.querySelectorAll('.unit-run').forEach(el=>el.textContent=metric?' (m)':' (ft)');
+  document.querySelectorAll('.unit-height').forEach(el=>el.textContent=metric?' (m)':' (ft)');
+  document.querySelectorAll('.unit-small').forEach(el=>el.textContent=metric?' (mm)':' (in)');
+  document.querySelectorAll('.run-unit-label').forEach(el=>el.textContent=metric?'m':'ft');
+  document.querySelectorAll('.picket-unit-label').forEach(el=>el.textContent=metric?'mm':'in');
+}
+function renderRunInputs(){
+  const metric=$('units').value==='metric';
+  const current=[...runList.querySelectorAll('input[data-run]')].map(x=>parseFloat(x.value)).filter(Number.isFinite);
+  runList.innerHTML='';
+  for(let i=0;i<state.runs;i++){
+    const row=document.createElement('div'); row.className='run-row';
+    const wrap=document.createElement('div'); wrap.innerHTML='<label for="run'+(i+1)+'">Run '+(i+1)+' length <span class="run-unit-label">'+(metric?'m':'ft')+'</span></label><input id="run'+(i+1)+'" data-run="'+(i+1)+'" type="number" min="0" step="'+(metric?'0.1':'0.1')+'" inputmode="decimal" value="'+(current[i]!=null?current[i]:(i===0?(metric?'30.5':'100'):''))+'"/>';
+    const remove=document.createElement('button'); remove.type='button'; remove.className='remove-run'; remove.textContent='Remove';
+    remove.disabled=state.runs===1;
+    remove.addEventListener('click',function(){if(state.runs<=1)return;state.runs--;renderRunInputs();calculate();});
+    const input=wrap.querySelector('input[data-run]');
+    input.addEventListener('input',calculate);
+    row.appendChild(wrap); row.appendChild(remove); runList.appendChild(row);
+  }
+}
+function changeUnits(){
+  const old=$('units').value;
+  const metric=old==='metric';
+  const previous=metric?'imperial':'metric';
+  // The select already contains the new unit; convert from the previous system to the new one.
+  const switchedToMetric=metric;
+  const runRatio=switchedToMetric?0.3048:3.280839895;
+  const smallRatio=switchedToMetric?25.4:1/25.4;
+  const runFields=['fenceHeight','postSpacing','railPieceLength','gateWidth','panelWidth'];
+  runFields.forEach(id=>convertField(id,runRatio,switchedToMetric?2:2));
+  ['picketWidth','picketGap','holeDiameter','holeDepth','gravelBase','postWidth'].forEach(id=>convertField(id,smallRatio,switchedToMetric?1:2));
+  const runs=[...runList.querySelectorAll('input[data-run]')];
+  runs.forEach(el=>{const n=parseFloat(el.value);if(Number.isFinite(n))setValue(el,n*runRatio,2)});
+  updateUnitLabels();
+  calculate();
+}
+function setDefaults(){
+  $('fenceHeight').value=$('units').value==='metric'?'1.8':'6';
+  $('postSpacing').value=$('units').value==='metric'?'2.4':'8';
+  $('railPieceLength').value=$('units').value==='metric'?'2.4':'8';
+  $('gateWidth').value=$('units').value==='metric'?'1.2':'4';
+  $('panelWidth').value=$('units').value==='metric'?'2.4':'8';
+  $('picketWidth').value=$('units').value==='metric'?'140':'5.5';
+  $('picketGap').value=$('units').value==='metric'?'0':'0';
+  $('holeDiameter').value=$('units').value==='metric'?'203':'8';
+  $('holeDepth').value=$('units').value==='metric'?'914':'36';
+  $('gravelBase').value=$('units').value==='metric'?'76':'3';
+  $('postWidth').value=$('units').value==='metric'?'89':'3.5';
+}
+function fmt(n,dec=0){return Number(n.toFixed(dec)).toLocaleString('en-US',{maximumFractionDigits:dec})}
+function dualLength(ft){
+  return cfg().length==='m'
+    ? fmt(ft,2)+' m · '+fmt(ft*3.280839895,1)+' ft'
+    : fmt(ft,1)+' ft · '+fmt(ft/3.280839895,2)+' m';
+}
+function dualSmall(inches){
+  return cfg().small==='mm'
+    ? fmt(inches*25.4,0)+' mm · '+fmt(inches,2)+' in'
+    : fmt(inches,1)+' in · '+fmt(inches*25.4,0)+' mm';
+}
+function price(id){const n=parseFloat($(id).value);return Number.isFinite(n)&&n>=0?n:null}
+function calcValues(){
+  const metric=$('units').value==='metric';
+  const rToFt=metric?0.3048:1;
+  const smallToIn=metric?1/25.4:1;
+  const runValues=[...runList.querySelectorAll('input[data-run]')].map(x=>parseFloat(x.value)||0);
+  const totalRunFt=runValues.reduce((a,b)=>a+b*rToFt,0);
+  const gateCount=Math.max(0,Math.floor(val('gates')||0));
+  const gateWidthFt=Math.max(0,(val('gateWidth')||0)*rToFt);
+  const gateOpenFt=gateCount*gateWidthFt;
+  const coveredFt=totalRunFt-gateOpenFt;
+  const spacingFt=(val('postSpacing')||0)*rToFt;
+  const fenceHeightFt=(val('fenceHeight')||0)*rToFt;
+  const shared=Math.max(0,Math.floor(val('sharedCorners')||0));
+  const rawSections=runValues.filter(n=>n>0).reduce((sum,n)=>sum+Math.ceil((n*rToFt)/spacingFt),0);
+  const rawPosts=runValues.filter(n=>n>0).length+rawSections;
+  const layoutPosts=Math.max(0,rawPosts-shared);
+  const gatePosts=gateCount*2;
+  const totalPosts=Math.max(layoutPosts,gatePosts);
+  const linePosts=Math.max(0,totalPosts-gatePosts);
+  const materialSections=coveredFt>0?Math.ceil(coveredFt/spacingFt):0;
+  const railsPerSection=parseInt($('railsPerSection').value,10);
+  const railPieceFt=(val('railPieceLength')||0)*rToFt;
+  const waste=Math.max(0,Math.min(50,val('waste')||0))/100;
+  const railsBase=$('style').value==='panel'?0:materialSections*railsPerSection;
+  const rails=Math.ceil(railsBase*(1+waste));
+  const railLengthFt=rails*railPieceFt;
+  const style=$('style').value;
+  let claddingBase=0,claddingLabel='Pickets',claddingUnit='pickets';
+  if(style==='panel'){
+    const panelWidthFt=(val('panelWidth')||0)*rToFt;
+    claddingBase=panelWidthFt>0&&coveredFt>0?Math.ceil(coveredFt/panelWidthFt):0;
+    claddingLabel='Panels';claddingUnit='panels';
+  }else{
+    const picketWidthIn=(val('picketWidth')||0)*smallToIn;
+    const gapIn=Math.max(0,(val('picketGap')||0)*smallToIn);
+    const slotIn=picketWidthIn+gapIn;
+    claddingBase=slotIn>0&&coveredFt>0?Math.ceil((coveredFt*12)/slotIn):0;
+  }
+  const cladding=Math.ceil(claddingBase*(1+waste));
+  const holeDiaIn=(val('holeDiameter')||0)*smallToIn;
+  const holeDepthIn=(val('holeDepth')||0)*smallToIn;
+  const gravelIn=Math.max(0,(val('gravelBase')||0)*smallToIn);
+  const effectiveDepthIn=holeDepthIn-gravelIn;
+  const postDimIn=(val('postWidth')||0)*smallToIn;
+  const holeRadiusFt=(holeDiaIn/12)/2;
+  const effectiveDepthFt=effectiveDepthIn/12;
+  const holeVolumeFt3=Math.PI*holeRadiusFt*holeRadiusFt*Math.max(0,effectiveDepthFt);
+  const postCrossSection=postShape.value==='round'?Math.PI*Math.pow((postDimIn/12)/2,2):Math.pow(postDimIn/12,2);
+  const postDisplacementFt3=postCrossSection*Math.max(0,effectiveDepthFt);
+  const concretePerPostFt3=Math.max(0,holeVolumeFt3-postDisplacementFt3);
+  const totalConcreteFt3=concretePerPostFt3*totalPosts;
+  const bagYieldFt3=parseFloat($('bagYield').value);
+  const concreteBags=Math.ceil(totalConcreteFt3/bagYieldFt3);
+  const postLengthFt=fenceHeightFt+((val('holeDepth')||0)*rToFt);
+  const prices={post:price('pricePost'),rail:style==='panel'?null:price('priceRail'),clad:price('priceCladding'),bag:price('priceBag')};
+  const costItems=[];
+  if(prices.post!==null)costItems.push(['Posts',totalPosts,prices.post,totalPosts*prices.post]);
+  if(prices.rail!==null)costItems.push(['Rails',rails,prices.rail,rails*prices.rail]);
+  if(prices.clad!==null)costItems.push([claddingLabel,cladding,prices.clad,cladding*prices.clad]);
+  if(prices.bag!==null)costItems.push(['Concrete bags',concreteBags,prices.bag,concreteBags*prices.bag]);
+  const totalCost=costItems.reduce((s,x)=>s+x[3],0);
+  const costKnown=costItems.length>0;
+  return {metric,runValues,totalRunFt,gateCount,gateWidthFt,gateOpenFt,coveredFt,spacingFt,fenceHeightFt,shared,rawSections,rawPosts,totalPosts,gatePosts,linePosts,materialSections,railsPerSection,railPieceFt,waste,rails,railLengthFt,style,cladding,claddingBase,claddingLabel,claddingUnit,holeDiaIn,holeDepthIn,gravelIn,effectiveDepthIn,postDimIn,holeVolumeFt3,postDisplacementFt3,concretePerPostFt3,totalConcreteFt3,bagYieldFt3,concreteBags,postLengthFt,costItems,totalCost,costKnown};
+}
+function calculate(){
+  const err=$('error');err.textContent='';
+  const runs=[...runList.querySelectorAll('input[data-run]')].map(x=>parseFloat(x.value));
+  if(!runs.some(v=>Number.isFinite(v)&&v>0)){err.textContent='Enter at least one fence-run length greater than 0.';return}
+  if(!(val('postSpacing')>0)){err.textContent='Enter a maximum post spacing greater than 0.';return}
+  if(!(val('fenceHeight')>0)){err.textContent='Enter a fence height greater than 0.';return}
+  if((val('gates')||0)>0 && !(val('gateWidth')>0)){err.textContent='Enter the gate opening width or set the number of gates to 0.';return}
+  if((val('sharedCorners')||0)>state.runs-1){err.textContent='Shared corners cannot exceed the number of possible run-to-run connections.';return}
+  if((val('waste')||0)<0 || (val('waste')||0)>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
+  if((val('gravelBase')||0)>=(val('holeDepth')||0)){err.textContent='Gravel base depth must be smaller than the total post-hole depth.';return}
+  if((val('holeDiameter')||0)<=0 || (val('holeDepth')||0)<=0 || (val('postWidth')||0)<=0){err.textContent='Enter positive post-hole and post dimensions.';return}
+  if((val('picketWidth')||0)+(val('picketGap')||0)<=0 && $('style').value!=='panel'){err.textContent='Picket/board width plus gap must be greater than 0.';return}
+  if($('style').value==='panel' && !(val('panelWidth')>0)){err.textContent='Enter a panel width greater than 0.';return}
+  const o=calcValues();
+  if(o.coveredFt<0){err.textContent='Gate openings cannot be longer than the total fence run.';return}
+  const cost=o.costKnown?'<div class="ok"><strong>Estimated material cost:</strong> '+fmt(o.totalCost,2)+' in your entered currency. Change or leave price fields blank to control which items are included.</div>':'';
+  const claddingLine=o.style==='panel'
+    ? '<tr><th>Panels</th><td>'+fmt(o.cladding)+'</td><td>'+fmt(o.claddingBase)+' base + '+Math.round(o.waste*100)+'% waste</td></tr>'
+    : '<tr><th>Pickets / boards</th><td>'+fmt(o.cladding)+'</td><td>'+fmt(o.claddingBase)+' base + '+Math.round(o.waste*100)+'% waste</td></tr>';
+  const result=$('result');
+  result.innerHTML='<h2>Project material estimate</h2><div class="result-grid">'
+    +'<div class="metric"><strong>Total fence runs</strong><span>'+dualLength(o.totalRunFt)+'</span></div>'
+    +'<div class="metric"><strong>Covered fence</strong><span>'+dualLength(o.coveredFt)+'</span></div>'
+    +'<div class="metric"><strong>Total posts</strong><span>'+fmt(o.totalPosts)+'</span></div>'
+    +'<div class="metric"><strong>Concrete bags</strong><span>'+fmt(o.concreteBags)+'</span></div>'
+    +'</div>'
+    +'<div class="table-wrap"><table><thead><tr><th>Material</th><th>Quantity</th><th>Planning detail</th></tr></thead><tbody>'
+    +'<tr><th>Posts</th><td>'+fmt(o.totalPosts)+'</td><td>'+fmt(o.linePosts)+' line + '+fmt(o.gatePosts)+' gate-position posts</td></tr>'
+    +'<tr><th>Rails</th><td>'+fmt(o.rails)+'</td><td>'+fmt(o.railsPerSection)+' per section · '+dualLength(o.railLengthFt)+' total piece length</td></tr>'
+    +claddingLine
+    +'<tr><th>Concrete</th><td>'+fmt(o.concreteBags)+' bags</td><td>'+fmt(o.totalConcreteFt3,3)+' ft³ · '+fmt(o.totalConcreteFt3*28.3168,1)+' L</td></tr>'
+    +'<tr><th>Post purchase length</th><td>'+dualLength(o.postLengthFt)+'</td><td>Fence height + entered hole depth</td></tr>'
+    +'</tbody></table></div>'
+    +'<div class="note"><strong>Layout summary:</strong> '+fmt(o.rawSections)+' planned sections before shared-corner adjustment; '+fmt(o.shared)+' shared corner'+(o.shared===1?'':'s')+' removed from the post count. Gate openings remove '+dualLength(o.gateOpenFt)+' from the covered cladding length.</div>'
+    +cost
+    +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy material summary</button><span id="copyStatus" class="copy-status"></span></div>';
+  const copyButton=$('copyResult');
+  copyButton.addEventListener('click',async function(){
+    const text='Fence material estimate\nPosts: '+o.totalPosts+'\nRails: '+o.rails+'\n'+o.claddingLabel+': '+o.cladding+'\nConcrete bags: '+o.concreteBags+'\nTotal covered fence: '+dualLength(o.coveredFt)+'\nEstimated cost: '+(o.costKnown?fmt(o.totalCost,2):'not entered');
+    try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
+  });
+}
+function reset(){
+  state.runs=1;renderRunInputs();
+  $('units').value='imperial';setDefaults();
+  $('style').value='privacy';$('sharedCorners').value='0';$('gates').value='0';$('waste').value='10';$('railsPerSection').value='3';$('postShape').value='square';$('bagYield').value='0.45';
+  $('pricePost').value='';$('priceRail').value='';$('priceCladding').value='';$('priceBag').value='';
+  updateUnitLabels();toggleStyle();calculate();
+}
+function toggleStyle(){
+  const panel=$('style').value==='panel';
+  $('panelFields').classList.toggle('hidden',!panel);
+  $('claddingFields').classList.toggle('hidden',panel);
+  $('railsPerSection').disabled=panel;
+  $('railPieceLength').disabled=panel;
+}
+$('addRun').addEventListener('click',function(){if(state.runs>=6)return;state.runs++;renderRunInputs();calculate();});
+$('fenceForm').addEventListener('submit',function(e){e.preventDefault();calculate()});
+$('reset').addEventListener('click',reset);
+$('units').addEventListener('change',function(){changeUnits();});
+$('style').addEventListener('change',function(){
+  if(this.value==='privacy' && $('picketWidth').value==='3.5' && $('picketGap').value==='1.5'){ $('picketWidth').value='5.5'; $('picketGap').value='0'; }
+  if(this.value==='picket' && $('picketWidth').value==='5.5' && $('picketGap').value==='0'){ $('picketWidth').value='3.5'; $('picketGap').value='1.5'; }
+  toggleStyle();calculate();
+});
+document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',function(){
+  const id=this.dataset.target;$(id).value=$('units').value==='metric'?this.dataset.metric:this.dataset.imperial;calculate();
+}));
+['sharedCorners','fenceHeight','postSpacing','railsPerSection','railPieceLength','gates','gateWidth','waste','picketWidth','picketGap','panelWidth','holeDiameter','holeDepth','gravelBase','postWidth','postShape','bagYield','pricePost','priceRail','priceCladding','priceBag'].forEach(id=>$(id).addEventListener('input',calculate));
+['style','postShape','bagYield'].forEach(id=>$(id).addEventListener('change',calculate));
+renderRunInputs();updateUnitLabels();toggleStyle();calculate();
+})();
+</script>
+</body>
+</html>

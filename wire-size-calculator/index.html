@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Wire Size &amp; Voltage Drop Calculator | AC, DC, Solar &amp; Inverter</title>
+<meta name="description" content="Calculate wire size and voltage drop for DC, single-phase AC and three-phase circuits. Enter voltage, current or power, one-way distance, material and target drop to get a planning-level cable size.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zemtools.com/wire-size-calculator/">
+<meta property="og:type" content="website"><meta property="og:title" content="Wire Size &amp; Voltage Drop Calculator"><meta property="og:description" content="Find a planning-level cable size from voltage, load, distance and voltage-drop target for DC, AC, solar and inverter wiring."><meta property="og:url" content="https://zemtools.com/wire-size-calculator/"><meta property="og:image" content="https://zemtools.com/social-preview.png"><meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-related-tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Wire Size & Voltage Drop Calculator","url":"https://zemtools.com/wire-size-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level wire size and voltage drop calculator for DC, single-phase AC and three-phase circuits."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Energy & Electrical","item":"https://zemtools.com/energy-electrical/"},{"@type":"ListItem","position":3,"name":"Wire Size & Voltage Drop Calculator","item":"https://zemtools.com/wire-size-calculator/"}]}</script>
+<style>
+.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
+@media(max-width:700px){.wire-tool .choice-grid{grid-template-columns:1fr}.wire-tool .input-row{grid-template-columns:1fr}.wire-tool .result-grid{grid-template-columns:1fr}.wire-tool .comparison-row{grid-template-columns:1fr 1fr}.wire-tool .comparison-row span:last-child{grid-column:1/-1}.wire-page{overflow-x:clip}}
+</style>
+</head>
+<body class="tool-page wire-page">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content" class="wire-tool">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="energy-electrical/">Energy &amp; Electrical</a><span class="crumb-sep">›</span><span>Wire Size &amp; Voltage Drop Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">⚡</div><div><h1>Wire Size &amp; Voltage Drop Calculator</h1><p>Find a planning-level cable size from voltage, load, distance and your voltage-drop target for DC, single-phase AC and three-phase circuits.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Designed around the real sizing problem</strong>Enter watts or amps, use the actual one-way cable distance, choose copper or aluminum, and get the next standard metric size plus an approximate AWG equivalent. The calculation is transparent so you can see why the recommendation changes.</div></div>
+</section>
+
+<section class="layout" aria-label="Wire size calculator">
+<article class="card tool-card">
+<div class="card-head"><h2>Size Your Cable</h2><button id="clearBtn" class="secondary" type="button">↻ Clear</button></div>
+<div class="preset-row" aria-label="Quick presets">
+<button class="preset" data-preset="solar">☀ Solar DC</button><button class="preset" data-preset="battery">🔋 48V Inverter</button><button class="preset" data-preset="home">🏠 230V Home</button><button class="preset" data-preset="three">⚡ 400V 3-Phase</button>
+</div>
+
+<div class="section-label">1. Circuit type</div>
+<div class="choice-grid" role="group" aria-label="Circuit type">
+<button class="choice active" data-circuit="dc" aria-pressed="true" type="button">DC</button><button class="choice" data-circuit="single" aria-pressed="false" type="button">AC Single-Phase</button><button class="choice" data-circuit="three" aria-pressed="false" type="button">AC 3-Phase</button>
+</div>
+
+<div class="section-label">2. Load</div>
+<div class="choice-grid" role="group" aria-label="Load input type">
+<button class="choice active" data-load="amps" aria-pressed="true" type="button">I know Amps</button><button class="choice" data-load="watts" aria-pressed="false" type="button">I know Watts</button><button class="choice" data-load="power" aria-pressed="false" type="button">Power + PF</button>
+</div>
+
+<div class="field"><label for="voltage">System voltage (V)</label><input id="voltage" type="number" min="0.1" step="any" value="48" inputmode="decimal"><div class="hint">Use the nominal source voltage. For solar PV, use the actual string/system voltage used for the run.</div></div>
+<div class="field" id="ampsField"><label for="amps">Load current (A)</label><input id="amps" type="number" min="0" step="any" value="60" inputmode="decimal"><div class="hint">Enter the design current for the cable run.</div></div>
+<div class="field hidden" id="wattsField"><label for="watts">Load power (W)</label><input id="watts" type="number" min="0" step="any" value="3000" inputmode="decimal"></div>
+<div class="field hidden" id="pfField"><label for="pf">Power factor (cos φ)</label><input id="pf" type="number" min="0.1" max="1" step="0.01" value="0.90" inputmode="decimal"><div class="hint">Used only when calculating AC current from watts.</div></div>
+
+<div class="section-label">3. Cable run</div>
+<div class="field"><label for="length">One-way cable length</label><div class="input-row"><input id="length" type="number" min="0" step="any" value="5" inputmode="decimal"><select id="lengthUnit" aria-label="Length unit"><option value="m">metres</option><option value="ft">feet</option></select></div><div class="hint">Enter the physical one-way distance. The calculator applies the circuit path factor automatically.</div></div>
+<div class="field"><label for="material">Conductor material</label><select id="material"><option value="cu">Copper</option><option value="al">Aluminum</option></select></div>
+<div class="field"><label for="target">Maximum voltage drop</label><select id="target"><option value="1">1%</option><option value="2" selected>2%</option><option value="3">3%</option><option value="5">5%</option><option value="10">10%</option></select><div class="hint">This is a planning target, not a universal code limit. The appropriate limit depends on the installation and jurisdiction.</div></div>
+
+<button id="calculateBtn" class="primary" type="button">⚡ Calculate Recommended Cable →</button>
+<div class="danger-note">Voltage-drop sizing is only one part of cable selection. Final installations also require checks for ampacity, insulation temperature, installation method, protection, short-circuit withstand and the electrical code that applies to the project.</div>
+</article>
+
+<aside class="card result-card" aria-live="polite">
+<h2>▥ &nbsp; Recommendation</h2>
+<div id="status" class="status">Enter your circuit details and calculate.</div>
+<div class="result-main"><div class="result-label">Recommended standard size</div><div id="recommended" class="result-value">—</div><div id="recommendedSub" class="result-sub">Your result will appear here.</div></div>
+<div class="result-grid">
+<div class="stat"><div class="stat-icon">↕</div><strong>Voltage Drop</strong><span id="dropPct">—</span></div>
+<div class="stat"><div class="stat-icon">V</div><strong>Voltage Lost</strong><span id="dropV">—</span></div>
+<div class="stat"><div class="stat-icon">⚡</div><strong>Voltage at Load</strong><span id="loadV">—</span></div>
+<div class="stat"><div class="stat-icon">♨</div><strong>Power Lost</strong><span id="lossW">—</span></div>
+<div class="stat stat-wide"><div class="stat-icon">I</div><strong>Calculated Current</strong><span id="resultCurrent">—</span></div>
+</div>
+<div class="comparison"><strong>Why this size?</strong><div id="whyText" class="hint">The calculator will compare the calculated minimum area with standard cable sizes.</div><div id="comparisonRows"></div></div>
+</aside>
+</section>
+
+<section class="support-grid">
+<article class="card"><h2>What the Calculator Does</h2><p>It converts your load into current when needed, calculates conductor resistance from material and cross-sectional area, applies the correct circuit path factor, and selects the smallest standard metric size that meets your chosen voltage-drop target.</p></article>
+<article class="card"><h2>Useful for Solar &amp; Inverters</h2><p>DC mode is suited to planning runs such as solar-array wiring, battery-to-inverter cables and other low-voltage DC loads. One-way length is doubled internally for the outgoing and return conductors.</p></article>
+<article class="card"><h2>Formula</h2><div class="formula">Vdrop = I × R × path factor</div><p>The path factor is 2 for DC and single-phase circuits and √3 for balanced three-phase calculations.</p></article>
+</section>
+
+<section class="card faq-card">
+<h2>Frequently Asked Questions</h2>
+<div class="faq"><button type="button"><span>Does the calculator automatically double cable length?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Enter one-way physical distance. DC and single-phase calculations use a 2× path factor for the outgoing and return conductors. Balanced three-phase uses √3 × one-way length in the voltage-drop calculation.</div></div>
+<div class="faq"><button type="button"><span>Can I use watts instead of amps?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. For DC and single-phase AC the calculator derives current from watts and voltage, with power factor applied when relevant. For three-phase AC, it uses the three-phase power relationship and the selected power factor.</div></div>
+<div class="faq"><button type="button"><span>Does a passing voltage-drop result mean the cable is safe?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Voltage drop is only one design check. Ampacity, insulation rating, installation method, ambient temperature, grouping, protection and local electrical requirements must also be checked before an installation is finalized.</div></div>
+<div class="faq"><button type="button"><span>Why does low-voltage wiring often need a larger cable?</span><span class="faq-icon">+</span></button><div class="faq-answer">For the same power, lower voltage requires more current. Higher current creates more voltage drop and resistive loss, so a low-voltage 12V, 24V or 48V run can need substantially more conductor area than a higher-voltage circuit of the same power.</div></div>
+<div class="faq"><button type="button"><span>Are the AWG and mm² values exact equivalents?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. AWG and metric cross-sectional sizes are different standards. The calculator shows an approximate AWG equivalent for the selected metric size; use the actual cable datasheet and applicable standard when purchasing or specifying cable.</div></div>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
+<a class="related-item" href="conduit-fill-calculator/"><div><strong>Conduit Fill Calculator</strong><span>Check conduit fill using the conductors you plan to install.</span></div><span aria-hidden="true">›</span></a>
+</div></section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<script>
+(function(){
+'use strict';
+const metric=[1,1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240];
+const awg=[['20',0.518],['18',0.823],['16',1.31],['14',2.08],['12',3.31],['10',5.26],['8',8.37],['6',13.3],['4',21.15],['3',26.67],['2',33.62],['1',42.41],['1/0',53.49],['2/0',67.43],['3/0',85.01],['4/0',107.2]];
+const rho={cu:0.01724,al:0.0282};
+let circuit='dc',loadMode='amps';
+const $=id=>document.getElementById(id);
+function fmt(n,d=2){if(!isFinite(n))return '—';return n.toLocaleString(undefined,{maximumFractionDigits:d});}
+function setCircuit(v){circuit=v;document.querySelectorAll('[data-circuit]').forEach(b=>b.classList.toggle('active',b.dataset.circuit===v));if(v==='dc'){$('voltage').value=48;$('pfField').classList.add('hidden')}else{$('voltage').value=v==='three'?400:230;if(loadMode==='power')$('pfField').classList.remove('hidden')}}
+function setLoad(v){loadMode=v;document.querySelectorAll('[data-load]').forEach(b=>b.classList.toggle('active',b.dataset.load===v));$('ampsField').classList.toggle('hidden',v!=='amps');$('wattsField').classList.toggle('hidden',v==='amps');$('pfField').classList.toggle('hidden',v==='amps'||v==='watts'&&circuit==='dc')}
+function current(){const V=Number($('voltage').value), W=Number($('watts').value), A=Number($('amps').value), pf=Math.min(1,Math.max(.1,Number($('pf').value)||1));if(loadMode==='amps')return A;if(!V||!W)return NaN;if(circuit==='three')return W/(Math.sqrt(3)*V*pf);if(circuit==='single')return W/(V*pf);return W/V}
+function lengthM(){const L=Number($('length').value);return $('lengthUnit').value==='ft'?L*0.3048:L}
+function pathFactor(){return circuit==='three'?Math.sqrt(3):2}
+function awgForArea(area){for(let i=0;i<awg.length;i++)if(awg[i][1]>=area)return awg[i][0];return '4/0+'}
+function calculate(){
+ const V=Number($('voltage').value), I=current(), L=lengthM(), target=Number($('target').value), material=$('material').value;
+ if(!(V>0)||!(I>0)||!(L>0)||!(target>0)){ $('status').className='status warn';$('status').textContent='Enter valid positive voltage, load, length and target values.';return}
+ const allowed=V*target/100, minArea=(rho[material]*L*pathFactor()*I)/allowed;
+ const size=metric.find(x=>x>=minArea)||metric[metric.length-1];
+ const R=rho[material]/size, drop=I*R*L*pathFactor(), pct=drop/V*100, loadV=V-drop, loss=I*I*R*L*pathFactor();
+ const awgLabel=awgForArea(size);
+ const selectedPass=pct<=target+1e-9;
+ $('recommended').textContent=size+' mm²';
+ $('recommendedSub').textContent='Approx. '+awgLabel+' AWG · '+(material==='cu'?'Copper':'Aluminum');
+ $('dropPct').textContent=fmt(pct,2)+'%';
+ $('dropV').textContent=fmt(drop,3)+' V';
+ $('loadV').textContent=fmt(loadV,3)+' V';
+ $('lossW').textContent=fmt(loss,2)+' W';
+ $('resultCurrent').textContent=fmt(I,2)+' A';
+ $('status').className='status '+(selectedPass?'ok':'warn');
+ $('status').textContent=selectedPass?'Meets your voltage-drop target.':'The available standard list reaches its largest size; review the run or target.';
+ $('whyText').textContent='The calculated minimum cross-sectional area is '+fmt(minArea,2)+' mm². The calculator rounds up to the next standard metric size so the selected size is not smaller than the calculated requirement.';
+ const prev=metric[Math.max(0,metric.indexOf(size)-2)], rows=[prev,size,metric[metric.indexOf(size)+1]].filter((x,i,a)=>x&&a.indexOf(x)===i);
+ $('comparisonRows').innerHTML='<div class="comparison-row"><strong>Size</strong><strong>Drop</strong><span>Status</span></div>'+rows.map(s=>{const d=I*(rho[material]/s)*L*pathFactor(),p=d/V*100;return '<div class="comparison-row"><strong>'+s+' mm²</strong><strong>'+fmt(p,2)+'%</strong><span>'+(p<=target?'Within target':'Above target')+'</span></div>'}).join('');
+}
+function preset(name){
+ const p={solar:{c:'dc',l:'amps',v:400,a:12,len:30,unit:'m',mat:'cu',t:2},battery:{c:'dc',l:'watts',v:48,w:3000,len:2,unit:'m',mat:'cu',t:2},home:{c:'single',l:'amps',v:230,a:16,len:25,unit:'m',mat:'cu',t:3},three:{c:'three',l:'amps',v:400,a:25,len:40,unit:'m',mat:'cu',t:3}}[name];if(!p)return;setCircuit(p.c);setLoad(p.l);$('voltage').value=p.v;$('amps').value=p.a||'';$('watts').value=p.w||'';$('length').value=p.len;$('lengthUnit').value=p.unit;$('material').value=p.mat;$('target').value=p.t;calculate()}
+document.querySelectorAll('[data-circuit]').forEach(b=>b.onclick=()=>{setCircuit(b.dataset.circuit);document.querySelectorAll('[data-circuit]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.circuit===b.dataset.circuit));calculate()});
+document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);document.querySelectorAll('[data-load]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.load===b.dataset.load));calculate()});
+document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));
+$('calculateBtn').onclick=calculate;
+$('clearBtn').onclick=()=>{location.reload()};
+document.querySelectorAll('.faq button').forEach(b=>b.onclick=()=>{const f=b.parentElement;f.classList.toggle('open');b.querySelector('.faq-icon').textContent=f.classList.contains('open')?'−':'+'});
+['voltage','amps','watts','pf','length','lengthUnit','material','target'].forEach(id=>$(id).addEventListener('input',calculate));
+$('lengthUnit').addEventListener('change',calculate);$('material').addEventListener('change',calculate);$('target').addEventListener('change',calculate);
+calculate();
+})();
+</script>
+<style id="tool-header-search-style">.tool-page .site-header .header-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex:0 0 auto!important;margin-left:auto!important}.tool-page .site-header .menu-btn{display:grid!important}.tool-page .site-header .search-panel{position:absolute!important;left:20px!important;right:20px!important;top:100%!important;max-width:none!important;margin:0!important;padding:10px 14px!important;background:#fff!important;border:1px solid #d8e5f3!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;display:none}.tool-page .site-header .search-panel.open{display:block!important}.tool-page .site-header .mobile-nav.is-open{display:grid!important;position:absolute!important;right:20px!important;top:100%!important;width:280px!important;max-width:calc(100vw - 40px)!important;margin:0!important;padding:8px!important;gap:5px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important}.tool-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;background:#fff!important;color:#334155!important;text-decoration:none!important}#toolHeaderSearchResults a{display:block;padding:9px 11px;border:1px solid #e0e9f3;border-radius:9px;background:#f7fafe;color:#294b70;text-decoration:none;font-weight:700;font-size:13px}#toolHeaderSearchResults a:hover{background:#eaf2ff;border-color:#cfe0ff;color:#1759c9}.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}@media(max-width:820px){.tool-page .site-header .search-panel{left:12px!important;right:12px!important;padding:8px!important}.tool-page .site-header .mobile-nav.is-open{right:12px!important;left:12px!important;width:auto!important;max-width:none!important}}</style><script>(function(){'use strict';const s=document.getElementById('toolHeaderSearch'),p=document.getElementById('toolHeaderSearchPanel'),f=document.getElementById('toolHeaderSearchForm'),i=document.getElementById('toolHeaderSearchInput'),r=document.getElementById('toolHeaderSearchResults'),m=document.getElementById('toolHeaderMenu'),n=document.getElementById('toolHeaderMenuPanel'),t=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];function q(v){const x=String(v||'').trim().toLowerCase(),a=(x?t.filter(z=>(z.title+' '+(z.description||'')+' '+(z.keywords||[]).join(' ')).toLowerCase().includes(x)):t).slice(0,8);r.innerHTML=a.length?a.map(z=>'<a href="'+z.href+'">'+z.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>'}function cs(){p&&p.classList.remove('open');s&&s.setAttribute('aria-expanded','false')}function cm(){n&&n.classList.remove('is-open');m&&m.setAttribute('aria-expanded','false')}q('');s&&s.addEventListener('click',e=>{e.stopPropagation();const o=!p.classList.contains('open');cm();p.classList.toggle('open',o);s.setAttribute('aria-expanded',String(o));if(o)i&&i.focus()});i&&i.addEventListener('input',()=>q(i.value));f&&i&&f.addEventListener('submit',e=>{e.preventDefault();const v=i.value.trim();if(v)location.href='tools/?q='+encodeURIComponent(v)});m&&n&&m.addEventListener('click',e=>{e.stopPropagation();const o=!n.classList.contains('is-open');cs();n.classList.toggle('is-open',o);m.setAttribute('aria-expanded',String(o))});document.addEventListener('click',e=>{if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))cs();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))cm()})})();</script>
+</body>
+</html>

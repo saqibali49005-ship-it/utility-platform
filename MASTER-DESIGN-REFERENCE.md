@@ -4,7 +4,7 @@
 
 Use this live page as the visual and structural reference for all future tool pages:
 
-https://saqibali49005-ship-it.github.io/utility-platform/time-calculator.html
+https://zemtools.com/time-calculator/
 
 Source file: `time-calculator.html`
 

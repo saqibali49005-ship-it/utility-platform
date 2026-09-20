@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Aspect Ratio Calculator | Find &amp; Resize Image Ratios</title>
+<meta name="description" content="Calculate image and video aspect ratios, find a missing width or height, and resize dimensions without changing proportions.">
+<link rel="canonical" href="https://zemtools.com/aspect-ratio-calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aspect Ratio Calculator | Find &amp; Resize Image Ratios">
+<meta property="og:description" content="Find simplified aspect ratios, solve missing dimensions, and scale images or video sizes without distortion.">
+<meta property="og:url" content="https://zemtools.com/aspect-ratio-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aspect Ratio Calculator">
+<meta name="twitter:description" content="Calculate ratios and proportional image or video dimensions.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Aspect Ratio Calculator","url":"https://zemtools.com/aspect-ratio-calculator/","applicationCategory":"DesignApplication","operatingSystem":"Any","description":"Calculate aspect ratios and proportional image or video dimensions.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Digital & Developer","item":"https://zemtools.com/digital-developer/"},{"@type":"ListItem","position":3,"name":"Aspect Ratio Calculator","item":"https://zemtools.com/aspect-ratio-calculator/"}]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css">
+<style>
+.aspect-tool .preset-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.aspect-tool .preset-grid button{min-width:72px}
+.aspect-tool .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.aspect-tool .stat{padding:12px;border:1px solid #d5e6f3;border-radius:12px;background:#f7fbff}
+.aspect-tool .stat span{display:block;color:#69809a;font-size:12px}
+.aspect-tool .stat strong{display:block;font-size:20px;margin-top:4px;color:#194b79}
+.aspect-tool .preview-wrap{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;align-items:center}
+.aspect-tool .ratio-preview{width:100%;max-width:560px;margin:auto;border:1px solid #cddcea;border-radius:14px;overflow:hidden;background:repeating-conic-gradient(#eef3f8 0 25%,#fff 0 50%) 50%/24px 24px}
+.aspect-tool .ratio-preview-inner{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#1767e7,#19a9e8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px}
+.aspect-tool .download-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.aspect-tool .download-grid button{width:100%}
+.aspect-tool .note{color:#657990;font-size:13px}
+@media(max-width:800px){.aspect-tool .preview-wrap{grid-template-columns:1fr}.aspect-tool .result-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.aspect-tool .download-grid{grid-template-columns:1fr}.aspect-tool .result-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="tool-page aspect-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/" aria-current="page">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel">
+<form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form>
+<div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div>
+</div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation">
+<a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a>
+</nav>
+</div>
+</header>
+<main id="main-content">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="digital-developer/">Digital &amp; Developer</a><span class="crumb-sep">›</span><span>Aspect Ratio Calculator</span></nav>
+<section class="hero"><div class="tool-icon" aria-hidden="true">↔</div><div><h1>Aspect Ratio Calculator</h1><p>Find the simplified ratio of an image, video or screen, or calculate a missing dimension while keeping proportions intact.</p></div></section>
+<section class="info-callout"><div class="info-icon" aria-hidden="true">i</div><div><strong>Designed for practical resizing.</strong><span>Enter dimensions to find the exact ratio, then use a preset or custom ratio to calculate a matching width or height.</span></div></section>
+
+<section class="card">
+<h2>Find an aspect ratio</h2>
+<div class="grid">
+<div><label for="width">Width</label><input id="width" type="number" min="1" step="1" value="1920" inputmode="numeric"></div>
+<div><label for="height">Height</label><input id="height" type="number" min="1" step="1" value="1080" inputmode="numeric"></div>
+</div>
+<div class="preset-grid" aria-label="Common aspect ratios">
+<button type="button" data-ratio="16:9">16:9</button><button type="button" data-ratio="9:16">9:16</button><button type="button" data-ratio="4:3">4:3</button><button type="button" data-ratio="1:1">1:1</button><button type="button" data-ratio="3:2">3:2</button><button type="button" data-ratio="21:9">21:9</button>
+</div>
+<div class="actions"><button class="primary" id="findRatio" type="button">Calculate ratio</button><button class="secondary" id="swap" type="button">Swap width &amp; height</button></div>
+<div class="result" id="ratioResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Find a missing dimension</h2>
+<p class="note">Choose a ratio and enter either the width or height. The other dimension is calculated proportionally.</p>
+<div class="grid">
+<div><label for="ratioW">Ratio width</label><input id="ratioW" type="number" min="1" step="1" value="16"></div>
+<div><label for="ratioH">Ratio height</label><input id="ratioH" type="number" min="1" step="1" value="9"></div>
+<div><label for="knownDimension">Known dimension</label><select id="knownDimension"><option value="width">Width</option><option value="height">Height</option></select></div>
+<div><label for="knownValue">Known value</label><input id="knownValue" type="number" min="1" step="1" value="1280"></div>
+</div>
+<div class="preset-grid"><button type="button" data-solve="16:9">16:9</button><button type="button" data-solve="9:16">9:16</button><button type="button" data-solve="4:3">4:3</button><button type="button" data-solve="1:1">1:1</button><button type="button" data-solve="3:2">3:2</button></div>
+<div class="actions"><button class="primary" id="solveSize" type="button">Calculate missing dimension</button></div>
+<div class="result" id="sizeResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Resize while keeping the original ratio</h2>
+<div class="grid">
+<div><label for="origW">Original width</label><input id="origW" type="number" min="1" step="1" value="1920"></div>
+<div><label for="origH">Original height</label><input id="origH" type="number" min="1" step="1" value="1080"></div>
+<div><label for="targetDimension">Set target</label><select id="targetDimension"><option value="width">New width</option><option value="height">New height</option></select></div>
+<div><label for="targetValue">Target value</label><input id="targetValue" type="number" min="1" step="1" value="1280"></div>
+</div>
+<div class="actions"><button class="primary" id="resize" type="button">Calculate resized dimensions</button></div>
+<div class="result" id="resizeResult" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>Visual preview</h2>
+<div class="preview-wrap">
+<div class="ratio-preview"><div class="ratio-preview-inner" id="previewInner">16:9</div></div>
+<div><strong id="previewLabel">16:9</strong><p class="note" id="previewText">Widescreen shape. The preview is illustrative and not a pixel-perfect rendering of your original file.</p></div>
+</div>
+</section>
+
+<section class="support-grid">
+<section class="card"><h2>Common aspect ratios</h2><ul><li><strong>16:9</strong> — widescreen video and modern displays</li><li><strong>9:16</strong> — vertical video</li><li><strong>1:1</strong> — square images</li><li><strong>4:3</strong> — classic display and photo formats</li><li><strong>3:2</strong> — common photography format</li></ul></section>
+<section class="card"><h2>How it works</h2><p>The calculator finds the greatest common divisor of the width and height, then divides both values by it to produce the simplest whole-number ratio.</p></section>
+<section class="card"><h2>Good for</h2><ul><li>Image and thumbnail sizing</li><li>Video export dimensions</li><li>Website and responsive design</li><li>Social media graphics</li></ul></section>
+</section>
+
+<section class="card faq-card">
+<h2>Frequently asked questions</h2>
+<div class="faq"><button type="button"><span>What is an aspect ratio?</span><span class="faq-icon">+</span></button><div class="faq-answer">Aspect ratio describes the proportional relationship between width and height, written as two numbers such as 16:9. It describes shape rather than physical size.</div></div>
+<div class="faq"><button type="button"><span>How do I calculate an aspect ratio?</span><span class="faq-icon">+</span></button><div class="faq-answer">Enter the width and height. The calculator finds their greatest common divisor and divides both values by it. For example, 1920 × 1080 becomes 16:9.</div></div>
+<div class="faq"><button type="button"><span>How do I resize an image without stretching it?</span><span class="faq-icon">+</span></button><div class="faq-answer">Keep the original width-to-height ratio and change only one target dimension. The calculator computes the matching other dimension.</div></div>
+<div class="faq"><button type="button"><span>Is 1920 × 1080 exactly 16:9?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Both values divide by 120, producing 16 × 9. Other dimensions may be close to a common ratio without reducing to exactly the same whole-number ratio.</div></div>
+</section>
+
+<section class="card">
+<h2>Method &amp; notes</h2>
+<p class="small">Ratio calculations use positive numeric dimensions and integer greatest-common-divisor reduction. Missing dimensions are calculated from proportional multiplication and rounded to the nearest whole pixel. The tool does not inspect or upload image files.</p>
+<p class="small">Explore more <a href="digital-developer/">Digital &amp; Developer tools</a> for text and web-development utilities.</p>
+<div class="download-grid"><button id="downloadTxt" type="button">↓ Download TXT</button><button id="downloadCsv" type="button">↓ Download CSV</button></div>
+</section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<style id="tool-header-search-style">
+/* Header controls: desktop + mobile, without changing existing header geometry. */
+.tool-page .site-header .header-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex:0 0 auto!important;margin-left:auto!important;}
+.tool-page .site-header .menu-btn{display:grid!important;}
+.tool-page .site-header .mobile-nav.is-open{display:grid!important;position:absolute!important;right:20px!important;top:100%!important;width:280px!important;max-width:calc(100vw - 40px)!important;margin:0!important;padding:8px!important;gap:5px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;}
+.tool-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;background:#fff!important;color:#334155!important;text-decoration:none!important;}
+.tool-page .site-header .mobile-nav.is-open a:hover{background:#f4f8fd!important;color:#1759c9!important;}
+.tool-page .site-header .search-panel{position:absolute!important;left:20px!important;right:20px!important;top:100%!important;max-width:none!important;margin:0!important;padding:10px 14px!important;background:#fff!important;border:1px solid #d8e5f3!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;}
+.tool-page .site-header .search-panel.open{display:block!important;}
+#toolHeaderSearchResults a{display:block;padding:9px 11px;border:1px solid #e0e9f3;border-radius:9px;background:#f7fafe;color:#294b70;text-decoration:none;font-weight:700;font-size:13px}
+#toolHeaderSearchResults a:hover{background:#eaf2ff;border-color:#cfe0ff;color:#1759c9}
+.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}
+@media(max-width:820px){
+ .tool-page .site-header .header-actions{margin-left:auto!important;}
+ .tool-page .site-header .menu-btn{display:grid!important}
+ .tool-page .site-header .search-panel{left:12px!important;right:12px!important;padding:8px!important;}
+ .tool-page .site-header .mobile-nav.is-open{display:grid!important}
+}
+</style>
+<script>
+(function(){
+'use strict';
+const searchBtn=document.getElementById('toolHeaderSearch'),searchPanel=document.getElementById('toolHeaderSearchPanel'),searchForm=document.getElementById('toolHeaderSearchForm'),searchInput=document.getElementById('toolHeaderSearchInput'),searchResults=document.getElementById('toolHeaderSearchResults'),menuBtn=document.getElementById('toolHeaderMenu'),menu=document.getElementById('toolHeaderMenuPanel');
+const tools=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+function render(q){if(!searchResults)return;const term=String(q||'').trim().toLowerCase();const matches=(term?tools.filter(t=>(t.title+' '+(t.description||'')+' '+(t.keywords||[]).join(' ')).toLowerCase().includes(term)):tools).slice(0,8);searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+t.href+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';}
+function closeSearch(){searchPanel&&searchPanel.classList.remove('open');searchBtn&&searchBtn.setAttribute('aria-expanded','false')}
+function closeMenu(){menu&&menu.classList.remove('is-open');menuBtn&&menuBtn.setAttribute('aria-expanded','false')}
+render('');
+searchBtn&&searchBtn.addEventListener('click',function(e){e.stopPropagation();const open=!searchPanel.classList.contains('open');closeMenu();searchPanel.classList.toggle('open',open);searchBtn.setAttribute('aria-expanded',String(open));if(open){searchInput&&searchInput.focus()}});
+searchInput&&searchInput.addEventListener('input',function(){render(searchInput.value)});
+searchForm&&searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q)});
+menuBtn&&menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open))});
+document.addEventListener('click',function(e){if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu()});
+})();
+</script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const state={lastExport:null};
+function num(id){const n=Number($(id).value);return Number.isFinite(n)&&n>0?n:null}
+function gcd(a,b){a=Math.round(Math.abs(a));b=Math.round(Math.abs(b));while(b){const t=a%b;a=b;b=t}return a||1}
+function ratio(a,b){const g=gcd(a,b);return (a/g)+':'+(b/g)}
+function set(el,html){el.innerHTML=html}
+function validPair(a,b){return a!==null&&b!==null}
+function calcRatio(){
+ const w=num('width'),h=num('height');if(!validPair(w,h)){set($('ratioResult'),'<strong>Enter positive width and height values.</strong>');return}
+ const r=ratio(w,h),dec=(w/h).toFixed(4);
+ state.lastExport={ratio:r,width:w,height:h,source:'Find ratio'};set($('ratioResult'),'<div class="big">'+r+'</div><div class="result-grid"><div class="stat"><span>Width</span><strong>'+w.toLocaleString()+'</strong></div><div class="stat"><span>Height</span><strong>'+h.toLocaleString()+'</strong></div><div class="stat"><span>Simplified</span><strong>'+r+'</strong></div><div class="stat"><span>Decimal</span><strong>'+dec+':1</strong></div></div>');
+ updatePreview(w/h,r)
+}
+function solve(){
+ const rw=num('ratioW'),rh=num('ratioH'),known=num('knownValue');if(!validPair(rw,rh)||known===null){set($('sizeResult'),'<strong>Enter valid ratio and dimension values.</strong>');return}
+ let w,h;if($('knownDimension').value==='width'){w=known;h=known*rh/rw}else{h=known;w=known*rw/rh}
+ w=Math.round(w);h=Math.round(h);const r=ratio(rw,rh);
+ state.lastExport={ratio:r,width:w,height:h,source:'Missing dimension'};set($('sizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>At <strong>'+r+'</strong>, '+$('knownDimension').value+' '+known.toLocaleString()+' px gives a matching '+($('knownDimension').value==='width'?'height':'width')+' of '+($('knownDimension').value==='width'?h:w).toLocaleString()+' px.</p>');
+ updatePreview(rw/rh,r)
+}
+function resize(){
+ const ow=num('origW'),oh=num('origH'),target=num('targetValue');if(!validPair(ow,oh)||target===null){set($('resizeResult'),'<strong>Enter valid original and target dimensions.</strong>');return}
+ let w,h;if($('targetDimension').value==='width'){w=Math.round(target);h=Math.round(target*oh/ow)}else{h=Math.round(target);w=Math.round(target*ow/oh)}
+ const r=ratio(ow,oh),scale=$('targetDimension').value==='width'?w/ow:h/oh;
+ state.lastExport={ratio:r,width:w,height:h,source:'Resize'};set($('resizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>Original ratio: <strong>'+r+'</strong> · Scale: <strong>'+(scale*100).toFixed(2)+'%</strong></p>');
+ updatePreview(w/h,r)
+}
+function updatePreview(value,label){$('previewInner').style.aspectRatio=value; $('previewInner').textContent=label;$('previewLabel').textContent=label;$('previewText').textContent='Illustrative preview of the '+label+' shape.'}
+document.querySelectorAll('[data-ratio]').forEach(b=>b.addEventListener('click',()=>{const [w,h]=b.dataset.ratio.split(':');$('width').value=w*120;$('height').value=h*120;calcRatio()}));
+document.querySelectorAll('[data-solve]').forEach(b=>b.addEventListener('click',()=>{const [w,h]=b.dataset.solve.split(':');$('ratioW').value=w;$('ratioH').value=h;solve()}));
+$('findRatio').addEventListener('click',calcRatio);$('swap').addEventListener('click',()=>{const w=$('width').value,h=$('height').value;$('width').value=h;$('height').value=w;calcRatio()});
+$('solveSize').addEventListener('click',solve);$('resize').addEventListener('click',resize);
+function download(type){const x=state.lastExport||{ratio:$('previewLabel').textContent,width:$('width').value||'',height:$('height').value||''};const ratioLabel=x.ratio;const width=x.width;const height=x.height;const decimal=((Number(width)||0)/(Number(height)||1)).toFixed(4);const text=type==='csv'?['Field,Value','Tool,Aspect Ratio Calculator','Ratio,'+ratioLabel,'Width,'+width,'Height,'+height,'Decimal ratio,'+decimal+':1'].join('\n')+'\n':['Aspect Ratio Calculator','Ratio: '+ratioLabel,'Width: '+width,'Height: '+height,'Ratio decimal: '+decimal+':1'].join('\n')+'\n';const blob=new Blob([text],{type:type==='csv'?'text/csv;charset=utf-8':'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aspect-ratio-result.'+(type==='csv'?'csv':'txt');a.click();setTimeout(()=>URL.revokeObjectURL(a.href),100)}
+$('downloadTxt').addEventListener('click',()=>download('txt'));$('downloadCsv').addEventListener('click',()=>download('csv'));calcRatio();
+})();
+</script>
+</body>
+</html>

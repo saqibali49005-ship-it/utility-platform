@@ -40,10 +40,10 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 <a class="skip-link" href="#main-content">Skip to content</a>
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="ZEMTOOLS home"><div class="brand-mark">Z</div><div>ZEMTOOLS</div></a>
+    <a class="brand" href="/" aria-label="ZEMTOOLS home"><div class="brand-mark">Z</div><div>ZEMTOOLS</div></a>
     <nav aria-label="Primary navigation" class="top-nav">
-      <a aria-current="page" href="index.html">Home</a><a href="tools.html">All Tools</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a><a href="energy-electrical.html">Energy &amp; Electrical</a>
-    </nav><div class="home-header-controls" aria-label="Header controls"><button class="home-header-control" id="homeHeaderSearch" type="button" aria-label="Focus search" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg></button><button class="home-header-control" id="homeHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="homeHeaderMenuPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><nav class="home-header-menu" id="homeHeaderMenuPanel" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="math-science.html">Math &amp; Science</a><a href="digital-developer.html">Digital &amp; Developer</a><a href="home-construction.html">Home &amp; Construction</a><a href="energy-electrical.html">Energy &amp; Electrical</a></nav>
+      <a aria-current="page" href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a>
+    </nav><div class="home-header-controls" aria-label="Header controls"><button class="home-header-control" id="homeHeaderSearch" type="button" aria-label="Focus search" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg></button><button class="home-header-control" id="homeHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="homeHeaderMenuPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><nav class="home-header-menu" id="homeHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
     
   </div>
 </header>
@@ -66,14 +66,14 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 </section>
 
 <section class="home-section" aria-labelledby="quick-title">
-  <div class="home-section-head"><div><h2 id="quick-title">Explore by category</h2><p>Jump into the kind of task you need to solve.</p></div><a class="text-link" href="tools.html">View all tools →</a></div>
+  <div class="home-section-head"><div><h2 id="quick-title">Explore by category</h2><p>Jump into the kind of task you need to solve.</p></div><a class="text-link" href="tools/">View all tools →</a></div>
   <div class="quick-links" id="quick-links"></div>
 </section>
 
 <section class="home-section" aria-labelledby="latest-title">
-  <div class="home-section-head"><div><h2 id="latest-title">New &amp; featured</h2><p>The newest tools stay here; older tools naturally remain in the full library.</p></div><a class="text-link" href="tools.html">Browse the library →</a></div>
+  <div class="home-section-head"><div><h2 id="latest-title">New &amp; featured</h2><p>The newest tools stay here; older tools naturally remain in the full library.</p></div><a class="text-link" href="tools/">Browse the library →</a></div>
   <div class="latest-grid" id="latest-grid" aria-live="polite"></div>
-  <div class="directory-banner"><div><strong>Building out the library</strong><span>One central tool catalog makes a larger platform easier to browse, search and expand.</span></div><a href="tools.html">Explore all tools</a></div>
+  <div class="directory-banner"><div><strong>Building out the library</strong><span>One central tool catalog makes a larger platform easier to browse, search and expand.</span></div><a href="tools/">Explore all tools</a></div>
 </section>
 
 <section class="home-section" aria-labelledby="categories-title">
@@ -92,7 +92,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
 <div class="home-footer-note">Utility Platform is being expanded around real user problems, not a fixed number of pages.</div>
 </main>
 
-<footer><div>© 2026 Utility Platform</div><nav aria-label="Footer" class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer>
+<footer><div>© 2026 Utility Platform</div><nav aria-label="Footer" class="footer-links"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></footer>
 
 <script>
 (function(){
@@ -126,7 +126,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
     const lower=clean.toLowerCase();
     const direct=tools.find(t=>t.title.toLowerCase()===lower)||tools.find(t=>matches(t,lower));
     if(direct){location.href=direct.href;return;}
-    location.href='tools.html?q='+encodeURIComponent(clean);
+    location.href='tools/?q='+encodeURIComponent(clean);
   }
   search.addEventListener('submit',e=>{e.preventDefault();goSearch(input.value);});
   input.addEventListener('input',renderSuggestions);
@@ -134,7 +134,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
   suggestions.addEventListener('click',e=>{const b=e.target.closest('[data-href]');if(b)location.href=b.dataset.href;});
   document.addEventListener('click',e=>{if(!search.contains(e.target))suggestions.hidden=true;});
 
-  quick.innerHTML=categories.filter(c=>tools.some(t=>t.category===c.id)).slice(0,6).map(c=>'<a href="'+(c.href||('tools.html?category='+encodeURIComponent(c.id)))+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');
+  quick.innerHTML=categories.filter(c=>tools.some(t=>t.category===c.id)).slice(0,6).map(c=>'<a href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');
 
   const sorted=tools.sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0));
   latest.innerHTML=sorted.slice(0,6).map((t,i)=>{
@@ -148,7 +148,7 @@ footer{border-top:1px solid var(--border);background:#fff;text-align:center;padd
   const liveCats=categories.filter(c=>tools.some(t=>t.category===c.id));
   catGrid.innerHTML=liveCats.map(c=>{
     const count=tools.filter(t=>t.category===c.id).length;
-    return '<a class="category-card" href="'+(c.href||('tools.html?category='+encodeURIComponent(c.id)))+'">'+
+    return '<a class="category-card" href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'">'+
       '<div class="category-icon" aria-hidden="true">'+c.icon+'</div><h3>'+c.title+'</h3><p>'+c.description+'</p>'+
       '<div class="category-meta">'+count+' '+(count===1?'tool':'tools')+' · Explore →</div></a>';
   }).join('');

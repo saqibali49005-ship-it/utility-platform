@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Paver Edge Restraint Calculator | Edging, Spikes &amp; Cost</title>
+<meta name="description" content="Calculate paver edge restraint length, edging sections, straight and curve spikes, waste and optional material cost for patios, walkways and hardscape projects.">
+<link rel="canonical" href="https://zemtools.com/paver-edge-restraint-calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paver Edge Restraint Calculator | Edging, Spikes & Cost">
+<meta property="og:description" content="Calculate open paver edge restraint, stock edging sections, straight and curve spikes, waste and optional cost.">
+<meta property="og:url" content="https://zemtools.com/paver-edge-restraint-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta property="og:image:alt" content="Utility Platform — Practical Online Tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paver Edge Restraint Calculator">
+<meta name="twitter:description" content="Calculate paver edge restraint, edging sections, spikes, waste and optional cost.">
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Paver Edge Restraint Calculator","url":"https://zemtools.com/paver-edge-restraint-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Calculate paver edge restraint length, edging sections, spikes, waste and optional cost for patios, walkways and hardscape projects.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},
+{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},
+{"@type":"ListItem","position":3,"name":"Paver Edge Restraint Calculator","item":"https://zemtools.com/paver-edge-restraint-calculator/"}]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-related-tools.css">
+<style>
+.paver-edge-tool{width:100%;max-width:none;min-width:0;overflow-x:hidden}
+.paver-edge-tool main,.paver-edge-tool section,.paver-edge-tool article,.paver-edge-tool .hero-shell,.paver-edge-tool .hero,.paver-edge-tool .card{width:100%;max-width:100%;min-width:0}
+.paver-edge-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.paver-edge-tool .field{min-width:0}
+.paver-edge-tool .field.full{grid-column:1/-1}
+.paver-edge-tool input,.paver-edge-tool select,.paver-edge-tool button{max-width:100%;box-sizing:border-box}
+.paver-edge-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;font:inherit;font-size:17px}
+.paver-edge-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4}
+.paver-edge-tool .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.paver-edge-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.paver-edge-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.paver-edge-tool .result{background:linear-gradient(180deg,#fbfffd,#f2fff7)}
+.paver-edge-tool .result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.paver-edge-tool .metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.paver-edge-tool .metric strong{display:block;color:#102f54;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.paver-edge-tool .metric span{display:block;margin-top:3px;font-size:18px;font-weight:900;color:#102f54}
+.paver-edge-tool .note,.paver-edge-tool .warn,.paver-edge-tool .ok{padding:13px 14px;border-radius:12px;margin-top:12px}
+.paver-edge-tool .note{border:1px solid #cfe2f8;background:#eff7ff;color:#244c73}
+.paver-edge-tool .warn{border:1px solid #efd59a;background:#fff9e9;color:#745000}
+.paver-edge-tool .ok{border:1px solid #c9ecd8;background:#f2fff7;color:#1e6240}
+.paver-edge-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
+.paver-edge-tool .copy-status{color:var(--muted);font-size:13px}
+.paver-edge-tool .hidden{display:none!important}
+.paver-edge-tool .diagram{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.paver-edge-tool .diagram-card{border:1px solid var(--line);border-radius:13px;padding:14px;background:#fbfdff}
+.paver-edge-tool .diagram-card strong{display:block;margin-bottom:5px}
+.paver-edge-tool table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+.paver-edge-tool th,.paver-edge-tool td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+@media(max-width:700px){.paver-edge-tool .tool-grid,.paver-edge-tool .result-grid,.paver-edge-tool .diagram{grid-template-columns:1fr}.paver-edge-tool .actions{flex-direction:column;align-items:stretch}.paver-edge-tool .actions button{width:100%}}
+@media(max-width:430px){.paver-edge-tool .hero h1{font-size:27px;line-height:1.08}.paver-edge-tool .hero p{font-size:14px;line-height:1.45}.paver-edge-tool .card{padding:18px 16px}}
+</style>
+</head>
+<body class="tool-page paver-edge-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel">
+<form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form>
+<div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div>
+</div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation">
+<a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a>
+</nav>
+</div>
+</header>
+
+<main id="main-content">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="home-construction/">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Paver Edge Restraint Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🧱</div><div><h1>Paver Edge Restraint Calculator</h1><p>Calculate the open paver edge that needs restraint, how many edging sections to buy, and how many spikes or stakes you may need — including separate straight and curved runs.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Only calculate the edge that actually needs restraint.</strong> Subtract sides already held by a house, slab, curb or other suitable fixed boundary. Use the product manufacturer's spacing when it differs from your planning assumptions.</div></div>
+</section>
+
+<section class="layout" aria-label="Paver edge restraint calculator">
+<article class="card tool-card">
+<h2>Build Your Edge Restraint Plan</h2>
+<p class="hint">For a rectangle, enter the project length and width, then tell the calculator how much perimeter is already restrained. For an irregular project, enter the open edge directly.</p>
+<form id="edgeForm">
+<div class="tool-grid">
+<div class="field"><label for="units">Measurement system</label><select id="units"><option value="imperial" selected>Imperial (ft / in)</option><option value="metric">Metric (m / cm)</option></select><span class="field-help">Use the same system for dimensions and spacing.</span></div>
+<div class="field"><label for="mode">Project input</label><select id="mode"><option value="rectangle" selected>Rectangle + restrained edge</option><option value="open">Open edge length directly</option></select><span class="field-help">Direct open-edge input is useful for curved or irregular layouts.</span></div>
+<div class="field rectangle-only"><label for="length">Paver area length <span class="length-unit">(ft)</span></label><input id="length" type="number" min="0" step="0.01" value="20" inputmode="decimal"><span class="field-help">Finished paver footprint length.</span></div>
+<div class="field rectangle-only"><label for="width">Paver area width <span class="length-unit">(ft)</span></label><input id="width" type="number" min="0" step="0.01" value="12" inputmode="decimal"><span class="field-help">Finished paver footprint width.</span></div>
+<div class="field rectangle-only"><label for="restrained">Perimeter already restrained <span class="length-unit">(ft)</span></label><input id="restrained" type="number" min="0" step="0.01" value="12" inputmode="decimal"><span class="field-help">Examples: house wall, proper curb, slab edge or other suitable fixed boundary.</span></div>
+<div class="field open-only hidden"><label for="openEdge">Open edge needing restraint <span class="length-unit">(ft)</span></label><input id="openEdge" type="number" min="0" step="0.01" value="0" inputmode="decimal"><span class="field-help">Enter the total exposed edge length when the project is not a simple rectangle.</span></div>
+<div class="field"><label for="curved">Curved portion of open edge <span class="length-unit">(ft)</span></label><input id="curved" type="number" min="0" step="0.01" value="0" inputmode="decimal"><span class="field-help">This must not exceed the calculated open edge. Curves can require tighter spike spacing.</span></div>
+<div class="field"><label for="stock">Edging stock length <span class="length-unit">(ft)</span></label><input id="stock" type="number" min="0.01" step="0.01" value="8" inputmode="decimal"><span class="field-help">Enter the actual length of one edging section/roll you plan to buy.</span></div>
+<div class="field"><label for="straightSpacing">Straight spike spacing <span class="length-unit">(in)</span></label><input id="straightSpacing" type="number" min="0.01" step="0.1" value="12" inputmode="decimal"><span class="field-help">Planning input only. Follow the restraint product instructions for your site.</span></div>
+<div class="field"><label for="curveSpacing">Curve spike spacing <span class="length-unit">(in)</span></label><input id="curveSpacing" type="number" min="0.01" step="0.1" value="6" inputmode="decimal"><span class="field-help">Use a tighter value if your product or installation plan calls for it.</span></div>
+<div class="field"><label for="waste">Edging / cutting allowance (%)</label><input id="waste" type="number" min="0" max="50" step="0.5" value="5" inputmode="decimal"><span class="field-help">Covers corner cuts and unusable offcuts. It is separate from spike spacing.</span></div>
+<div class="field"><label for="price">Price per edging section <span class="muted">(optional)</span></label><input id="price" type="number" min="0" step="0.01" placeholder="e.g. 7.50" inputmode="decimal"><span class="field-help">Enter your supplier's price for one stock section.</span></div>
+<div class="field"><label for="currency">Currency label</label><input id="currency" type="text" maxlength="8" value="$" placeholder="$, €, £, PKR"><span class="field-help">Display label only; the numeric price is the value you enter.</span></div>
+<div class="field full"><div class="actions"><button type="submit">Calculate Edge Restraint</button><button type="button" class="secondary" id="reset">Reset</button><span id="error" class="copy-status" role="alert"></span></div></div>
+</div>
+</form>
+</article>
+
+<article class="card result" id="result">
+<h2>Your edge restraint estimate</h2>
+<p class="hint">Enter your project details and calculate.</p>
+</article>
+</section>
+
+<section class="card">
+<h2>What the Calculator Estimates</h2>
+<div class="diagram">
+<div class="diagram-card"><strong>Open restraint length</strong><span>Perimeter or directly entered open edge, minus boundaries that already provide suitable restraint.</span></div>
+<div class="diagram-card"><strong>Purchasing quantity</strong><span>Edging sections are rounded up after the selected allowance so the result can be used as a shopping quantity.</span></div>
+<div class="diagram-card"><strong>Spike quantity</strong><span>Straight and curved portions are calculated separately using their own spacing inputs.</span></div>
+<div class="diagram-card"><strong>Optional cost</strong><span>Enter your actual section price and currency label to estimate the material purchase cost.</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>How the Math Works</h2>
+<div class="formula">
+Rectangle perimeter = 2 × (length + width)<br>
+Open edge = perimeter − already restrained edge<br>
+Edging to buy = ceil(open edge × (1 + allowance) ÷ stock length)<br>
+Straight spikes = ceil(straight edge ÷ straight spacing)<br>
+Curve spikes = ceil(curved edge ÷ curve spacing)<br>
+Total spikes = straight spikes + curve spikes
+</div>
+<p class="small">The tool is intentionally transparent: the geometry, purchasing allowance and spike-spacing assumptions remain visible instead of being hidden inside one unexplained number.</p>
+</section>
+
+<section class="card">
+<h2>Paver Edge Restraint Planning Notes</h2>
+<ul class="small-list">
+<li>Only edges that are not already held by a suitable fixed boundary normally need separate restraint. Do not automatically buy edging for every side of a patio.</li>
+<li>Use the actual stock length of the product you are buying. Different restraint systems are sold in different lengths and may have different installation requirements.</li>
+<li>Spike spacing is product- and site-dependent. Curves can require closer spacing than straight runs, so the calculator keeps those inputs separate rather than assuming one universal rate.</li>
+<li>For vehicle areas, weak or poorly compacted bases, unusual soils, frost conditions or other demanding sites, follow the applicable product and project specifications. Edge restraint cannot compensate for a failed base.</li>
+</ul>
+<div class="warn"><strong>Planning tool:</strong> quantities are estimates. Verify restraint type, spike length, spacing, base conditions and supplier instructions before installation or ordering.</div>
+</section>
+
+<section class="card">
+<h2>Paver Edge Restraint Calculator FAQs</h2>
+<details><summary>How much paver edging do I need?</summary><p>Calculate the perimeter, subtract the edges that are already restrained, add an allowance for cuts, then divide by the stock length of the edging and round up to whole sections.</p></details>
+<details><summary>Do I need paver edging against a house?</summary><p>If the house foundation or another suitable fixed boundary is actually providing restraint, that edge can normally be excluded from the separate edging quantity. Confirm the site and product requirements before installation.</p></details>
+<details><summary>How many spikes do I need for paver edging?</summary><p>Divide each edge type by its planned spike spacing and round up. This calculator keeps straight and curved runs separate because their spacing assumptions may differ.</p></details>
+<details><summary>What spike spacing should I use?</summary><p>Use the manufacturer's installation instructions for the restraint product you are buying. The default values are editable planning inputs, not a universal installation standard.</p></details>
+<details><summary>Can I use this for a curved patio?</summary><p>Yes. Enter the total open edge directly when the layout is irregular, then enter the portion that is curved so the curve can use its own spike spacing.</p></details>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title">
+<h2 id="related-title">Related Tools</h2>
+<div class="related-grid">
+<a class="related-item" href="gravel-calculator/"><div><strong>Gravel Quantity &amp; Ordering Planner</strong><span>Estimate gravel and aggregate quantities for the base and surrounding ground work.</span></div><span aria-hidden="true">›</span></a>
+</div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function metric(){return $('units').value==='metric'}
+function lenToFt(v){return metric()?v*3.280839895:v}
+function inputLength(id){return Math.max(0,parseFloat($(id).value)||0)}
+function displayUnit(){return metric()?'m':'ft'}
+function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
+function updateLabels(){
+  document.querySelectorAll('.length-unit').forEach(x=>x.textContent=metric()?'(m)':'(ft)');
+  const curve=$('curved').parentElement.querySelector('.length-unit'); if(curve)curve.textContent=metric()?'(m)':'(ft)';
+  const straight=$('straightSpacing').parentElement.querySelector('.length-unit'); if(straight)straight.textContent=metric()?'(in equivalent input)':'(in)';
+  const curveSpace=$('curveSpacing').parentElement.querySelector('.length-unit'); if(curveSpace)curveSpace.textContent=metric()?'(in equivalent input)':'(in)';
+}
+function convertValues(toMetric){
+  const lengthFactor=toMetric?0.3048:3.280839895;
+  ['length','width','restrained','openEdge','curved','stock'].forEach(id=>{
+    const v=parseFloat($(id).value); if(Number.isFinite(v))$(id).value=(v*lengthFactor).toFixed(2);
+  });
+}
+function setMode(){
+  const open=$('mode').value==='open';
+  document.querySelectorAll('.rectangle-only').forEach(e=>e.classList.toggle('hidden',open));
+  document.querySelector('.open-only').classList.toggle('hidden',!open);
+  calculate();
+}
+function calculate(){
+  const err=$('error'); err.textContent='';
+  const openMode=$('mode').value==='open';
+  let openFt=0;
+  if(openMode){
+    openFt=inputLength('openEdge'); openFt=lenToFt(openFt);
+    if(openFt<=0){err.textContent='Enter a positive open edge length.';return}
+  }else{
+    const l=lenToFt(inputLength('length')), w=lenToFt(inputLength('width')), r=lenToFt(inputLength('restrained'));
+    if(l<=0||w<=0){err.textContent='Enter positive length and width values.';return}
+    const perimeter=2*(l+w);
+    if(r>perimeter){err.textContent='Already restrained edge cannot exceed the total perimeter.';return}
+    openFt=Math.max(0,perimeter-r);
+    if(openFt<=0){err.textContent='There is no open edge left to restrain.';return}
+  }
+  const curvedFt=lenToFt(inputLength('curved'));
+  if(curvedFt>openFt){err.textContent='Curved edge cannot exceed the total open edge.';return}
+  const straightFt=Math.max(0,openFt-curvedFt);
+  const stockFt=lenToFt(inputLength('stock'));
+  const straightIn=Math.max(0,parseFloat($('straightSpacing').value)||0);
+  const curveIn=Math.max(0,parseFloat($('curveSpacing').value)||0);
+  const waste=Math.min(50,Math.max(0,parseFloat($('waste').value)||0))/100;
+  if(stockFt<=0||straightIn<=0||curveIn<=0){err.textContent='Enter positive stock length and spike spacing values.';return}
+  const edgingSections=Math.ceil((openFt*(1+waste))/stockFt);
+  const straightSpikes=straightFt>0?Math.ceil(straightFt/(straightIn/12)):0;
+  const curveSpikes=curvedFt>0?Math.ceil(curvedFt/(curveIn/12)):0;
+  const totalSpikes=straightSpikes+curveSpikes;
+  const purchasedLength=edgingSections*stockFt;
+  const price=Math.max(0,parseFloat($('price').value)||0);
+  const currency=($('currency').value||'$').trim()||'$';
+  const cost=price>0?edgingSections*price:null;
+  const u=displayUnit();
+  const toU=ft=>metric()?ft*0.3048:ft;
+  const result=$('result');
+  result.innerHTML='<h2>Your edge restraint estimate</h2>'+
+    '<div class="result-grid">'+
+    '<div class="metric"><strong>Open edge</strong><span>'+fmt(toU(openFt),2)+' '+u+'</span></div>'+
+    '<div class="metric"><strong>Edging sections</strong><span>'+fmt(edgingSections)+' × '+fmt(toU(stockFt),2)+' '+u+'</span></div>'+
+    '<div class="metric"><strong>Total spikes</strong><span>'+fmt(totalSpikes)+'</span></div>'+
+    '<div class="metric"><strong>Estimated cost</strong><span>'+(cost===null?'—':currency+fmt(cost,2))+'</span></div>'+
+    '</div>'+
+    '<div class="note"><strong>Breakdown:</strong> '+fmt(toU(straightFt),2)+' '+u+' straight → '+fmt(straightSpikes)+' spikes; '+fmt(toU(curvedFt),2)+' '+u+' curved → '+fmt(curveSpikes)+' spikes. Edging allowance: '+fmt(waste*100,1)+'%.</div>'+
+    '<div class="ok"><strong>Purchase length:</strong> '+fmt(toU(purchasedLength),2)+' '+u+' of stock edging. The sections are rounded up to whole pieces.</div>'+
+    '<div class="actions"><button id="copyResult" type="button" class="secondary">Copy shopping summary</button><span id="copyStatus" class="copy-status"></span></div>';
+  $('copyResult').addEventListener('click',async function(){
+    const text='Paver edge restraint estimate\nOpen edge: '+fmt(toU(openFt),2)+' '+u+'\nEdging: '+edgingSections+' sections x '+fmt(toU(stockFt),2)+' '+u+'\nStraight spikes: '+straightSpikes+'\nCurve spikes: '+curveSpikes+'\nTotal spikes: '+totalSpikes+'\nAllowance: '+fmt(waste*100,1)+'%'+(cost!==null?'\nEstimated cost: '+currency+fmt(cost,2):'');
+    try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
+  });
+}
+$('units').addEventListener('change',function(){
+  const toMetric=this.value==='metric'; convertValues(toMetric); updateLabels(); calculate();
+});
+$('mode').addEventListener('change',setMode);
+$('edgeForm').addEventListener('submit',e=>{e.preventDefault();calculate()});
+$('reset').addEventListener('click',function(){
+  $('units').value='imperial';$('mode').value='rectangle';$('length').value='20';$('width').value='12';$('restrained').value='12';$('openEdge').value='0';$('curved').value='0';$('stock').value='8';$('straightSpacing').value='12';$('curveSpacing').value='6';$('waste').value='5';$('price').value='';$('currency').value='$';updateLabels();setMode();
+});
+['length','width','restrained','openEdge','curved','stock','straightSpacing','curveSpacing','waste','price','currency'].forEach(id=>$(id).addEventListener('input',calculate));
+updateLabels();setMode();
+})();
+</script>
+<style id="tool-header-search-style">
+.tool-page .site-header .header-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex:0 0 auto!important;margin-left:auto!important}.tool-page .site-header .menu-btn{display:grid!important}
+.tool-page .site-header .search-panel{position:absolute!important;left:20px!important;right:20px!important;top:100%!important;max-width:none!important;margin:0!important;padding:10px 14px!important;background:#fff!important;border:1px solid #d8e5f3!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;display:none}
+.tool-page .site-header .search-panel.open{display:block!important}.tool-page .site-header .mobile-nav.is-open{display:grid!important;position:absolute!important;right:20px!important;top:100%!important;width:280px!important;max-width:calc(100vw - 40px)!important;margin:0!important;padding:8px!important;gap:5px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important}
+.tool-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;background:#fff!important;color:#334155!important;text-decoration:none!important}
+#toolHeaderSearchResults a{display:block;padding:9px 11px;border:1px solid #e0e9f3;border-radius:9px;background:#f7fafe;color:#294b70;text-decoration:none;font-weight:700;font-size:13px}#toolHeaderSearchResults a:hover{background:#eaf2ff;border-color:#cfe0ff;color:#1759c9}.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}
+@media(max-width:820px){.tool-page .site-header .search-panel{left:12px!important;right:12px!important;padding:8px!important}.tool-page .site-header .mobile-nav.is-open{right:12px!important;left:12px!important;width:auto!important;max-width:none!important}}
+</style>
+<script>(function(){'use strict';const searchBtn=document.getElementById('toolHeaderSearch'),searchPanel=document.getElementById('toolHeaderSearchPanel'),searchForm=document.getElementById('toolHeaderSearchForm'),searchInput=document.getElementById('toolHeaderSearchInput'),searchResults=document.getElementById('toolHeaderSearchResults'),menuBtn=document.getElementById('toolHeaderMenu'),menu=document.getElementById('toolHeaderMenuPanel');const tools=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];function render(q){if(!searchResults)return;const term=String(q||'').trim().toLowerCase();const matches=(term?tools.filter(t=>(t.title+' '+(t.description||'')+' '+(t.keywords||[]).join(' ')).toLowerCase().includes(term)):tools).slice(0,8);searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+t.href+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>'}function closeSearch(){searchPanel&&searchPanel.classList.remove('open');searchBtn&&searchBtn.setAttribute('aria-expanded','false')}function closeMenu(){menu&&menu.classList.remove('is-open');menuBtn&&menuBtn.setAttribute('aria-expanded','false')}render('');searchBtn&&searchBtn.addEventListener('click',function(e){e.stopPropagation();const open=!searchPanel.classList.contains('open');closeMenu();searchPanel.classList.toggle('open',open);searchBtn.setAttribute('aria-expanded',String(open));if(open&&searchInput)searchInput.focus()});searchInput&&searchInput.addEventListener('input',function(){render(searchInput.value)});searchForm&&searchInput&&searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q)});menuBtn&&menu&&menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open))});document.addEventListener('click',function(e){if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu()})})();</script>
+</body>
+</html>

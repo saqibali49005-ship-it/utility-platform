@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#111827"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<title>Sod Staple Calculator - Calculate Sod Staples &amp; Pins</title>
+<meta name="description" content="Calculate how many sod staples, sod pins or landscape staples you need from area, spacing, edges and seams. Get package quantities in imperial or metric units."/>
+<link href="https://zemtools.com/sod-staple-calculator/" rel="canonical"/>
+<meta content="Sod Staple Calculator - Calculate Sod Staples &amp; Pins" property="og:title"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Calculate sod staples, sod pins or landscape staples from lawn area, spacing, edges, seams and package size." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://zemtools.com/sod-staple-calculator/" property="og:url"/>
+<meta content="https://zemtools.com/social-preview.png" property="og:image"/>
+<meta content="Utility Platform — Practical Online Tools" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Sod Staple Calculator - Calculate Sod Staples &amp; Pins" name="twitter:title"/>
+<meta content="Calculate sod staples, sod pins or landscape staples from area, spacing, edges, seams and package size." name="twitter:description"/>
+<meta content="https://zemtools.com/social-preview.png" name="twitter:image"/>
+<meta content="index,follow" name="robots"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Sod Staple Calculator","url":"https://zemtools.com/sod-staple-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate sod staples or landscape pins from area, staple spacing, edges, seams and extra allowance.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},{"@type":"ListItem","position":3,"name":"Sod Staple Calculator","item":"https://zemtools.com/sod-staple-calculator/"}]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-related-tools.css">
+<style>
+.sod-tool{width:100%;max-width:none;min-width:0;overflow-x:hidden}
+.sod-tool .site-header{width:100%;max-width:none}.sod-tool .header-inner{width:100%;max-width:1180px;box-sizing:border-box}
+.sod-tool .search-panel,.sod-tool .mobile-nav{width:100%;box-sizing:border-box}
+.sod-tool main,.sod-tool section,.sod-tool article,.sod-tool .hero-shell,.sod-tool .hero,.sod-tool .layout,.sod-tool .card{width:100%;max-width:100%;min-width:0}
+.sod-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sod-tool .field{min-width:0}.sod-tool .field.full{grid-column:1/-1}
+.sod-tool input,.sod-tool select,.sod-tool button{max-width:100%;box-sizing:border-box}
+.sod-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:12px 14px;font:inherit;font-size:17px}
+.sod-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.4}
+.sod-tool .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.sod-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.sod-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.sod-tool .result{background:linear-gradient(180deg,#fbfffd,#f2fff7)}
+.sod-tool .result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.sod-tool .metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.sod-tool .metric strong{display:block;color:#102f54;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.sod-tool .metric span{display:block;margin-top:3px;font-size:18px;font-weight:900;color:#102f54}
+.sod-tool .note,.sod-tool .warn,.sod-tool .ok{padding:13px 14px;border-radius:12px;margin-top:12px}
+.sod-tool .note{border:1px solid #cfe2f8;background:#eff7ff;color:#244c73}
+.sod-tool .warn{border:1px solid #efd59a;background:#fff9e9;color:#745000}
+.sod-tool .ok{border:1px solid #c9ecd8;background:#f2fff7;color:#1e6240}
+.sod-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto}
+.sod-tool .hidden{display:none!important}.sod-tool .copy-status{color:var(--muted);font-size:13px}
+@media(max-width:700px){.sod-tool .tool-grid,.sod-tool .result-grid{grid-template-columns:1fr}.sod-tool .actions{flex-direction:column;align-items:stretch}.sod-tool .actions button{width:100%}.sod-tool .card{width:100%}}
+@media(max-width:430px){.sod-tool .hero h1{font-size:27px;line-height:1.08}.sod-tool .hero p{font-size:14px;line-height:1.45}.sod-tool .card{padding:18px 16px}}
+</style>
+</head>
+<body class="tool-page sod-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="home-construction/">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Sod Staple Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🌱</div><div><h1>Sod Staple Calculator</h1><p>Calculate how many sod staples, sod pins or landscape staples you need from your area, staple spacing, edges, seams and extra allowance — then convert the result into a practical purchase quantity.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Plan more than area × one fixed rate</strong>Use a base staple spacing, then add separate edge and seam requirements and an adjustable extra allowance. This gives you a transparent planning estimate you can adapt to the sod type, site and installation instructions.</div></div>
+</section>
+
+<section class="layout" aria-label="Sod staple calculator">
+<article class="card tool-card">
+<h2>Build Your Sod Staple Plan</h2>
+<p class="hint">Start with the sod area. Add edge and seam lengths when you want a more site-specific estimate.</p>
+<form id="sodForm">
+<div class="tool-grid">
+<div class="field"><label for="units">Measurement system</label><select id="units"><option value="imperial" selected>Imperial (ft / in)</option><option value="metric">Metric (m / cm)</option></select><span class="field-help">Choose the units used for area and spacing.</span></div>
+<div class="field"><label for="area">Sod area <span class="area-unit">(sq ft)</span></label><input id="area" type="number" min="0" step="0.01" value="1000" inputmode="decimal"><span class="field-help">Use the total area covered by sod.</span></div>
+<div class="field"><label for="spacing">Base staple spacing <span class="length-unit">(ft)</span></label><input id="spacing" type="number" min="0.01" step="0.01" value="5" inputmode="decimal"><span class="field-help">Average spacing for the main sod field. Follow your sod/product instructions when they specify a different pattern.</span></div>
+<div class="field"><label for="edgeSpacing">Edge staple spacing <span class="length-unit">(ft)</span></label><input id="edgeSpacing" type="number" min="0.01" step="0.01" value="1" inputmode="decimal"><span class="field-help">Closer spacing for exposed edges or other areas that need extra holding.</span></div>
+<div class="field"><label for="edgeLength">Total exposed edge length <span class="length-unit">(ft)</span></label><input id="edgeLength" type="number" min="0" step="0.1" value="0" inputmode="decimal"><span class="field-help">Optional. Enter the combined perimeter/edge length where you want dedicated edge staples.</span></div>
+<div class="field"><label for="seamSpacing">Seam staple spacing <span class="length-unit">(ft)</span></label><input id="seamSpacing" type="number" min="0.01" step="0.01" value="1" inputmode="decimal"><span class="field-help">Spacing along sod seams when you want a separate seam allowance.</span></div>
+<div class="field"><label for="seamLength">Total seam length <span class="length-unit">(ft)</span></label><input id="seamLength" type="number" min="0" step="0.1" value="0" inputmode="decimal"><span class="field-help">Optional. Add all seam lengths together.</span></div>
+<div class="field"><label for="extra">Extra / waste allowance (%)</label><input id="extra" type="number" min="0" max="100" step="1" value="10" inputmode="numeric"><span class="field-help">Covers missed placements, damaged staples and site-specific adjustments.</span></div>
+<div class="field"><label for="packSize">Staples per package</label><input id="packSize" type="number" min="1" step="1" value="100" inputmode="numeric"><span class="field-help">Enter the package size you plan to buy.</span></div>
+<div class="field full"><div class="actions"><button type="submit">Calculate Staples</button><button type="button" class="secondary" id="reset">Reset</button><span id="error" class="copy-status"></span></div></div>
+</div>
+</form>
+</article>
+
+<article class="card result" id="result">
+<h2>Your sod staple estimate</h2>
+<p class="hint">Enter your project details and calculate.</p>
+</article>
+</section>
+
+<section class="card">
+<h2>How to Calculate Sod Staples</h2>
+<div class="formula">
+Base staples = ceil(sod area ÷ area covered per staple)<br>
+Edge staples = ceil(exposed edge length ÷ edge staple spacing)<br>
+Seam staples = ceil(total seam length ÷ seam staple spacing)<br>
+Planning total = (base + edge + seam) × (1 + extra allowance)<br>
+Packages = ceil(planning total ÷ staples per package)
+</div>
+<p class="small">The calculator keeps each component visible so you can audit and adjust the estimate. Staple spacing is not a universal installation standard; use the manufacturer's or installer’s instructions for your specific sod, soil and site conditions.</p>
+</section>
+
+<section class="card">
+<h2>Sod Staple Planning Guide</h2>
+<ul class="small-list">
+<li>Use the base spacing as a planning assumption, not as a universal rule. Different sod, soil, weather and slope conditions can require different staple patterns.</li>
+<li>Edges and seams can need more attention than the middle of a lawn. Enter those lengths separately when you want the estimate to reflect your layout.</li>
+<li>Slopes, curves, soft soil and wind-exposed areas can increase the practical quantity required. Use the extra allowance to avoid an artificially tight purchase estimate.</li>
+<li>Package size is included because buying 1,037 individual staples is different from buying 11 packs of 100.</li>
+</ul>
+<div class="warn"><strong>Before installation:</strong> verify staple type, length, spacing and placement with the sod supplier or installation instructions. This tool is a quantity-planning aid, not an installation specification.</div>
+</section>
+
+<section class="card">
+<h2>Sod Staple Calculator FAQs</h2>
+<details><summary>How many sod staples do I need?</summary><p>Enter the sod area and your chosen base spacing. The calculator estimates the main-field staples, then adds any edge and seam quantities and your selected extra allowance.</p></details>
+<details><summary>How far apart should sod staples be?</summary><p>There is no single spacing that fits every sod installation. The calculator lets you choose the spacing so the estimate can follow the instructions for your particular sod and site.</p></details>
+<details><summary>Should I use more staples on edges?</summary><p>Edges can be more vulnerable to lifting or movement. If your installation plan calls for closer edge placement, enter the edge length and edge spacing separately.</p></details>
+<details><summary>How do I calculate staples for sod seams?</summary><p>Add the total length of the seams and choose the staple spacing you want to use along those seams. The tool adds that requirement to the main-area and edge estimates.</p></details>
+<details><summary>Does this work for landscape fabric pins?</summary><p>The arithmetic can also be used as a planning framework for similar landscape staples or pins, but product shape, holding power and installation instructions differ. Use the correct product guidance for the material you are securing.</p></details>
+</section>
+
+<section class="card"><h2>Sod Staple Spacing Guide</h2><p class="small">Need help choosing a spacing assumption before calculating? Read the practical guide for main areas, edges, seams and site conditions.</p><div class="actions"><a class="related-item" href="sod-staple-spacing-guide/" style="text-decoration:none;color:inherit"><div><strong>Read the Sod Staple Spacing Guide</strong><span>Understand spacing and quantity-planning considerations before you buy.</span></div><span aria-hidden="true">›</span></a></div></section>
+
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function toSqFt(v){return $('units').value==='metric'?v*10.7639104167:v}
+function toFt(v){return $('units').value==='metric'?v*3.280839895:v}
+function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
+function updateLabels(){
+ const m=$('units').value==='metric';
+ document.querySelector('.area-unit').textContent=m?'(m²)':'(sq ft)';
+ document.querySelectorAll('.length-unit').forEach(x=>x.textContent=m?'(m)':'(ft)');
+}
+function convert(oldMetric,newMetric){
+ const areaRatio=newMetric?0.09290304:10.7639104167;
+ const lengthRatio=newMetric?0.3048:3.280839895;
+ $('area').value=(parseFloat($('area').value)||0)*areaRatio;
+ ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=((parseFloat($(id).value)||0)*lengthRatio).toFixed(2)});
+}
+function calculate(){
+ const err=$('error');err.textContent='';
+ const area=parseFloat($('area').value)||0, spacing=parseFloat($('spacing').value)||0;
+ const edgeSpacing=parseFloat($('edgeSpacing').value)||0, edgeLength=parseFloat($('edgeLength').value)||0;
+ const seamSpacing=parseFloat($('seamSpacing').value)||0, seamLength=parseFloat($('seamLength').value)||0;
+ const extra=Math.max(0,Math.min(100,parseFloat($('extra').value)||0))/100;
+ const pack=Math.max(1,Math.floor(parseFloat($('packSize').value)||1));
+ if(area<=0||spacing<=0||edgeSpacing<=0||seamSpacing<=0){err.textContent='Enter positive area and spacing values.';return}
+ const areaFt=toSqFt(area), spacingFt=toFt(spacing), edgeSpacingFt=toFt(edgeSpacing), edgeFt=toFt(edgeLength), seamSpacingFt=toFt(seamSpacing), seamFt=toFt(seamLength);
+ const base=Math.ceil(areaFt/(spacingFt*spacingFt));
+ const edge=edgeFt>0?Math.ceil(edgeFt/edgeSpacingFt):0;
+ const seam=seamFt>0?Math.ceil(seamFt/seamSpacingFt):0;
+ const subtotal=base+edge+seam, total=Math.ceil(subtotal*(1+extra)), packages=Math.ceil(total/pack);
+ const r=$('result');
+ r.innerHTML='<h2>Your sod staple estimate</h2><div class="result-grid">'
+  +'<div class="metric"><strong>Total staples</strong><span>'+fmt(total)+'</span></div>'
+  +'<div class="metric"><strong>Packages</strong><span>'+fmt(packages)+' × '+fmt(pack)+' staples</span></div>'
+  +'<div class="metric"><strong>Main field</strong><span>'+fmt(base)+'</span></div>'
+  +'<div class="metric"><strong>Edges + seams</strong><span>'+fmt(edge+seam)+'</span></div>'
+  +'</div>'
+  +'<div class="note"><strong>Planning breakdown:</strong> '+fmt(base)+' base + '+fmt(edge)+' edge + '+fmt(seam)+' seam = '+fmt(subtotal)+' before '+fmt(extra*100)+'% extra allowance. Purchase quantity rounds up to whole packages.</div>'
+  +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy staple summary</button><span id="copyStatus" class="copy-status"></span></div>';
+ $('copyResult').addEventListener('click',async function(){
+   const text='Sod staple estimate\nTotal staples: '+total+'\nPackages: '+packages+' x '+pack+'\nBase: '+base+'\nEdge: '+edge+'\nSeams: '+seam+'\nExtra allowance: '+fmt(extra*100)+'%';
+   try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
+ });
+}
+$('units').addEventListener('change',function(){const nowMetric=this.value==='metric';convert(!nowMetric,nowMetric);updateLabels();calculate()});
+$('sodForm').addEventListener('submit',e=>{e.preventDefault();calculate()});
+$('reset').addEventListener('click',function(){$('units').value='imperial';$('area').value='1000';$('spacing').value='5';$('edgeSpacing').value='1';$('edgeLength').value='0';$('seamSpacing').value='1';$('seamLength').value='0';$('extra').value='10';$('packSize').value='100';updateLabels();calculate()});
+['area','spacing','edgeSpacing','edgeLength','seamSpacing','seamLength','extra','packSize'].forEach(id=>$(id).addEventListener('input',calculate));
+updateLabels();calculate();
+})();
+</script>
+<style id="tool-header-search-style">.tool-page .site-header .header-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex:0 0 auto!important;margin-left:auto!important}.tool-page .site-header .menu-btn{display:grid!important}.tool-page .site-header .search-panel{position:absolute!important;left:20px!important;right:20px!important;top:100%!important;max-width:none!important;margin:0!important;padding:10px 14px!important;background:#fff!important;border:1px solid #d8e5f3!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;display:none}.tool-page .site-header .search-panel.open{display:block!important}.tool-page .site-header .mobile-nav.is-open{display:grid!important;position:absolute!important;right:20px!important;top:100%!important;width:280px!important;max-width:calc(100vw - 40px)!important;margin:0!important;padding:8px!important;gap:5px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important}.tool-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;background:#fff!important;color:#334155!important;text-decoration:none!important}#toolHeaderSearchResults a{display:block;padding:9px 11px;border:1px solid #e0e9f3;border-radius:9px;background:#f7fafe;color:#294b70;text-decoration:none;font-weight:700;font-size:13px}#toolHeaderSearchResults a:hover{background:#eaf2ff;border-color:#cfe0ff;color:#1759c9}.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}@media(max-width:820px){.tool-page .site-header .search-panel{left:12px!important;right:12px!important;padding:8px!important}.tool-page .site-header .mobile-nav.is-open{right:12px!important;left:12px!important;width:auto!important;max-width:none!important}}</style><script>(function(){'use strict';const searchBtn=document.getElementById('toolHeaderSearch'),searchPanel=document.getElementById('toolHeaderSearchPanel'),searchForm=document.getElementById('toolHeaderSearchForm'),searchInput=document.getElementById('toolHeaderSearchInput'),searchResults=document.getElementById('toolHeaderSearchResults'),menuBtn=document.getElementById('toolHeaderMenu'),menu=document.getElementById('toolHeaderMenuPanel');const tools=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];function render(q){if(!searchResults)return;const term=String(q||'').trim().toLowerCase();const matches=(term?tools.filter(t=>(t.title+' '+(t.description||'')+' '+(t.keywords||[]).join(' ')).toLowerCase().includes(term)):tools).slice(0,8);searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+t.href+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>'}function closeSearch(){searchPanel&&searchPanel.classList.remove('open');searchBtn&&searchBtn.setAttribute('aria-expanded','false')}function closeMenu(){menu&&menu.classList.remove('is-open');menuBtn&&menuBtn.setAttribute('aria-expanded','false')}render('');searchBtn&&searchBtn.addEventListener('click',function(e){e.stopPropagation();const open=!searchPanel.classList.contains('open');closeMenu();searchPanel.classList.toggle('open',open);searchBtn.setAttribute('aria-expanded',String(open));if(open&&searchInput)searchInput.focus()});searchInput&&searchInput.addEventListener('input',function(){render(searchInput.value)});searchForm&&searchInput&&searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q)});menuBtn&&menu&&menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open))});document.addEventListener('click',function(e){if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu()})})();</script>
+</body>
+</html>

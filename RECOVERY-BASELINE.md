@@ -26,7 +26,7 @@ Final backup branch:
 The final audit included site structure, assets, metadata/canonical basics, sitemap/robots, accessibility basics, homepage search, and functional edge-case review of the four current tools. The final code fixes included Gravel unit conversion on unit switching and stricter UUID normalization/validation.
 
 ## Live site
-https://saqibali49005-ship-it.github.io/utility-platform/
+https://zemtools.com/
 
 ## Launch validation limitation
 Repository/code checks were completed through GitHub. Real-device rendering, Lighthouse/PageSpeed measurements, Search Console indexing status, and production analytics/ad configuration require direct access to those external environments and are not represented as verified here.

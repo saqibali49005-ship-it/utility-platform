@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="https://zemtools.com/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Conduit Fill Calculator | NEC Raceway Fill & Minimum Conduit Size</title>
+<meta name="description" content="Calculate conduit fill for mixed conductors, check NEC raceway fill limits, and find the smallest compliant conduit size for EMT, IMC, RMC and PVC.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zemtools.com/conduit-fill-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conduit Fill Calculator">
+<meta property="og:description" content="Check raceway fill, compare conduit sizes and find the smallest conduit for your conductor combination.">
+<meta property="og:url" content="https://zemtools.com/conduit-fill-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="master-tool-design.css">
+<link rel="stylesheet" href="master-related-tools.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Conduit Fill Calculator","url":"https://zemtools.com/conduit-fill-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level conduit fill calculator using NEC Chapter 9 raceway and conductor area rules."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Energy & Electrical","item":"https://zemtools.com/energy-electrical/"},{"@type":"ListItem","position":3,"name":"Conduit Fill Calculator","item":"https://zemtools.com/conduit-fill-calculator/"}]}</script>
+<style>
+.conduit-tool .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 18px}
+.conduit-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}
+.conduit-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}
+.conduit-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}
+.conduit-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}
+.conduit-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}
+.conduit-tool .conductor-row{display:grid;grid-template-columns:1.05fr 1.15fr 1.05fr 76px 42px;gap:8px;align-items:end;padding:12px 0;border-bottom:1px solid #e4edf5}
+.conduit-tool .conductor-row:first-child{padding-top:0}
+.conduit-tool .conductor-row .field{margin:0}
+.conduit-tool .row-label{font-size:11px;font-weight:900;color:#6a7d94;text-transform:uppercase;letter-spacing:.35px;margin-bottom:6px;display:block}
+.conduit-tool .remove-row{min-height:44px;border:1px solid #e0c9c9;background:#fff7f7;color:#9b3c3c;border-radius:10px;font-weight:900;cursor:pointer}
+.conduit-tool .add-row{margin-top:12px;border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}
+.conduit-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.conduit-tool .result-grid .stat-wide{grid-column:1/-1}
+.conduit-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}
+.conduit-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}
+.conduit-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}
+.conduit-tool .size-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.conduit-tool .size-table th,.conduit-tool .size-table td{padding:9px 7px;border-bottom:1px solid #e4edf5;text-align:left}
+.conduit-tool .size-table th{font-size:11px;text-transform:uppercase;letter-spacing:.35px;color:#6a7d94}
+.conduit-tool .size-table .pass{font-weight:900;color:#176b3a}
+.conduit-tool .size-table .fail{color:#8b4b4b}
+.conduit-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}
+.conduit-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}
+.conduit-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}
+.conduit-tool .toggle-line{display:flex;align-items:center;gap:9px;margin:0 0 14px;font-size:13px;color:#36506d;font-weight:800}
+.conduit-tool .toggle-line input{width:18px;height:18px}
+.conduit-tool .hidden{display:none!important}
+@media(max-width:700px){
+ .conduit-tool .choice-grid{grid-template-columns:1fr}
+ .conduit-tool .conductor-row{grid-template-columns:1fr 1fr 1fr 72px 42px}
+ .conduit-tool .conductor-row .field:first-child{grid-column:1/-1}
+ .conduit-tool .result-grid{grid-template-columns:1fr}
+ .conduit-tool .result-grid .stat-wide{grid-column:auto}
+}
+@media(max-width:430px){
+ .conduit-tool .conductor-row{grid-template-columns:1fr 1fr}
+ .conduit-tool .conductor-row .field:first-child{grid-column:1/-1}
+ .conduit-tool .conductor-row .remove-row{width:100%}
+}
+</style>
+</head>
+<body class="tool-page conduit-page">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content" class="conduit-tool">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="energy-electrical/">Energy &amp; Electrical</a><span class="crumb-sep">›</span><span>Conduit Fill Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">◉</div><div><h1>Conduit Fill Calculator</h1><p>Check raceway fill, compare conduit sizes, and find the smallest conduit that fits your conductor combination.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Built for mixed-conductor sizing</strong> Add conductors by size, insulation and quantity, choose the raceway type, and get total conductor area, allowable fill, fill percentage and the smallest compliant conduit size.</div></div>
+</section>
+
+<section class="layout" aria-label="Conduit fill calculator">
+<article class="card tool-card">
+<div class="card-head"><h2>Size Your Raceway</h2><button id="clearBtn" class="secondary" type="button">↻ Clear</button></div>
+
+<div class="section-label">1. Raceway</div>
+<div class="field"><label for="raceway">Conduit type</label><select id="raceway">
+<option value="emt">EMT</option><option value="imc">IMC</option><option value="rmc">RMC / GRC</option><option value="pvc40">PVC Schedule 40</option><option value="pvc80">PVC Schedule 80</option><option value="ent">ENT</option><option value="fmc">FMC</option><option value="lfmc">LFMC</option><option value="lfnc">LFNC-B</option>
+</select></div>
+<div class="field"><label for="tradeSize">Trade size</label><select id="tradeSize"></select></div>
+<label class="toggle-line"><input id="nipple" type="checkbox"> Nipple ≤ 24 in between enclosures (use 60% fill limit)</label>
+
+<div class="section-label">2. Conductors</div>
+<div id="rows"></div>
+<button id="addRow" class="add-row" type="button">+ Add conductor group</button>
+
+<div class="section-label">3. Check</div>
+<div class="choice-grid" role="group" aria-label="Calculator mode">
+<button class="choice active" data-mode="selected" type="button">Check selected size</button>
+<button class="choice" data-mode="minimum" type="button">Find minimum size</button>
+</div>
+
+<button id="calculateBtn" class="primary" type="button">⚡ Calculate Conduit Fill →</button>
+<div class="danger-note">Planning aid only. Raceway fill is one code check; conductor ampacity, derating, bending space, pull conditions, grounding/bonding and local code requirements may also apply. Verify the adopted electrical code and the actual conductor/raceway manufacturer's data before installation.</div>
+</article>
+
+<aside class="card result-card" aria-live="polite">
+<h2>▥ &nbsp; Fill Result</h2>
+<div id="status" class="status">Enter your raceway and conductors, then calculate.</div>
+<div class="result-main"><div class="result-label">Recommended / selected conduit</div><div id="recommended" class="result-value">—</div><div id="recommendedSub" class="result-sub">Your result will appear here.</div></div>
+<div class="result-grid">
+<div class="stat"><div class="stat-icon">∑</div><strong>Conductor Area</strong><span id="totalArea">—</span></div>
+<div class="stat"><div class="stat-icon">%</div><strong>Fill Used</strong><span id="fillPct">—</span></div>
+<div class="stat"><div class="stat-icon">▣</div><strong>Allowable Area</strong><span id="allowedArea">—</span></div>
+<div class="stat"><div class="stat-icon">#</div><strong>Conductor Count</strong><span id="count">—</span></div>
+<div class="stat stat-wide"><div class="stat-icon">↔</div><strong>Remaining Capacity</strong><span id="remaining">—</span></div>
+</div>
+<div class="comparison"><strong>Minimum size comparison</strong><div id="comparison"></div></div>
+</aside>
+</section>
+
+<section class="support-grid">
+<article class="card"><h2>How Fill Is Calculated</h2><p>The calculator sums the cross-sectional area of every conductor, including the equipment grounding conductor, then compares that total with the permitted percentage of the raceway's internal area.</p></article>
+<article class="card"><h2>NEC Fill Limits</h2><p>For the standard Chapter 9 fill calculation, the commonly used limits are 53% for one conductor, 31% for two conductors and 40% for more than two. A nipple 24 inches or less can use the 60% exception.</p></article>
+<article class="card"><h2>Formula</h2><div class="formula">Fill % = total conductor area ÷ allowable raceway area × 100</div><p>The allowable area changes with conductor count and the selected raceway type and trade size.</p></article>
+</section>
+
+<section class="card faq-card">
+<h2>Frequently Asked Questions</h2>
+<div class="faq"><button type="button"><span>Does the equipment grounding conductor count toward conduit fill?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. The equipment grounding conductor occupies physical space in the raceway and is included in the conductor-area total for the fill calculation.</div></div>
+<div class="faq"><button type="button"><span>What are the normal NEC conduit-fill percentages?</span><span class="faq-icon">+</span></button><div class="faq-answer">The standard Chapter 9 Table 1 limits are 53% for one conductor, 31% for two conductors and 40% for more than two conductors. A qualifying nipple 24 inches or less between enclosures can use the 60% rule.</div></div>
+<div class="faq"><button type="button"><span>Is conduit fill the same as wire derating?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Fill controls physical space inside the raceway. Ampacity adjustment or derating is a separate check that can reduce allowable conductor current when multiple current-carrying conductors share a raceway.</div></div>
+<div class="faq"><button type="button"><span>Can I mix different wire sizes and insulation types?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. This calculator is designed around conductor groups, so you can add different AWG sizes and insulation types and sum their individual areas before checking the raceway limit.</div></div>
+<div class="faq"><button type="button"><span>Does passing conduit fill mean the installation is code compliant?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Raceway fill is only one part of an electrical installation. Check ampacity, derating, temperature, grounding and bonding, conductor protection, bending space, pull conditions and the code adopted by your jurisdiction.</div></div>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
+<a class="related-item" href="wire-size-calculator/"><div><strong>Wire Size &amp; Voltage Drop Calculator</strong><span>Estimate conductor size and voltage drop before checking raceway fill.</span></div><span aria-hidden="true">›</span></a>
+</div></section>
+
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<script src="tools-data.js"></script>
+<script src="master-ui.js?v=20260920-11"></script>
+<script>
+(function(){
+'use strict';
+const raceways={
+ emt:{label:'EMT',sizes:{'1/2"':0.304,'3/4"':0.533,'1"':0.864,'1-1/4"':1.496,'1-1/2"':2.036,'2"':3.356,'2-1/2"':5.858,'3"':8.846,'3-1/2"':11.545,'4"':14.753}},
+ imc:{label:'IMC',sizes:{'1/2"':0.342,'3/4"':0.586,'1"':0.959,'1-1/4"':1.647,'1-1/2"':2.225,'2"':3.630,'2-1/2"':5.135,'3"':7.922,'3-1/2"':10.584,'4"':13.631}},
+ rmc:{label:'RMC / GRC',sizes:{'1/2"':0.314,'3/4"':0.549,'1"':0.887,'1-1/4"':1.526,'1-1/2"':2.071,'2"':3.408,'2-1/2"':4.866,'3"':7.499,'3-1/2"':10.010,'4"':12.882,'5"':20.212,'6"':29.158}},
+ pvc40:{label:'PVC Schedule 40',sizes:{'1/2"':0.285,'3/4"':0.508,'1"':0.832,'1-1/4"':1.453,'1-1/2"':1.986,'2"':3.291,'2-1/2"':4.695,'3"':7.268,'3-1/2"':9.737,'4"':12.554,'5"':19.761,'6"':28.567}},
+ pvc80:{label:'PVC Schedule 80',sizes:{'1/2"':0.217,'3/4"':0.409,'1"':0.688,'1-1/4"':1.237,'1-1/2"':1.711,'2"':2.874,'2-1/2"':4.119,'3"':6.442,'3-1/2"':8.688,'4"':11.258,'5"':17.855,'6"':25.598}},
+ ent:{label:'ENT',sizes:{'1/2"':0.285,'3/4"':0.508,'1"':0.832,'1-1/4"':1.453,'1-1/2"':1.986,'2"':3.291}},
+ fmc:{label:'FMC',sizes:{'3/8"':0.116,'1/2"':0.317,'3/4"':0.533,'1"':0.817,'1-1/4"':1.277,'1-1/2"':1.858,'2"':3.269,'2-1/2"':4.909,'3"':7.069,'3-1/2"':9.621,'4"':12.566}},
+ lfmc:{label:'LFMC',sizes:{'3/8"':0.192,'1/2"':0.314,'3/4"':0.541,'1"':0.873,'1-1/4"':1.528,'1-1/2"':1.981,'2"':3.246,'2-1/2"':4.881,'3"':7.475,'3-1/2"':9.731,'4"':12.692}},
+ lfnc:{label:'LFNC-B',sizes:{'3/8"':0.192,'1/2"':0.314,'3/4"':0.541,'1"':0.873,'1-1/4"':1.528,'1-1/2"':1.981,'2"':3.246,'2-1/2"':null,'3"':null,'3-1/2"':null,'4"':null}}
+};
+const conductorAreas={
+ '14|THHN/THWN-2':0.0097,'12|THHN/THWN-2':0.0133,'10|THHN/THWN-2':0.0211,'8|THHN/THWN-2':0.0366,'6|THHN/THWN-2':0.0507,'4|THHN/THWN-2':0.0824,'3|THHN/THWN-2':0.0973,'2|THHN/THWN-2':0.1158,'1|THHN/THWN-2':0.1562,'1/0|THHN/THWN-2':0.1855,'2/0|THHN/THWN-2':0.2223,'3/0|THHN/THWN-2':0.2679,'4/0|THHN/THWN-2':0.3237,
+ '14|XHHW-2':0.0114,'12|XHHW-2':0.0158,'10|XHHW-2':0.0247,'8|XHHW-2':0.0437,'6|XHHW-2':0.0589,'4|XHHW-2':0.0950,'3|XHHW-2':0.1116,'2|XHHW-2':0.1333,'1|XHHW-2':0.1781,'1/0|XHHW-2':0.2121,'2/0|XHHW-2':0.2537,'3/0|XHHW-2':0.3010,'4/0|XHHW-2':0.3650,
+ '14|THW/THWN':0.0130,'12|THW/THWN':0.0173,'10|THW/THWN':0.0275,'8|THW/THWN':0.0482,'6|THW/THWN':0.0629,'4|THW/THWN':0.1019,'3|THW/THWN':0.1196,'2|THW/THWN':0.1425,'1|THW/THWN':0.1901,'1/0|THW/THWN':0.2275,'2/0|THW/THWN':0.2714,'3/0|THW/THWN':0.3237,'4/0|THW/THWN':0.3917,
+ '14|Bare':0.0031,'12|Bare':0.0056,'10|Bare':0.0096,'8|Bare':0.0165,'6|Bare':0.0259,'4|Bare':0.0462,'3|Bare':0.0550,'2|Bare':0.0636,'1|Bare':0.0811,'1/0|Bare':0.0973,'2/0|Bare':0.1148,'3/0|Bare':0.1373,'4/0|Bare':0.1650
+};
+const sizes=['14','12','10','8','6','4','3','2','1','1/0','2/0','3/0','4/0'];
+const insulations=['THHN/THWN-2','XHHW-2','THW/THWN','Bare'];
+let mode='selected';
+const $=id=>document.getElementById(id);
+function options(list,value){return list.map(x=>'<option value="'+x+'">'+x+'</option>').join('')}
+function populateSizes(){
+ const r=raceways[$('raceway').value]; $('tradeSize').innerHTML=Object.keys(r.sizes).filter(k=>r.sizes[k]).map(k=>'<option value="'+k+'">'+k+'</option>').join('');
+}
+function rowHtml(size='12',ins='THHN/THWN-2',qty=3){
+ return '<div class="conductor-row"><div class="field"><label class="row-label">Wire size</label><select class="wire-size">'+options(sizes,size)+'</select></div><div class="field"><label class="row-label">Insulation</label><select class="wire-ins">'+options(insulations,ins)+'</select></div><div class="field"><label class="row-label">Quantity</label><input class="wire-qty" type="number" min="1" step="1" value="'+qty+'"></div><div class="field"><label class="row-label">Area</label><div class="hint row-area">—</div></div><button class="remove-row" type="button" aria-label="Remove conductor group">×</button></div>';
+}
+function addRow(size,ins,qty){$('rows').insertAdjacentHTML('beforeend',rowHtml(size,ins,qty));bindRows();updateAreas()}
+function bindRows(){
+ document.querySelectorAll('.conductor-row').forEach(row=>{
+  row.querySelector('.remove-row').onclick=()=>{row.remove();if(!document.querySelector('.conductor-row'))addRow('12','THHN/THWN-2',3);calculate()};
+  row.querySelectorAll('select,input').forEach(x=>x.oninput=()=>{updateAreas();calculate()});
+ });
+}
+function updateAreas(){
+ document.querySelectorAll('.conductor-row').forEach(row=>{
+  const area=conductorAreas[row.querySelector('.wire-size').value+'|'+row.querySelector('.wire-ins').value]||0;
+  row.querySelector('.row-area').textContent=area?area.toFixed(4)+' in²':'—';
+ });
+}
+function data(){
+ let total=0,count=0,details=[];
+ document.querySelectorAll('.conductor-row').forEach(row=>{
+  const size=row.querySelector('.wire-size').value,ins=row.querySelector('.wire-ins').value,qty=Math.max(1,Number(row.querySelector('.wire-qty').value)||0),area=conductorAreas[size+'|'+ins]||0;
+  total+=qty*area;count+=qty;details.push({size,ins,qty,area});
+ });
+ return {total,count,details};
+}
+function limit(count,nipple){return nipple?0.60:count===1?0.53:count===2?0.31:0.40}
+function check(racewayKey,size,total,count,nipple){
+ const area=raceways[racewayKey].sizes[size], allowed=area*limit(count,nipple), pct=total/allowed*100;
+ return {area,allowed,pct,pass:total<=allowed+1e-12,remaining:Math.max(0,allowed-total),lim:limit(count,nipple)};
+}
+function calculate(){
+ const d=data(),rk=$('raceway').value,nipple=$('nipple').checked,selected=$('tradeSize').value;
+ if(!d.total||!d.count){$('status').className='status warn';$('status').textContent='Add at least one valid conductor group.';return}
+ let chosen=selected;
+ if(mode==='minimum'){
+  chosen=Object.keys(raceways[rk].sizes).find(s=>raceways[rk].sizes[s]&&check(rk,s,d.total,d.count,nipple).pass)||selected;
+ }
+ const c=check(rk,chosen,d.total,d.count,nipple);
+ $('recommended').textContent=chosen;
+ $('recommendedSub').textContent=raceways[rk].label+' · '+Math.round(c.lim*100)+'% fill limit · internal area '+c.area.toFixed(3)+' in²';
+ $('totalArea').textContent=d.total.toFixed(4)+' in²';
+ $('fillPct').textContent=c.pct.toFixed(1)+'%';
+ $('allowedArea').textContent=c.allowed.toFixed(4)+' in²';
+ $('count').textContent=d.count;
+ $('remaining').textContent=c.remaining.toFixed(4)+' in²';
+ $('status').className='status '+(c.pass?'ok':'warn');
+ $('status').textContent=c.pass?'PASS — conductor area is within the selected fill limit.':'OVERFILL — choose a larger conduit or reduce the conductor load.';
+ const keys=Object.keys(raceways[rk].sizes).filter(s=>raceways[rk].sizes[s]);
+ const idx=Math.max(0,keys.indexOf(chosen)-1), view=keys.slice(idx,Math.min(keys.length,idx+4));
+ $('comparison').innerHTML='<table class="size-table"><thead><tr><th>Size</th><th>Fill</th><th>Status</th></tr></thead><tbody>'+view.map(s=>{const x=check(rk,s,d.total,d.count,nipple);return '<tr><td><strong>'+s+'</strong></td><td>'+x.pct.toFixed(1)+'%</td><td class="'+(x.pass?'pass':'fail')+'">'+(x.pass?'PASS':'OVERFILL')+'</td></tr>'}).join('')+'</tbody></table><div class="note">The percentage changes automatically when the conductor count or nipple setting changes.</div>';
+}
+$('raceway').onchange=()=>{populateSizes();calculate()};
+$('tradeSize').onchange=calculate;
+$('nipple').onchange=calculate;
+$('addRow').onclick=()=>addRow('12','THHN/THWN-2',1);
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));calculate()});
+$('calculateBtn').onclick=calculate;
+$('clearBtn').onclick=()=>location.reload();
+document.querySelectorAll('.faq button').forEach(b=>b.onclick=()=>{const f=b.parentElement;f.classList.toggle('open');b.querySelector('.faq-icon').textContent=f.classList.contains('open')?'−':'+'});
+populateSizes();addRow('12','THHN/THWN-2',3);addRow('10','THHN/THWN-2',1);updateAreas();calculate();
+})();
+</script>
+<style id="tool-header-search-style">.tool-page .site-header .header-actions{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;flex:0 0 auto!important;margin-left:auto!important}.tool-page .site-header .menu-btn{display:grid!important}.tool-page .site-header .search-panel{position:absolute!important;left:20px!important;right:20px!important;top:100%!important;max-width:none!important;margin:0!important;padding:10px 14px!important;background:#fff!important;border:1px solid #d8e5f3!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important;display:none}.tool-page .site-header .search-panel.open{display:block!important}.tool-page .site-header .mobile-nav.is-open{display:grid!important;position:absolute!important;right:20px!important;top:100%!important;width:280px!important;max-width:calc(100vw - 40px)!important;margin:0!important;padding:8px!important;gap:5px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;z-index:1002!important}.tool-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;background:#fff!important;color:#334155!important;text-decoration:none!important}#toolHeaderSearchResults a{display:block;padding:9px 11px;border:1px solid #e0e9f3;border-radius:9px;background:#f7fafe;color:#294b70;text-decoration:none;font-weight:700;font-size:13px}#toolHeaderSearchResults a:hover{background:#eaf2ff;border-color:#cfe0ff;color:#1759c9}.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}@media(max-width:820px){.tool-page .site-header .search-panel{left:12px!important;right:12px!important;padding:8px!important}.tool-page .site-header .mobile-nav.is-open{right:12px!important;left:12px!important;width:auto!important;max-width:none!important}}</style><script>(function(){'use strict';const s=document.getElementById('toolHeaderSearch'),p=document.getElementById('toolHeaderSearchPanel'),f=document.getElementById('toolHeaderSearchForm'),i=document.getElementById('toolHeaderSearchInput'),r=document.getElementById('toolHeaderSearchResults'),m=document.getElementById('toolHeaderMenu'),n=document.getElementById('toolHeaderMenuPanel'),t=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];function q(v){const x=String(v||'').trim().toLowerCase(),a=(x?t.filter(z=>(z.title+' '+(z.description||'')+' '+(z.keywords||[]).join(' ')).toLowerCase().includes(x)):t).slice(0,8);r.innerHTML=a.length?a.map(z=>'<a href="'+z.href+'">'+z.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>'}function cs(){p&&p.classList.remove('open');s&&s.setAttribute('aria-expanded','false')}function cm(){n&&n.classList.remove('is-open');m&&m.setAttribute('aria-expanded','false')}q('');s&&s.addEventListener('click',e=>{e.stopPropagation();const o=!p.classList.contains('open');cm();p.classList.toggle('open',o);s.setAttribute('aria-expanded',String(o));if(o)i&&i.focus()});i&&i.addEventListener('input',()=>q(i.value));f&&i&&f.addEventListener('submit',e=>{e.preventDefault();const v=i.value.trim();if(v)location.href='tools/?q='+encodeURIComponent(v)});m&&n&&m.addEventListener('click',e=>{e.stopPropagation();const o=!n.classList.contains('is-open');cs();n.classList.toggle('is-open',o);m.setAttribute('aria-expanded',String(o))});document.addEventListener('click',e=>{if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))cs();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))cm()})})();</script>
+</body>
+</html>
