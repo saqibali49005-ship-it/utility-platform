@@ -50,3 +50,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .tools-page .site-header .mobile-nav.is-open::before,.tools-page .site-header .mobile-nav.is-open::after{display:none!important;content:none!important}
 .tools-page .site-header .mobile-nav.is-open a{display:block!important;width:100%!important;min-width:0!important;margin:0!important;padding:11px 12px!important;background:#fff!important;background-image:none!important;color:#334155!important;border:1px solid transparent!important;border-radius:9px!important;box-shadow:none!important;text-decoration:none!important}
 .tools-page .site-header .mobile-nav.is-open a:hover,.tools-page .site-header .mobile-nav.is-open a:focus-visible,.tools-page .site-header .mobile-nav.is-open a[aria-current="page"]{background:#f1f5f9!important;color:#1d4ed8!important}}
+
+/* 2026-09-22 stability patch: prevent mixed header implementations from competing. */
+.tool-page .site-header .brand .brand-copy{display:block!important}
+.tool-page .site-header .brand .brand-copy strong{display:none!important}
+.tool-page .site-header .brand .brand-copy span{display:none!important}
+.tool-page .site-header .brand .brand-mark{font-size:0!important}
+.tool-page .site-header .brand .brand-mark::after{content:"Z";font-size:18px!important}
+.tool-page .site-header .mobile-nav{pointer-events:none!important}
+.tool-page .site-header .mobile-nav.is-open{pointer-events:auto!important}
+.tool-page .site-header .search-panel{display:none!important}
+.tool-page .site-header .search-panel.open{display:block!important}
+.tools-page .tools-header-menu.is-open,.category-page .category-header-menu.is-open,.math-science-page .math-header-menu.is-open,.digital-developer-page .digital-header-menu.is-open{display:grid!important;gap:5px!important}
+.tools-page .tools-header-menu,.category-page .category-header-menu,.math-science-page .math-header-menu,.digital-developer-page .digital-header-menu{pointer-events:none!important}
+.tools-page .tools-header-menu.is-open,.category-page .category-header-menu.is-open,.math-science-page .math-header-menu.is-open,.digital-developer-page .digital-header-menu.is-open{pointer-events:auto!important}
