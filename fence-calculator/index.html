@@ -436,11 +436,12 @@ function calcValues(){
   const railPieceFt=(val('railPieceLength')||0)*rToFt;
   const waste=Math.max(0,Math.min(50,val('waste')||0))/100;
   const railsBase=$('style').value==='panel'?0:runCoveredFt.reduce((sum,n)=>{
-    if(n<=0)return sum;
-    const sections=Math.ceil(n/spacingFt);
-    const bayLength=n/sections;
-    const piecesPerSection=railPieceFt>0?Math.ceil(bayLength/railPieceFt):0;
-    return sum+sections*piecesPerSection*railsPerSection;
+    if(n<=0 || spacingFt<=0 || railPieceFt<=0)return sum;
+    const fullSections=Math.floor(n/spacingFt);
+    const remainder=n-fullSections*spacingFt;
+    const piecesForFullSections=fullSections*Math.ceil(spacingFt/railPieceFt);
+    const piecesForFinalSection=remainder>1e-9?Math.ceil(remainder/railPieceFt):0;
+    return sum+(piecesForFullSections+piecesForFinalSection)*railsPerSection;
   },0);
   const rails=Math.ceil(railsBase*(1+waste));
   const railLengthFt=rails*railPieceFt;
