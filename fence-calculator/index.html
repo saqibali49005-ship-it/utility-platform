@@ -496,6 +496,10 @@ function calculate(){
   if((val('waste')||0)<0 || (val('waste')||0)>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
   if((val('gravelBase')||0)>=(val('holeDepth')||0)){err.textContent='Gravel base depth must be smaller than the total post-hole depth.';return}
   if((val('holeDiameter')||0)<=0 || (val('holeDepth')||0)<=0 || (val('postWidth')||0)<=0){err.textContent='Enter positive post-hole and post dimensions.';return}
+  const holeDiameterIn=(val('holeDiameter')||0)*($('units').value==='metric'?1/25.4:1);
+  const postWidthIn=(val('postWidth')||0)*($('units').value==='metric'?1/25.4:1);
+  const requiredHoleDiameterIn=$('postShape').value==='round'?postWidthIn:postWidthIn*Math.SQRT2;
+  if(holeDiameterIn<requiredHoleDiameterIn){err.textContent=$('postShape').value==='round'?'Post-hole diameter must be at least as wide as the round post.':'Post-hole diameter must be wide enough for the diagonal of the square post.';return}
   if((val('picketWidth')||0)+(val('picketGap')||0)<=0 && $('style').value!=='panel'){err.textContent='Picket/board width plus gap must be greater than 0.';return}
   if($('style').value==='panel' && !(val('panelWidth')>0)){err.textContent='Enter a panel width greater than 0.';return}
   const o=calcValues();
