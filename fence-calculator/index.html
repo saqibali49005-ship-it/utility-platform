@@ -296,10 +296,10 @@ Concrete = (hole volume − post displacement) × total posts
 <section class="card">
 <h2>Frequently asked questions</h2>
 <details><summary>How many fence posts do I need for a 100 ft fence?</summary><p>At an 8 ft maximum spacing, one straight 100 ft run produces 13 sections after rounding up and 14 post positions. The actual layout can require shorter bays at gates, corners or obstacles, so use the calculator with your individual runs for a more practical estimate.</p></details>
-<details><summary>How do I calculate fence materials?</summary><p>Enter each straight fence run, choose the maximum post spacing, and select the fence style. The calculator estimates post positions per run, subtracts shared corners, then estimates rails and boards or panels with the selected waste allowance. Gate openings are distributed proportionally across runs because exact gate positions are not entered.</p></details>
+<details><summary>How do I calculate fence materials?</summary><p>Enter each straight fence run, choose the maximum post spacing, and select the fence style. The calculator estimates post positions per run, subtracts shared corners, then estimates rails and boards or panels with the selected waste allowance. Gate openings are distributed proportionally across runs because exact gate positions are not entered. Two gate posts per opening are added separately as a conservative allowance.</p></details>
 <details><summary>How many fence panels do I need?</summary><p>Choose Pre-made fence panels and enter the panel width. The calculator rounds panel quantities up separately for each fence run after its proportional gate-width allowance. Actual panel cuts and gate locations can change the purchase quantity.</p></details>
 <details><summary>How does adding a second fence run affect posts?</summary><p>Each run has its own end positions, so the calculator adds the post requirement for each run and then subtracts shared corners that represent one physical post used by two connected runs.</p></details>
-<details><summary>How does a gate affect pickets or panels?</summary><p>The gate opening is removed from the covered fence length before the calculator estimates rails, pickets or panels. Gate hardware and the exact gate-frame material are outside the material takeoff.</p></details>
+<details><summary>How does a gate affect pickets or panels?</summary><p>The gate opening is removed from the covered fence length before the calculator estimates rails, pickets or panels. Two gate posts per opening are added separately as a conservative allowance because exact gate locations are not entered; this may overcount if a gate post replaces a normal line post. Gate hardware and exact gate-frame materials are outside the material takeoff.</p></details>
 <details><summary>How is concrete estimated?</summary><p>The tool calculates the volume of the cylindrical hole, subtracts the volume occupied by the post within the concrete depth, multiplies by the number of posts and divides by the selected bag yield. It then rounds up to whole bags.</p></details>
 <details><summary>Can I use this for chain-link or metal fencing?</summary><p>This version is intended for common wood picket/privacy layouts and pre-made fence panels. Chain-link and metal systems use different components and installation rules, so they are not treated as interchangeable with this material model.</p></details>
 </section>
@@ -426,8 +426,9 @@ function calcValues(){
   const rawPosts=runValues.filter(n=>n>0).length+rawSections;
   const layoutPosts=Math.max(0,rawPosts-shared);
   const gatePosts=gateCount*2;
-  const totalPosts=Math.max(layoutPosts,gatePosts);
-  const linePosts=Math.max(0,totalPosts-gatePosts);
+  // Gate locations are not entered, so count gate posts separately as a conservative allowance.
+  const linePosts=layoutPosts;
+  const totalPosts=linePosts+gatePosts;
   const gateShare=totalRunFt>0?gateOpenFt/totalRunFt:0;
   const runCoveredFt=runValues.map(n=>Math.max(0,n*rToFt*(1-gateShare)));
   const materialSections=runCoveredFt.reduce((sum,n)=>sum+(n>0?Math.ceil(n/spacingFt):0),0);
