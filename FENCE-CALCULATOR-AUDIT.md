@@ -77,3 +77,25 @@ These are early signals with low query-level impression counts, not proof of sea
 ## Deployment status
 
 This audit branch is separate from `main`. No production page, DNS, Cloudflare setting, GitHub Pages setting, or deployment has been changed. Do not merge until the calculation model and test cases are resolved and reviewed.
+
+
+## Follow-up arithmetic verification (2026-11-10)
+
+The revised per-run arithmetic was checked against these representative cases:
+
+| Case | Expected sections | Expected posts | Expected panels (8 ft panels) |
+|---|---:|---:|---:|
+| One 100 ft run, 8 ft spacing | 13 | 14 | 13 |
+| Two separate 4 ft runs, 8 ft spacing | 2 | 4 | 2 |
+| Two connected 4 ft runs, one shared corner | 2 | 3 | 2 |
+| Two 40 ft runs, one 4 ft gate opening distributed proportionally | 10 | 11 (one shared corner) | 10 |
+| Two separate 4 ft runs in panel mode | 2 | 4 | 2 |
+
+These checks confirm the intended arithmetic for separate-run rounding and shared-corner post subtraction. They are calculation-level checks, not a live-browser or end-to-end test of the page.
+
+## Remaining validation / known limitation
+
+- Gate openings are proportionally distributed across all runs because the interface asks only for a gate count and common gate width, not the run and position of each gate. This is an explicit approximation; users must verify gate placement and the resulting takeoff.
+- Shared-corner input is a user-supplied count; the calculator cannot validate the actual geometry of the fence layout.
+- Browser interaction, visual layout, clipboard, metric conversion round-trip, and concrete volume should still be tested in a browser before merge.
+- Pull request remains draft and must not be merged or deployed until those checks are completed.
