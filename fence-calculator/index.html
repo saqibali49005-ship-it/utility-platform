@@ -185,7 +185,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <div class="field">
 <label for="railsPerSection">Rails per fence section</label>
 <select id="railsPerSection"><option value="2">2 rails</option><option value="3" selected>3 rails</option><option value="4">4 rails</option></select>
-<span class="field-help">Panel fencing does not use this field.</span>
+<span class="field-help">Used with rail piece length to estimate how many individual rail pieces are needed for each section.</span>
 </div>
 
 <div class="field">
@@ -434,7 +434,13 @@ function calcValues(){
   const railsPerSection=parseInt($('railsPerSection').value,10);
   const railPieceFt=(val('railPieceLength')||0)*rToFt;
   const waste=Math.max(0,Math.min(50,val('waste')||0))/100;
-  const railsBase=$('style').value==='panel'?0:materialSections*railsPerSection;
+  const railsBase=$('style').value==='panel'?0:runCoveredFt.reduce((sum,n)=>{
+    if(n<=0)return sum;
+    const sections=Math.ceil(n/spacingFt);
+    const bayLength=n/sections;
+    const piecesPerSection=railPieceFt>0?Math.ceil(bayLength/railPieceFt):0;
+    return sum+sections*piecesPerSection*railsPerSection;
+  },0);
   const rails=Math.ceil(railsBase*(1+waste));
   const railLengthFt=rails*railPieceFt;
   const style=$('style').value;
@@ -482,7 +488,9 @@ function calculate(){
   if(!(val('postSpacing')>0)){err.textContent='Enter a maximum post spacing greater than 0.';return}
   if(!(val('fenceHeight')>0)){err.textContent='Enter a fence height greater than 0.';return}
   if((val('gates')||0)>0 && !(val('gateWidth')>0)){err.textContent='Enter the gate opening width or set the number of gates to 0.';return}
-  if((val('sharedCorners')||0)>state.runs-1){err.textContent='Shared corners cannot exceed the number of possible run-to-run connections.';return}
+  const activeRunCount=runs.filter(v=>Number.isFinite(v)&&v>0).length;
+  if((val('sharedCorners')||0)>Math.max(0,activeRunCount-1)){err.textContent='Shared corners cannot exceed the number of connections between non-empty runs.';return}
+  if($('style').value!=='panel' && !(val('railPieceLength')>0)){err.textContent='Enter a rail piece length greater than 0.';return}
   if((val('waste')||0)<0 || (val('waste')||0)>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
   if((val('gravelBase')||0)>=(val('holeDepth')||0)){err.textContent='Gravel base depth must be smaller than the total post-hole depth.';return}
   if((val('holeDiameter')||0)<=0 || (val('holeDepth')||0)<=0 || (val('postWidth')||0)<=0){err.textContent='Enter positive post-hole and post dimensions.';return}
@@ -503,7 +511,7 @@ function calculate(){
     +'</div>'
     +'<div class="table-wrap"><table><thead><tr><th>Material</th><th>Quantity</th><th>Planning detail</th></tr></thead><tbody>'
     +'<tr><th>Posts</th><td>'+fmt(o.totalPosts)+'</td><td>'+fmt(o.linePosts)+' line + '+fmt(o.gatePosts)+' gate-position posts</td></tr>'
-    +'<tr><th>Rails</th><td>'+fmt(o.rails)+'</td><td>'+fmt(o.railsPerSection)+' per section · '+dualLength(o.railLengthFt)+' total piece length</td></tr>'
+    +'<tr><th>Rail pieces</th><td>'+fmt(o.rails)+'</td><td>'+fmt(o.railsPerSection)+' rails per section · '+dualLength(o.railLengthFt)+' total purchased piece length</td></tr>'
     +claddingLine
     +'<tr><th>Concrete</th><td>'+fmt(o.concreteBags)+' bags</td><td>'+fmt(o.totalConcreteFt3,3)+' ft³ · '+fmt(o.totalConcreteFt3*28.3168,1)+' L</td></tr>'
     +'<tr><th>Post purchase length</th><td>'+dualLength(o.postLengthFt)+'</td><td>Fence height + entered hole depth</td></tr>'
@@ -513,7 +521,7 @@ function calculate(){
     +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy material summary</button><span id="copyStatus" class="copy-status"></span></div>';
   const copyButton=$('copyResult');
   copyButton.addEventListener('click',async function(){
-    const text='Fence material estimate\nPosts: '+o.totalPosts+'\nRails: '+o.rails+'\n'+o.claddingLabel+': '+o.cladding+'\nConcrete bags: '+o.concreteBags+'\nTotal covered fence: '+dualLength(o.coveredFt)+'\nEstimated cost: '+(o.costKnown?fmt(o.totalCost,2):'not entered');
+    const text='Fence material estimate\nPosts: '+o.totalPosts+'\nRail pieces: '+o.rails+'\n'+o.claddingLabel+': '+o.cladding+'\nConcrete bags: '+o.concreteBags+'\nTotal covered fence: '+dualLength(o.coveredFt)+'\nEstimated cost: '+(o.costKnown?fmt(o.totalCost,2):'not entered');
     try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
   });
 }
