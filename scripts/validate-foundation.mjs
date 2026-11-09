@@ -33,9 +33,14 @@ for(const t of entries){
     fail.push('Missing tool file: '+t.href);
     continue;
   }
+  const htmlPath=fs.statSync(filePath).isDirectory()?path.join(filePath,'index.html'):filePath;
+  if(!fs.existsSync(htmlPath)){
+    fail.push('Missing tool page: '+t.href);
+    continue;
+  }
   if(!sitemap.includes('<loc>https://saqibali49005-ship-it.github.io/utility-platform/'+t.href+'</loc>')) fail.push('Missing sitemap URL: '+t.href);
 
-  const html=fs.readFileSync(filePath,'utf8');
+  const html=fs.readFileSync(htmlPath,'utf8');
   if(!/<nav[^>]*class=["']top-nav["'][^>]*>[\s\S]*?<\/nav>/i.test(html)) fail.push('Missing desktop navigation: '+t.href);
   if(!/<nav[^>]*id=["']mobileNav["'][^>]*>[\s\S]*?<\/nav>/i.test(html)) fail.push('Missing mobile navigation: '+t.href);
   for(const href of requiredNav){
