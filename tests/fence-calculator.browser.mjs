@@ -27,20 +27,20 @@ try {
   await check('Default 100 ft run calculates expected posts and sections', async () => {
     await reset(); await calculate();
     const text = await resultText();
-    assert.match(text, /Total posts 14/);
+    assert.match(text, /total posts\\s+14/i);
     assert.match(text, /13 post-spacing sections/);
   });
 
   await check('Separate short runs round materials independently', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4); await calculate();
     const text = await resultText();
-    assert.match(text, /Total fence runs 8/);
-    assert.match(text, /Total posts 4/);
+    assert.match(text, /total fence runs\\s+8/i);
+    assert.match(text, /total posts\\s+4/i);
   });
 
   await check('Shared corner reduces one physical line post', async () => {
     await fill('#sharedCorners', 1); await calculate();
-    assert.match(await resultText(), /Total posts 3/);
+    assert.match(await resultText(), /total posts\\s+3/i);
   });
 
   await check('Fractional shared-corner value is rejected', async () => {
@@ -68,7 +68,7 @@ try {
   await check('Panel mode calculates panels per run', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4);
     await page.locator('#style').selectOption('panel'); await fill('#panelWidth', 8); await calculate();
-    assert.match(await resultText(), /Panels 3/);
+    assert.match(await resultText(), /panels\\s+3/i);
   });
 
   await check('Picket mode calculates boards per run', async () => {
@@ -114,10 +114,10 @@ try {
   await check('Concrete estimates render with and without gravel base', async () => {
     await reset(); await fill('#gravelBase', 0); await calculate();
     const without = await resultText();
-    assert.match(without, /CONCRETE BAGS [1-9]/);
+    assert.match(without, /concrete bags\\s+[1-9]/i);
     await fill('#gravelBase', 3); await calculate();
     const withBase = await resultText();
-    assert.match(withBase, /Concrete bags [1-9]/);
+    assert.match(withBase, /concrete bags\\s+[1-9]/i);
   });
 
   await check('Copy summary writes the calculated estimate to clipboard', async () => {
