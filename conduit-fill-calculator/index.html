@@ -121,7 +121,7 @@
 </section>
 
 <section class="support-grid">
-<article class="card"><h2>How Fill Is Calculated</h2><p>The calculator sums the cross-sectional area of every conductor, including the equipment grounding conductor, then compares that total with the permitted percentage of the raceway's internal area.</p></article>
+<article class="card"><h2>How Fill Is Calculated</h2><p>The calculator sums the cross-sectional area of every conductor, including the equipment grounding conductor, then compares that total with the permitted percentage of the raceway's internal area. Reference conductor data covers AWG 14 through 4/0; bare values are for stranded conductors. Larger kcmil sizes are not included.</p></article>
 <article class="card"><h2>NEC Fill Limits</h2><p>For the standard Chapter 9 fill calculation, the commonly used limits are 53% for one conductor, 31% for two conductors and 40% for more than two. A nipple 24 inches or less can use the 60% exception.</p></article>
 <article class="card"><h2>Formula</h2><div class="formula">Fill % = total conductor area ÷ allowable raceway area × 100</div><p>The allowable area changes with conductor count and the selected raceway type and trade size.</p></article>
 </section>
@@ -159,12 +159,12 @@ const raceways={
 };
 const conductorAreas={
  '14|THHN/THWN-2':0.0097,'12|THHN/THWN-2':0.0133,'10|THHN/THWN-2':0.0211,'8|THHN/THWN-2':0.0366,'6|THHN/THWN-2':0.0507,'4|THHN/THWN-2':0.0824,'3|THHN/THWN-2':0.0973,'2|THHN/THWN-2':0.1158,'1|THHN/THWN-2':0.1562,'1/0|THHN/THWN-2':0.1855,'2/0|THHN/THWN-2':0.2223,'3/0|THHN/THWN-2':0.2679,'4/0|THHN/THWN-2':0.3237,
- '14|XHHW-2':0.0114,'12|XHHW-2':0.0158,'10|XHHW-2':0.0247,'8|XHHW-2':0.0437,'6|XHHW-2':0.0589,'4|XHHW-2':0.0950,'3|XHHW-2':0.1116,'2|XHHW-2':0.1333,'1|XHHW-2':0.1781,'1/0|XHHW-2':0.2121,'2/0|XHHW-2':0.2537,'3/0|XHHW-2':0.3010,'4/0|XHHW-2':0.3650,
- '14|THW/THWN':0.0130,'12|THW/THWN':0.0173,'10|THW/THWN':0.0275,'8|THW/THWN':0.0482,'6|THW/THWN':0.0629,'4|THW/THWN':0.1019,'3|THW/THWN':0.1196,'2|THW/THWN':0.1425,'1|THW/THWN':0.1901,'1/0|THW/THWN':0.2275,'2/0|THW/THWN':0.2714,'3/0|THW/THWN':0.3237,'4/0|THW/THWN':0.3917,
- '14|Bare':0.0031,'12|Bare':0.0056,'10|Bare':0.0096,'8|Bare':0.0165,'6|Bare':0.0259,'4|Bare':0.0462,'3|Bare':0.0550,'2|Bare':0.0636,'1|Bare':0.0811,'1/0|Bare':0.0973,'2/0|Bare':0.1148,'3/0|Bare':0.1373,'4/0|Bare':0.1650
+ '14|XHHW-2':0.0139,'12|XHHW-2':0.0181,'10|XHHW-2':0.0243,'8|XHHW-2':0.0437,'6|XHHW-2':0.0590,'4|XHHW-2':0.0814,'3|XHHW-2':0.0962,'2|XHHW-2':0.1146,'1|XHHW-2':0.1534,'1/0|XHHW-2':0.1825,'2/0|XHHW-2':0.2190,'3/0|XHHW-2':0.2642,'4/0|XHHW-2':0.3197,
+ '14|TW/THW/THHW/THW-2':0.0139,'12|TW/THW/THHW/THW-2':0.0181,'10|TW/THW/THHW/THW-2':0.0243,'8|TW/THW/THHW/THW-2':0.0437,'6|TW/THW/THHW/THW-2':0.0726,'4|TW/THW/THHW/THW-2':0.0973,'3|TW/THW/THHW/THW-2':0.1134,'2|TW/THW/THHW/THW-2':0.1333,'1|TW/THW/THHW/THW-2':0.1901,'1/0|TW/THW/THHW/THW-2':0.2223,'2/0|TW/THW/THHW/THW-2':0.2624,'3/0|TW/THW/THHW/THW-2':0.3117,'4/0|TW/THW/THHW/THW-2':0.3718,
+ '14|Bare (stranded)':0.004,'12|Bare (stranded)':0.006,'10|Bare (stranded)':0.011,'8|Bare (stranded)':0.017,'6|Bare (stranded)':0.027,'4|Bare (stranded)':0.042,'3|Bare (stranded)':0.053,'2|Bare (stranded)':0.067,'1|Bare (stranded)':0.087,'1/0|Bare (stranded)':0.109,'2/0|Bare (stranded)':0.137,'3/0|Bare (stranded)':0.173,'4/0|Bare (stranded)':0.219
 };
 const sizes=['14','12','10','8','6','4','3','2','1','1/0','2/0','3/0','4/0'];
-const insulations=['THHN/THWN-2','XHHW-2','THW/THWN','Bare'];
+const insulations=['THHN/THWN-2','XHHW-2','TW/THW/THHW/THW-2','Bare (stranded)'];
 let mode='selected';
 let conductorRowId=0;
 const $=id=>document.getElementById(id);
@@ -190,38 +190,49 @@ function updateAreas(){
  });
 }
 function data(){
- let total=0,count=0,details=[];
+ let total=0,count=0,details=[],error='';
  document.querySelectorAll('.conductor-row').forEach(row=>{
-  const size=row.querySelector('.wire-size').value,ins=row.querySelector('.wire-ins').value,qty=Math.max(1,Number(row.querySelector('.wire-qty').value)||0),area=conductorAreas[size+'|'+ins]||0;
+  const size=row.querySelector('.wire-size').value,ins=row.querySelector('.wire-ins').value,rawQty=row.querySelector('.wire-qty').value.trim(),qty=Number(rawQty),area=conductorAreas[size+'|'+ins]||0;
+  if(!rawQty||!Number.isSafeInteger(qty)||qty<1){error='Each conductor quantity must be a whole number of at least 1.';return}
+  if(!area){error='A selected conductor combination is not supported.';return}
   total+=qty*area;count+=qty;details.push({size,ins,qty,area});
  });
- return {total,count,details};
+ return {total,count,details,error};
 }
 function limit(count,nipple){return nipple?0.60:count===1?0.53:count===2?0.31:0.40}
 function check(racewayKey,size,total,count,nipple){
- const area=raceways[racewayKey].sizes[size], allowed=area*limit(count,nipple), pct=total/allowed*100;
- return {area,allowed,pct,pass:total<=allowed+1e-12,remaining:Math.max(0,allowed-total),lim:limit(count,nipple)};
+ const area=raceways[racewayKey].sizes[size], lim=limit(count,nipple), allowed=area*lim, pct=total/area*100;
+ return {area,allowed,pct,pass:total<=allowed+1e-12,remaining:Math.max(0,allowed-total),lim};
 }
 function calculate(){
  const d=data(),rk=$('raceway').value,nipple=$('nipple').checked,selected=$('tradeSize').value;
- if(!d.total||!d.count){$('status').className='status warn';$('status').textContent='Add at least one valid conductor group.';return}
- let chosen=selected;
+ if(d.error||!d.total||!d.count){
+  $('status').className='status warn';
+  $('status').textContent=d.error||'Add at least one valid conductor group.';
+  $('recommended').textContent='—';$('recommendedSub').textContent='Correct the conductor quantities to calculate.';
+  ['totalArea','fillPct','allowedArea','count','remaining'].forEach(id=>$(id).textContent='—');
+  $('comparison').innerHTML='';
+  return;
+ }
+ const keys=Object.keys(raceways[rk].sizes).filter(s=>raceways[rk].sizes[s]);
+ let chosen=selected,noFit=false;
  if(mode==='minimum'){
-  chosen=Object.keys(raceways[rk].sizes).find(s=>raceways[rk].sizes[s]&&check(rk,s,d.total,d.count,nipple).pass)||selected;
+  const passing=keys.find(s=>check(rk,s,d.total,d.count,nipple).pass);
+  if(passing)chosen=passing;
+  else{chosen=keys[keys.length-1];noFit=true}
  }
  const c=check(rk,chosen,d.total,d.count,nipple);
- $('recommended').textContent=chosen;
- $('recommendedSub').textContent=raceways[rk].label+' · '+Math.round(c.lim*100)+'% fill limit · internal area '+c.area.toFixed(3)+' in²';
+ $('recommended').textContent=noFit?'No listed size':chosen;
+ $('recommendedSub').textContent=(noFit?'Largest available: '+chosen+' · ':'')+raceways[rk].label+' · '+Math.round(c.lim*100)+'% fill limit · internal area '+c.area.toFixed(3)+' in²';
  $('totalArea').textContent=d.total.toFixed(4)+' in²';
  $('fillPct').textContent=c.pct.toFixed(1)+'%';
  $('allowedArea').textContent=c.allowed.toFixed(4)+' in²';
  $('count').textContent=d.count;
  $('remaining').textContent=c.remaining.toFixed(4)+' in²';
- $('status').className='status '+(c.pass?'ok':'warn');
- $('status').textContent=c.pass?'PASS — conductor area is within the selected fill limit.':'OVERFILL — choose a larger conduit or reduce the conductor load.';
- const keys=Object.keys(raceways[rk].sizes).filter(s=>raceways[rk].sizes[s]);
- const idx=Math.max(0,keys.indexOf(chosen)-1), view=keys.slice(idx,Math.min(keys.length,idx+4));
- $('comparison').innerHTML='<table class="size-table"><thead><tr><th>Size</th><th>Fill</th><th>Status</th></tr></thead><tbody>'+view.map(s=>{const x=check(rk,s,d.total,d.count,nipple);return '<tr><td><strong>'+s+'</strong></td><td>'+x.pct.toFixed(1)+'%</td><td class="'+(x.pass?'pass':'fail')+'">'+(x.pass?'PASS':'OVERFILL')+'</td></tr>'}).join('')+'</tbody></table><div class="note">The percentage changes automatically when the conductor count or nipple setting changes.</div>';
+ $('status').className='status '+(c.pass&&!noFit?'ok':'warn');
+ $('status').textContent=noFit?'NO FIT — even the largest listed conduit exceeds the fill limit.':c.pass?'PASS — actual raceway fill is within the permitted limit.':'OVERFILL — choose a larger conduit or reduce the conductor load.';
+ const idx=Math.max(0,keys.indexOf(chosen)-1),view=keys.slice(idx,Math.min(keys.length,idx+4));
+ $('comparison').innerHTML='<table class="size-table"><thead><tr><th>Size</th><th>Actual fill</th><th>Limit</th><th>Status</th></tr></thead><tbody>'+view.map(s=>{const x=check(rk,s,d.total,d.count,nipple);return '<tr><td><strong>'+s+'</strong></td><td>'+x.pct.toFixed(1)+'%</td><td>'+Math.round(x.lim*100)+'%</td><td class="'+(x.pass?'pass':'fail')+'">'+(x.pass?'PASS':'OVERFILL')+'</td></tr>'}).join('')+'</tbody></table><div class="note">Actual fill is conductor area divided by total raceway internal area. The allowed limit depends on conductor count and the nipple setting.</div>';
 }
 $('raceway').onchange=()=>{populateSizes();calculate()};
 $('tradeSize').onchange=calculate;
