@@ -31,3 +31,5 @@ jobs:
           exit 1
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
+      - name: Run wire-size calculator browser regression tests
+        run: node tests/wire-size-calculator.browser.mjs
