@@ -24,13 +24,13 @@
 .conduit-tool .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 18px}
 .conduit-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}
 .conduit-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}
-.conduit-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}
+.conduit-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#475569;font-weight:900;margin:18px 0 9px}
 .conduit-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}
 .conduit-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}
 .conduit-tool .conductor-row{display:grid;grid-template-columns:1.05fr 1.15fr 1.05fr 76px 42px;gap:8px;align-items:end;padding:12px 0;border-bottom:1px solid #e4edf5}
 .conduit-tool .conductor-row:first-child{padding-top:0}
 .conduit-tool .conductor-row .field{margin:0}
-.conduit-tool .row-label{font-size:11px;font-weight:900;color:#6a7d94;text-transform:uppercase;letter-spacing:.35px;margin-bottom:6px;display:block}
+.conduit-tool .row-label{font-size:11px;font-weight:900;color:#475569;text-transform:uppercase;letter-spacing:.35px;margin-bottom:6px;display:block}
 .conduit-tool .remove-row{min-height:44px;border:1px solid #e0c9c9;background:#fff7f7;color:#9b3c3c;border-radius:10px;font-weight:900;cursor:pointer}
 .conduit-tool .add-row{margin-top:12px;border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}
 .conduit-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -40,10 +40,10 @@
 .conduit-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}
 .conduit-tool .size-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
 .conduit-tool .size-table th,.conduit-tool .size-table td{padding:9px 7px;border-bottom:1px solid #e4edf5;text-align:left}
-.conduit-tool .size-table th{font-size:11px;text-transform:uppercase;letter-spacing:.35px;color:#6a7d94}
+.conduit-tool .size-table th{font-size:11px;text-transform:uppercase;letter-spacing:.35px;color:#475569}
 .conduit-tool .size-table .pass{font-weight:900;color:#176b3a}
 .conduit-tool .size-table .fail{color:#8b4b4b}
-.conduit-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}
+.conduit-tool .note{font-size:12.5px;color:#475569;margin-top:12px}
 .conduit-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}
 .conduit-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}
 .conduit-tool .toggle-line{display:flex;align-items:center;gap:9px;margin:0 0 14px;font-size:13px;color:#36506d;font-weight:800}
@@ -166,13 +166,15 @@ const conductorAreas={
 const sizes=['14','12','10','8','6','4','3','2','1','1/0','2/0','3/0','4/0'];
 const insulations=['THHN/THWN-2','XHHW-2','THW/THWN','Bare'];
 let mode='selected';
+let conductorRowId=0;
 const $=id=>document.getElementById(id);
 function options(list,value){return list.map(x=>'<option value="'+x+'">'+x+'</option>').join('')}
 function populateSizes(){
  const r=raceways[$('raceway').value]; $('tradeSize').innerHTML=Object.keys(r.sizes).filter(k=>r.sizes[k]).map(k=>'<option value="'+k+'">'+k+'</option>').join('');
 }
 function rowHtml(size='12',ins='THHN/THWN-2',qty=3){
- return '<div class="conductor-row"><div class="field"><label class="row-label">Wire size</label><select class="wire-size">'+options(sizes,size)+'</select></div><div class="field"><label class="row-label">Insulation</label><select class="wire-ins">'+options(insulations,ins)+'</select></div><div class="field"><label class="row-label">Quantity</label><input class="wire-qty" type="number" min="1" step="1" value="'+qty+'"></div><div class="field"><label class="row-label">Area</label><div class="hint row-area">—</div></div><button class="remove-row" type="button" aria-label="Remove conductor group">×</button></div>';
+ const id='conductor-row-'+(++conductorRowId);
+ return '<div class="conductor-row"><div class="field"><label class="row-label" for="'+id+'-size">Wire size</label><select id="'+id+'-size" class="wire-size">'+options(sizes,size)+'</select></div><div class="field"><label class="row-label" for="'+id+'-insulation">Insulation</label><select id="'+id+'-insulation" class="wire-ins">'+options(insulations,ins)+'</select></div><div class="field"><label class="row-label" for="'+id+'-quantity">Quantity</label><input id="'+id+'-quantity" class="wire-qty" type="number" min="1" step="1" value="'+qty+'"></div><div class="field"><span class="row-label">Area</span><div class="hint row-area">—</div></div><button class="remove-row" type="button" aria-label="Remove conductor group">×</button></div>';
 }
 function addRow(size,ins,qty){$('rows').insertAdjacentHTML('beforeend',rowHtml(size,ins,qty));bindRows();updateAreas()}
 function bindRows(){
