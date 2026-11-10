@@ -61,7 +61,8 @@ try {
     await preset('three');
     assert.equal(await page.locator('#voltage').inputValue(), '400');
     const size = parseFloat(await value('recommended'));
-    assert.equal(size, 4);
+    // With the preset's 25 A, 40 m, 400 V, and 3% target, 2.5 mm² is the next standard size.
+    assert.equal(size, 2.5);
     const expected = 3 * 25 * 25 * (0.01724 / size) * 40;
     const actual = parseFloat((await value('lossW')).replace(' W',''));
     assert.ok(Math.abs(actual-expected) < 0.02, 'expected '+expected+' W, got '+actual+' W');
@@ -84,7 +85,7 @@ try {
     await page.locator('#target').selectOption('1');
     await page.locator('#calculateBtn').click();
     assert.equal(await value('recommended'), 'No listed size meets target');
-    assert.match(await value('status'), /largest standard list/i);
+    assert.match(await value('status'), /largest size/i);
     assert.match(await value('recommendedSub'), /Largest listed size/i);
   });
 
