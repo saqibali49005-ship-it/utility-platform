@@ -36,8 +36,8 @@ for(const t of entries){
   if(!sitemap.includes('<loc>https://saqibali49005-ship-it.github.io/utility-platform/'+t.href+'</loc>')) fail.push('Missing sitemap URL: '+t.href);
 
   const html=fs.readFileSync(filePath,'utf8');
-  if(!/<nav[^>]*class=["']top-nav["'][^>]*>[\\s\\S]*?<\\/nav>/i.test(html)) fail.push('Missing desktop navigation: '+t.href);
-  if(!/<nav[^>]*id=["']mobileNav["'][^>]*>[\\s\\S]*?<\\/nav>/i.test(html)) fail.push('Missing mobile navigation: '+t.href);
+  if(!/<nav[^>]*class=["']top-nav["'][^>]*>[\s\S]*?<\/nav>/i.test(html)) fail.push('Missing desktop navigation: '+t.href);
+  if(!/<nav[^>]*id=["']mobileNav["'][^>]*>[\s\S]*?<\/nav>/i.test(html)) fail.push('Missing mobile navigation: '+t.href);
   for(const href of requiredNav){
     if(!html.includes('href="'+href+'"') && !html.includes("href='"+href+"'"))
       fail.push('Missing main navigation link '+href+': '+t.href);
