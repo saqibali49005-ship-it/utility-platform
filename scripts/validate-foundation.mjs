@@ -28,8 +28,9 @@ const requiredNav=[
 ];
 
 for(const t of entries){
-  const filePath=path.join(root,t.href);
-  if(!fs.existsSync(filePath)){
+  let filePath=path.join(root,t.href);
+  if(fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) filePath=path.join(filePath,'index.html');
+  if(!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()){
     fail.push('Missing tool file: '+t.href);
     continue;
   }
