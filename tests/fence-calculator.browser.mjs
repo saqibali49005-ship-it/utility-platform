@@ -17,7 +17,7 @@ async function errorText() { return (await page.locator('#error').innerText()).t
 async function reset() { await page.locator('#reset').click(); await page.waitForTimeout(50); }
 
 try {
-  await page.goto('http://127.0.0.1:4173/fence-calculator/', { waitUntil: 'networkidle' });
+  await page.goto('http://127.0.0.1:4173/fence-calculator/', { waitUntil: 'domcontentloaded' });
   await check('Page loads with canonical URL and calculator heading', async () => {
     assert.match(await page.title(), /Fence Material Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/fence-calculator/');
