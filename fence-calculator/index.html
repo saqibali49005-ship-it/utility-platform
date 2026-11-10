@@ -547,8 +547,11 @@ function calculate(){
   });
 }
 function reset(){
-  state.runs=1;renderRunInputs();
-  $('units').value='imperial';setDefaults();
+  state.runs=1;
+  $('units').value='imperial';
+  runList.innerHTML='';
+  renderRunInputs();
+  setDefaults();
   $('style').value='privacy';$('sharedCorners').value='0';$('gates').value='0';$('waste').value='10';$('railsPerSection').value='3';$('postShape').value='square';$('bagYield').value='0.45';
   $('pricePost').value='';$('priceRail').value='';$('priceCladding').value='';$('priceBag').value='';
   updateUnitLabels();toggleStyle();calculate();
