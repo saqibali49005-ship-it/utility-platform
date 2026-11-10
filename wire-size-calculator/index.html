@@ -114,8 +114,8 @@ const rho={cu:0.01724,al:0.0282};
 let circuit='dc',loadMode='amps';
 const $=id=>document.getElementById(id);
 function fmt(n,d=2){if(!isFinite(n))return '—';return n.toLocaleString(undefined,{maximumFractionDigits:d});}
-function setCircuit(v){circuit=v;document.querySelectorAll('[data-circuit]').forEach(b=>b.classList.toggle('active',b.dataset.circuit===v));if(v==='dc'){$('voltage').value=48;$('pfField').classList.add('hidden')}else{$('voltage').value=v==='three'?400:230;if(loadMode==='power')$('pfField').classList.remove('hidden')}}
-function setLoad(v){loadMode=v;document.querySelectorAll('[data-load]').forEach(b=>b.classList.toggle('active',b.dataset.load===v));$('ampsField').classList.toggle('hidden',v!=='amps');$('wattsField').classList.toggle('hidden',v==='amps');$('pfField').classList.toggle('hidden',v==='amps'||v==='watts'&&circuit==='dc')}
+function setCircuit(v){circuit=v;document.querySelectorAll('[data-circuit]').forEach(b=>{const active=b.dataset.circuit===v;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});if(v==='dc'){$('voltage').value=48;$('pfField').classList.add('hidden')}else{$('voltage').value=v==='three'?400:230;if(loadMode!=='amps')$('pfField').classList.remove('hidden')}}
+function setLoad(v){loadMode=v;document.querySelectorAll('[data-load]').forEach(b=>{const active=b.dataset.load===v;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});$('ampsField').classList.toggle('hidden',v!=='amps');$('wattsField').classList.toggle('hidden',v==='amps');$('pfField').classList.toggle('hidden',v==='amps'||v==='watts'&&circuit==='dc')}
 function current(){const V=Number($('voltage').value), W=Number($('watts').value), A=Number($('amps').value), pf=Math.min(1,Math.max(.1,Number($('pf').value)||1));if(loadMode==='amps')return A;if(!V||!W)return NaN;if(circuit==='three')return W/(Math.sqrt(3)*V*pf);if(circuit==='single')return W/(V*pf);return W/V}
 function lengthM(){const L=Number($('length').value);return $('lengthUnit').value==='ft'?L*0.3048:L}
 function pathFactor(){return circuit==='three'?Math.sqrt(3):2}
