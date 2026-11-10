@@ -25,6 +25,7 @@ try {
     assert.match(await page.title(), /Conduit Fill Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/conduit-fill-calculator/');
     await page.getByRole('heading', { name: 'Size Your Raceway' }).waitFor();
+    assert.equal(await page.locator('#tradeSize').inputValue(), '1/2"');
   });
 
   await check('Actual fill percentage uses total raceway area, not allowable fill area', async () => {
