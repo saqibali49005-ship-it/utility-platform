@@ -92,7 +92,7 @@ try {
     await page.locator('.wire-qty').first().fill('30');
     await page.locator('.wire-qty').nth(1).fill('1');
     await page.locator('[data-mode="minimum"]').click();
-    assert.equal(await value('recommended'), '1"');
+    assert.equal(await value('recommended'), '1-1/4"');
     assert.match(await value('status'), /PASS/);
   });
 
