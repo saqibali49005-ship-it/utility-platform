@@ -59,7 +59,7 @@
 .paint-tool .room-card .room-head{min-height:38px}
 .paint-tool .room-card .remove-room{flex:0 0 auto;white-space:nowrap}
 @media(max-width:700px){.paint-tool .room-card .tool-grid{grid-template-columns:1fr}.paint-tool .room-card .field label{min-height:0}}
-.paint-tool .small{color:var(--muted);font-size:13px}
+.paint-tool .small{color:#475569;font-size:13px}
 @media(max-width:700px){.paint-tool .tool-grid{grid-template-columns:1fr}.paint-tool .result-list{grid-template-columns:1fr}.paint-tool .unit-row{grid-template-columns:1fr}.paint-tool .actions{flex-direction:column;align-items:stretch}.paint-tool .actions button{width:100%}}
 
 .paint-tool .hero-shell{width:100%;min-width:0}
@@ -146,17 +146,17 @@ const roomList=$('roomList');
 let rooms=0,lastResult=null;
 function addRoom(){
  rooms++;
- const card=document.createElement('div'); card.className='room-card'; card.dataset.room=String(rooms);
+ const card=document.createElement('div'); card.className='room-card'; card.dataset.room=String(rooms); const idPrefix='paint-room-'+rooms+'-';
  card.innerHTML=`<div class="room-head"><strong>Room ${rooms}</strong><button type="button" class="remove-room" data-remove>Remove</button></div>
  <div class="tool-grid">
-   <div class="field"><label>Length</label><input data-r="length" type="number" min="0" step="any" inputmode="decimal" value="12"></div>
-   <div class="field"><label>Width</label><input data-r="width" type="number" min="0" step="any" inputmode="decimal" value="10"></div>
-   <div class="field"><label>Wall height</label><input data-r="height" type="number" min="0" step="any" inputmode="decimal" value="8"></div>
-   <div class="field"><label>Ceiling?</label><select data-r="ceiling"><option value="yes" selected>Include ceiling</option><option value="no">Walls only</option></select></div>
-   <div class="field"><label>Doors</label><input data-r="doors" type="number" min="0" step="1" inputmode="numeric" value="1"></div>
-   <div class="field"><label>Windows</label><input data-r="windows" type="number" min="0" step="1" inputmode="numeric" value="2"></div>
-   <div class="field"><label>Standard door area</label><input data-r="doorArea" type="number" min="0" step="any" inputmode="decimal" value="20"><span class="hint">Default uses 20 sq ft per door in Imperial mode; metric inputs use converted area.</span></div>
-   <div class="field"><label>Standard window area</label><input data-r="windowArea" type="number" min="0" step="any" inputmode="decimal" value="12"><span class="hint">Default uses 12 sq ft per window in Imperial mode; metric inputs use converted area.</span></div>
+   <div class="field"><label for="${idPrefix}length">Length</label><input id="${idPrefix}length" data-r="length" type="number" min="0" step="any" inputmode="decimal" value="12"></div>
+   <div class="field"><label for="${idPrefix}width">Width</label><input id="${idPrefix}width" data-r="width" type="number" min="0" step="any" inputmode="decimal" value="10"></div>
+   <div class="field"><label for="${idPrefix}height">Wall height</label><input id="${idPrefix}height" data-r="height" type="number" min="0" step="any" inputmode="decimal" value="8"></div>
+   <div class="field"><label for="${idPrefix}ceiling">Ceiling?</label><select id="${idPrefix}ceiling" data-r="ceiling"><option value="yes" selected>Include ceiling</option><option value="no">Walls only</option></select></div>
+   <div class="field"><label for="${idPrefix}doors">Doors</label><input id="${idPrefix}doors" data-r="doors" type="number" min="0" step="1" inputmode="numeric" value="1"></div>
+   <div class="field"><label for="${idPrefix}windows">Windows</label><input id="${idPrefix}windows" data-r="windows" type="number" min="0" step="1" inputmode="numeric" value="2"></div>
+   <div class="field"><label for="${idPrefix}doorArea">Standard door area</label><input id="${idPrefix}doorArea" data-r="doorArea" type="number" min="0" step="any" inputmode="decimal" value="20"><span class="hint">Default uses 20 sq ft per door in Imperial mode; metric inputs use converted area.</span></div>
+   <div class="field"><label for="${idPrefix}windowArea">Standard window area</label><input id="${idPrefix}windowArea" data-r="windowArea" type="number" min="0" step="any" inputmode="decimal" value="12"><span class="hint">Default uses 12 sq ft per window in Imperial mode; metric inputs use converted area.</span></div>
  </div>`;
  roomList.appendChild(card);
  card.querySelector('[data-remove]').addEventListener('click',()=>{card.remove();renumber();});
