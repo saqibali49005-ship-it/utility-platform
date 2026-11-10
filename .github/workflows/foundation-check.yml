@@ -33,3 +33,5 @@ jobs:
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
         run: node tests/wire-size-calculator.browser.mjs
+      - name: Run conduit-fill calculator browser regression tests
+        run: node tests/conduit-fill-calculator.browser.mjs
