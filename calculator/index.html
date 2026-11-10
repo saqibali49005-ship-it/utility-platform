@@ -20,7 +20,7 @@
 <a class="skip-link" href="#main-content">Skip to calculator</a>
 <header class="site-header zem-header">
 <div class="header-inner">
-<a class="brand" href="/"><div class="brand-mark">UP</div><div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div></a>
+<a class="brand" href="/"><div class="brand-mark">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
 <nav aria-label="Primary navigation" class="top-nav"><a href="/">Home</a><a href="tools/">All Tools</a><a aria-current="page" href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
 
 <div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
@@ -73,7 +73,7 @@
 </section>
 
 </main>
-<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
 <script>
 (function(){
 const modeButtons=[...document.querySelectorAll('.mode-btn')],singleMode=document.getElementById('singleMode'),addMode=document.getElementById('addMode'),multiplyMode=document.getElementById('multiplyMode'),targetField=document.getElementById('targetField'),numberInput=document.getElementById('numberInput'),targetInput=document.getElementById('targetInput'),addInput=document.getElementById('addInput'),multiplyInput=document.getElementById('multiplyInput'),calculateBtn=document.getElementById('calculateBtn'),clearBtn=document.getElementById('clearBtn'),resultValue=document.getElementById('resultValue'),resultSub=document.getElementById('resultSub'),fullPrecision=document.getElementById('fullPrecision'),sigCount=document.getElementById('sigCount');let mode='count';
@@ -100,7 +100,7 @@ if(document.body.classList.contains('tool-page')&&!document.getElementById('repo
  const btn=document.createElement('button');
  btn.id='reportProblemBtn';btn.className='report-problem-btn';btn.type='button';btn.setAttribute('aria-label','Report a problem with this tool');btn.textContent='⚑ Report a problem';
  btn.addEventListener('click',function(){
-  const title=(document.querySelector('h1')?.textContent||'Utility Platform tool').trim();
+  const title=(document.querySelector('h1')?.textContent||'ZemTools tool').trim();
   const rows=[];let omittedTextarea=false;
   document.querySelectorAll('main input, main select').forEach(function(el){
    if(el.disabled||el.type==='hidden')return;

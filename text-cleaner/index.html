@@ -14,7 +14,7 @@
 <meta property="og:description" content="Clean messy copied text, normalize spacing and line breaks, remove blank or duplicate lines, and copy the result without uploading your text."/>
 <meta property="og:url" content="https://zemtools.com/text-cleaner/"/>
 <meta property="og:image" content="https://zemtools.com/social-preview.png"/>
-<meta property="og:image:alt" content="Utility Platform — Practical Online Tools"/>
+<meta property="og:image:alt" content="ZemTools — Practical Online Tools"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Text Cleaner Online | Clean &amp; Format Text"/>
 <meta name="twitter:description" content="Clean messy copied text, normalize spacing and line breaks, remove blank or duplicate lines, and copy the result without uploading your text."/>
@@ -61,8 +61,8 @@ body.text-cleaner-tool .tip strong{display:block;margin-bottom:4px}
 <header class="site-header zem-header">
   <div class="header-inner">
     <a class="brand" href="/">
-      <div class="brand-mark" aria-hidden="true">UP</div>
-      <div class="brand-copy"><strong>Utility Platform</strong><span>Practical online tools</span></div>
+      <div class="brand-mark" aria-hidden="true">Z</div>
+      <div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div>
     </a>
     <nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
     
@@ -179,10 +179,10 @@ body.text-cleaner-tool .tip strong{display:block;margin-bottom:4px}
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand"><div class="footer-mark" aria-hidden="true">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div>
+    <div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div>
     <nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav>
   </div>
-  <div class="copyright">© 2026 Utility Platform</div>
+  <div class="copyright">© 2026 ZemTools</div>
 </footer>
 
 <script src="tools-data.js"></script>
@@ -212,7 +212,7 @@ async function copyResult(){
 }
 $('cleanBtn').addEventListener('click',cleanText);copyBtn.addEventListener('click',copyResult);
 $('clearBtn').addEventListener('click',()=>{input.value='';output.value='';copyBtn.disabled=true;updateStats();status.textContent='Cleared. Paste text above, then clean it.';input.focus()});
-$('sampleBtn').addEventListener('click',()=>{input.value='  Utility Platform   \r\n\r\nText cleaner online   \r\nText cleaner online\n\n  Remove extra spaces   \r\nUseful tools  ';$('blankLines').checked=true;$('duplicateLines').checked=true;cleanText()});
+$('sampleBtn').addEventListener('click',()=>{input.value='  ZemTools   \r\n\r\nText cleaner online   \r\nText cleaner online\n\n  Remove extra spaces   \r\nUseful tools  ';$('blankLines').checked=true;$('duplicateLines').checked=true;cleanText()});
 input.addEventListener('input',updateStats);checks.forEach(id=>$(id).addEventListener('change',()=>{if(input.value)cleanText()}));
 document.querySelectorAll('.faq button').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.parentElement,itemOpen=item.classList.toggle('open');btn.querySelector('.faq-icon').textContent=itemOpen?'−':'+'}));
 updateStats();
