@@ -499,10 +499,10 @@ function calcValues(){
 function calculate(){
   const err=$('error');err.textContent='';
   const runs=[...runList.querySelectorAll('input[data-run]')].map(x=>parseFloat(x.value));
+  if(runs.some(v=>Number.isFinite(v)&&v<0)){err.textContent='Fence-run lengths cannot be negative. Leave unused run fields blank or enter 0.';return}
   if(!runs.some(v=>Number.isFinite(v)&&v>0)){err.textContent='Enter at least one fence-run length greater than 0.';return}
   if(!(val('postSpacing')>0)){err.textContent='Enter a maximum post spacing greater than 0.';return}
   if(!(val('fenceHeight')>0)){err.textContent='Enter a fence height greater than 0.';return}
-  if(runs.some(v=>Number.isFinite(v)&&v<0)){err.textContent='Fence-run lengths cannot be negative. Leave unused run fields blank or enter 0.';return}
   const gateInput=val('gates')||0;
   if(!Number.isInteger(gateInput)||gateInput<0){err.textContent='Enter a whole number of gates, 0 or more.';return}
   if((val('gateWidth')||0)<0){err.textContent='Gate opening width cannot be negative.';return}
