@@ -146,7 +146,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <section class="layout" aria-label="Fence material calculator">
 <article class="card tool-card">
 <h2>Build Your Fence Plan</h2>
-<p class="hint">Start with one run. Add more runs when your fence changes direction or has separate straight sections.</p>
+<p class="hint">Estimate materials for wood privacy fences, open picket fences and pre-made panels. Enter each straight run separately, then add gate openings, post spacing and material dimensions to estimate posts, rail pieces, boards or panels, and concrete.</p>
 <form id="fenceForm">
 <div class="tool-grid">
 <div class="field">
@@ -185,7 +185,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <div class="field">
 <label for="railsPerSection">Rails per fence section</label>
 <select id="railsPerSection"><option value="2">2 rails</option><option value="3" selected>3 rails</option><option value="4">4 rails</option></select>
-<span class="field-help">Panel fencing does not use this field.</span>
+<span class="field-help">For wood fence styles, this sets the rail courses per section. Panel mode does not use separate rails.</span>
 </div>
 
 <div class="field">
@@ -199,7 +199,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <div class="field">
 <label for="gateWidth">Gate opening width <span class="unit-run">(ft)</span></label>
 <input id="gateWidth" type="number" min="0" step="0.1" value="4" inputmode="decimal"/>
-<span class="field-help">Used to remove gate openings from rails, pickets or panels.</span>
+<span class="field-help">Total gate width is distributed proportionally across runs because exact gate positions are not entered; treat quantities as planning estimates.</span>
 </div>
 <div class="field">
 <label for="waste">Material waste / overage (%)</label>
@@ -239,7 +239,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <p class="section-label">Optional material prices</p>
 <div class="tool-grid">
 <div class="field"><label for="pricePost">Price per post</label><input id="pricePost" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
-<div class="field"><label for="priceRail">Price per rail</label><input id="priceRail" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
+<div class="field"><label for="priceRail">Price per rail piece</label><input id="priceRail" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
 <div class="field"><label for="priceCladding">Price per picket / panel</label><input id="priceCladding" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
 <div class="field"><label for="priceBag">Price per concrete bag</label><input id="priceBag" type="number" min="0" step="0.01" placeholder="Leave blank to skip" inputmode="decimal"/></div>
 </div>
@@ -309,9 +309,10 @@ Concrete = (hole volume − post displacement) × total posts
 <section class="card">
 <h2>Frequently asked questions</h2>
 <details><summary>How many fence posts do I need for a 100 ft fence?</summary><p>At an 8 ft maximum spacing, one straight 100 ft run produces 13 sections after rounding up and 14 post positions. The actual layout can require shorter bays at gates, corners or obstacles, so use the calculator with your individual runs for a more practical estimate.</p></details>
-<details><summary>How do I calculate wood fence materials?</summary><p>Measure each straight run, subtract gate openings from the covered length, and enter the maximum post spacing, rail count, board width and picket gap or panel width. Add the post-hole dimensions and concrete bag yield for a footing estimate. The calculator rounds material quantities up and lets you include an optional waste allowance.</p></details>
-<details><summary>How does adding a second fence run affect posts?</summary><p>Each run has its own end positions, so the calculator adds the post requirement for each run and then subtracts shared corners that represent one physical post used by two connected runs.</p></details>
-<details><summary>How does a gate affect pickets or panels?</summary><p>The gate opening is removed from the covered fence length before the calculator estimates rails, pickets or panels. Gate hardware and the exact gate-frame material are outside the material takeoff.</p></details>
+<details><summary>How do I calculate fence materials?</summary><p>Enter each straight run separately, choose the maximum post spacing and select a wood fence or pre-made panel layout. The calculator rounds post-spacing sections per run, subtracts any shared corners you enter, and estimates rail pieces and boards or panels with your waste allowance. Gate width is distributed proportionally across runs because exact gate locations are not entered. Add post-hole dimensions and the concrete bag yield for a footing estimate.</p></details>
+<details><summary>How many fence panels do I need?</summary><p>Choose Pre-made fence panels and enter the panel width. The calculator rounds panel quantities up separately for each fence run after its proportional gate-width allowance. Actual panel cuts, gate placement and layout details can change the final purchase quantity.</p></details>
+<details><summary>How does adding a second fence run affect posts?</summary><p>Each run has its own end positions, so the calculator estimates post positions separately for every non-empty run, then subtracts the shared-corner count you enter. Only count a shared corner when two runs really use the same physical post.</p></details>
+<details><summary>How does a gate affect pickets or panels?</summary><p>Total gate width is removed from the covered fence length. Because exact gate locations are not entered, the opening width is distributed proportionally across the runs for material estimates. Two gate-position posts per opening are added as a conservative allowance; this can overcount when a gate post replaces an ordinary line post. Gate hardware and exact gate-frame materials are not included.</p></details>
 <details><summary>How is concrete estimated?</summary><p>The tool calculates the volume of the cylindrical hole, subtracts the volume occupied by the post within the concrete depth, multiplies by the number of posts and divides by the selected bag yield. It then rounds up to whole bags.</p></details>
 <details><summary>Can I use this for chain-link or metal fencing?</summary><p>This version is intended for common wood picket/privacy layouts and pre-made fence panels. Chain-link and metal systems use different components and installation rules, so they are not treated as interchangeable with this material model.</p></details>
 </section>
@@ -363,6 +364,7 @@ function updateUnitLabels(){
   document.querySelectorAll('.unit-small').forEach(el=>el.textContent=metric?' (mm)':' (in)');
   document.querySelectorAll('.run-unit-label').forEach(el=>el.textContent=metric?'m':'ft');
   document.querySelectorAll('.picket-unit-label').forEach(el=>el.textContent=metric?'mm':'in');
+  document.querySelectorAll('.preset[data-target="postSpacing"]').forEach((el,i)=>{el.textContent=metric?(i===0?'1.8 m':'2.4 m'):(i===0?'6 ft':'8 ft')});
 }
 function renderRunInputs(){
   const metric=$('units').value==='metric';
@@ -437,26 +439,36 @@ function calcValues(){
   const rawPosts=runValues.filter(n=>n>0).length+rawSections;
   const layoutPosts=Math.max(0,rawPosts-shared);
   const gatePosts=gateCount*2;
-  const totalPosts=Math.max(layoutPosts,gatePosts);
-  const linePosts=Math.max(0,totalPosts-gatePosts);
-  const materialSections=coveredFt>0?Math.ceil(coveredFt/spacingFt):0;
+  // Gate positions are not entered; separate gate posts are a conservative allowance and may overcount overlaps.
+  const linePosts=layoutPosts;
+  const totalPosts=linePosts+gatePosts;
+  const gateShare=totalRunFt>0?gateOpenFt/totalRunFt:0;
+  const runCoveredFt=runValues.map(n=>Math.max(0,n*rToFt*(1-gateShare)));
+  const materialSections=runCoveredFt.reduce((sum,n)=>sum+(n>0?Math.ceil(n/spacingFt):0),0);
   const railsPerSection=parseInt($('railsPerSection').value,10);
   const railPieceFt=(val('railPieceLength')||0)*rToFt;
   const waste=Math.max(0,Math.min(50,val('waste')||0))/100;
-  const railsBase=$('style').value==='panel'?0:materialSections*railsPerSection;
+  const style=$('style').value;
+  const railsBase=style==='panel'?0:runCoveredFt.reduce((sum,n)=>{
+    if(n<=0 || spacingFt<=0 || railPieceFt<=0)return sum;
+    const fullSections=Math.floor(n/spacingFt);
+    const remainder=n-fullSections*spacingFt;
+    const piecesForFullSections=fullSections*Math.ceil(spacingFt/railPieceFt);
+    const piecesForFinalSection=remainder>1e-9?Math.ceil(remainder/railPieceFt):0;
+    return sum+(piecesForFullSections+piecesForFinalSection)*railsPerSection;
+  },0);
   const rails=Math.ceil(railsBase*(1+waste));
   const railLengthFt=rails*railPieceFt;
-  const style=$('style').value;
   let claddingBase=0,claddingLabel='Pickets',claddingUnit='pickets';
   if(style==='panel'){
     const panelWidthFt=(val('panelWidth')||0)*rToFt;
-    claddingBase=panelWidthFt>0&&coveredFt>0?Math.ceil(coveredFt/panelWidthFt):0;
+    claddingBase=panelWidthFt>0?runCoveredFt.reduce((sum,n)=>sum+(n>0?Math.ceil(n/panelWidthFt):0),0):0;
     claddingLabel='Panels';claddingUnit='panels';
   }else{
     const picketWidthIn=(val('picketWidth')||0)*smallToIn;
     const gapIn=Math.max(0,(val('picketGap')||0)*smallToIn);
     const slotIn=picketWidthIn+gapIn;
-    claddingBase=slotIn>0&&coveredFt>0?Math.ceil((coveredFt*12)/slotIn):0;
+    claddingBase=slotIn>0?runCoveredFt.reduce((sum,n)=>sum+(n>0?Math.ceil((n*12)/slotIn):0),0):0;
   }
   const cladding=Math.ceil(claddingBase*(1+waste));
   const holeDiaIn=(val('holeDiameter')||0)*smallToIn;
@@ -467,7 +479,7 @@ function calcValues(){
   const holeRadiusFt=(holeDiaIn/12)/2;
   const effectiveDepthFt=effectiveDepthIn/12;
   const holeVolumeFt3=Math.PI*holeRadiusFt*holeRadiusFt*Math.max(0,effectiveDepthFt);
-  const postCrossSection=postShape.value==='round'?Math.PI*Math.pow((postDimIn/12)/2,2):Math.pow(postDimIn/12,2);
+  const postCrossSection=$('postShape').value==='round'?Math.PI*Math.pow((postDimIn/12)/2,2):Math.pow(postDimIn/12,2);
   const postDisplacementFt3=postCrossSection*Math.max(0,effectiveDepthFt);
   const concretePerPostFt3=Math.max(0,holeVolumeFt3-postDisplacementFt3);
   const totalConcreteFt3=concretePerPostFt3*totalPosts;
@@ -490,15 +502,23 @@ function calculate(){
   if(!runs.some(v=>Number.isFinite(v)&&v>0)){err.textContent='Enter at least one fence-run length greater than 0.';return}
   if(!(val('postSpacing')>0)){err.textContent='Enter a maximum post spacing greater than 0.';return}
   if(!(val('fenceHeight')>0)){err.textContent='Enter a fence height greater than 0.';return}
-  if((val('gates')||0)>0 && !(val('gateWidth')>0)){err.textContent='Enter the gate opening width or set the number of gates to 0.';return}
-  if((val('sharedCorners')||0)>state.runs-1){err.textContent='Shared corners cannot exceed the number of possible run-to-run connections.';return}
+  const gateInput=val('gates')||0;
+  if(!Number.isInteger(gateInput)||gateInput<0){err.textContent='Enter a whole number of gates, 0 or more.';return}
+  if(gateInput>0 && !(val('gateWidth')>0)){err.textContent='Enter the gate opening width or set the number of gates to 0.';return}
+  const activeRunCount=runs.filter(v=>Number.isFinite(v)&&v>0).length;
+  if((val('sharedCorners')||0)>Math.max(0,activeRunCount-1)){err.textContent='Shared corners cannot exceed the number of connections between non-empty runs.';return}
+  if($('style').value!=='panel' && !(val('railPieceLength')>0)){err.textContent='Enter a rail piece length greater than 0.';return}
   if((val('waste')||0)<0 || (val('waste')||0)>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
   if((val('gravelBase')||0)>=(val('holeDepth')||0)){err.textContent='Gravel base depth must be smaller than the total post-hole depth.';return}
   if((val('holeDiameter')||0)<=0 || (val('holeDepth')||0)<=0 || (val('postWidth')||0)<=0){err.textContent='Enter positive post-hole and post dimensions.';return}
+  const holeDiameterIn=(val('holeDiameter')||0)*($('units').value==='metric'?1/25.4:1);
+  const postWidthIn=(val('postWidth')||0)*($('units').value==='metric'?1/25.4:1);
+  const requiredHoleDiameterIn=$('postShape').value==='round'?postWidthIn:postWidthIn*Math.SQRT2;
+  if(holeDiameterIn<requiredHoleDiameterIn){err.textContent=$('postShape').value==='round'?'Post-hole diameter must be at least as wide as the round post.':'Post-hole diameter must be wide enough for the diagonal of the square post.';return}
   if((val('picketWidth')||0)+(val('picketGap')||0)<=0 && $('style').value!=='panel'){err.textContent='Picket/board width plus gap must be greater than 0.';return}
   if($('style').value==='panel' && !(val('panelWidth')>0)){err.textContent='Enter a panel width greater than 0.';return}
   const o=calcValues();
-  if(o.coveredFt<0){err.textContent='Gate openings cannot be longer than the total fence run.';return}
+  if(o.coveredFt<=0){err.textContent='Gate openings must be shorter than the total fence run so some fence remains to calculate.';return}
   const cost=o.costKnown?'<div class="ok"><strong>Estimated material cost:</strong> '+fmt(o.totalCost,2)+' in your entered currency. Change or leave price fields blank to control which items are included.</div>':'';
   const claddingLine=o.style==='panel'
     ? '<tr><th>Panels</th><td>'+fmt(o.cladding)+'</td><td>'+fmt(o.claddingBase)+' base + '+Math.round(o.waste*100)+'% waste</td></tr>'
@@ -512,17 +532,17 @@ function calculate(){
     +'</div>'
     +'<div class="table-wrap"><table><thead><tr><th>Material</th><th>Quantity</th><th>Planning detail</th></tr></thead><tbody>'
     +'<tr><th>Posts</th><td>'+fmt(o.totalPosts)+'</td><td>'+fmt(o.linePosts)+' line + '+fmt(o.gatePosts)+' gate-position posts</td></tr>'
-    +'<tr><th>Rails</th><td>'+fmt(o.rails)+'</td><td>'+fmt(o.railsPerSection)+' per section · '+dualLength(o.railLengthFt)+' total piece length</td></tr>'
+    +'<tr><th>Rail pieces</th><td>'+fmt(o.rails)+'</td><td>'+fmt(o.railsPerSection)+' rail courses per section · '+dualLength(o.railLengthFt)+' total purchased piece length</td></tr>'
     +claddingLine
     +'<tr><th>Concrete</th><td>'+fmt(o.concreteBags)+' bags</td><td>'+fmt(o.totalConcreteFt3,3)+' ft³ · '+fmt(o.totalConcreteFt3*28.3168,1)+' L</td></tr>'
-    +'<tr><th>Post purchase length</th><td>'+dualLength(o.postLengthFt)+'</td><td>Fence height + entered hole depth</td></tr>'
+    +'<tr><th>Post purchase length</th><td>'+dualLength(o.postLengthFt)+'</td><td>Fence height + entered hole depth; verify embedment and site specifications</td></tr>'
     +'</tbody></table></div>'
-    +'<div class="note"><strong>Layout summary:</strong> '+fmt(o.rawSections)+' planned sections before shared-corner adjustment; '+fmt(o.shared)+' shared corner'+(o.shared===1?'':'s')+' removed from the post count. Gate openings remove '+dualLength(o.gateOpenFt)+' from the covered cladding length.</div>'
+    +'<div class="note"><strong>Layout summary:</strong> '+fmt(o.rawSections)+' post-spacing sections before shared-corner adjustment; '+fmt(o.shared)+' shared corner'+(o.shared===1?'':'s')+' removed from the line-post count. Gate width is distributed proportionally across runs for covered-material estimates. Two gate-position posts are added per gate as a conservative allowance and may overcount if they replace ordinary line posts. Confirm exact placement before purchasing.</div>'
     +cost
     +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy material summary</button><span id="copyStatus" class="copy-status"></span></div>';
   const copyButton=$('copyResult');
   copyButton.addEventListener('click',async function(){
-    const text='Fence material estimate\nPosts: '+o.totalPosts+'\nRails: '+o.rails+'\n'+o.claddingLabel+': '+o.cladding+'\nConcrete bags: '+o.concreteBags+'\nTotal covered fence: '+dualLength(o.coveredFt)+'\nEstimated cost: '+(o.costKnown?fmt(o.totalCost,2):'not entered');
+    const text='Fence material estimate\nPosts: '+o.totalPosts+'\nRail pieces: '+o.rails+'\n'+o.claddingLabel+': '+o.cladding+'\nConcrete bags: '+o.concreteBags+'\nTotal covered fence: '+dualLength(o.coveredFt)+'\nEstimated cost: '+(o.costKnown?fmt(o.totalCost,2):'not entered');
     try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Copied.'}catch(e){$('copyStatus').textContent='Copy not available on this browser.'}
   });
 }
