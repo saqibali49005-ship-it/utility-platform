@@ -27,20 +27,20 @@ try {
   await check('Default 100 ft run calculates expected posts and sections', async () => {
     await reset(); await calculate();
     const text = await resultText();
-    assert.match(text, /total posts\\s+14/i);
+    assert.match(text, /total posts\s+14/i);
     assert.match(text, /13 post-spacing sections/);
   });
 
   await check('Separate short runs round materials independently', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4); await calculate();
     const text = await resultText();
-    assert.match(text, /total fence runs\\s+8/i);
-    assert.match(text, /total posts\\s+4/i);
+    assert.match(text, /total fence runs\s+8/i);
+    assert.match(text, /total posts\s+4/i);
   });
 
   await check('Shared corner reduces one physical line post', async () => {
     await fill('#sharedCorners', 1); await calculate();
-    assert.match(await resultText(), /total posts\\s+3/i);
+    assert.match(await resultText(), /total posts\s+3/i);
   });
 
   await check('Fractional shared-corner value is rejected', async () => {
@@ -68,13 +68,13 @@ try {
   await check('Panel mode calculates panels per run', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4);
     await page.locator('#style').selectOption('panel'); await fill('#panelWidth', 8); await calculate();
-    assert.match(await resultText(), /panels\\s+3/i);
+    assert.match(await resultText(), /panels\s+3/i);
   });
 
   await check('Picket mode calculates boards per run', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4);
     await page.locator('#style').selectOption('picket'); await fill('#picketWidth', 3.5); await fill('#picketGap', 1.5); await calculate();
-    assert.match(await resultText(), /Pickets \/ boards 22/);
+    assert.match(await resultText(), /pickets \/ boards\s+22/i);
   });
 
   await check('Imperial to metric and back preserves run length and preset labels', async () => {
@@ -92,7 +92,7 @@ try {
     assert.equal(await page.locator('#units').inputValue(), 'imperial');
     assert.equal(await page.locator('#run1').inputValue(), '100');
     assert.equal(await page.locator('input[data-run]').count(), 1);
-    assert.match(await resultText(), /Total posts 14/);
+    assert.match(await resultText(), /total posts\s+14/i);
   });
 
   await check('Square post-hole diagonal fit is enforced', async () => {
@@ -114,10 +114,10 @@ try {
   await check('Concrete estimates render with and without gravel base', async () => {
     await reset(); await fill('#gravelBase', 0); await calculate();
     const without = await resultText();
-    assert.match(without, /concrete bags\\s+[1-9]/i);
+    assert.match(without, /concrete bags\s+[1-9]/i);
     await fill('#gravelBase', 3); await calculate();
     const withBase = await resultText();
-    assert.match(withBase, /concrete bags\\s+[1-9]/i);
+    assert.match(withBase, /concrete bags\s+[1-9]/i);
   });
 
   await check('Copy summary writes the calculated estimate to clipboard', async () => {
