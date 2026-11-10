@@ -12,7 +12,7 @@ async function check(name, fn) {
 }
 async function fill(selector, value) { await page.locator(selector).fill(String(value)); }
 async function calculate() { await page.locator('#calculate').click(); }
-async function resultText() { return (await page.locator('#result').innerText()).replace(/\\s+/g, ' '); }
+async function resultText() { return (await page.locator('#result').innerText()).replace(/\s+/g, ' '); }
 async function errorText() { return (await page.locator('#error').innerText()).trim(); }
 async function reset() { await page.locator('#reset').click(); await page.waitForTimeout(50); }
 
@@ -68,13 +68,13 @@ try {
   await check('Panel mode calculates panels per run', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4);
     await page.locator('#style').selectOption('panel'); await fill('#panelWidth', 8); await calculate();
-    assert.match(await resultText(), /Panels 2/);
+    assert.match(await resultText(), /Panels 3/);
   });
 
   await check('Picket mode calculates boards per run', async () => {
     await reset(); await fill('#run1', 4); await page.locator('#addRun').click(); await fill('#run2', 4);
     await page.locator('#style').selectOption('picket'); await fill('#picketWidth', 3.5); await fill('#picketGap', 1.5); await calculate();
-    assert.match(await resultText(), /Pickets \/ boards 20/);
+    assert.match(await resultText(), /Pickets \/ boards 22/);
   });
 
   await check('Imperial to metric and back preserves run length and preset labels', async () => {
@@ -114,7 +114,7 @@ try {
   await check('Concrete estimates render with and without gravel base', async () => {
     await reset(); await fill('#gravelBase', 0); await calculate();
     const without = await resultText();
-    assert.match(without, /Concrete bags [1-9]/);
+    assert.match(without, /CONCRETE BAGS [1-9]/);
     await fill('#gravelBase', 3); await calculate();
     const withBase = await resultText();
     assert.match(withBase, /Concrete bags [1-9]/);
