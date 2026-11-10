@@ -168,9 +168,9 @@ const insulations=['THHN/THWN-2','XHHW-2','TW/THW/THHW/THW-2','Bare (stranded)']
 let mode='selected';
 let conductorRowId=0;
 const $=id=>document.getElementById(id);
-function options(list,value){return list.map(x=>'<option value="'+x+'">'+x+'</option>').join('')}
+function options(list,value){return list.map(x=>'<option value="'+x+'"'+(x===value?' selected':'')+'>'+x+'</option>').join('')}
 function populateSizes(){
- const r=raceways[$('raceway').value]; $('tradeSize').innerHTML=Object.keys(r.sizes).filter(k=>r.sizes[k]).map(k=>'<option value="'+k+'">'+k+'</option>').join('');
+ const r=raceways[$('raceway').value]; $('tradeSize').innerHTML=Object.keys(r.sizes).filter(k=>r.sizes[k]).map(k=>"<option value='"+k+"'>"+k+"</option>").join('');
 }
 function rowHtml(size='12',ins='THHN/THWN-2',qty=3){
  const id='conductor-row-'+(++conductorRowId);
