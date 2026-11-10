@@ -44,8 +44,34 @@
 <section class="support-grid"><article class="card"><h2>What are Significant Figures?</h2><p>Significant figures are the digits in a number that communicate meaningful measurement precision. They help show how precisely a value is known.</p></article><article class="card"><h2>Rules Summary</h2><ul><li>For addition and subtraction, round to the least precise decimal place.</li><li>For multiplication and division, round to the fewest significant figures.</li><li>Non-zero digits and interior zeros are significant.</li><li>Leading zeros are not significant.</li><li>Trailing decimal zeros are significant; whole-number trailing zeros can be ambiguous without notation.</li></ul></article><article class="card"><h2>Examples</h2><div class="examples"><div class="example">12.3 + 4.56 = 16.9&nbsp; (3 s.f.)</div><div class="example">5.2 × 3.1 = 16&nbsp; (2 s.f.)</div><div class="example">100.0 ÷ 3 = 33.3&nbsp; (3 s.f.)</div><div class="example">0.00450 × 2.0 = 0.0090&nbsp; (2 s.f.)</div></div></article></section>
 
 
+<section class="card sigfig-guide">
+<h2>How to Use a Significant Figures Calculator</h2>
+<p>A significant figures calculator helps you count meaningful digits, round a number to a chosen precision, and apply measurement-precision rules to arithmetic. Enter the value as written, including its decimal point or scientific notation, so its intended precision is clear.</p>
+<h3>How to round to significant figures</h3>
+<ol>
+<li>Start at the first non-zero digit. This is the first significant digit.</li>
+<li>Count the required number of significant digits from left to right.</li>
+<li>Look at the next digit: if it is 5 or greater, increase the last kept digit by one; otherwise leave it unchanged.</li>
+<li>Use decimal places or scientific notation to make the final precision unambiguous.</li>
+</ol>
+<p>For example, 0.004567 rounded to 3 significant figures is 0.00457. The leading zeros locate the decimal point; they do not count as significant digits.</p>
+<h3>Significant figures in addition and subtraction</h3>
+<p>For addition and subtraction, the result is limited by the input with the fewest decimal places. For example, 12.11 + 18.0 = 30.11, which is reported as 30.1 because 18.0 is precise only to the tenths place.</p>
+<h3>Significant figures in multiplication and division</h3>
+<p>For multiplication and division, report the result with the same number of significant figures as the input with the fewest significant figures. For example, 2.50 × 4.0 = 10.0 before rounding, so the reported result is 10. (2 significant figures).</p>
+<h3>Zeros and scientific notation</h3>
+<ul>
+<li>Leading zeros are not significant: 0.0032 has 2 significant figures.</li>
+<li>Zeros between non-zero digits are significant: 1002 has 4 significant figures.</li>
+<li>Trailing zeros after a decimal point are significant: 4.500 has 4 significant figures.</li>
+<li>Scientific notation makes precision explicit: 1.20 × 10³ has 3 significant figures.</li>
+</ul>
+<p>Exact counted quantities and defined conversion factors do not limit significant figures in the same way as measured values. Keep unrounded digits during intermediate steps and round the final answer once.</p>
+</section>
+
 <section class="card faq-card"><h2>Frequently Asked Questions</h2><div class="faq"><button type="button"><span>What are significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Significant figures indicate the meaningful precision communicated by a measured or calculated number.</div></div><div class="faq"><button type="button"><span>How do I count significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Count non-zero digits and interior zeros as significant, exclude leading zeros, and treat trailing decimal zeros as significant. Trailing zeros in whole numbers can be ambiguous without notation.</div></div><div class="faq"><button type="button"><span>What is the rule for multiplication and division?</span><span class="faq-icon">+</span></button><div class="faq-answer">Report the result with the same number of significant figures as the input with the fewest significant figures.</div></div></section>
 
+<div class="faq"><button type="button"><span>How do I round a number to 3 significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Find the first non-zero digit, keep three significant digits, and use the next digit to decide whether to round the third digit up. For example, 0.004567 becomes 0.00457.</div></div><div class="faq"><button type="button"><span>What is the difference between decimal places and significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Decimal places count digits to the right of the decimal point. Significant figures count meaningful digits starting with the first non-zero digit. Addition and subtraction use decimal-place precision; multiplication and division use significant-figure precision.</div></div>
 </main>
 <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark">UP</div><div><strong>Utility Platform</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 Utility Platform</div></footer>
 <script>
