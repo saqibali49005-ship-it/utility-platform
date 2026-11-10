@@ -101,7 +101,7 @@ try {
   });
 
   await check('Round post fit accepts diameter-sized hole', async () => {
-    await fill('#postShape', 'round'); await fill('#holeDiameter', 4); await fill('#postWidth', 3.5); await calculate();
+    await page.locator('#postShape').selectOption('round'); await fill('#holeDiameter', 4); await fill('#postWidth', 3.5); await calculate();
     assert.equal(await errorText(), '');
     assert.match(await resultText(), /Project material estimate/);
   });
