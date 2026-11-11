@@ -107,8 +107,21 @@
 </section>
 
 <section class="card">
+<h2>Sod Staple Calculator Example</h2>
+<p>For a <strong>1,000 sq ft</strong> lawn using a planning spacing of <strong>5 ft</strong>, the square-grid estimate is 1,000 ÷ (5 × 5) = 40 main-field staples. With a 10% extra allowance, that becomes 44 staples. If staples come in packs of 100, the purchase estimate is <strong>1 pack</strong>.</p>
+<div class="formula">
+Area covered per staple = 5 ft × 5 ft = 25 sq ft<br>
+Main-field staples = ceil(1,000 ÷ 25) = 40<br>
+With 10% extra = ceil(40 × 1.10) = 44<br>
+Packages = ceil(44 ÷ 100) = 1 pack
+</div>
+<p class="small">The main-field calculation treats the chosen spacing as a square-grid planning interval. It is a quantity estimate, not a prescribed installation pattern. Real layouts, edges, seams, slopes and manufacturer instructions can change the required count.</p>
+</section>
+
+<section class="card">
 <h2>How to Calculate Sod Staples</h2>
 <div class="formula">
+Area covered per staple = base spacing × base spacing (square-grid estimate)<br>
 Base staples = ceil(sod area ÷ area covered per staple)<br>
 Edge staples = ceil(exposed edge length ÷ edge staple spacing)<br>
 Seam staples = ceil(total seam length ÷ seam staple spacing)<br>
@@ -132,6 +145,7 @@ Packages = ceil(planning total ÷ staples per package)
 <section class="card">
 <h2>Sod Staple Calculator FAQs</h2>
 <details><summary>How many sod staples do I need?</summary><p>Enter the sod area and your chosen base spacing. The calculator estimates the main-field staples, then adds any edge and seam quantities and your selected extra allowance.</p></details>
+<details><summary>How many staples do I need for 1,000 square feet of sod?</summary><p>At a 5 ft square-grid planning spacing, the main field estimate is 40 staples. With a 10% extra allowance, that becomes 44 staples, or one 100-staple pack. Add separate edge and seam lengths when your layout needs them, and follow your sod supplier's instructions for actual placement.</p></details>
 <details><summary>How far apart should sod staples be?</summary><p>There is no single spacing that fits every sod installation. The calculator lets you choose the spacing so the estimate can follow the instructions for your particular sod and site.</p></details>
 <details><summary>Should I use more staples on edges?</summary><p>Edges can be more vulnerable to lifting or movement. If your installation plan calls for closer edge placement, enter the edge length and edge spacing separately.</p></details>
 <details><summary>How do I calculate staples for sod seams?</summary><p>Add the total length of the seams and choose the staple spacing you want to use along those seams. The tool adds that requirement to the main-area and edge estimates.</p></details>
