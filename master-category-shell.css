@@ -187,3 +187,16 @@
     word-break:normal!important;
   }
 }
+
+/* 2026-11-12: category cards must collapse before tablet-width text becomes cramped. */
+@media(max-width:900px){
+  .category-page main.wrap .category-guide-grid,
+  .category-page main.wrap .catalog-sync-card>div{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .category-page main.wrap .category-guide-grid>div,
+  .category-page main.wrap .catalog-sync-item{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
