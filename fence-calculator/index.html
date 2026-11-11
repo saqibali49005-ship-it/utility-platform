@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#111827"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<title>Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete</title>
-<meta name="description" content="Estimate fence posts, rails, pickets, panels and concrete. Plan gates, multiple runs and optional material costs in metric or imperial units."/>
+<title>Wood Fence Material Calculator | Posts, Rails &amp; Concrete</title>
+<meta name="description" content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan multiple runs, gates, shared corners and optional material costs."/>
 <link href="https://zemtools.com/fence-calculator/" rel="canonical"/>
-<meta content="Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete" property="og:title"/>
-<meta content="Estimate fence materials, concrete and optional cost for practical wood fence projects with multiple runs, gates, metric and imperial units." property="og:description"/>
+<meta content="Wood Fence Material Calculator | Posts, Rails &amp; Concrete" property="og:title"/>
+<meta content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan multiple runs, gates, shared corners and optional material costs." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://zemtools.com/fence-calculator/" property="og:url"/>
 <meta content="https://zemtools.com/social-preview.png" property="og:image"/>
@@ -18,11 +18,11 @@
 <meta content="https://zemtools.com/social-preview.png" name="twitter:image"/>
 <meta content="ZemTools — Practical Online Tools" name="twitter:image:alt"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Fence Material Calculator | Posts, Rails, Pickets &amp; Concrete" name="twitter:title"/>
-<meta content="Estimate fence materials, concrete and optional cost for practical wood fence projects with multiple runs, gates, metric and imperial units." name="twitter:description"/>
+<meta content="Wood Fence Material Calculator | Posts, Rails &amp; Concrete" name="twitter:title"/>
+<meta content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan multiple runs, gates, shared corners and optional material costs." name="twitter:description"/>
 <meta content="index,follow" name="robots"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Fence Material Calculator","url":"https://zemtools.com/fence-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate fence posts, rails, pickets or panels, concrete and optional material cost for a fence project.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Wood Fence Material Calculator","url":"https://zemtools.com/fence-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate wood fence posts, rails, pickets or panels, concrete and optional material cost for a fence project.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 
 <link rel="stylesheet" href="master-tool-design.css">
@@ -139,7 +139,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <main id="main-content">
 <section class="hero-shell">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="home-construction/">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Fence Material Calculator</span></nav>
-<div class="hero"><div class="tool-icon" aria-hidden="true">🪵</div><div><h1>Fence Material Calculator</h1><p>Plan a fence project with posts, rails, pickets or panels, concrete and an optional material-cost estimate — with support for multiple runs and gates.</p></div></div>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🪵</div><div><h1>Wood Fence Material Calculator</h1><p>Estimate wood fence posts, rails, pickets or pre-made panels, post-hole concrete and optional material costs for multiple fence runs and gates.</p></div></div>
 <div class="info-callout"><div class="info-icon">i</div><div><strong>Built for project planning, not just a single length</strong>Enter each fence run, account for gates and shared corners, choose your construction style, and get a practical material takeoff. Final quantities should be checked against your fence design, site conditions, local requirements and product instructions.</div></div>
 </section>
 
@@ -266,7 +266,7 @@ body.fence-tool .mobile-nav,body.fence-tool .search-panel{width:100%;box-sizing:
 <div class="metric"><strong>Materials</strong><span>Posts, rails, pickets/panels</span></div>
 <div class="metric"><strong>Foundations</strong><span>Hole-volume concrete estimate</span></div>
 </div>
-<div class="note"><strong>Why the project view matters:</strong> a fence is rarely just one uninterrupted line. Stronger planning tools account for runs, corners, gates and the physical post-hole geometry instead of returning only a single picket count. Current fence calculators show this broader direction, including multiple runs and concrete calculations based on hole geometry.</div>
+<div class="note"><strong>Plan the full layout:</strong> enter each straight run separately, identify shared corner posts and gate openings, then estimate the materials for the fence sections that remain. Post and footing quantities still need to be checked against the actual layout and site conditions.</div>
 </section>
 
 <section class="card">
@@ -293,6 +293,18 @@ Pickets = ceil(covered length in inches ÷ (picket width + gap))<br>
 Concrete = (hole volume − post displacement) × total posts
 </div>
 <p class="small">The formulas are intentionally visible so you can audit the result. Rounding, the exact position of gates, slopes, cut-down panels and local installation requirements can change the final purchase quantity.</p>
+</section>
+
+<section class="card" aria-labelledby="wood-fence-example-title">
+<h2 id="wood-fence-example-title">Example: materials for a 100 ft wood privacy fence</h2>
+<p>For one straight 100 ft run with a 6 ft fence height and 8 ft maximum post spacing, the calculator starts with 13 sections and 14 post positions. With three rail courses, 8 ft rail stock, 5.5 in boards with no gap and a 10% material overage, the example estimate is:</p>
+<div class="table-wrap"><table><thead><tr><th>Material</th><th>Example quantity</th><th>Assumptions</th></tr></thead><tbody>
+<tr><th>Fence posts</th><td>14</td><td>One run, no gates or shared corners</td></tr>
+<tr><th>Rail pieces</th><td>43</td><td>Three courses, 8 ft stock, 10% overage</td></tr>
+<tr><th>Boards / pickets</th><td>241</td><td>5.5 in board width, zero gap, 10% overage</td></tr>
+<tr><th>Concrete</th><td>23 bags</td><td>8 in hole, 36 in depth, 3 in gravel base, 3.5 in square post, 60 lb bag yield of 0.45 ft³</td></tr>
+</tbody></table></div>
+<p class="small">These are illustrative planning quantities, not a construction specification. The example uses the default layout and material assumptions shown. Actual post spacing, gate locations, stock lengths, cuts, soil and concrete product yield can change the purchase list. Confirm the design and product instructions before ordering.</p>
 </section>
 
 <section class="card">
@@ -485,7 +497,7 @@ function calcValues(){
   const totalConcreteFt3=concretePerPostFt3*totalPosts;
   const bagYieldFt3=parseFloat($('bagYield').value);
   const concreteBags=Math.ceil(totalConcreteFt3/bagYieldFt3);
-  const postLengthFt=fenceHeightFt+((val('holeDepth')||0)*rToFt);
+  const postLengthFt=fenceHeightFt+(holeDepthIn/12);
   const prices={post:price('pricePost'),rail:style==='panel'?null:price('priceRail'),clad:price('priceCladding'),bag:price('priceBag')};
   const costItems=[];
   if(prices.post!==null)costItems.push(['Posts',totalPosts,prices.post,totalPosts*prices.post]);
