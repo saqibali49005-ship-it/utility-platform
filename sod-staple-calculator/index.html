@@ -162,8 +162,8 @@ Packages = ceil(planning total ÷ staples per package)
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-function toSqFt(v){return $('units').value==='metric'?v*10.7639104167:v}
-function toFt(v){return $('units').value==='metric'?v*3.280839895:v}
+function toSqFt(v){return $('units').value==='metric'?v*10.763910416709722:v}
+function toFt(v){return $('units').value==='metric'?v*3.280839895013123:v}
 function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
 function ceilCount(value){
  const nearest=Math.round(value);
@@ -176,10 +176,10 @@ function updateLabels(){
  document.querySelectorAll('.length-unit').forEach(x=>x.textContent=m?'(m)':'(ft)');
 }
 function convert(oldMetric,newMetric){
- const areaRatio=newMetric?0.09290304:10.7639104167;
- const lengthRatio=newMetric?0.3048:3.280839895;
- $('area').value=(parseFloat($('area').value)||0)*areaRatio;
- ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=((parseFloat($(id).value)||0)*lengthRatio).toFixed(4)});
+ const areaRatio=newMetric?0.09290304:10.763910416709722;
+ const lengthRatio=newMetric?0.3048:3.280839895013123;
+ $('area').value=String(Number(((parseFloat($('area').value)||0)*areaRatio).toPrecision(12)));
+ ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=String(Number(((parseFloat($(id).value)||0)*lengthRatio).toPrecision(12)))});
 }
 function calculate(){
  const err=$('error');err.textContent='';
