@@ -130,3 +130,60 @@
  .category-page .wrap{padding-left:14px!important;padding-right:14px!important}
  .category-page .grid{grid-template-columns:1fr!important}
 }
+
+/* 2026-11-12: stable category content alignment. Keep injected catalogue panels
+   in normal document flow; never allow heading/content to form accidental columns. */
+.category-page main.wrap .catalog-sync-card{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-auto-flow:row!important;
+  align-items:stretch!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.category-page main.wrap .catalog-sync-card>h2,
+.category-page main.wrap .catalog-sync-card>div{
+  grid-column:1 / -1!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.category-page main.wrap .catalog-sync-card>div{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important;
+  align-items:stretch!important;
+}
+.category-page main.wrap .catalog-sync-item{
+  min-width:0!important;
+  overflow-wrap:anywhere!important;
+}
+.category-page main.wrap .category-guide{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.category-page main.wrap .category-guide>h2,
+.category-page main.wrap .category-guide>p,
+.category-page main.wrap .category-guide>.category-guide-grid{
+  width:100%!important;
+  max-width:none!important;
+}
+.category-page main.wrap .category-guide-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch!important;
+}
+.category-page main.wrap .category-guide-grid>div{
+  min-width:0!important;
+  overflow-wrap:anywhere!important;
+}
+@media(max-width:700px){
+  .category-page main.wrap .catalog-sync-card>div,
+  .category-page main.wrap .category-guide-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .category-page main.wrap .catalog-sync-item h3,
+  .category-page main.wrap .category-guide-grid h3{
+    overflow-wrap:break-word!important;
+    word-break:normal!important;
+  }
+}
