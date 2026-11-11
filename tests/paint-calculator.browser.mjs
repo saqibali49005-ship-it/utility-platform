@@ -27,8 +27,8 @@ try {
   await check('Default room estimate matches the wall, ceiling, openings, coats and overage formula', async () => {
     await fresh();
     await calculate();
-    assert.equal(await page.locator('#coveredArea').innerText(), '428.0 sq ft');
-    assert.equal(await page.locator('#coatedArea').innerText(), '856.0 sq ft');
+    assert.equal(await page.locator('#coveredArea').innerText(), '428 sq ft');
+    assert.equal(await page.locator('#coatedArea').innerText(), '856 sq ft');
     assert.equal(await page.locator('#paintResult').innerText(), '2.4 gal · 9.1 L');
   });
 
