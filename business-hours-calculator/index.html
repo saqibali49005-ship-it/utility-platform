@@ -72,6 +72,13 @@
   .business-tool .result-grid{grid-template-columns:1fr}
   .business-tool .schedule-table{font-size:13px}
 }
+
+/* Keep the weekly schedule table scrollable inside its own card at every viewport. */
+.business-tool .layout,
+.business-tool .layout>*{min-width:0!important}
+.business-tool .schedule-table-wrap{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.business-tool .schedule-table{display:table!important;width:100%!important;min-width:520px!important;max-width:none!important;table-layout:fixed!important;overflow:visible!important;white-space:nowrap!important}
+
 </style>
 </head>
 <body class="tool-page business-tool">
@@ -145,10 +152,12 @@
 
 <aside class="card">
   <div class="card-head"><div><h2>Work schedule</h2><p class="tiny-note">Set one or two work periods for each day. Disabled days are treated as non-working.</p></div></div>
+  <div class="schedule-table-wrap" role="region" aria-label="Weekly work schedule" tabindex="0">
   <table class="schedule-table" aria-label="Weekly business hours schedule">
     <thead><tr><th>Day</th><th>Period 1</th><th>Period 2</th></tr></thead>
     <tbody id="scheduleBody"></tbody>
   </table>
+  </div>
   <p class="schedule-help tiny-note">Example split shift: 09:00–13:00 and 14:00–17:00. Keep the end after the start.</p>
 </aside>
 </div>
