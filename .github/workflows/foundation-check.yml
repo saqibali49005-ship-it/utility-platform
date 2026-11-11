@@ -29,6 +29,8 @@ jobs:
           done
           cat /tmp/zemtools-http.log
           exit 1
+      - name: Run pilot-hole calculator browser regression tests
+        run: node tests/pilot-hole-calculator.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
