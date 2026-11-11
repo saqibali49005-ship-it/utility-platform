@@ -166,27 +166,42 @@ function parse(v){return Number(v);}
 function fmt(n,d=2){return Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';}
 function toM(v,metric){return metric?v:v*0.3048;}
 function areaToM2(v,metric){return metric?v:v*0.09290304;}
+function showError(message){
+ $('paintResult').textContent='—';
+ ['paintLitres','coveredArea','coatedArea','overageResult'].forEach(id=>$(id).textContent='—');
+ $('resultSub').textContent=message;
+ $('orderNote').textContent='Correct the inputs above, then calculate again.';
+ lastResult=null;
+}
 function calc(){
  const metric=$('units').value==='metric';
- const coats=Math.max(1,Math.min(10,parse($('coats').value)||1));
- const waste=Math.max(0,Math.min(50,parse($('waste').value)||0))/100;
- const covInput=parse($('coverage').value);
- const covUnit=$('coverageUnit').value;
+ const coatsInput=parse($('coats').value),wasteInput=parse($('waste').value);
+ const covInput=parse($('coverage').value),covUnit=$('coverageUnit').value;
+ if(!Number.isInteger(coatsInput)||coatsInput<1||coatsInput>10){showError('Number of coats must be a whole number between 1 and 10.');return;}
+ if(!Number.isFinite(wasteInput)||wasteInput<0||wasteInput>50){showError('Planning overage must be between 0% and 50%.');return;}
+ if(!Number.isFinite(covInput)||covInput<=0){showError('Enter a positive paint coverage value.');return;}
  let coverageM2PerL;
  if(covUnit==='sqm') coverageM2PerL=covInput;
  else coverageM2PerL=covInput*0.09290304/3.785411784;
- if(!(coverageM2PerL>0)){alert('Enter a valid paint coverage value.');return;}
- let wallArea=0, openings=0, ceiling=0;
+ if(!Number.isFinite(coverageM2PerL)||coverageM2PerL<=0){showError('Enter a valid paint coverage value.');return;}
+ if(!roomList.children.length){showError('Add at least one room or space.');return;}
+ const coats=coatsInput,waste=wasteInput/100;
+ let wallArea=0,openings=0,ceiling=0;
  for(const card of roomList.children){
    const l=parse(card.querySelector('[data-r="length"]').value),w=parse(card.querySelector('[data-r="width"]').value),h=parse(card.querySelector('[data-r="height"]').value);
-   const doors=Math.max(0,parse(card.querySelector('[data-r="doors"]').value)||0),windows=Math.max(0,parse(card.querySelector('[data-r="windows"]').value)||0);
-   const doorArea=areaToM2(parse(card.querySelector('[data-r="doorArea"]').value)||0,metric);
-   const windowArea=areaToM2(parse(card.querySelector('[data-r="windowArea"]').value)||0,metric);
-   if(!(l>0&&w>0&&h>0)){alert('Enter positive room dimensions for every room.');return;}
+   const doors=parse(card.querySelector('[data-r="doors"]').value),windows=parse(card.querySelector('[data-r="windows"]').value);
+   const doorAreaInput=parse(card.querySelector('[data-r="doorArea"]').value),windowAreaInput=parse(card.querySelector('[data-r="windowArea"]').value);
+   if(!(Number.isFinite(l)&&Number.isFinite(w)&&Number.isFinite(h)&&l>0&&w>0&&h>0)){showError('Enter positive room dimensions for every room.');return;}
+   if(!Number.isInteger(doors)||doors<0||!Number.isInteger(windows)||windows<0){showError('Door and window counts must be whole numbers of 0 or more.');return;}
+   if(!Number.isFinite(doorAreaInput)||doorAreaInput<0||!Number.isFinite(windowAreaInput)||windowAreaInput<0){showError('Door and window areas cannot be negative and must be valid numbers.');return;}
+   if((doors>0&&doorAreaInput<=0)||(windows>0&&windowAreaInput<=0)){showError('Enter a positive standard area for each door or window type in use.');return;}
+   const doorArea=areaToM2(doorAreaInput,metric),windowArea=areaToM2(windowAreaInput,metric);
    const lm=toM(l,metric),wm=toM(w,metric),hm=toM(h,metric);
-   wallArea += 2*(lm+wm)*hm;
-   openings += doors*doorArea+windows*windowArea;
-   if(card.querySelector('[data-r="ceiling"]').value==='yes') ceiling += lm*wm;
+   const roomWallArea=2*(lm+wm)*hm,roomOpenings=doors*doorArea+windows*windowArea;
+   if(roomOpenings>roomWallArea){showError('Door and window openings cannot exceed the room wall area.');return;}
+   wallArea+=roomWallArea;
+   openings+=roomOpenings;
+   if(card.querySelector('[data-r="ceiling"]').value==='yes') ceiling+=lm*wm;
  }
  const paintable=Math.max(0,wallArea+ceiling-openings);
  const coated=paintable*coats;
