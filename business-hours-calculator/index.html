@@ -219,9 +219,11 @@
   function scheduleData(){
     return DAYS.map((name,i)=>{
       const en=$('day-'+i+'-enabled').checked;
-      const a=timeMinutes($('day-'+i+'-start1').value),b=timeMinutes($('day-'+i+'-end1').value);
-      const c=timeMinutes($('day-'+i+'-start2').value),d=timeMinutes($('day-'+i+'-end2').value);
-      return {name,enabled:en,intervals:[a!==null&&b!==null?[a,b]:null,c!==null&&d!==null?[c,d]:null].filter(Boolean)};
+      const start1=$('day-'+i+'-start1').value,end1=$('day-'+i+'-end1').value;
+      const start2=$('day-'+i+'-start2').value,end2=$('day-'+i+'-end2').value;
+      const a=timeMinutes(start1),b=timeMinutes(end1),c=timeMinutes(start2),d=timeMinutes(end2);
+      const incomplete=Boolean(start1)!==Boolean(end1)||Boolean(start2)!==Boolean(end2);
+      return {name,enabled:en,incomplete,intervals:[a!==null&&b!==null?[a,b]:null,c!==null&&d!==null?[c,d]:null].filter(Boolean)};
     });
   }
   function holidays(){
@@ -235,6 +237,7 @@
     const errors=[];
     s.forEach((day,i)=>{
       if(!day.enabled)return;
+      if(day.incomplete){errors.push(DAYS[i]+' has an incomplete time period. Enter both a start and end time, or clear both fields.');return;}
       if(!day.intervals.length)errors.push(DAYS[i]+' needs at least one complete time period.');
       day.intervals.forEach((r,j)=>{if(r[1]<=r[0])errors.push(DAYS[i]+' period '+(j+1)+' must end after it starts.');});
       if(day.intervals.length===2 && day.intervals[1][0]<day.intervals[0][1])errors.push(DAYS[i]+' period 2 must start at or after period 1 ends.');
