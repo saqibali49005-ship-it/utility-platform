@@ -47,6 +47,38 @@ try {
     assert.equal(await page.locator('#resultValue').innerText(), '-1e+2');
     assert.equal(await page.locator('#sigCount').innerText(), '1');
   });
+
+  await check('Multiplication displays trailing zeros to make precision explicit', async () => {
+    await page.locator('[data-mode="multiply"]').click();
+    await page.locator('#multiplyInput').fill('2.50 × 4.0');
+    await page.locator('#calculateBtn').click();
+    assert.equal(await page.locator('#resultValue').innerText(), '1.0e+1');
+    assert.equal(await page.locator('#sigCount').innerText(), '2');
+  });
+
+  await check('Rounding retains requested trailing significant zeros', async () => {
+    await page.locator('[data-mode="round"]').click();
+    await page.locator('#numberInput').fill('9.99');
+    await page.locator('#targetInput').fill('3');
+    await page.locator('#calculateBtn').click();
+    assert.equal(await page.locator('#resultValue').innerText(), '10.0');
+    assert.equal(await page.locator('#sigCount').innerText(), '3');
+  });
+
+  await check('Very small scientific-notation values can be rounded without toFixed range errors', async () => {
+    await page.locator('#numberInput').fill('1e-200');
+    await page.locator('#targetInput').fill('2');
+    await page.locator('#calculateBtn').click();
+    assert.equal(await page.locator('#resultValue').innerText(), '1.0e-200');
+    assert.equal(await page.locator('#sigCount').innerText(), '2');
+  });
+
+  await check('Counting significant figures respects trailing decimal zeros', async () => {
+    await page.locator('[data-mode="count"]').click();
+    await page.locator('#numberInput').fill('0.004560');
+    await page.locator('#calculateBtn').click();
+    assert.equal(await page.locator('#resultValue').innerText(), '4');
+  });
 } finally {
   await browser.close();
 }
