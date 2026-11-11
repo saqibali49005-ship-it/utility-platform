@@ -1,3 +1,5 @@
+/* Keep intentional full-bleed footer backgrounds from creating a horizontal page scroll. */
+html{overflow-x:clip}
 :root{
   --up-bg:#f4f7fb;--up-surface:#ffffff;--up-surface-soft:#f8fafc;--up-text:#0b1220;--up-muted:#5f6b7a;--up-line:#dfe6ef;--up-primary:#2563eb;--up-primary-dark:#1d4ed8;--up-primary-soft:#eff6ff;--up-shadow:0 8px 24px rgba(15,23,42,.055);--up-shadow-lg:0 16px 36px rgba(15,23,42,.09);--up-radius:18px;
 }
