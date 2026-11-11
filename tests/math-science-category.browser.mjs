@@ -61,9 +61,15 @@ try {
     assert.equal(await page.locator('#mathLocalSearch').evaluate(el => el.classList.contains('is-open')), true);
     await page.locator('#mathLocalSearchInput').fill('time');
     const results = page.locator('#mathLocalSearchResults a');
-    assert.equal(await results.count(), 2);
+    assert.equal(await results.count(), 1);
     assert.match(await page.locator('#mathLocalSearchResults').innerText(), /Time Calculator/);
+    assert.doesNotMatch(await page.locator('#mathLocalSearchResults').innerText(), /Business Hours Calculator/);
+    await page.locator('#mathLocalSearchInput').fill('business');
+    assert.equal(await results.count(), 1);
     assert.match(await page.locator('#mathLocalSearchResults').innerText(), /Business Hours Calculator/);
+    await page.locator('#mathLocalSearchInput').fill('significant');
+    assert.equal(await results.count(), 1);
+    assert.match(await page.locator('#mathLocalSearchResults').innerText(), /Significant Figures Calculator/);
   });
 
   await check('Mobile menu opens and page has no horizontal overflow', async () => {
