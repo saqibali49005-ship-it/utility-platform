@@ -165,6 +165,11 @@ const $=id=>document.getElementById(id);
 function toSqFt(v){return $('units').value==='metric'?v*10.7639104167:v}
 function toFt(v){return $('units').value==='metric'?v*3.280839895:v}
 function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
+function ceilCount(value){
+ const nearest=Math.round(value);
+ const tolerance=Number.EPSILON*Math.max(1,Math.abs(value))*16;
+ return Math.abs(value-nearest)<=tolerance?nearest:Math.ceil(value);
+}
 function updateLabels(){
  const m=$('units').value==='metric';
  document.querySelector('.area-unit').textContent=m?'(m²)':'(sq ft)';
@@ -188,10 +193,10 @@ function calculate(){
  if(!Number.isInteger(pack)||pack<1){err.textContent='Staples per package must be a whole number of at least 1.';return}
  const extra=extraInput/100;
  const areaFt=toSqFt(area), spacingFt=toFt(spacing), edgeSpacingFt=toFt(edgeSpacing), edgeFt=toFt(edgeLength), seamSpacingFt=toFt(seamSpacing), seamFt=toFt(seamLength);
- const base=Math.ceil(areaFt/(spacingFt*spacingFt));
- const edge=edgeFt>0?Math.ceil(edgeFt/edgeSpacingFt):0;
- const seam=seamFt>0?Math.ceil(seamFt/seamSpacingFt):0;
- const subtotal=base+edge+seam, total=Math.ceil(subtotal*(1+extra)), packages=Math.ceil(total/pack);
+ const base=ceilCount(areaFt/(spacingFt*spacingFt));
+ const edge=edgeFt>0?ceilCount(edgeFt/edgeSpacingFt):0;
+ const seam=seamFt>0?ceilCount(seamFt/seamSpacingFt):0;
+ const subtotal=base+edge+seam, total=ceilCount(subtotal*(1+extra)), packages=ceilCount(total/pack);
  const r=$('result');
  r.innerHTML='<h2>Your sod staple estimate</h2><div class="result-grid">'
   +'<div class="metric"><strong>Total staples</strong><span>'+fmt(total)+'</span></div>'
