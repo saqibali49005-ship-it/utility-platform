@@ -241,16 +241,18 @@ $('units').addEventListener('change',function(){
 });
 function calculate(){
   const err=$('error'); err.textContent='';
-  const joists=Math.floor(parseFloat($('joistCount').value)||0);
+  const joists=parseFloat($('joistCount').value);
   const spacingRaw=parseFloat($('joistSpacing').value)||0;
-  const rows=Math.floor(parseFloat($('blockingRows').value)||0);
+  const rows=parseFloat($('blockingRows').value);
   const thicknessRaw=parseFloat($('joistThickness').value)||0;
-  const extra=Math.floor(parseFloat($('extraBlocks').value)||0);
+  const extra=parseFloat($('extraBlocks').value);
   const stockRaw=parseFloat($('stockLength').value)||0;
-  const wastePct=Math.max(0,Math.min(50,parseFloat($('waste').value)||0));
-  const fasteners=Math.max(0,Math.floor(parseFloat($('fastenersPerBlock').value)||0));
-  const price=parseFloat($('stockPrice').value);
-  const runRaw=parseFloat($('joistRun').value);
+  const wastePct=parseFloat($('waste').value);
+  const fasteners=parseFloat($('fastenersPerBlock').value);
+  const priceText=$('stockPrice').value.trim();
+  const price=priceText===''?NaN:parseFloat(priceText);
+  const runText=$('joistRun').value.trim();
+  const runRaw=runText===''?NaN:parseFloat(runText);
   const m=metric();
   const inchPerSmall=m?1/25.4:1;
   const ftPerLength=m?0.3048:1;
@@ -258,12 +260,16 @@ function calculate(){
   const thicknessIn=thicknessRaw*inchPerSmall;
   const stockFt=stockRaw*ftPerLength;
   const runFt=Number.isFinite(runRaw)?runRaw*ftPerLength:null;
-  if(joists<2){err.textContent='Enter at least 2 joists.';return}
+  if(!Number.isInteger(joists)||joists<2){err.textContent='Enter a whole number of at least 2 joists.';return}
   if(spacingIn<=0){err.textContent='Enter a joist spacing greater than 0.';return}
-  if(rows<1){err.textContent='Enter at least 1 blocking row.';return}
+  if(!Number.isInteger(rows)||rows<1){err.textContent='Enter a whole number of at least 1 blocking row.';return}
   if(thicknessIn<=0){err.textContent='Enter an actual joist thickness greater than 0.';return}
   if(stockFt<=0){err.textContent='Enter a stock board length greater than 0.';return}
-  if(extra<0 || wastePct<0 || wastePct>50 || fasteners<0){err.textContent='Check the quantity and waste inputs.';return}
+  if(!Number.isInteger(extra)||extra<0){err.textContent='Extra blocking pieces must be a whole number of 0 or more.';return}
+  if(!Number.isFinite(wastePct)||wastePct<0||wastePct>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
+  if(!Number.isInteger(fasteners)||fasteners<0){err.textContent='Fasteners per blocking piece must be a whole number of 0 or more.';return}
+  if(priceText!==''&&(!Number.isFinite(price)||price<0)){err.textContent='Enter a valid non-negative stock board price or leave it blank.';return}
+  if(runText!==''&&(!Number.isFinite(runRaw)||runRaw<=0)){err.textContent='Enter a positive joist run length or leave it blank.';return}
   const cutIn=spacingIn-thicknessIn;
   if(cutIn<=0){err.textContent='Joist spacing must be greater than actual joist thickness.';return}
   const bays=joists-1;
@@ -275,7 +281,7 @@ function calculate(){
   const stockCapacityFt=boards*stockFt;
   const leftoverFt=Math.max(0,stockCapacityFt-purchaseFt);
   const fastenerCount=totalPieces*fasteners;
-  const estimatedCost=Number.isFinite(price)&&price>=0?boards*price:null;
+  const estimatedCost=Number.isFinite(price)?boards*price:null;
   let runNote='';
   if(runFt!==null){
     const implied=spacingIn/12;

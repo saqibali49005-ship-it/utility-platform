@@ -184,7 +184,7 @@ Total spikes = straight spikes + curve spikes
 const $=id=>document.getElementById(id);
 function metric(){return $('units').value==='metric'}
 function lenToFt(v){return metric()?v*3.280839895:v}
-function inputLength(id){return Math.max(0,parseFloat($(id).value)||0)}
+function inputLength(id){const value=parseFloat($(id).value);return Number.isFinite(value)?value:0}
 function displayUnit(){return metric()?'m':'ft'}
 function fmt(n,d=0){return Number(n.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d})}
 function updateLabels(){
@@ -208,6 +208,13 @@ function setMode(){
 function calculate(){
   const err=$('error'); err.textContent='';
   const openMode=$('mode').value==='open';
+  const wasteInput=parseFloat($('waste').value);
+  const priceText=$('price').value.trim();
+  const priceInput=priceText===''?null:parseFloat(priceText);
+  if(inputLength('curved')<0){err.textContent='Curved edge length cannot be negative.';return}
+  if(!openMode&&inputLength('restrained')<0){err.textContent='Already restrained edge length cannot be negative.';return}
+  if(!Number.isFinite(wasteInput)||wasteInput<0||wasteInput>50){err.textContent='Waste / overage must be between 0% and 50%.';return}
+  if(priceInput!==null&&(!Number.isFinite(priceInput)||priceInput<0)){err.textContent='Enter a valid non-negative stock price or leave it blank.';return}
   let openFt=0;
   if(openMode){
     openFt=inputLength('openEdge'); openFt=lenToFt(openFt);
@@ -226,14 +233,14 @@ function calculate(){
   const stockFt=lenToFt(inputLength('stock'));
   const straightIn=Math.max(0,parseFloat($('straightSpacing').value)||0);
   const curveIn=Math.max(0,parseFloat($('curveSpacing').value)||0);
-  const waste=Math.min(50,Math.max(0,parseFloat($('waste').value)||0))/100;
+  const waste=wasteInput/100;
   if(stockFt<=0||straightIn<=0||curveIn<=0){err.textContent='Enter positive stock length and spike spacing values.';return}
   const edgingSections=Math.ceil((openFt*(1+waste))/stockFt);
   const straightSpikes=straightFt>0?Math.ceil(straightFt/(straightIn/12)):0;
   const curveSpikes=curvedFt>0?Math.ceil(curvedFt/(curveIn/12)):0;
   const totalSpikes=straightSpikes+curveSpikes;
   const purchasedLength=edgingSections*stockFt;
-  const price=Math.max(0,parseFloat($('price').value)||0);
+  const price=priceInput===null?0:priceInput;
   const currency=($('currency').value||'$').trim()||'$';
   const cost=price>0?edgingSections*price:null;
   const u=displayUnit();

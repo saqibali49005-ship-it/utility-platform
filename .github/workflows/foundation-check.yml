@@ -39,3 +39,9 @@ jobs:
         run: node tests/gravel-calculator.browser.mjs
       - name: Run significant-figures browser regression tests
         run: node tests/significant-figures.browser.mjs
+      - name: Run paver edge restraint browser regression tests
+        run: node tests/paver-edge-restraint.browser.mjs
+      - name: Run deck joist blocking browser regression tests
+        run: node tests/deck-joist-blocking.browser.mjs
+      - name: Run sod staple browser regression tests
+        run: node tests/sod-staple.browser.mjs
