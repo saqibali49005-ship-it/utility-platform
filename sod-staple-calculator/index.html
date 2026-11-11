@@ -174,7 +174,7 @@ function convert(oldMetric,newMetric){
  const areaRatio=newMetric?0.09290304:10.7639104167;
  const lengthRatio=newMetric?0.3048:3.280839895;
  $('area').value=(parseFloat($('area').value)||0)*areaRatio;
- ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=((parseFloat($(id).value)||0)*lengthRatio).toFixed(2)});
+ ['spacing','edgeSpacing','edgeLength','seamSpacing','seamLength'].forEach(id=>{$(id).value=((parseFloat($(id).value)||0)*lengthRatio).toFixed(4)});
 }
 function calculate(){
  const err=$('error');err.textContent='';
