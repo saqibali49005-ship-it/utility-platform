@@ -43,6 +43,34 @@ try {
     assert.equal(await page.locator('.category-faq details').count(), 4);
   });
 
+  await check('Guide links remain normal readable text instead of collapsing into narrow tool cards', async () => {
+    for (const width of [390, 768]) {
+      await fresh({ width, height: 900 });
+      const guide = await page.locator('.category-guide > p').evaluate(el => ({
+        display: getComputedStyle(el).display,
+        fontSize: getComputedStyle(el).fontSize,
+        links: [...el.querySelectorAll(':scope > a')].map(a => ({
+          text: a.textContent.trim(),
+          display: getComputedStyle(a).display,
+          width: Math.round(a.getBoundingClientRect().width)
+        }))
+      }));
+      assert.equal(guide.display, 'block', `guide paragraph must remain a paragraph at ${width}px: ${JSON.stringify(guide)}`);
+      assert.ok(guide.links.every(link => link.display === 'inline'),
+        `guide links must remain inline at ${width}px: ${JSON.stringify(guide.links)}`);
+      const columns = await page.locator('.category-guide-grid').evaluate(el =>
+        getComputedStyle(el).gridTemplateColumns.trim().split(/\\s+/).length
+      );
+      assert.equal(columns, 1, `guide content should stack into one column at ${width}px`);
+      const dimensions = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        scroll: document.documentElement.scrollWidth
+      }));
+      assert.ok(dimensions.scroll <= dimensions.client + 1,
+        `guide causes horizontal overflow at ${width}px: ${JSON.stringify(dimensions)}`);
+    }
+  });
+
   await check('CollectionPage structured data lists the three calculator URLs', async () => {
     const json = await page.locator('script[type="application/ld+json"]').first().textContent();
     const data = JSON.parse(json);
