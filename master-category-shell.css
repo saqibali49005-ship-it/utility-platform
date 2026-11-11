@@ -236,3 +236,27 @@
     pointer-events:none!important;
   }
 }
+
+
+/* 2026-11-12 targeted width and footer containment repair. */
+html,body{width:100%;max-width:100%;margin:0}
+.site-header,.site-header .header-inner{box-sizing:border-box;min-width:0}
+.site-header .header-inner{width:100%}
+.info-page{box-sizing:border-box;width:100%;max-width:1040px;margin-inline:auto;padding:28px 20px 56px}
+.info-page>.card{box-sizing:border-box;width:100%;min-width:0}
+.info-page>footer,.category-page main.wrap>footer,
+.info-page>.site-footer,.category-page main.wrap>.site-footer{
+ box-sizing:border-box;display:block;position:static;width:100%;max-width:100%;
+ margin:40px auto 0;padding:22px 0 0;border-top:1px solid #d8e5f3;
+ color:#5f7188;text-align:center;background:transparent;box-shadow:none;clip-path:none
+}
+.site-footer .footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:8px}
+.site-footer .footer-links a{color:#4e6178;text-decoration:none}
+.site-footer .footer-links a:hover{color:#1667e8;text-decoration:underline}
+@media(max-width:650px){
+ .info-page{padding:22px 14px 48px}
+ .info-page>footer,.category-page main.wrap>footer,.info-page>.site-footer,.category-page main.wrap>.site-footer{
+  width:100%;max-width:100%;margin:32px auto 0;padding-top:18px
+ }
+ .site-footer .footer-links{gap:12px}
+}
