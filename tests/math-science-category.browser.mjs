@@ -44,7 +44,7 @@ try {
   });
 
   await check('Guide links remain normal readable text instead of collapsing into narrow tool cards', async () => {
-    for (const width of [390, 768]) {
+    for (const width of [390, 689, 768]) {
       await fresh({ width, height: 900 });
       const guide = await page.locator('.category-guide > p').evaluate(el => ({
         display: getComputedStyle(el).display,
