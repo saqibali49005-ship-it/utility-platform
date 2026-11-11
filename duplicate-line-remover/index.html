@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Duplicate Line Remover | Remove Duplicate Lines Online</title>
-<meta name="description" content="Remove duplicate lines while preserving order. Ignore case, trim spaces, skip blank lines, and keep the first or last match."/>
+<meta name="description" content="Remove duplicate lines online while preserving order. Ignore case, trim spaces, remove blank lines, sort A–Z, or keep the first or last match."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://zemtools.com/duplicate-line-remover/"/>
 <meta name="theme-color" content="#0f172a"/>
@@ -47,7 +47,7 @@
 
 <main id="main-content">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="digital-developer/">Digital &amp; Developer</a><span class="crumb-sep">›</span><span>Duplicate Line Remover</span></nav>
-<section class="hero"><div class="tool-icon" aria-hidden="true">⧉</div><div><h1>Duplicate Line Remover</h1><p>Remove repeated lines from lists, URLs, keywords, logs and copied text while keeping the order you need.</p></div></section>
+<section class="hero"><div class="tool-icon" aria-hidden="true">⧉</div><div><h1>Remove Duplicate Lines Online</h1><p>Deduplicate a pasted list, URL set, keyword list or text file while keeping the first or last occurrence of each matching line.</p></div></section>
 <div class="info-callout"><div class="info-icon" aria-hidden="true">✓</div><div><strong>Browser-based deduplication.</strong> Your text is processed locally. Choose how duplicates should be compared, then copy the cleaned list.</div></div>
 <section class="card" aria-labelledby="tool-title">
 <div class="card-head"><h2 id="tool-title">Remove duplicate lines</h2><button class="secondary" id="sampleBtn" type="button">Load sample</button></div>
@@ -80,13 +80,30 @@
 <p>The tool processes text in your browser; it does not need to upload your pasted list to a server. Matching options affect how lines are compared, while the selected source line is kept in its original form.</p>
 </section>
 
-<section class="card"><h2>How it works</h2><p>Each newline-separated entry is compared using your selected rules. By default, the first occurrence is retained and later matches are removed. The original source text is not rewritten just because whitespace or case-insensitive comparison is enabled.</p></section>
+<section class="card"><h2>How it works</h2><p>Each newline-separated entry is compared using your selected rules. By default, the first occurrence is retained and later matches are removed. The original source text is not rewritten just because whitespace or case-insensitive comparison is enabled. Matching compares whole lines; it does not remove a line just because it contains another line as a substring.</p></section>
+
+<section class="card" aria-labelledby="duplicate-example-title">
+<h2 id="duplicate-example-title">Example: remove duplicate lines from a list</h2>
+<p>With <strong>Ignore case</strong> and <strong>Trim whitespace</strong> enabled, these entries are treated as duplicates even though their capitalization or outside spaces differ:</p>
+<pre><code>Apple
+banana
+ Apple
+BANANA
+Cherry</code></pre>
+<p><strong>Keep first</strong> produces:</p>
+<pre><code>Apple
+banana
+Cherry</code></pre>
+<p>Choose <strong>Keep last</strong> to retain the final source occurrence instead. Turn on <strong>Sort result A–Z</strong> only when you want the unique output sorted rather than kept in source order.</p>
+</section>
 <section class="card" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2>
 <div class="faq"><button type="button"><span>How do I remove duplicate lines from a text file?</span><span class="faq-icon">+</span></button><div class="faq-answer">Paste the text with one entry per line, choose your comparison options, and select Remove Duplicates. Copy the unique result when you are satisfied with it.</div></div>
 <div class="faq"><button type="button"><span>Can I remove duplicate lines online without changing the original order?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Leave Sort result A–Z turned off and choose Keep first to preserve the order of each entry's first appearance.</div></div>
 <div class="faq"><button type="button"><span>Does it preserve order?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Keep first preserves first-appearance order. Keep last retains the last occurrence of each value; sorting can then be applied if selected.</div></div>
 <div class="faq"><button type="button"><span>Can Apple and apple be treated as duplicates?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Turn on Ignore case.</div></div>
 <div class="faq"><button type="button"><span>Does trimming change my output?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Trimming is used for comparison. The selected source line is kept as written unless sorting changes its position.</div></div>
+<div class="faq"><button type="button"><span>Does it remove partial or similar lines?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. It compares whole lines. A line is considered a duplicate only when its full value matches another line under your selected case and whitespace options; differences inside the text are not treated as approximate matches.</div></div>
+<div class="faq"><button type="button"><span>Can I remove duplicate rows from a spreadsheet?</span><span class="faq-icon">+</span></button><div class="faq-answer">This tool compares each pasted line as one complete entry. It does not compare individual spreadsheet columns or remove rows based on selected columns. For best results, copy the one-column list you want to deduplicate, with one item per line.</div></div>
 <div class="faq"><button type="button"><span>Is my text uploaded?</span><span class="faq-icon">+</span></button><div class="faq-answer">No server upload is required. The deduplication runs in your browser.</div></div>
 </section>
 
