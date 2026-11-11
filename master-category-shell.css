@@ -204,9 +204,9 @@
 /* Keep full-bleed category footers inside the available layout viewport on mobile/tablet. */
 @media(max-width:900px){
   .category-page main.wrap>footer{
-    width:calc(100% + 32px)!important;
+    width:calc(100% + 28px)!important;
     max-width:none!important;
-    margin-left:-16px!important;
+    margin-left:-14px!important;
     margin-right:0!important;
   }
 }
