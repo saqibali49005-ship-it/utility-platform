@@ -35,25 +35,49 @@ for (const route of routes) {
           brandVisible: Boolean(brand && getComputedStyle(brand).display !== 'none' && brand.getBoundingClientRect().width > 0),
           desktopHomeLink: Boolean(homeNav),
           client: document.documentElement.clientWidth,
-          scroll: document.documentElement.scrollWidth
+          scroll: document.documentElement.scrollWidth,
+          offenders: [...document.querySelectorAll('body *')].map(el => {
+            const rect = el.getBoundingClientRect();
+            const css = getComputedStyle(el);
+            return {
+              tag: el.tagName.toLowerCase(),
+              id: el.id || '',
+              className: typeof el.className === 'string' ? el.className : '',
+              left: Math.round(rect.left * 10) / 10,
+              right: Math.round(rect.right * 10) / 10,
+              width: Math.round(rect.width * 10) / 10,
+              position: css.position,
+              overflowX: css.overflowX
+            };
+          }).filter(item => item.right > innerWidth + 1 || item.left < -1)
+            .sort((a,b) => b.right - a.right).slice(0,10)
         };
       });
       assert.ok(state.header, 'missing shared site header');
       assert.ok(state.brandHome && state.brandVisible, 'header logo is not a visible Home link');
       assert.ok(state.desktopHomeLink, 'primary navigation has no Home link');
-      assert.ok(state.scroll <= state.client + 1, `horizontal overflow: ${state.scroll}px > ${state.client}px`);
+      assert.ok(state.scroll <= state.client + 1, `horizontal overflow: ${state.scroll}px > ${state.client}px; offenders: ${JSON.stringify(state.offenders)}`);
       if (viewport.width <= 820) {
         const buttonId = await page.evaluate(() => {
-          const buttons = [...document.querySelectorAll('.site-header button[aria-controls]')];
+          const panelFor = {
+            toolHeaderMenu: 'toolHeaderMenuPanel',
+            infoHeaderMenu: 'infoMobileNav',
+            notFoundMenu: 'notFoundMobileNav'
+          };
+          const buttons = [...document.querySelectorAll('.site-header button')]
+            .filter(item => /Menu$/.test(item.id));
           const button = buttons.find(item => {
-            const panel = document.getElementById(item.getAttribute('aria-controls'));
+            const panelId = item.getAttribute('aria-controls') || panelFor[item.id] || (item.id + 'Panel');
+            const panel = document.getElementById(panelId);
             return panel && panel.querySelector('a[href="/"]');
           });
           return button?.id || null;
         });
         assert.ok(buttonId, 'no mobile menu button controls a panel with Home link');
         await page.locator('#' + buttonId).click();
-        const panelId = await page.locator('#' + buttonId).getAttribute('aria-controls');
+        const panelId = await page.locator('#' + buttonId).getAttribute('aria-controls')
+          || ({ toolHeaderMenu: 'toolHeaderMenuPanel', infoHeaderMenu: 'infoMobileNav', notFoundMenu: 'notFoundMobileNav' }[buttonId])
+          || (buttonId + 'Panel');
         const panel = page.locator('#' + panelId);
         assert.equal(await panel.isVisible(), true, 'mobile navigation does not open');
         assert.ok(await panel.locator('a[href="/"]').count(), 'mobile navigation has no Home link');
