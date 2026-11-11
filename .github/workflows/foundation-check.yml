@@ -35,3 +35,7 @@ jobs:
         run: node tests/wire-size-calculator.browser.mjs
       - name: Run conduit-fill calculator browser regression tests
         run: node tests/conduit-fill-calculator.browser.mjs
+      - name: Run gravel calculator browser regression tests
+        run: node tests/gravel-calculator.browser.mjs
+      - name: Run significant-figures browser regression tests
+        run: node tests/significant-figures.browser.mjs
