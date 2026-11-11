@@ -83,6 +83,48 @@ try {
     assert.equal(await page.locator('#coveredArea').innerText(), '39.8 m²');
     assert.equal(await page.locator('#paintLitres').innerText(), '9.1 L');
   });
+
+  await check('Walls-only mode excludes the ceiling from paintable area', async () => {
+    await fresh();
+    await page.locator('.room-card [data-r="ceiling"]').selectOption('no');
+    await calculate();
+    assert.equal(await page.locator('#coveredArea').innerText(), '308 sq ft');
+    assert.equal(await page.locator('#coatedArea').innerText(), '616 sq ft');
+    assert.equal(await page.locator('#paintLitres').innerText(), '6.5 L');
+  });
+
+  await check('Adding a second room doubles the default room estimate', async () => {
+    await fresh();
+    await page.locator('#addRoom').click();
+    assert.equal(await page.locator('.room-card').count(), 2);
+    await calculate();
+    assert.equal(await page.locator('#coveredArea').innerText(), '856 sq ft');
+    assert.equal(await page.locator('#coatedArea').innerText(), '1,712 sq ft');
+    assert.equal(await page.locator('#paintLitres').innerText(), '18.1 L');
+  });
+
+  await check('Removing every room produces a clear validation message', async () => {
+    await fresh();
+    await page.locator('.room-card [data-remove]').click();
+    assert.equal(await page.locator('.room-card').count(), 0);
+    await calculate();
+    assert.match(await page.locator('#resultSub').innerText(), /add at least one room or space/i);
+    assert.equal(await page.locator('#paintResult').innerText(), '—');
+  });
+
+  await check('Reset restores one default Imperial room and clears prior results', async () => {
+    await fresh();
+    await page.locator('#units').selectOption('metric');
+    await page.locator('#addRoom').click();
+    await calculate();
+    await page.locator('#reset').click();
+    assert.equal(await page.locator('.room-card').count(), 1);
+    assert.equal(await page.locator('#units').inputValue(), 'imperial');
+    assert.equal(await page.locator('#coverage').inputValue(), '375');
+    assert.equal(await page.locator('#coats').inputValue(), '2');
+    assert.equal(await page.locator('#waste').inputValue(), '5');
+    assert.equal(await page.locator('#paintResult').innerText(), '—');
+  });
 } finally {
   await browser.close();
 }
