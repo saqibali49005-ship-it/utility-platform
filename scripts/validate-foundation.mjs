@@ -32,6 +32,8 @@ for (const tool of entries) {
   const canonical = 'https://zemtools.com/' + tool.href;
   if (!html.includes(canonical)) fail.push('Missing ZemTools canonical URL: ' + tool.href);
   if (!sitemap.includes('<loc>' + canonical + '</loc>')) fail.push('Missing sitemap URL: ' + tool.href);
+const homepageSitemapEntry = sitemap.match(/<url>\s*<loc>https:\/\/zemtools\.com\/\s*<\/loc>\s*<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>\s*<\/url>/);
+if (!homepageSitemapEntry) fail.push('Homepage sitemap entry must include an accurate lastmod date.');
 
   if (!/class=["'][^"']*top-nav/.test(html)) fail.push('Missing desktop navigation: ' + tool.href);
   if (!/id=["']toolHeaderMenuPanel["']/.test(html)) fail.push('Missing mobile navigation: ' + tool.href);
