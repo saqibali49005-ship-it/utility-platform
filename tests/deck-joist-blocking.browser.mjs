@@ -24,7 +24,13 @@ try {
   await check('Page loads with canonical URL and default blocking estimate', async () => {
     assert.match(await page.title(), /Deck Joist Blocking Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/deck-joist-blocking-calculator/');
-    assert.match(await page.locator('#result').innerText(), /12/);
+    const result = await page.locator('#result').innerText();
+    assert.match(result, /Blocking pieces\\s+12/);
+    assert.match(result, /14\\.5 in/);
+    assert.match(result, /14\\.5 ft/);
+    assert.match(result, /2 × 8 ft/);
+    assert.match(result, /12 bays per row × 1 row = 12 base pieces/);
+    assert.match(await page.locator('body').innerText(), /Deck Joist Blocking Calculator: Worked Example/);
   });
 
   await check('Fractional joist count is rejected rather than rounded down', async () => {
@@ -75,6 +81,36 @@ try {
     await calculate();
     assert.match(await page.locator('#error').innerText(), /non-negative stock board price/i);
   });
+  await check('Metric mode converts dimensions and preserves the block cut length', async () => {
+    await fresh();
+    await page.locator('#units').selectOption('metric');
+    assert.equal(await page.locator('#joistSpacing').inputValue(), '406.4');
+    assert.equal(await page.locator('#joistThickness').inputValue(), '38.1');
+    const result = await page.locator('#result').innerText();
+    assert.match(result, /368\\.3 mm/);
+    assert.match(result, /2 × 2\\.44 m/);
+  });
+
+  await check('Multiple blocking rows, extra pieces and fasteners are counted correctly', async () => {
+    await fresh();
+    await page.locator('#blockingRows').fill('2');
+    await page.locator('#extraBlocks').fill('2');
+    await page.locator('#fastenersPerBlock').fill('2');
+    await calculate();
+    const result = await page.locator('#result').innerText();
+    assert.match(result, /Blocking pieces\\s+26/);
+    assert.match(result, /Fasteners\\s+52/);
+    assert.match(result, /Stock boards\\s+5 × 8 ft/);
+    assert.match(result, /12 bays per row × 2 rows = 24 base pieces/);
+  });
+
+  await check('Spacing that does not exceed joist thickness is rejected', async () => {
+    await fresh();
+    await page.locator('#joistSpacing').fill('1.5');
+    await calculate();
+    assert.match(await page.locator('#error').innerText(), /spacing must be greater than actual joist thickness/i);
+  });
+
 } finally {
   await browser.close();
 }
