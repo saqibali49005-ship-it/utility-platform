@@ -92,7 +92,7 @@ function roundAtDecimalPosition(value,position){
  else rounded=value;
  if(rounded===0)return {text:'0',significant:1};
  const exponent=Math.floor(Math.log10(Math.abs(rounded)));
- const significant=Math.max(1,exponent-position+1);
+ const significant=Math.max(1,exponent+position+1);
  const text=position<0?formatForSig(rounded,significant):position<=100?rounded.toFixed(position):rounded.toExponential(Math.max(0,significant-1));
  return {text,significant};
 }
