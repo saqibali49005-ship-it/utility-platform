@@ -15,6 +15,7 @@ async function fresh() {
   await page.locator('#calculate').waitFor();
 }
 async function setImperialThirdYard() {
+  await page.locator('#allowance').fill('0');
   await page.locator('#units').selectOption('imperial');
   const area = page.locator('.area-card').first();
   await area.locator('[data-role="length"]').fill('3');
@@ -51,6 +52,7 @@ try {
 
   await check('Equivalent metric volume produces matching mass', async () => {
     await fresh();
+    await page.locator('#allowance').fill('0');
     await page.locator('#units').selectOption('metric');
     const area = page.locator('.area-card').first();
     await area.locator('[data-role="length"]').fill('0.9144');
