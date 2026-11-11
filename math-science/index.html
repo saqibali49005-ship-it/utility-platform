@@ -6,8 +6,8 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="#0b2f66" name="theme-color"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<title>Math &amp; Science Tools | ZemTools</title>
-<meta name="description" content="Explore practical math and science tools and calculators for calculations, measurements, time, business hours, and precision-focused problem solving.">
+<title>Math &amp; Science Calculators | Time Math &amp; Significant Figures | ZemTools</title>
+<meta name="description" content="Use free math and science calculators for time math, time differences, adding or subtracting hours and minutes, significant figures, rounding and business hours.">
 <link href="https://zemtools.com/math-science/" rel="canonical"/>
 <style>
 :root{--bg:#f6f7f9;--card:#fff;--text:#111827;--muted:#5b6472;--line:#d9dee6;--accent:#111827}
@@ -20,14 +20,27 @@ h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:
 .card h2{margin-top:0;margin-bottom:8px}.card p{margin-top:0;margin-bottom:18px}.button{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;margin-top:auto;background:var(--accent);color:#fff;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:800}
 footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
 @media(max-width:650px){.wrap{padding-top:22px}.grid{grid-template-columns:1fr;gap:14px}.card{min-height:0;padding:17px}.button{width:100%}}
+.category-guide{margin-top:22px}
+.category-guide>p{margin:0;color:var(--muted)}
+.category-guide a{font-weight:700;color:#1d4ed8}
+.category-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.category-guide-grid>div{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
+.category-guide-grid h3{margin:0 0 7px;font-size:17px;line-height:1.3}
+.category-guide-grid p{margin:0;color:var(--muted);font-size:14px}
+.category-faq{margin-top:18px}
+.category-faq details{padding:12px 0;border-bottom:1px solid var(--line)}
+.category-faq details:last-child{border-bottom:0}
+.category-faq summary{font-weight:750;cursor:pointer}
+.category-faq details p{margin:8px 0 0;color:var(--muted)}
+@media(max-width:700px){.category-guide-grid{grid-template-columns:1fr;gap:10px}}
 </style>
 <link href="site-design.css?v=20260920-3" rel="stylesheet"/>
 <link href="visual-polish.css?v=20260920-2" rel="stylesheet"/>
-<meta content="index,follow" name="robots"/><meta content="website" property="og:type"/><meta content="Math &amp; Science Tools | ZemTools" property="og:title"/><meta content="Explore Math &amp; Science tools on ZemTools, including significant figures and pilot-hole sizing utilities." property="og:description"/><meta content="https://zemtools.com/math-science/" property="og:url"/>
+<meta content="index,follow" name="robots"/><meta content="website" property="og:type"/><meta content="Math &amp; Science Calculators | Time Math &amp; Significant Figures | ZemTools" property="og:title"/><meta content="Calculate time differences, add or subtract clock time, count significant figures and plan business hours with free online calculators." property="og:description"/><meta content="https://zemtools.com/math-science/" property="og:url"/>
 <meta content="https://zemtools.com/social-preview.png" property="og:image"/>
 <meta content="ZemTools — Practical Online Tools" property="og:image:alt"/>
 <meta content="https://zemtools.com/social-preview.png" name="twitter:image"/><meta content="ZemTools — Practical Online Tools" name="twitter:image:alt"/>
-<meta content="summary" name="twitter:card"/><meta content="Math &amp; Science Tools | ZemTools" name="twitter:title"/><meta content="Explore Math &amp; Science tools on ZemTools, including significant figures, time and business-hours calculations." name="twitter:description"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Math & Science Tools | ZemTools","url":"https://zemtools.com/math-science/","description":"Explore practical math and science tools and calculators for calculations, measurements, time, business hours, and precision-focused problem solving.","isPartOf":{"@type":"WebSite","name":"ZemTools","url":"https://zemtools.com/"}}</script>
+<meta content="summary" name="twitter:card"/><meta content="Math &amp; Science Calculators | Time Math &amp; Significant Figures | ZemTools" name="twitter:title"/><meta content="Free tools for time math, elapsed time, adding or subtracting clock time, significant figures and working hours." name="twitter:description"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Math & Science Calculators | ZemTools","url":"https://zemtools.com/math-science/","description":"Free calculators for time math, elapsed time, adding and subtracting clock time, significant figures, rounding and business hours.","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Significant Figures Calculator","url":"https://zemtools.com/calculator/"},{"@type":"ListItem","position":2,"name":"Time Calculator","url":"https://zemtools.com/time-calculator/"},{"@type":"ListItem","position":3,"name":"Business Hours Calculator","url":"https://zemtools.com/business-hours-calculator/"}]},"isPartOf":{"@type":"WebSite","name":"ZemTools","url":"https://zemtools.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Math & Science Tools","item":"https://zemtools.com/math-science/"}]}</script>
 
 <style>
@@ -95,12 +108,29 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
 </header>
 <main class="wrap">
 <h1>Math &amp; Science Tools</h1>
-<p class="muted">A focused collection of calculators and practical tools for mathematical, scientific and technical problems.</p>
+<p class="muted">Free online calculators for everyday math, time math, measurements and precision-focused calculations. Choose a tool below to calculate elapsed time, add or subtract clock values, or work with significant figures.</p>
 <div class="grid">
-<section class="card"><h2>Significant Figures Calculator</h2><p class="muted">Count significant figures, round values, and apply addition, subtraction, multiplication, and division rules.</p><a class="button" href="calculator/">Open calculator</a></section>
-<section class="card"><h2>Time Calculator</h2><p class="muted">Calculate time between two clock times, or add and subtract hours, minutes and seconds.</p><a class="button" href="time-calculator/">Open calculator</a></section>
-<section class="card"><h2>Business Hours Calculator</h2><p class="muted">Calculate working hours between dates with custom schedules and holidays, or find a business-time deadline.</p><a class="button" href="business-hours-calculator/">Open calculator</a></section>
+<section class="card"><h2>Significant Figures Calculator</h2><p class="muted">Count significant figures, round measured values, and apply precision rules to addition, subtraction, multiplication and division.</p><a class="button" href="calculator/">Open calculator</a></section>
+<section class="card"><h2>Time Calculator</h2><p class="muted">Do time math: calculate the time difference between two clock times, or add and subtract hours, minutes and seconds.</p><a class="button" href="time-calculator/">Open calculator</a></section>
+<section class="card"><h2>Business Hours Calculator</h2><p class="muted">Calculate business hours across dates with custom work schedules and holidays, or add and subtract working time to find a deadline.</p><a class="button" href="business-hours-calculator/">Open calculator</a></section>
 </div>
+
+<section class="card category-guide" aria-labelledby="time-math-title">
+<h2 id="time-math-title">Time Math, Significant Figures and Business Hours</h2>
+<p>Different calculations need different rules. Use the <a href="time-calculator/">Time Calculator</a> for ordinary clock-time arithmetic, the <a href="business-hours-calculator/">Business Hours Calculator</a> when work schedules and holidays matter, and the <a href="calculator/">Significant Figures Calculator</a> when the precision of measured numbers matters.</p>
+<div class="category-guide-grid">
+<div><h3>Time difference and time math</h3><p>Find elapsed time between a start and end clock time, including an interval that crosses midnight. You can also add or subtract hours, minutes and seconds. For example, 9:30 AM to 5:15 PM is 7 hours 45 minutes, or 7.75 decimal hours.</p></div>
+<div><h3>Business hours and deadlines</h3><p>Count only the working time inside a configured weekly schedule, exclude entered holidays, or move a deadline forward or backward by business hours. This is different from ordinary elapsed-time math.</p></div>
+<div><h3>Significant figures and arithmetic</h3><p>Count meaningful digits, round a value, or calculate with measurement precision. For addition and subtraction, use the least precise decimal place; for multiplication and division, use the fewest significant figures.</p></div>
+</div>
+</section>
+<section class="card category-faq" aria-labelledby="math-faq-title">
+<h2 id="math-faq-title">Math &amp; Science Calculator FAQs</h2>
+<details><summary>How do I calculate the time difference between two times?</summary><p>Enter the start and end clock times in the Time Calculator. If the interval ends after midnight, enable its next-day option.</p></details>
+<details><summary>What is the difference between a time calculator and a business hours calculator?</summary><p>A time calculator handles ordinary clock-time arithmetic and elapsed time. A business-hours calculator counts only the work periods in your configured schedule and can exclude holidays.</p></details>
+<details><summary>How do I add or subtract time?</summary><p>Use the Time Calculator's Add / Subtract mode and enter hours, minutes and seconds. Minutes are base 60, so 2 hours 30 minutes equals 2.5 hours, not 2.30 hours.</p></details>
+<details><summary>How do significant figures affect addition and subtraction?</summary><p>For addition and subtraction, round the result to the least precise decimal place in the inputs. For multiplication and division, round to the fewest significant figures in the inputs.</p></details>
+</section>
 <footer><a href="about/">About</a> · <a href="contact/">Contact</a> · <a href="privacy/">Privacy</a> · <a href="terms/">Terms</a></footer>
 
 </main><script id="math-header-controls-js">
