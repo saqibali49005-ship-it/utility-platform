@@ -31,6 +31,8 @@ jobs:
           done
           cat /tmp/zemtools-http.log
           exit 1
+      - name: Run Math & Science category browser regression tests
+        run: node tests/math-science-category.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
@@ -51,5 +53,3 @@ jobs:
         run: node tests/paint-calculator.browser.mjs
       - name: Run business-hours calculator browser regression tests
         run: node tests/business-hours-calculator.browser.mjs
-      - name: Run Math & Science category browser regression tests
-        run: node tests/math-science-category.browser.mjs
