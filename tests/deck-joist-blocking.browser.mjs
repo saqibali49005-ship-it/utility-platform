@@ -90,7 +90,7 @@ try {
     const result = await page.locator('#result').innerText();
     assert.match(result, /368\.3 mm/);
     assert.match(result, /2 × 2\.44 m/);
-    assert.match(result, /4\.80 m at 406\.4 mm OC implies about 13 joists/);
+    assert.match(result, /4\.8 m at 406\.4 mm OC implies about 13 joists/);
   });
 
   await check('Multiple blocking rows, extra pieces and fasteners are counted correctly', async () => {
