@@ -58,10 +58,10 @@ try {
 
   await check('Rounding retains requested trailing significant zeros', async () => {
     await page.locator('[data-mode="round"]').click();
-    await page.locator('#numberInput').fill('9.99');
+    await page.locator('#numberInput').fill('9.996');
     await page.locator('#targetInput').fill('3');
     await page.locator('#calculateBtn').click();
-    assert.equal(await page.locator('#resultValue').innerText(), '10.0');
+    assert.equal(await page.locator('#resultValue').innerText(), '1.00e+1');
     assert.equal(await page.locator('#sigCount').innerText(), '3');
   });
 
