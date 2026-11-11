@@ -269,7 +269,7 @@ function calculate(){
   const runRaw=runText===''?NaN:parseFloat(runText);
   const m=metric();
   const inchPerSmall=m?1/25.4:1;
-  const ftPerLength=m?0.3048:1;
+  const ftPerLength=m?1/0.3048:1;
   const spacingIn=spacingRaw*inchPerSmall;
   const thicknessIn=thicknessRaw*inchPerSmall;
   const stockFt=stockRaw*ftPerLength;
