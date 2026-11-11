@@ -175,6 +175,8 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
  if(b&&s&&i){
   b.addEventListener('click',function(){
    const o=!s.classList.contains('is-open'); s.classList.toggle('is-open',o);
+   if(o&&p)p.classList.remove('is-open');
+   if(o&&m){m.setAttribute('aria-expanded','false');m.setAttribute('aria-label','Open menu');}
    if(o){i.focus();render('');}
   });
   function render(q){const x=q.trim().toLowerCase();const a=items.filter(v=>v.n.toLowerCase().includes(x));r.innerHTML=a.length?a.map(v=>'<a href="'+v.u+'">'+v.n+'</a>').join(''):'<div class="math-local-search-empty">No matching Math &amp; Science tool found.</div>';}
@@ -184,6 +186,8 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:v
   m.addEventListener('click',function(){
    const o=!p.classList.contains('is-open');
    p.classList.toggle('is-open',o);
+   if(o&&s)s.classList.remove('is-open');
+   if(o&&b)b.setAttribute('aria-expanded','false');
    m.setAttribute('aria-expanded',String(o));
    m.setAttribute('aria-label',o?'Close menu':'Open menu');
   });
