@@ -167,9 +167,12 @@ function calculate(){
  const area=parseFloat($('area').value)||0, spacing=parseFloat($('spacing').value)||0;
  const edgeSpacing=parseFloat($('edgeSpacing').value)||0, edgeLength=parseFloat($('edgeLength').value)||0;
  const seamSpacing=parseFloat($('seamSpacing').value)||0, seamLength=parseFloat($('seamLength').value)||0;
- const extra=Math.max(0,Math.min(100,parseFloat($('extra').value)||0))/100;
- const pack=Math.max(1,Math.floor(parseFloat($('packSize').value)||1));
+ const extraInput=parseFloat($('extra').value), pack=parseFloat($('packSize').value);
  if(area<=0||spacing<=0||edgeSpacing<=0||seamSpacing<=0){err.textContent='Enter positive area and spacing values.';return}
+ if(edgeLength<0||seamLength<0){err.textContent='Edge and seam lengths cannot be negative.';return}
+ if(!Number.isFinite(extraInput)||extraInput<0||extraInput>100){err.textContent='Extra / waste allowance must be between 0% and 100%.';return}
+ if(!Number.isInteger(pack)||pack<1){err.textContent='Staples per package must be a whole number of at least 1.';return}
+ const extra=extraInput/100;
  const areaFt=toSqFt(area), spacingFt=toFt(spacing), edgeSpacingFt=toFt(edgeSpacing), edgeFt=toFt(edgeLength), seamSpacingFt=toFt(seamSpacing), seamFt=toFt(seamLength);
  const base=Math.ceil(areaFt/(spacingFt*spacingFt));
  const edge=edgeFt>0?Math.ceil(edgeFt/edgeSpacingFt):0;
