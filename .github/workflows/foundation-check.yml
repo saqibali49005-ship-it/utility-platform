@@ -47,3 +47,5 @@ jobs:
         run: node tests/sod-staple.browser.mjs
       - name: Run paint calculator browser regression tests
         run: node tests/paint-calculator.browser.mjs
+      - name: Run business-hours calculator browser regression tests
+        run: node tests/business-hours-calculator.browser.mjs
