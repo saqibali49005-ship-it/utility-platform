@@ -51,3 +51,5 @@ jobs:
         run: node tests/paint-calculator.browser.mjs
       - name: Run business-hours calculator browser regression tests
         run: node tests/business-hours-calculator.browser.mjs
+      - name: Run Math & Science category browser regression tests
+        run: node tests/math-science-category.browser.mjs
