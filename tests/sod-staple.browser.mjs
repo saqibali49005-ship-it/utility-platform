@@ -24,8 +24,8 @@ try {
     assert.match(await page.title(), /Sod Staple Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/sod-staple-calculator/');
     const result = await page.locator('#result').innerText();
-    assert.match(result, /Total staples\\s+44/);
-    assert.match(result, /Packages\\s+1 × 100 staples/);
+    assert.match(result, /TOTAL STAPLES\s+44/i);
+    assert.match(result, /Packages\s+1 × 100 staples/);
     assert.match(result, /40 base \\+ 0 edge \\+ 0 seam = 40 before 10% extra allowance/);
     assert.match(await page.locator('body').innerText(), /Sod Staple Calculator Example/);
   });
@@ -35,11 +35,11 @@ try {
     const imperial = await page.locator('#result').innerText();
     await page.locator('#units').selectOption('metric');
     const metric = await page.locator('#result').innerText();
-    assert.match(metric, /Total staples\\s+44/);
+    assert.match(metric, /TOTAL STAPLES\s+44/i);
     assert.match(metric, /40 base \\+ 0 edge \\+ 0 seam = 40 before 10% extra allowance/);
     await page.locator('#units').selectOption('imperial');
-    assert.match(await page.locator('#result').innerText(), /Total staples\\s+44/);
-    assert.match(imperial, /Total staples\\s+44/);
+    assert.match(await page.locator('#result').innerText(), /TOTAL STAPLES\s+44/i);
+    assert.match(imperial, /TOTAL STAPLES\s+44/i);
   });
 
   await check('Edge and seam allowances are added before extra percentage and packages', async () => {
@@ -48,7 +48,7 @@ try {
     await page.locator('#seamLength').fill('10');
     await calculate();
     const result = await page.locator('#result').innerText();
-    assert.match(result, /Total staples\\s+66/);
+    assert.match(result, /TOTAL STAPLES\s+66/i);
     assert.match(result, /40 base \\+ 10 edge \\+ 10 seam = 60 before 10% extra allowance/);
   });
 
