@@ -120,7 +120,7 @@ function clockFromSeconds(total){
   let x=((total%86400)+86400)%86400;
   const h=Math.floor(x/3600); x%=3600;
   const m=Math.floor(x/60); const s=x%60;
-  const suffix=dayCount===0?'':(dayCount>0?' (next day)':' (previous day)');
+  const suffix=dayCount===0?'':dayCount===1?' (next day)':dayCount===-1?' (previous day)':dayCount>0?' ('+dayCount+' days later)':' ('+Math.abs(dayCount)+' days earlier)';
   return pad(h)+':'+pad(m)+':'+pad(s)+suffix;
 }
 function setMessage(el,msg){el.innerHTML=msg;}
