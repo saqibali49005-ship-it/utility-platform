@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#111827">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Deck Joist Blocking Calculator - Pieces, Lumber &amp; Boards</title>
-<meta name="description" content="Calculate deck joist blocking pieces, cut lengths, lumber and stock boards. Include blocking rows, waste and metric or imperial units.">
+<meta name="description" content="Use this deck joist blocking calculator to estimate blocking pieces, cut lengths, lumber, stock boards, waste and optional fasteners in imperial or metric units.">
 <link rel="canonical" href="https://zemtools.com/deck-joist-blocking-calculator/">
 <meta property="og:title" content="Deck Joist Blocking Calculator - Pieces, Lumber &amp; Boards">
 <meta property="og:description" content="Plan deck or floor joist blocking with piece count, cut length, total lumber, stock boards, waste and optional fasteners.">
@@ -150,6 +150,19 @@ Stock boards = ceil(purchase-planning length ÷ stock board length)
 </section>
 
 <section class="card">
+<h2>Deck Joist Blocking Calculator: Worked Example</h2>
+<p>Suppose your framing plan has <strong>13 joists at 16 inches on center</strong>, surfaced joists that are <strong>1.5 inches thick</strong>, one blocking row, and no extra pieces. The calculator estimates 12 joist bays, so one row needs 12 blocking pieces.</p>
+<div class="formula">
+Joist bays = 13 − 1 = 12<br>
+Cut length = 16 in − 1.5 in = 14.5 in per piece<br>
+Required blocking = 12 × 14.5 in = 174 in = 14.5 ft<br>
+With 10% overage = 14.5 ft × 1.10 = 15.95 ft<br>
+8 ft stock boards = ceil(15.95 ÷ 8) = 2 boards
+</div>
+<p class="small">This is a footage-based purchase estimate, not an optimized cut list. Saw kerf, board defects, grain direction and the actual cutting layout can change the number of boards needed. Measure the framing and plan the cuts before purchasing.</p>
+</section>
+
+<section class="card">
 <h2>How to Use This Joist Blocking Calculator</h2>
 <ol class="small-list">
 <li>Count the joists that create the bays you need to block. One uninterrupted row normally has one blocking position between each adjacent pair.</li>
@@ -179,6 +192,7 @@ Stock boards = ceil(purchase-planning length ÷ stock board length)
 
 <section class="card">
 <h2>Deck Joist Blocking FAQs</h2>
+<details><summary>How many blocks are needed for 13 joists at 16-inch spacing?</summary><p>There are 12 spaces between 13 adjacent joists. For one uninterrupted blocking row, the material estimate is 12 pieces. If your framing plan calls for two rows, it is 24 pieces before any extra pieces. The required number and location of rows must come from the approved framing design.</p></details>
 <details><summary>How many blocking pieces do I need between joists?</summary><p>For a simple repeated row, the planning count is one piece between each adjacent joist pair. That is joist count minus one pieces per row, multiplied by the number of rows, plus any extra pieces you enter.</p></details>
 <details><summary>How long should joist blocking pieces be?</summary><p>For this material model, cut length equals the entered on-center spacing minus the actual joist thickness. A 16 in spacing with 1.5 in thick joists produces a 14.5 in planning cut length.</p></details>
 <details><summary>Should blocking be the same depth as the joists?</summary><p>Blocking dimensions and connection details should follow the framing design and applicable requirements. This calculator does not choose a structural block size; it uses spacing and actual joist thickness only to estimate the length of a block that fits between the joists.</p></details>
@@ -309,7 +323,7 @@ function calculate(){
     +fastenerRow
     +'<tr><th>Estimated lumber cost</th><td>'+cost+'</td><td>Based only on the price per stock board you entered</td></tr>'
     +'</tbody></table></div>'
-    +'<div class="note"><strong>Method:</strong> '+fmt(bays)+' bays per row × '+fmt(rows)+' rows = '+fmt(basePieces)+' base pieces; '+fmt(extra)+' extra pieces gives '+fmt(totalPieces)+' total. Cut length uses spacing minus actual joist thickness.</div>'
+    +'<div class="note"><strong>Method:</strong> '+fmt(bays)+' bays per row × '+fmt(rows)+' row'+(rows===1?'':'s')+' = '+fmt(basePieces)+' base pieces; '+fmt(extra)+' extra pieces gives '+fmt(totalPieces)+' total. Cut length uses spacing minus actual joist thickness.</div>'
     +runNote
     +'<div class="actions"><button id="copyResult" type="button" class="secondary">Copy material summary</button><span id="copyStatus" class="copy-status"></span></div>';
   $('copyResult').addEventListener('click',async function(){
