@@ -25,7 +25,7 @@ try {
     assert.match(await page.title(), /Deck Joist Blocking Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/deck-joist-blocking-calculator/');
     const result = await page.locator('#result').innerText();
-    assert.match(result, /Blocking pieces\s+12/);
+    assert.match(result, /BLOCKING PIECES\s+12/i);
     assert.match(result, /14\.5 in/);
     assert.match(result, /14\.5 ft/);
     assert.match(result, /2 × 8 ft/);
@@ -86,9 +86,11 @@ try {
     await page.locator('#units').selectOption('metric');
     assert.equal(await page.locator('#joistSpacing').inputValue(), '406.4');
     assert.equal(await page.locator('#joistThickness').inputValue(), '38.1');
+    await page.locator('#joistRun').fill('4.8');
     const result = await page.locator('#result').innerText();
     assert.match(result, /368\.3 mm/);
     assert.match(result, /2 × 2\.44 m/);
+    assert.match(result, /4\.80 m at 406\.4 mm OC implies about 13 joists/);
   });
 
   await check('Multiple blocking rows, extra pieces and fasteners are counted correctly', async () => {
@@ -98,9 +100,9 @@ try {
     await page.locator('#fastenersPerBlock').fill('2');
     await calculate();
     const result = await page.locator('#result').innerText();
-    assert.match(result, /Blocking pieces\s+26/);
+    assert.match(result, /BLOCKING PIECES\s+26/i);
     assert.match(result, /Fasteners\s+52/);
-    assert.match(result, /Stock boards\s+5 × 8 ft/);
+    assert.match(result, /STOCK BOARDS\s+5 × 8 ft/i);
     assert.match(result, /12 bays per row × 2 rows = 24 base pieces/);
   });
 
