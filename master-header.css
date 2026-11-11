@@ -114,3 +114,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
    margin:0!important;
  }
 }
+
+/* 2026-11-12 information pages: use the master header proportions at every width. */
+.info-page-header .site-header .header-inner{width:100%;max-width:1120px;margin:0 auto;box-sizing:border-box}
+.info-page-header .site-header .brand{flex:0 0 auto;min-width:0}
+.info-page-header .site-header .top-nav{flex:1 1 auto;min-width:0;justify-content:center}
+@media(max-width:960px){
+ .info-page-header .site-header .header-inner{gap:10px;padding-left:16px;padding-right:16px}
+ .info-page-header .site-header .top-nav{justify-content:flex-start}
+}
+@media(max-width:820px){
+ .info-page-header .site-header .header-inner{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;min-height:64px;padding:9px 12px;gap:8px}
+ .info-page-header .site-header .brand{order:1;flex:0 1 auto;min-width:0}
+ .info-page-header .site-header .top-nav{display:none!important}
+ .info-page-header .site-header .header-actions{display:flex;order:2;margin-left:auto;flex:0 0 auto}
+ .info-page-header .site-header .menu-btn{display:grid!important}
+ .info-page-header .site-header .mobile-nav{display:none;position:absolute;left:12px;right:12px;top:calc(100% + 8px);z-index:1002;max-height:calc(100vh - 88px);overflow:auto}
+ .info-page-header .site-header .mobile-nav.is-open{display:grid;gap:5px}
+ .info-page-header .site-header .mobile-nav a{display:block}
+}
