@@ -33,6 +33,8 @@ jobs:
           exit 1
       - name: Run Math & Science category browser regression tests
         run: node tests/math-science-category.browser.mjs
+      - name: Run sitewide responsive and Home navigation browser audit
+        run: node tests/sitewide-responsive.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
