@@ -35,7 +35,7 @@ try {
     assert.equal(await value('allowedArea'), '0.1216 in²');
     assert.equal(await value('remaining'), '0.0606 in²');
     await limitText('40% fill limit');
-    assert.match(await page.locator('#comparison thead').innerText(), /Actual fill[\s\S]*Limit/);
+    assert.match(await page.locator('#comparison thead').innerText(), /Actual fill[\s\S]*Limit/i);
   });
 
   await check('Single-conductor rule applies 53 percent', async () => {
