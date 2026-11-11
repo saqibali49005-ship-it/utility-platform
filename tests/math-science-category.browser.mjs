@@ -19,9 +19,9 @@ async function fresh(viewport = { width: 1365, height: 900 }) {
 try {
   await fresh();
   await check('Category page loads with canonical URL and search-focused metadata', async () => {
-    assert.match(await page.title(), /Math & Science Calculators.*Time Math.*Significant Figures/i);
+    assert.equal(await page.title(), 'Math & Science Calculators | Time Math | ZemTools');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/math-science/');
-    assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /time math.*time differences.*significant figures/i);
+    assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /time differences.*clock-time addition and subtraction.*significant figures/i);
     assert.equal(await page.locator('main.wrap h1').innerText(), 'Math & Science Tools');
   });
 
