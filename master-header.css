@@ -64,3 +64,38 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .tools-page .tools-header-menu.is-open,.category-page .category-header-menu.is-open,.math-science-page .math-header-menu.is-open,.digital-developer-page .digital-header-menu.is-open{display:grid!important;gap:5px!important}
 .tools-page .tools-header-menu,.category-page .category-header-menu,.math-science-page .math-header-menu,.digital-developer-page .digital-header-menu{pointer-events:none!important}
 .tools-page .tools-header-menu.is-open,.category-page .category-header-menu.is-open,.math-science-page .math-header-menu.is-open,.digital-developer-page .digital-header-menu.is-open{pointer-events:auto!important}
+
+
+/* 2026-11-12 final responsive QA overrides — shared category/home pages */
+.category-page .site-header .header-inner{position:relative!important;min-width:0!important}
+.category-page .wrap{width:100%!important;max-width:900px!important;margin-left:auto!important;margin-right:auto!important;min-width:0!important}
+.category-page .wrap>.grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important}
+.category-page .wrap>.grid>.card{min-width:0!important;width:100%!important}
+.category-page .category-guide{display:block!important;width:100%!important;min-width:0!important}
+.category-page .category-guide>h2,
+.category-page .category-guide>p,
+.category-page .category-guide>div{width:100%!important;max-width:none!important;min-width:0!important}
+.category-page .category-guide-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;width:100%!important}
+.category-page .category-guide-grid>*{min-width:0!important}
+.category-page .category-guide-grid h3{word-break:normal!important;overflow-wrap:anywhere!important}
+.category-page .catalog-sync-card>div{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important}
+@media(max-width:820px){
+ .category-page .site-header .header-inner{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;min-height:64px!important;padding:9px 12px!important}
+ .category-page .site-header .brand{order:1!important;min-width:0!important;flex:0 1 auto!important}
+ .category-page .site-header .top-nav{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;overflow:hidden!important}
+ .category-page .site-header .header-actions,
+ .category-page .site-header [class$="-header-controls"]{display:flex!important;order:2!important;align-items:center!important;gap:7px!important;margin-left:auto!important;flex:0 0 auto!important}
+ .category-page .site-header [class$="-header-menu"]{display:none!important;position:absolute!important;left:12px!important;right:12px!important;top:calc(100% + 8px)!important;z-index:1002!important;gap:5px!important;padding:8px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(15,23,42,.12)!important;pointer-events:none!important}
+ .category-page .site-header [class$="-header-menu"].is-open{display:grid!important;pointer-events:auto!important}
+ .category-page .site-header [class$="-header-menu"] a{display:block!important;width:100%!important;padding:11px 12px!important;border-radius:9px!important;text-decoration:none!important;color:#334155!important;font-weight:700!important}
+}
+@media(max-width:760px){
+ .category-page .wrap>.grid,
+ .category-page .category-guide-grid,
+ .category-page .catalog-sync-card>div{grid-template-columns:minmax(0,1fr)!important}
+ .category-page .wrap{padding-left:14px!important;padding-right:14px!important}
+ .category-page .wrap>.grid>.card{min-height:0!important}
+ .category-page .card h2,
+ .category-page .card h3{word-break:normal!important;overflow-wrap:anywhere!important}
+ .category-page .wrap .button{width:100%!important;justify-content:center!important}
+}
