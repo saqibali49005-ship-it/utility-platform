@@ -75,11 +75,27 @@ try {
   await check('Mobile menu opens and page has no horizontal overflow', async () => {
     await page.locator('#mathHeaderMenu').click();
     assert.equal(await page.locator('#mathHeaderMenuPanel').isVisible(), true);
-    const dimensions = await page.evaluate(() => ({
-      client: document.documentElement.clientWidth,
-      scroll: document.documentElement.scrollWidth
-    }));
-    assert.ok(dimensions.scroll <= dimensions.client + 1, `horizontal overflow: ${dimensions.scroll}px > ${dimensions.client}px`);
+    const dimensions = await page.evaluate(() => {
+      const offenders = [...document.querySelectorAll('body *')].map(el => {
+        const r = el.getBoundingClientRect();
+        const css = getComputedStyle(el);
+        return {
+          tag: el.tagName.toLowerCase(),
+          id: el.id || '',
+          className: typeof el.className === 'string' ? el.className : '',
+          left: Math.round(r.left * 10) / 10,
+          right: Math.round(r.right * 10) / 10,
+          width: Math.round(r.width * 10) / 10,
+          position: css.position,
+          overflowX: css.overflowX
+        };
+      }).filter(x => x.right > innerWidth + 1 || x.left < -1)
+        .sort((a,b) => b.right - a.right)
+        .slice(0,20);
+      return { client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth, offenders };
+    });
+    assert.ok(dimensions.scroll <= dimensions.client + 1,
+      `horizontal overflow: ${dimensions.scroll}px > ${dimensions.client}px; offenders: ${JSON.stringify(dimensions.offenders)}`);
   });
 } finally {
   await browser.close();
