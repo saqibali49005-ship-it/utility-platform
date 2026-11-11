@@ -68,7 +68,7 @@ try {
     await fresh();
     await page.locator('#holidayDates').fill('2026-11-09');
     await between('2026-11-09T09:00', '2026-11-09T17:00');
-    assert.equal(await resultValue(), '0 minutes');
+    assert.equal(await resultValue(), '0 hours');
     assert.match(await page.locator('#resultArea').innerText(), /Holidays excluded\s+1/i);
   });
 
