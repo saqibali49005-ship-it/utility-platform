@@ -45,3 +45,5 @@ jobs:
         run: node tests/deck-joist-blocking.browser.mjs
       - name: Run sod staple browser regression tests
         run: node tests/sod-staple.browser.mjs
+      - name: Run paint calculator browser regression tests
+        run: node tests/paint-calculator.browser.mjs
