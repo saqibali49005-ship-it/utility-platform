@@ -1,0 +1,30 @@
+name: Weekly Repository Backup
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out full repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create and verify Git bundle
+        run: |
+          git bundle create zemtools-backup.bundle --all
+          git bundle verify zemtools-backup.bundle
+      - name: Store backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zemtools-git-backup-${{ github.run_id }}
+          path: zemtools-backup.bundle
+          if-no-files-found: error
+          retention-days: 90
