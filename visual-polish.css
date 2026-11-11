@@ -41,7 +41,7 @@ main:not(.wrap) > .card .related-item:hover{transform:translateY(-1px);border-co
 
 /* Sitewide centered footer — approved reference layout: copyright line, then centered links. */
 body > footer,main > footer,footer.wrap{width:100vw!important;max-width:none!important;box-sizing:border-box!important;background:#fff!important;border-top:1px solid var(--up-line,#dfe6ef)!important;color:var(--up-muted,#5f6b7a)!important;text-align:center!important;padding:24px 16px 28px!important;margin-top:30px!important;margin-left:calc(50% - 50vw)!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;overflow:hidden!important}
-body > footer::before,main > footer::before,footer.wrap::before{content:"© 2026 Utility Platform";display:block!important;order:-2;font-size:16px!important;line-height:1.45!important;font-weight:600!important;color:var(--up-text,#0b1220)!important;margin:0!important}
+body > footer::before,main > footer::before,footer.wrap::before{content:"© 2026 ZemTools";display:block!important;order:-2;font-size:16px!important;line-height:1.45!important;font-weight:600!important;color:var(--up-text,#0b1220)!important;margin:0!important}
 footer:not(:has(.foot)) > div:first-child{display:none!important}
 footer > .foot > span{display:none!important}
 footer.wrap > span:first-child{display:none!important}
