@@ -35,6 +35,8 @@ jobs:
         run: node tests/math-science-category.browser.mjs
       - name: Run sitewide responsive and Home navigation browser audit
         run: node tests/sitewide-responsive.browser.mjs
+      - name: Run GA4 tool-usage tracking browser tests
+        run: node tests/ga4-tool-tracking.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests

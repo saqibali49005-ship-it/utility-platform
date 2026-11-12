@@ -10,17 +10,44 @@ if(!window.__zemtoolsGa4Loaded){
  window.gtag('js',new Date());
  window.gtag('config','G-LX61P24FYK');
 }
+function initPreviewNavigation(){
+ const host=location.hostname.toLowerCase();
+ if(!host.endsWith('.pages.dev')&&host!=='preview.zemtools.com')return;
+ function keepLinksOnPreview(root){
+  const links=[];
+  if(root&&root.matches&&root.matches('a[href]'))links.push(root);
+  if(root&&root.querySelectorAll)links.push(...root.querySelectorAll('a[href]'));
+  links.forEach(link=>{
+   try{
+    const url=new URL(link.href,location.href);
+    if(url.hostname==='zemtools.com'||url.hostname==='www.zemtools.com'){
+     link.href=location.origin+url.pathname+url.search+url.hash;
+    }
+   }catch(_){}
+  });
+ }
+ keepLinksOnPreview(document);
+ document.addEventListener('click',function(e){
+  const link=e.target.closest&&e.target.closest('a[href]');
+  if(link)keepLinksOnPreview(link);
+ },true);
+}
 function initToolCalculateTracking(){
  if(!document.body.classList.contains('tool-page'))return;
+ const calculateIds=/^(calculate|calculatebtn|calculatebetween|calculatedeadline|calcduration|calcadd|findratio|solvesize|resize|measure)$/i;
  document.addEventListener('click',function(e){
   const button=e.target.closest('button, input[type="button"], input[type="submit"]');
-  if(!button||button.disabled)return;
+  if(!button||button.disabled||button.closest('.faq, .faq-card, [data-analytics-ignore]'))return;
   const label=String(button.textContent||button.value||'').replace(/\s+/g,' ').trim();
-  const id=String(button.id||'');
-  if(!/calculate/i.test(id+' '+label))return;
+  const id=String(button.id||'').trim();
+  const isGenerate=/^generate(?:\s|$)/i.test(label)||/^generate$/i.test(id);
+  const isCalculate=/^calculate(?:\s|$)/i.test(label)||/^find business-time result$/i.test(label)||calculateIds.test(id);
+  if(!isGenerate&&!isCalculate)return;
   if(typeof window.gtag!=='function')return;
   const heading=(document.querySelector('main h1, h1')?.textContent||document.title||'Unknown tool').trim();
-  window.gtag('event','tool_calculate',{
+  const actionType=isGenerate?'generate':'calculate';
+  window.gtag('event',isGenerate?'tool_generate':'tool_calculate',{
+   action_type:actionType,
    tool_name:heading,
    tool_path:location.pathname,
    button_id:id||'(none)',
@@ -95,6 +122,7 @@ function initReport(){
  });
  document.body.appendChild(btn);
 }
+initPreviewNavigation();
 initSearch();
 initReport();
 initToolCalculateTracking();
