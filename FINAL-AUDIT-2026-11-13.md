@@ -174,26 +174,26 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 91 | Search Console property and canonical host configuration are verified | NOT TESTED | Current access/data not present in this audit context |
-| 92 | Current indexing report reviewed by page and reason | NOT TESTED | Fresh export required |
-| 93 | Current performance report reviewed for clicks, impressions, CTR and position | NOT TESTED | Fresh export required |
-| 94 | Query and landing-page trends are recorded without unsupported conclusions | NOT TESTED | Fresh export required |
+| 91 | Search Console property and canonical host configuration are verified | PASS | OpenSEO project ZemTools is bound to verified `sc-domain:zemtools.com`; connected Google account has `siteOwner` permission and the property is selected |
+| 92 | Current indexing report reviewed by page and reason | PASS | Google URL Inspection checked all 31 sitemap URLs on 2026-11-13: 31/31 `Submitted and indexed`, robots allowed, fetch successful, mobile crawl, 31/31 declared and Google canonicals match; no URL inspection errors |
+| 93 | Current performance report reviewed for clicks, impressions, CTR and position | PASS | GSC final data reviewed for 2026-08-09–2026-11-09 and 2026-10-13–2026-11-09. Page-dimension 3-month rows: 8 clicks/1,175 impressions; date-dimension rows: 8 clicks/1,071 impressions. The dimension totals differ, so they are recorded separately, not combined as one site total |
+| 94 | Query and landing-page trends are recorded without unsupported conclusions | PASS | Reviewed 138 visible query rows, 36 page rows, date trend and device split; visible-query impressions omit anonymized queries. Top observed opportunities include fence material, gravel calculator, significant figures and duplicate-line removal; low-volume data is treated as directional, not stable demand |
 | 95 | Sitemap submission and processing status are reviewed | NOT TESTED | Current GSC evidence required |
 | 96 | GA4 or equivalent analytics property is verified | NOT TESTED | Connector/property evidence pending |
 | 97 | Tool-use events are firing and parameters are correct | NOT TESTED | Browser test exists but did not run in latest failed workflow |
 | 98 | Analytics events are not duplicated or inflated | NOT TESTED | Event validation pending |
-| 99 | A baseline reporting snapshot and date are stored | NOT TESTED | Current report snapshot pending |
+| 99 | A baseline reporting snapshot and date are stored | PASS | Search Console property, date windows, page/query/device examples and URL Inspection counts recorded in this audit on 2026-11-13 |
 | 100 | Monitoring cadence and owner/next review are documented | NOT TESTED | Set after baseline review |
 
 ## Current evidence-backed tally (2026-11-13)
 
-- PASS: **43 / 100**
+- PASS: **48 / 100**
 - FAIL: **1 / 100** — criterion #88, automatic Cloudflare Worker deployment on every push to main
-- NOT TESTED: **56 / 100**
-- Audit coverage: **44%** (43 PASS + 1 FAIL with conclusive evidence)
-- Verified score: **43%** (43 PASS out of the fixed 100)
+- NOT TESTED: **51 / 100**
+- Audit coverage: **49%** (48 PASS + 1 FAIL with conclusive evidence)
+- Verified score: **48%** (48 PASS out of the fixed 100)
 
-This is the **verified score against the fixed audit checklist**, not a claim that the website is 43% built, that Google has indexed 43% of pages, or that AdSense approval is likely. The denominator remains 100. Criterion #88 is a real deployment-safety failure on the current main branch; PR #45 proposes a validation-only workflow, but the issue is not closed until the change is merged and verified.
+This is the **verified score against the fixed audit checklist**, not a claim that the website is 48% built, that Google has indexed 48% of pages, or that AdSense approval is guaranteed. The denominator remains 100. Search Console now confirms all 31 sitemap URLs are indexed and the current 3-month search-performance baseline has been recorded. Remaining untested criteria include the submitted-sitemap processing report, full content originality/factual audit, real GA4 property/event validation, performance/accessibility, and security.
 
 ## Production serving path finding
 
@@ -210,20 +210,48 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 
 ## Latest successful final-baseline CI
 
-- Workflow: Foundation Check run `43326485239` on PR #45 branch head `5352e7ce68cf8c9ad4f35dd2dd44bb68cce85fd4`.
+- Workflow: Foundation Check run `43326910013` on PR #45 head `402997d2165d6adb14db91cbb4f1c71110a78e8d`; every job step completed successfully.
+- Cloudflare Worker Config Validation run `43326909951` passed; this workflow is now PR-only dry-run validation, with no Worker production deployment job.
 - Foundation validator and homepage site-name validator passed.
 - Math & Science category: 7 checks passed.
 - Sitewide navigation/responsive: 96/96 passed.
-- GA4 tool tracking: 4 scenarios passed.
+- GA4 tool-tracking code behavior (stubbed dataLayer tests): 4 scenarios passed; this does **not** prove live GA4 collection or property connection.
 - SEO metadata/internal links: 7 checks passed.
-- Sitemap-wide local metadata/structure: 31/31 passed, including unique titles and unique meta descriptions.
+- Sitemap-wide local metadata/structure: 31/31 passed.
 - Production sitemap live route/canonical/indexability: 31/31 passed.
-- Sitewide internal-link/footer audit: all 31 pages checked, all four legal footer links present, 31 unique internal targets checked, 0 failures.
+- Live sitewide internal-link/footer audit: all 31 pages checked, all four legal footer links present, 31 unique internal targets checked, 0 failures.
 - Calculator regression tests: Fence 19, Wire Size 10, Conduit Fill 12, Gravel 5, Significant Figures 9, Paver Edge 5, Deck Joist Blocking 11, Sod Staple 7, Paint 12, Business Hours 8 — all passed.
-- Remaining ten tools: **20/20** passed.
-- Total recorded automated checks in this run: **356 passed, 0 failed** (294 earlier checks plus 62 sitewide page/target checks).
-- Latest Cloudflare Pages preview for the tested site changes: `https://e5668678.zemtools-review.pages.dev`.
+- Remaining ten tools: 20/20 passed.
+- The full automated workflow is green. These are test-suite results, not a summed number of website-completion points.
+- Latest Cloudflare Pages preview for site-code changes remains `https://e5668678.zemtools-review.pages.dev`.
 - PR #45 remains preview-only and unmerged.
+
+## Search Console and indexing baseline (2026-11-13)
+
+**Connected property:** `sc-domain:zemtools.com`; account has `siteOwner` permission.
+
+### URL Inspection
+- Inspected every one of the **31 sitemap URLs** using Search Console URL Inspection.
+- Result: **31/31 Submitted and indexed**, **0 non-indexed**, **0 URL inspection errors**.
+- All 31: robots allowed, indexing allowed, successful fetch, Google-selected canonical exactly equals declared canonical, crawled as mobile.
+- Latest crawl among these 31: `2026-11-12T12:50:27Z`; earliest recorded crawl: `2026-09-22T00:52:03Z`.
+- Breadcrumb rich-result verdict returned PASS on 26 pages where a rich-results result was present.
+- Search Console URL Inspection returned no sitemap association for three URLs (`/find-replace/`, `/uuid-generator-calculator/`, `/conduit-fill-calculator/`) even though the current XML source includes them. Keep the separate Sitemaps report criterion #95 NOT TESTED until actual sitemap processing/submission status is read.
+
+### Search performance
+**Final data window:** 2026-08-09 to 2026-11-09 (Google data lag; date values from the Search Console API).
+
+- Page dimension: 36 rows; 8 clicks and 1,175 impressions.
+- Date dimension: 53 rows; 8 clicks and 1,071 impressions.
+- Query dimension: 138 visible query rows, 591 impressions and no clicks in those visible rows. Query data can omit anonymized queries; do not treat its visible-row sum as the site's total impressions.
+- The page and date dimension impression totals differ. Preserve them separately rather than merging into one invented site total.
+- Last 28-day window (2026-10-13 to 2026-11-09): page dimension 3 clicks / 340 impressions; date dimension 3 clicks / 242 impressions.
+- Device rows for the 3-month window: desktop 4 clicks / 762 impressions (avg position 50.1); mobile 4 clicks / 308 impressions (avg position 9.0); tablet 0 clicks / 1 impression.
+- Landing-page clicks in the 3-month page report: homepage 4; About 1; Aspect Ratio 1; Deck Joist Blocking 1; Sod Staple 1.
+- Visible query opportunities include fence material calculator (16 impressions, avg position 6.8), gravel calculator tons (21, pos 10.5), gravel base calculator (10, pos 5.3), significant figures calculator (9, pos 8), and duplicate line remover online (4, pos 7). These are small-sample signals, not stable demand estimates.
+
+### Analytics limitations
+- GA4 tracking code and a measurement ID exist in source. The four CI tracking scenarios stub `gtag`/dataLayer and abort the Google Tag Manager script; they verify event code behavior but do not verify real GA4 property connection, live event ingestion, or duplicate-event behavior. Criteria #96–98 remain NOT TESTED.
 
 ## Content, legal and AdSense-readiness review
 
@@ -260,4 +288,5 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 | 2026-11-13 | Added sitewide sitemap metadata test and live 31-route check; fixed nine missing Twitter Card tags | PR #45; 31/31 local metadata and 31/31 live route checks passed in run 43323850936 |
 | 2026-11-13 | Recorded actual production DNS/origin topology without changing hosting or DNS | Cloudflare DNS/Worker/Pages API read; GitHub Pages deploy run 43313729151 |
 | 2026-11-13 | Added browser regression coverage for remaining ten catalog tools; all 20 tests passed on rerun | PR #45; Foundation Check run 43325210646 |
-| 2026-11-13 | Updated fixed audit score to 26/100 after all 20 tools and 13 calculator known-answer suites passed | PR #45 run 43325210646; 294/294 checks passed |
+| 2026-11-13 | Updated fixed audit score to 26/100 after all 20 tools and 13 calculator known-answer suites passed | Historical run 43325210646 |
+| 2026-11-13 | Connected Search Console review and 31/31 URL Inspection; recorded 3-month page/query/device baseline; updated score to 48/100 | ZemTools GSC property `sc-domain:zemtools.com`; OpenSEO read-only URL Inspection and Search Analytics |
