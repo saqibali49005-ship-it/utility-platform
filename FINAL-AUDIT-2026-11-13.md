@@ -57,7 +57,7 @@ This is the single final baseline audit ledger for the current site. It consolid
 | 11 | Historical 20-tool header audit remains recorded as completed for its original scope | PASS | Historical audit record incorporated |
 | 12 | Header logo/brand link is visible and correctly aligned across all sitemap routes | NOT TESTED | Do not repeat old audit; current full-route evidence needed |
 | 13 | Search control is visible and usable across all sitemap routes and viewports | NOT TESTED | Existing 96-scenario suite covers only 32 routes |
-| 14 | Hamburger/menu behavior is correct across all sitemap routes and viewports | FAIL | Specific 95/96 observation; reconcile against existing user evidence |
+| 14 | Hamburger/menu behavior is correct across all sitemap routes and viewports | NOT TESTED | Broader route/viewport coverage not established; reconcile the single #8 failure against existing user evidence before treating it as a defect |
 | 15 | Search and menu panels open/close correctly, including mutual closing and Escape/outside-click behavior | NOT TESTED | Existing test covers a subset; do not repeat old completed checks without reason |
 | 16 | Footer structure, links and viewport alignment are consistent across all public routes | NOT TESTED | Four info-page parity changes require live visual verification |
 | 17 | No horizontal overflow across all sitemap routes and viewports | NOT TESTED | Existing suite covers 32 routes, but aggregate point not yet separately reported |
@@ -185,13 +185,15 @@ This is the single final baseline audit ledger for the current site. It consolid
 | 99 | A baseline reporting snapshot and date are stored | NOT TESTED | Current report snapshot pending |
 | 100 | Monitoring cadence and owner/next review are documented | NOT TESTED | Set after baseline review |
 
-## Initial evidence-backed tally
+## Initial evidence-backed tally (baseline snapshot)
 
-- PASS: **11** criteria? No — tally must be generated mechanically from the status column before reporting a percentage.
-- FAIL: **2** criteria are currently known: #8 (95/96 responsive matrix) and #14 (desktop menu visibility observation). These overlap as the same underlying test finding; they are separate criteria only because #8 measures the complete matrix and #14 measures the menu behavior itself. They must not be double-counted as separate bugs.
-- NOT TESTED: remaining criteria, pending the final sweep.
+- PASS: **14 / 100**
+- FAIL: **1 / 100** — criterion #8 (95/96 responsive matrix; one desktop menu visibility failure)
+- NOT TESTED: **85 / 100**
+- Audit coverage: **15%** (14 PASS + 1 FAIL)
+- Verified score: **14%** (14 PASS out of 100)
 
-**Do not quote a percentage from this draft until the table has been machine-counted and each PASS/FAIL is supported by a named test, screenshot, workflow run, or explicit manual review record.** This guard prevents contradictory figures.
+This is an **initial audit score, not the final site completion percentage**. It is intentionally conservative because 85 criteria have not yet been tested in this audit. The one known responsive failure is recorded once, under criterion #8; criterion #14 remains NOT TESTED until the broader menu behavior is reconciled. Final percentage will be reported only after the fixed 100 criteria have been audited and defects have been re-tested.
 
 ## Audit execution order
 
