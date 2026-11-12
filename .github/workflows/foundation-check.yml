@@ -39,6 +39,8 @@ jobs:
         run: node tests/ga4-tool-tracking.browser.mjs
       - name: Run SEO metadata and internal-link regression tests
         run: node tests/seo-metadata-and-links.browser.mjs
+      - name: Run sitemap-wide metadata and page structure checks
+        run: node tests/sitemap-metadata.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
