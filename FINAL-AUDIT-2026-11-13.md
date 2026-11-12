@@ -212,3 +212,4 @@ This is an **initial audit score, not the final site completion percentage**. It
 | Date | Change | Commit / evidence |
 |---|---|---|
 | 2026-11-13 | Created fixed 100-criterion baseline and incorporated known historical evidence | Audit branch; initial status snapshot |
+| 2026-11-13 | Isolated the only responsive failure to a page-specific desktop menu CSS override and opened a targeted one-line fix | PR #45; pending CI and preview verification |
