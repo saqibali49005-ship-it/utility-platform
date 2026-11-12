@@ -69,7 +69,7 @@ function initSearch(){
   if(!searchResults)return;
   const term=String(q||'').trim().toLowerCase();
   const matches=(term?tools.filter(t=>(t.title+' '+(t.description||'')+' '+(Array.isArray(t.keywords)?t.keywords.join(' '):'')).toLowerCase().includes(term)):tools).slice(0,8);
-  searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+t.href+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';
+  searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+(t.href.startsWith('/')?t.href:'/'+t.href)+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';
  }
  function closeSearch(){if(searchPanel)searchPanel.classList.remove('open');if(searchBtn)searchBtn.setAttribute('aria-expanded','false');}
  function closeMenu(){if(menu)menu.classList.remove('is-open');if(menuBtn)menuBtn.setAttribute('aria-expanded','false');}
