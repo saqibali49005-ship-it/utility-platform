@@ -1,6 +1,8 @@
 name: Cloudflare Production Deploy
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -15,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: zemtools-production-deploy
+  group: ${{ github.event_name == 'pull_request' && format('zemtools-pr-{0}', github.event.pull_request.number) || 'zemtools-production-deploy' }}
   cancel-in-progress: false
 
 jobs:
@@ -36,12 +38,12 @@ jobs:
         run: npx --yes wrangler@4 deploy --dry-run --config wrangler.jsonc
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.confirm_production_deploy == true
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.confirm_production_deploy == true)
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 15
     steps:
-      - name: Check out approved commit
+      - name: Check out approved main commit
         uses: actions/checkout@v4
 
       - name: Set up Node.js
