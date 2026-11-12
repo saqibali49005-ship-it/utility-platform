@@ -81,16 +81,25 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 ## 5. Active work queue
 
-**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** The fixed 100-criterion checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Do not create a competing checklist or change its denominator silently.
+**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** Fixed 100-point checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Latest recorded verified score: **24/100 (24%)**, with **0 failures and 76 not tested**. Denominator is locked; do not create a competing checklist or change it silently.
 
-Work in this order unless new evidence changes priority:
+### Verified during this audit
 
-1. Run and record the fixed audit criteria in order, incorporating prior audit records where their scope/evidence is sufficient.
-2. **Targeted fix opened:** PR #45 removes the page-specific desktop-only hide rule on `/sod-staple-spacing-guide/`. Await CI and preview verification. Do not repeat the historical 20-page header audit.
-3. Verify the four approved information-page changes on production.
-4. Complete remaining technical SEO metadata/internal-link coverage and full sitemap route checks.
-5. Complete tool correctness, content quality, trust/AdSense, performance/accessibility, security and deployment criteria.
-6. Review fresh Search Console and analytics data when available; do not invent current impressions, clicks or index coverage.
+- PR #45 Foundation Check run `43323850936` passed end-to-end (274 automated scenarios/checks, 0 failed).
+- The single guide desktop-menu regression is fixed in PR #45 and the 96/96 responsive matrix passes.
+- All 31 sitemap pages passed local metadata/structure checks.
+- All 31 production sitemap routes passed HTTP 200, canonical and indexability checks.
+- Existing calculator suites in this run passed for Fence, Wire Size, Conduit Fill, Gravel, Significant Figures, Paver Edge, Deck Joist Blocking, Sod Staple, Paint and Business Hours.
+- The historical 20-tool header audit remains completed; it was not repeated.
+
+### Open work
+
+1. Continue the remaining 76 audit criteria: broader calculator known-answer/boundary testing, content usefulness/originality, trust/AdSense quality, accessibility/performance, security, and current analytics/Search Console evidence.
+2. Verify the approved About, Contact, Privacy and Terms visual/footer parity on production; source route checks returned 200 but the specific visual diff is not yet signed off.
+3. Keep PR #45 preview-only until user explicitly approves production publishing. Do not merge or deploy to production on inferred approval.
+4. PR #44 is the documentation-only project baseline PR. Keep it as the permanent master record after review; its base main still lacks PR #45's menu correction, so the full Foundation Check is expected to fail until the approved fix is integrated.
+5. Record the actual production origin: apex and www currently resolve to GitHub Pages behind Cloudflare proxy; Cloudflare Pages project is preview-only, and Worker routes/domains are empty. Do not change DNS/hosting without explicit user approval.
+6. Review fresh Search Console and analytics data when available; do not invent impressions, clicks or index coverage.
 
 ## 6. New issue workflow
 
@@ -126,6 +135,7 @@ A side issue does not reset or rename the active phase.
 ## 8. Completion and reporting
 
 - The fixed 100-criterion final audit is defined in `FINAL-AUDIT-2026-11-13.md`.
+- Latest tally: **24 PASS / 0 FAIL / 76 NOT TESTED; verified score 24%; audit coverage 24%**.
 - Verified score = PASS criteria / 100 × 100. Audit coverage = criteria with conclusive PASS/FAIL/BLOCKED evidence / 100 × 100.
 - Keep audit score distinct from traffic, rankings, indexing or AdSense approval.
 - Any checklist/denominator change requires a versioned amendment and written reason.
