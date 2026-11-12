@@ -81,16 +81,19 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 ## 5. Active work queue
 
-**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** Fixed 100-point checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Latest recorded verified score: **26/100 (26%)**, with **0 failures and 74 not tested**. Denominator is locked; do not create a competing checklist or change it silently.
+**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** Fixed 100-point checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Latest recorded verified score: **43/100 (43%)**, with **1 failure and 56 not tested**. Denominator is locked; do not create a competing checklist or change it silently.
 
 ### Verified during this audit
 
-- PR #45 Foundation Check run `43325210646` passed end-to-end (294 automated scenarios/checks, 0 failed).
+- PR #45 Foundation Check run `43326485239` passed end-to-end (356 automated checks, 0 failed), including 31 live internal-link targets and 31 footer checks.
 - The single guide desktop-menu regression is fixed in PR #45 and the 96/96 responsive matrix passes.
+- 31 sitemap routes passed metadata uniqueness/structure tests, live canonical/indexability checks, and live footer/internal-link validation (31 internal targets, 0 failures).
 - PR #45 latest tested commit: `e7e6b55fc570fcce275fb3e06fd190e7f0da8f16`; Cloudflare preview: `https://e5668678.zemtools-review.pages.dev`.
 - All 31 sitemap pages passed local metadata/structure checks.
 - All 31 production sitemap routes passed HTTP 200, canonical and indexability checks.
 - Existing calculator suites and new browser suites passed for all 20 catalog tools, including all 13 calculators; the remaining ten-tool suite passed 20/20.
+- Source-level content review completed for all 20 tool pages and all four category pages, plus About, Contact, Privacy and Terms. Detailed scope and limitations are recorded in `FINAL-AUDIT-2026-11-13.md`.
+- Current main has a deployment-safety failure: Cloudflare Worker deployment is triggered automatically on pushes to main despite no production route being attached. PR #45 changes this to PR-only dry-run validation; not closed until merged and verified.
 - The historical 20-tool header audit remains completed; it was not repeated.
 
 ### Open work
@@ -136,7 +139,7 @@ A side issue does not reset or rename the active phase.
 ## 8. Completion and reporting
 
 - The fixed 100-criterion final audit is defined in `FINAL-AUDIT-2026-11-13.md`.
-- Latest tally: **26 PASS / 0 FAIL / 74 NOT TESTED; verified score 26%; audit coverage 26%**.
+- Latest tally: **43 PASS / 1 FAIL / 56 NOT TESTED; verified score 43%; audit coverage 44%**.
 - Verified score = PASS criteria / 100 × 100. Audit coverage = criteria with conclusive PASS/FAIL/BLOCKED evidence / 100 × 100.
 - Keep audit score distinct from traffic, rankings, indexing or AdSense approval.
 - Any checklist/denominator change requires a versioned amendment and written reason.
