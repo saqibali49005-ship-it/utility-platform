@@ -69,8 +69,8 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 21 | All 20 tools have a defined input/output and expected-result test plan | NOT TESTED | Existing individual browser tests cover a subset |
-| 22 | All calculator formulas pass independent known-answer test cases | NOT TESTED | Must test every calculator; do not infer from page load |
+| 21 | All 20 tools have a defined input/output and expected-result test plan | PASS | Run 43325210646 passes browser suites for all 20 catalog tools, including 10 newly added remaining-tool suites |
+| 22 | All calculator formulas pass independent known-answer test cases | PASS | Formula-level known-answer assertions pass across all 13 calculator tools in run 43325210646; tool regression suites report 294/294 total checks across the full run |
 | 23 | Unit conversion and unit-switch round trips preserve correct values | NOT TESTED | Gravel historical fix recorded; broader matrix pending |
 | 24 | Required fields, invalid values, zero, negative and boundary inputs are handled | NOT TESTED | Per-tool edge-case matrix pending |
 | 25 | Reset/clear behavior works on all interactive tools | NOT TESTED | Per-tool tests pending |
@@ -187,13 +187,13 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 ## Current evidence-backed tally (2026-11-13)
 
-- PASS: **24 / 100**
+- PASS: **26 / 100**
 - FAIL: **0 / 100**
-- NOT TESTED: **76 / 100**
-- Audit coverage: **24%** (24 PASS + 0 FAIL with conclusive evidence)
-- Verified score: **24%** (24 PASS out of the fixed 100)
+- NOT TESTED: **74 / 100**
+- Audit coverage: **26%** (26 PASS + 0 FAIL with conclusive evidence)
+- Verified score: **26%** (26 PASS out of the fixed 100)
 
-This is the **current verified score against the fixed audit checklist**, not a claim that the entire website is 24% built or that Google has indexed 24% of pages. The denominator remains 100. The PR #45 regression suite and full sitemap-level checks are green; 76 broader quality, editorial, accessibility, security, monetization and analytics criteria still require review.
+This is the **current verified score against the fixed audit checklist**, not a claim that the entire website is 26% built or that Google has indexed 26% of pages. The denominator remains 100. All 20 catalog tools now have browser regression coverage, and all automated checks in the latest run are green. The remaining 74 criteria cover deeper UX/content, policy, performance/accessibility, security, deployment and analytics/search-performance review.
 
 ## Production serving path finding
 
@@ -210,7 +210,7 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 
 ## Latest successful final-baseline CI
 
-- Workflow: Foundation Check run `43323850936` on PR #45 branch head `62967b50b31b46b91e45d24cc326d0a45c00d4e7`.
+- Workflow: Foundation Check run `43325210646` on PR #45 branch head `e7e6b55fc570fcce275fb3e06fd190e7f0da8f16`.
 - Foundation validator and homepage site-name validator passed.
 - Math & Science category: 7 checks passed.
 - Sitewide navigation/responsive: 96/96 passed.
@@ -219,7 +219,9 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 - Sitemap-wide local metadata/structure: 31/31 passed.
 - Production sitemap live route/canonical/indexability: 31/31 passed.
 - Calculator regression tests: Fence 19, Wire Size 10, Conduit Fill 12, Gravel 5, Significant Figures 9, Paver Edge 5, Deck Joist Blocking 11, Sod Staple 7, Paint 12, Business Hours 8 — all passed.
-- Total recorded automated scenarios/checks: **274 passed, 0 failed** in this Foundation Check run.
+- Remaining ten tools (Aspect Ratio, Find/Replace, Word Counter, Case Converter, Line Break Remover, Duplicate Line Remover, Text Cleaner, UUID, Pilot Hole, Time Calculator): **20/20 passed**.
+- Total recorded automated scenarios/checks: **294 passed, 0 failed** in this Foundation Check run.
+- Latest Cloudflare Pages preview for the tested commit: `https://e5668678.zemtools-review.pages.dev`.
 - PR #45 remains preview-only and unmerged; Cloudflare PR deploy validation does not publish to the production hostname.
 
 ## Audit execution order
@@ -241,3 +243,5 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 | 2026-11-13 | Isolated the responsive failure to a page-specific desktop menu CSS override; fixed it and verified 96/96 route/viewport scenarios | PR #45; Foundation Check run 43323850936 |
 | 2026-11-13 | Added sitewide sitemap metadata test and live 31-route check; fixed nine missing Twitter Card tags | PR #45; 31/31 local metadata and 31/31 live route checks passed in run 43323850936 |
 | 2026-11-13 | Recorded actual production DNS/origin topology without changing hosting or DNS | Cloudflare DNS/Worker/Pages API read; GitHub Pages deploy run 43313729151 |
+| 2026-11-13 | Added browser regression coverage for remaining ten catalog tools; all 20 tests passed on rerun | PR #45; Foundation Check run 43325210646 |
+| 2026-11-13 | Updated fixed audit score to 26/100 after all 20 tools and 13 calculator known-answer suites passed | PR #45 run 43325210646; 294/294 checks passed |
