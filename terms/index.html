@@ -81,7 +81,6 @@
 <footer><div>© 2026 ZemTools</div><nav aria-label="Footer" class="footer-links"><a href="/">Home</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a aria-current="page" href="/terms/">Terms</a></nav></footer>
 </main>
 
-<script id="info-mobile-nav-js">
-(function(){const b=document.getElementById('infoHeaderMenu'),p=document.getElementById('infoMobileNav');if(!b||!p)return;function close(){p.classList.remove('is-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}b.addEventListener('click',function(e){e.stopPropagation();const open=!p.classList.contains('is-open');p.classList.toggle('is-open',open);b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'Close menu':'Open menu');});document.addEventListener('click',function(e){if(!p.contains(e.target)&&!b.contains(e.target))close();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});})();
-</script>
+
+<script src="/zemtools-navigation.js" defer></script>
 </body></html>

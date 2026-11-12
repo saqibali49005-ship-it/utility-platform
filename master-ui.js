@@ -65,37 +65,15 @@ function initToolCalculateTracking(){
   });
  },true);
 }
-function initSearch(){
- const searchBtn=document.getElementById('toolHeaderSearch');
- const searchPanel=document.getElementById('toolHeaderSearchPanel');
- const searchForm=document.getElementById('toolHeaderSearchForm');
- const searchInput=document.getElementById('toolHeaderSearchInput');
- const searchResults=document.getElementById('toolHeaderSearchResults');
- const menuBtn=document.getElementById('toolHeaderMenu');
- const menu=document.getElementById('toolHeaderMenuPanel');
- if(!searchBtn&&!menuBtn)return;
- const tools=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
- function render(q){
-  if(!searchResults)return;
-  const term=String(q||'').trim().toLowerCase();
-  const matches=(term?tools.filter(t=>(t.title+' '+(t.description||'')+' '+(Array.isArray(t.keywords)?t.keywords.join(' '):'')).toLowerCase().includes(term)):tools).slice(0,8);
-  searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+(t.href.startsWith('/')?t.href:'/'+t.href)+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';
- }
- function closeSearch(){if(searchPanel)searchPanel.classList.remove('open');if(searchBtn)searchBtn.setAttribute('aria-expanded','false');}
- function closeMenu(){if(menu)menu.classList.remove('is-open');if(menuBtn)menuBtn.setAttribute('aria-expanded','false');}
- render('');
- if(searchBtn&&searchPanel){
-  searchBtn.addEventListener('click',function(e){e.stopPropagation();const open=!searchPanel.classList.contains('open');closeMenu();searchPanel.classList.toggle('open',open);searchBtn.setAttribute('aria-expanded',String(open));if(open&&searchInput)searchInput.focus();});
- }
- if(searchInput)searchInput.addEventListener('input',function(){render(searchInput.value);});
- if(searchForm&&searchInput)searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q);});
- if(menuBtn&&menu&&!menuBtn.hasAttribute('data-menu-inline')){
-  menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open));});
- }
- document.addEventListener('click',function(e){
-  if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();
-  if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu();
- });
+function loadSharedNavigation(){
+ if(window.__zemtoolsNavigationRequested)return;
+ window.__zemtoolsNavigationRequested=true;
+ var script=document.createElement('script');
+ script.src='/zemtools-navigation.js';
+ script.async=true;
+ script.onload=function(){window.__zemtoolsNavigationLoaded=true;};
+ script.onerror=function(){window.__zemtoolsNavigationError=true;};
+ document.head.appendChild(script);
 }
 function initReport(){
  if(!document.body.classList.contains('tool-page')||document.getElementById('reportProblemBtn'))return;
@@ -133,7 +111,7 @@ function initReport(){
  document.body.appendChild(btn);
 }
 initPreviewNavigation();
-initSearch();
+loadSharedNavigation();
 initReport();
 initToolCalculateTracking();
 })();
