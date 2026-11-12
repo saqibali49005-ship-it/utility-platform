@@ -41,6 +41,7 @@ try {
   await assertEvent('tool_calculate', 'calculate', '/paint-calculator/');
 
   await fresh('/business-hours-calculator/');
+  await page.locator('#deadlineTab').click();
   await page.locator('#calculateDeadline').click();
   await assertEvent('tool_calculate', 'calculate', '/business-hours-calculator/');
 
