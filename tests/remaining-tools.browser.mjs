@@ -37,7 +37,7 @@ try {
     await page.locator('#knownDimension').selectOption('width');
     await page.locator('#knownValue').fill('1280');
     await page.locator('#solveSize').click();
-    assert.match(await page.locator('#sizeResult').innerText(), /1280\s*[×x]\s*720/);
+    assert.match(await page.locator('#sizeResult').innerText(), /1,280\s*[×x]\s*720/);
   });
 
   await open('/find-replace/', '#inputText');
