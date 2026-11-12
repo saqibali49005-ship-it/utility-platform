@@ -34,9 +34,9 @@ if(!window.__zemtoolsGa4Loaded){
      if(!button||button.disabled)return;
      var label=(button.getAttribute('aria-label')||button.textContent||'').trim().toLowerCase();
      var action='';
-     if(/\\b(calculate|convert|generate|check result)\\b/.test(label))action='calculate';
-     else if(/\\b(copy|copy result|copy output)\\b/.test(label))action='copy';
-     else if(/\\b(download|export)\\b/.test(label))action='download';
+     if(/\b(calculate|convert|generate|check result)\b/.test(label))action='calculate';
+     else if(/\b(copy|copy result|copy output)\b/.test(label))action='copy';
+     else if(/\b(download|export)\b/.test(label))action='download';
      if(!action)return;
      mixpanel.track('Tool Action',{action:action,tool_name:toolName||'none',page_path:pagePath});
     },true);
