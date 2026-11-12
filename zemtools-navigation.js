@@ -119,6 +119,26 @@
   return panel;
  }
  let searchPanel=searchPanelFor(searchBtn);
+ // Preserve the shared catalogue-backed live search on calculator/tool pages.
+ if(searchPanel&&searchPanel.id==='toolHeaderSearchPanel'){
+  const form=searchPanel.querySelector('#toolHeaderSearchForm');
+  const input=searchPanel.querySelector('#toolHeaderSearchInput');
+  const results=searchPanel.querySelector('#toolHeaderSearchResults');
+  const catalog=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+  function renderToolMatches(query){
+   if(!results)return;
+   const term=String(query||'').trim().toLowerCase();
+   const matches=(term?catalog.filter(t=>(t.title+' '+(t.description||'')+' '+(Array.isArray(t.keywords)?t.keywords.join(' '):'')).toLowerCase().includes(term)):catalog).slice(0,8);
+   results.innerHTML=matches.length?matches.map(t=>'<a href="'+(String(t.href||'').startsWith('/')?t.href:'/'+t.href)+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';
+  }
+  if(input)input.addEventListener('input',function(){renderToolMatches(input.value);});
+  if(form&&input)form.addEventListener('submit',function(e){
+   e.preventDefault();
+   const query=input.value.trim();
+   if(query)location.href='/tools/?q='+encodeURIComponent(query);
+  });
+  renderToolMatches('');
+ }
 
  function focusTarget(){
   const byId={homeHeaderSearch:'#tool-search',toolsHeaderSearch:'#dir-input',mathHeaderSearch:'#mathLocalSearchInput',digitalHeaderSearch:'#digitalLocalSearchInput'};
