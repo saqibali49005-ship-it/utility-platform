@@ -1,0 +1,7 @@
+.git/
+.github/
+scripts/
+tests/
+*.md
+CNAME
+wrangler.jsonc
