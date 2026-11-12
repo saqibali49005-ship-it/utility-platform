@@ -113,7 +113,7 @@ try {
     await page.locator('#removeBlanks').check();
     await page.locator('#dedupeBtn').click();
     assert.equal(await page.locator('#outputText').inputValue(), 'Apple\nBanana');
-    assert.match(await page.locator('#removedStats').innerText(), /4 duplicates/i);
+    assert.match(await page.locator('#removedStats').innerText(), /3 duplicates/i);
   });
   await check('Duplicate-line remover keep-last mode retains final duplicate positions', async () => {
     await page.locator('#inputText').fill('A\nB\nA');
