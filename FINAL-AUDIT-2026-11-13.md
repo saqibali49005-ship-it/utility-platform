@@ -46,7 +46,7 @@ This is the single final baseline audit ledger for the current site. It consolid
 | 5 | Homepage sitemap entry has lastmod | PASS | Foundation validator passed |
 | 6 | Homepage has one valid WebSite JSON-LD node with the ZemTools brand/canonical URL | PASS | Site-name validator passed |
 | 7 | Math & Science category browser behavior and structured data | PASS | 7/7 browser checks passed |
-| 8 | All 32 responsive test routes pass at mobile, tablet and desktop (96 scenarios) | FAIL | 95/96; one guide desktop menu visibility failure |
+| 8 | All 32 responsive test routes pass at mobile, tablet and desktop (96 scenarios) | PASS | PR #45 Foundation Check run 43323850936 passed 96/96; desktop menu on `/sod-staple-spacing-guide/` now passes |
 | 9 | Apex HTTPS, www-to-apex and legacy URL redirects preserve expected targets/query | PASS | Live smoke run 43313733225 |
 | 10 | Live robots.txt and sitemap.xml endpoints return valid HTTP 200 responses | PASS | Live smoke run 43313733225 |
 
@@ -55,12 +55,12 @@ This is the single final baseline audit ledger for the current site. It consolid
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
 | 11 | Historical 20-tool header audit remains recorded as completed for its original scope | PASS | Historical audit record incorporated |
-| 12 | Header logo/brand link is visible and correctly aligned across all sitemap routes | NOT TESTED | Do not repeat old audit; current full-route evidence needed |
-| 13 | Search control is visible and usable across all sitemap routes and viewports | NOT TESTED | Existing 96-scenario suite covers only 32 routes |
-| 14 | Hamburger/menu behavior is correct across all sitemap routes and viewports | NOT TESTED | Broader route/viewport coverage not established; reconcile the single #8 failure against existing user evidence before treating it as a defect |
+| 12 | Header logo/brand link is visible and correctly aligned across all sitemap routes | PASS | Sitewide responsive run 43323850936 checked visible brand/home link across all 32 routes × 3 viewports |
+| 13 | Search control is visible and usable across all sitemap routes and viewports | PASS | Run 43323850936 checked visible search control and open/focus behavior across all 32 routes × 3 viewports |
+| 14 | Hamburger/menu behavior is correct across all sitemap routes and viewports | PASS | Run 43323850936 verified menu visibility, open state and Escape close across all 32 routes × 3 viewports |
 | 15 | Search and menu panels open/close correctly, including mutual closing and Escape/outside-click behavior | NOT TESTED | Existing test covers a subset; do not repeat old completed checks without reason |
 | 16 | Footer structure, links and viewport alignment are consistent across all public routes | NOT TESTED | Four info-page parity changes require live visual verification |
-| 17 | No horizontal overflow across all sitemap routes and viewports | NOT TESTED | Existing suite covers 32 routes, but aggregate point not yet separately reported |
+| 17 | No horizontal overflow across all sitemap routes and viewports | PASS | Run 43323850936 checked horizontal overflow for all 32 routes × 3 viewports |
 | 18 | Breadcrumbs and primary navigation destinations work across all sitemap routes | NOT TESTED | Structural checks passed for catalog tools; full link behavior not audited |
 | 19 | 404 route is usable and does not masquerade as a successful content page | NOT TESTED | Responsive load test only |
 | 20 | Desktop, tablet and mobile visual alignment matches locked design reference | NOT TESTED | Requires visual review; no claim from source-only checks |
@@ -84,12 +84,12 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 31 | All 31 sitemap URLs return intended live status and final URL | NOT TESTED | Only selected endpoints checked live |
-| 32 | Every indexable page has one self-referencing canonical | NOT TESTED | 20 catalog tools structurally checked; all 31 pages pending |
+| 31 | All 31 sitemap URLs return intended live status and final URL | PASS | Live sitemap check in run 43323850936 passed 31/31 with HTTP 200 and no redirect from canonical route |
+| 32 | Every indexable page has one self-referencing canonical | PASS | Run 43323850936 verified exactly one canonical per live sitemap URL and exact URL match, 31/31 |
 | 33 | Titles are unique, descriptive and aligned with page intent | NOT TESTED | Four tool pages have a test script; full site pending |
 | 34 | Meta descriptions are unique, useful and within agreed snippet guidance | NOT TESTED | Four tool pages have a test script; full site pending |
 | 35 | Open Graph and Twitter metadata are present and aligned where required | NOT TESTED | Four tool pages have a test script; full site pending |
-| 36 | Robots directives do not block intended public pages or expose unintended pages | NOT TESTED | robots endpoint returned 200; directives need full review |
+| 36 | Robots directives do not block intended public pages or expose unintended pages | PASS | Live route checks verified `index,follow` on all 31 pages; `robots.txt` allows `/` and points to sitemap; smoke run 43313733225 returned 200 |
 | 37 | Structured data parses and matches visible page content | NOT TESTED | Homepage and Math & Science have specific tests only |
 | 38 | Internal links resolve and use stable clean URLs | NOT TESTED | Selected routes have a test; full crawl pending |
 | 39 | Redirects do not create loops, chains or incorrect query handling | NOT TESTED | Three key redirect cases passed; full redirect inventory pending |
@@ -159,11 +159,11 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 81 | Actual production serving path (DNS, Pages/Worker/origin) is documented and verified | NOT TESTED | Must reconcile repository workflows with live routing |
+| 81 | Actual production serving path (DNS, Pages/Worker/origin) is documented and verified | PASS | Cloudflare DNS API shows apex A records to GitHub Pages IPs with proxy enabled, www CNAME to GitHub Pages; Worker routes/domains empty; Pages project is preview-only (`preview.zemtools.com`). GitHub Pages deploy run 43313729151 succeeded. This records the current production path; it is not a recommendation to migrate DNS. |
 | 82 | No Vercel dependency remains in the production workflow | NOT TESTED | Repo metadata still contains historical Vercel homepage value; deployment config audit pending |
 | 83 | Approved changes reach the intended production origin | NOT TESTED | Current live source/commit correlation pending |
 | 84 | Four information pages show the approved header/footer changes live | NOT TESTED | PR #43 merged; live visual check pending |
-| 85 | Production homepage and all 31 sitemap routes are reachable | NOT TESTED | Full live route sweep pending |
+| 85 | Production homepage and all 31 sitemap routes are reachable | PASS | Run 43323850936 live sitemap route check passed 31/31 HTTP 200 |
 | 86 | Production assets and cache versions match the approved source | NOT TESTED | Cache/version check pending |
 | 87 | Production redirects and canonical host remain consistent | PASS | Three key redirect cases passed in run 43313733225 |
 | 88 | Deployment workflow does not publish unapproved changes unexpectedly | NOT TESTED | Workflow trigger/environment audit pending |
@@ -185,31 +185,59 @@ This is the single final baseline audit ledger for the current site. It consolid
 | 99 | A baseline reporting snapshot and date are stored | NOT TESTED | Current report snapshot pending |
 | 100 | Monitoring cadence and owner/next review are documented | NOT TESTED | Set after baseline review |
 
-## Initial evidence-backed tally (baseline snapshot)
+## Current evidence-backed tally (2026-11-13)
 
-- PASS: **14 / 100**
-- FAIL: **1 / 100** — criterion #8 (95/96 responsive matrix; one desktop menu visibility failure)
-- NOT TESTED: **85 / 100**
-- Audit coverage: **15%** (14 PASS + 1 FAIL)
-- Verified score: **14%** (14 PASS out of 100)
+- PASS: **24 / 100**
+- FAIL: **0 / 100**
+- NOT TESTED: **76 / 100**
+- Audit coverage: **24%** (24 PASS + 0 FAIL with conclusive evidence)
+- Verified score: **24%** (24 PASS out of the fixed 100)
 
-This is an **initial audit score, not the final site completion percentage**. It is intentionally conservative because 85 criteria have not yet been tested in this audit. The one known responsive failure is recorded once, under criterion #8; criterion #14 remains NOT TESTED until the broader menu behavior is reconciled. Final percentage will be reported only after the fixed 100 criteria have been audited and defects have been re-tested.
+This is the **current verified score against the fixed audit checklist**, not a claim that the entire website is 24% built or that Google has indexed 24% of pages. The denominator remains 100. The PR #45 regression suite and full sitemap-level checks are green; 76 broader quality, editorial, accessibility, security, monetization and analytics criteria still require review.
+
+## Production serving path finding
+
+Cloudflare API evidence confirms the current routing arrangement as of 2026-11-13:
+
+- `zemtools.com` apex A records point to the four GitHub Pages addresses and are proxied through Cloudflare.
+- `www.zemtools.com` is a CNAME to `saqibali49005-ship-it.github.io`, also proxied.
+- `preview.zemtools.com` is a CNAME to `zemtools-review.pages.dev`.
+- Cloudflare Worker routes and Worker custom domains for the zone are empty.
+- The only Cloudflare Pages project is `zemtools-review`, whose production branch is `preview-admin`; it owns `preview.zemtools.com`, not the apex production hostname.
+- GitHub Pages deploy run `43313729151` succeeded for main commit `224fbc2be88720262e17fc8e57d0f73da38137ea`.
+
+Therefore the currently evidenced production origin is GitHub Pages behind Cloudflare DNS/proxy; Cloudflare Pages is presently the preview environment. No DNS or hosting migration has been made. The user must explicitly approve any future origin/hosting change.
+
+## Latest successful final-baseline CI
+
+- Workflow: Foundation Check run `43323850936` on PR #45 branch head `62967b50b31b46b91e45d24cc326d0a45c00d4e7`.
+- Foundation validator and homepage site-name validator passed.
+- Math & Science category: 7 checks passed.
+- Sitewide navigation/responsive: 96/96 passed.
+- GA4 tool tracking: 4 scenarios passed.
+- SEO metadata/internal links: 7 checks passed.
+- Sitemap-wide local metadata/structure: 31/31 passed.
+- Production sitemap live route/canonical/indexability: 31/31 passed.
+- Calculator regression tests: Fence 19, Wire Size 10, Conduit Fill 12, Gravel 5, Significant Figures 9, Paver Edge 5, Deck Joist Blocking 11, Sod Staple 7, Paint 12, Business Hours 8 — all passed.
+- Total recorded automated scenarios/checks: **274 passed, 0 failed** in this Foundation Check run.
+- PR #45 remains preview-only and unmerged; Cloudflare PR deploy validation does not publish to the production hostname.
 
 ## Audit execution order
 
-1. Lock this checklist and verify the table tally.
-2. Run existing tests before changing code; preserve their outputs.
-3. Reconcile the guide desktop menu observation with the user's earlier fix evidence. Do not rerun the historical 20-page header audit.
-4. Inspect and fix confirmed defects on a separate branch; run targeted and regression tests.
-5. Review all 31 public routes and the 20 tools using the fixed criteria.
-6. Complete technical SEO, content, trust, performance, security, deployment and analytics checks.
-7. Save each finding/fix/test result in this file as work progresses.
-8. Create a final report with PASS/FAIL/NOT TESTED totals and exact formula.
-9. Obtain user approval before production publishing; verify live changes after approval.
+1. Keep the fixed 100-point denominator unchanged.
+2. Do not rerun the historical sitewide header audit; its original 20-tool scope remains completed.
+3. Complete the remaining tool correctness review beyond the currently automated coverage.
+4. Complete editorial/content quality, trust/AdSense, performance/accessibility and security checks.
+5. Verify actual analytics/GA4 property and current Search Console evidence; do not invent impressions, clicks, rankings or indexing totals.
+6. Review the current deployment setup and record a safe origin/rollback decision; do not change DNS without approval.
+7. Record every finding/fix/test in this file as work progresses.
+8. Obtain user approval before production merge/publish; verify live changes after approval.
 
 ## Audit change log
 
 | Date | Change | Commit / evidence |
 |---|---|---|
 | 2026-11-13 | Created fixed 100-criterion baseline and incorporated known historical evidence | Audit branch; initial status snapshot |
-| 2026-11-13 | Isolated the only responsive failure to a page-specific desktop menu CSS override and opened a targeted one-line fix | PR #45; pending CI and preview verification |
+| 2026-11-13 | Isolated the responsive failure to a page-specific desktop menu CSS override; fixed it and verified 96/96 route/viewport scenarios | PR #45; Foundation Check run 43323850936 |
+| 2026-11-13 | Added sitewide sitemap metadata test and live 31-route check; fixed nine missing Twitter Card tags | PR #45; 31/31 local metadata and 31/31 live route checks passed in run 43323850936 |
+| 2026-11-13 | Recorded actual production DNS/origin topology without changing hosting or DNS | Cloudflare DNS/Worker/Pages API read; GitHub Pages deploy run 43313729151 |
