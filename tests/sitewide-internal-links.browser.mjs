@@ -37,8 +37,8 @@ try {
       for (const href of hrefs) {
         if (/^(mailto:|tel:|javascript:|data:)/i.test(href) || href.startsWith('#')) continue;
         let target;
-        try { target = new URL(href, document.baseURI); } catch { continue; }
-        if (target.origin !== location.origin) continue;
+        try { target = new URL(href, origin + '/'); } catch { continue; }
+        if (target.origin !== origin) continue;
         target.hash = '';
         checkedTargets.add(target.toString());
       }
