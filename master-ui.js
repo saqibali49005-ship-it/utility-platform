@@ -12,15 +12,20 @@ if(!window.__zemtoolsGa4Loaded){
 }
 function initToolCalculateTracking(){
  if(!document.body.classList.contains('tool-page'))return;
+ const calculateIds=/^(calculate|calculatebtn|calculatebetween|calculatedeadline|calcduration|calcadd|findratio|solvesize|resize|measure)$/i;
  document.addEventListener('click',function(e){
   const button=e.target.closest('button, input[type="button"], input[type="submit"]');
-  if(!button||button.disabled)return;
+  if(!button||button.disabled||button.closest('.faq, .faq-card, [data-analytics-ignore]'))return;
   const label=String(button.textContent||button.value||'').replace(/\s+/g,' ').trim();
-  const id=String(button.id||'');
-  if(!/calculate/i.test(id+' '+label))return;
+  const id=String(button.id||'').trim();
+  const isGenerate=/^generate(?:\s|$)/i.test(label)||/^generate$/i.test(id);
+  const isCalculate=/^calculate(?:\s|$)/i.test(label)||/^find business-time result$/i.test(label)||calculateIds.test(id);
+  if(!isGenerate&&!isCalculate)return;
   if(typeof window.gtag!=='function')return;
   const heading=(document.querySelector('main h1, h1')?.textContent||document.title||'Unknown tool').trim();
-  window.gtag('event','tool_calculate',{
+  const actionType=isGenerate?'generate':'calculate';
+  window.gtag('event',isGenerate?'tool_generate':'tool_calculate',{
+   action_type:actionType,
    tool_name:heading,
    tool_path:location.pathname,
    button_id:id||'(none)',
