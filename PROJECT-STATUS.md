@@ -81,11 +81,11 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 ## 5. Active work queue
 
-**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** Fixed 100-point checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Latest recorded verified score: **43/100 (43%)**, with **1 failure and 56 not tested**. Denominator is locked; do not create a competing checklist or change it silently.
+**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** Fixed 100-point checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Latest recorded verified score: **48/100 (48%)**, with **1 failure and 51 not tested**. Denominator is locked; do not create a competing checklist or change it silently.
 
 ### Verified during this audit
 
-- PR #45 Foundation Check run `43326485239` passed end-to-end (356 automated checks, 0 failed), including 31 live internal-link targets and 31 footer checks.
+- PR #45 Foundation Check run `43326910013` passed end-to-end; every workflow step completed successfully, including all 20 tool suites, 96/96 responsive tests, 31/31 metadata, 31/31 production route checks, and 31 internal targets.
 - The single guide desktop-menu regression is fixed in PR #45 and the 96/96 responsive matrix passes.
 - 31 sitemap routes passed metadata uniqueness/structure tests, live canonical/indexability checks, and live footer/internal-link validation (31 internal targets, 0 failures).
 - PR #45 latest tested commit: `e7e6b55fc570fcce275fb3e06fd190e7f0da8f16`; Cloudflare preview: `https://e5668678.zemtools-review.pages.dev`.
@@ -95,6 +95,8 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 - Source-level content review completed for all 20 tool pages and all four category pages, plus About, Contact, Privacy and Terms. Detailed scope and limitations are recorded in `FINAL-AUDIT-2026-11-13.md`.
 - Current main has a deployment-safety failure: Cloudflare Worker deployment is triggered automatically on pushes to main despite no production route being attached. PR #45 changes this to PR-only dry-run validation; not closed until merged and verified.
 - The historical 20-tool header audit remains completed; it was not repeated.
+- Search Console property `sc-domain:zemtools.com` is connected with owner access. URL Inspection found 31/31 sitemap URLs indexed, canonical matches, mobile crawls, and no inspection errors. Three URL inspection records have no sitemap association recorded; the actual Sitemaps report is still pending.
+- GSC final performance data (2026-08-09 to 2026-11-09) and 28-day performance were reviewed and recorded in `FINAL-AUDIT-2026-11-13.md`.
 
 ### Open work
 
@@ -103,7 +105,7 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 3. Keep PR #45 preview-only until user explicitly approves production publishing. Do not merge or deploy to production on inferred approval.
 4. PR #44 is the documentation-only project baseline PR. Keep it as the permanent master record after review; its base main still lacks PR #45's menu correction, so the full Foundation Check is expected to fail until the approved fix is integrated.
 5. Record the actual production origin: apex and www currently resolve to GitHub Pages behind Cloudflare proxy; Cloudflare Pages project is preview-only, and Worker routes/domains are empty. Do not change DNS/hosting without explicit user approval.
-6. Review fresh Search Console and analytics data when available; do not invent impressions, clicks or index coverage.
+6. Finish GSC sitemap submission report (3 inspection records lack sitemap association) and verify real GA4 property/event ingestion; do not infer actual GA4 collection from stubbed browser tests.
 
 ## 6. New issue workflow
 
@@ -139,7 +141,7 @@ A side issue does not reset or rename the active phase.
 ## 8. Completion and reporting
 
 - The fixed 100-criterion final audit is defined in `FINAL-AUDIT-2026-11-13.md`.
-- Latest tally: **43 PASS / 1 FAIL / 56 NOT TESTED; verified score 43%; audit coverage 44%**.
+- Latest tally: **48 PASS / 1 FAIL / 51 NOT TESTED; verified score 48%; audit coverage 49%**.
 - Verified score = PASS criteria / 100 × 100. Audit coverage = criteria with conclusive PASS/FAIL/BLOCKED evidence / 100 × 100.
 - Keep audit score distinct from traffic, rankings, indexing or AdSense approval.
 - Any checklist/denominator change requires a versioned amendment and written reason.
