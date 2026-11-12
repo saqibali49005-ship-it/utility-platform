@@ -57,7 +57,23 @@ try {
   await page.locator('#generate').click();
   await assertEvent('tool_generate', 'generate', '/uuid-generator-calculator/');
 
-  console.log('GA4 tool tracking checks: 4 scenarios passed; calculation, business-hours, FAQ exclusion, UUID generation.');
+  await page.route('https://preview-test.zemtools-review.pages.dev/**', route => route.fulfill({
+    status: 200,
+    contentType: 'text/html; charset=utf-8',
+    body: '<!doctype html><html><body><a id="internal" href="https://zemtools.com/tools/">All Tools</a></body></html>'
+  }));
+  await page.goto('https://preview-test.zemtools-review.pages.dev/');
+  await page.addScriptTag({ content: localTrackingScript });
+  assert.equal(
+    await page.locator('#internal').getAttribute('href'),
+    'https://preview-test.zemtools-review.pages.dev/tools/',
+    'preview internal links must stay on the preview host'
+  );
+  await page.locator('#internal').click();
+  await page.waitForURL('https://preview-test.zemtools-review.pages.dev/tools/');
+  assert.equal(new URL(page.url()).hostname, 'preview-test.zemtools-review.pages.dev');
+
+  console.log('GA4 tool tracking checks: 4 scenarios passed; preview navigation host check passed.');
 } finally {
   await browser.close();
 }
