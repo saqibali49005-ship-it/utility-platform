@@ -24,6 +24,21 @@ try {
     await page.getByRole('heading', { name: 'Build Your Fence Plan' }).waitFor();
   });
 
+  await check('Search snippet targets material quantities and gates', async () => {
+    const description = await page.locator('meta[name="description"]').getAttribute('content');
+    assert.equal(description, 'Calculate wood fence posts, rails, pickets or panels, and concrete bags. Plan multiple runs, shared corners, gate openings and material costs.');
+    assert.equal(await page.locator('meta[property="og:description"]').getAttribute('content'), description);
+    assert.equal(await page.locator('meta[name="twitter:description"]').getAttribute('content'), description);
+  });
+
+  await check('Post-hole depth input is clearly an example, not a recommendation', async () => {
+    const depthField = page.locator('#holeDepth').locator('xpath=..');
+    assert.match(await depthField.innerText(), /36 in default is an example input, not a recommendation/i);
+    const faq = page.locator('details').filter({ hasText: 'How deep should a fence post hole be?' });
+    assert.match(await faq.innerText(), /does not determine a safe or code-compliant depth/i);
+    assert.match(await faq.innerText(), /less any gravel-base depth/i);
+  });
+
   await check('Default 100 ft run calculates expected posts and sections', async () => {
     await reset(); await calculate();
     const text = await resultText();
