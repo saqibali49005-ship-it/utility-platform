@@ -10,6 +10,28 @@ if(!window.__zemtoolsGa4Loaded){
  window.gtag('js',new Date());
  window.gtag('config','G-LX61P24FYK');
 }
+function initPreviewNavigation(){
+ const host=location.hostname.toLowerCase();
+ if(!host.endsWith('.pages.dev')&&host!=='preview.zemtools.com')return;
+ function keepLinksOnPreview(root){
+  const links=[];
+  if(root&&root.matches&&root.matches('a[href]'))links.push(root);
+  if(root&&root.querySelectorAll)links.push(...root.querySelectorAll('a[href]'));
+  links.forEach(link=>{
+   try{
+    const url=new URL(link.href,location.href);
+    if(url.hostname==='zemtools.com'||url.hostname==='www.zemtools.com'){
+     link.href=location.origin+url.pathname+url.search+url.hash;
+    }
+   }catch(_){}
+  });
+ }
+ keepLinksOnPreview(document);
+ document.addEventListener('click',function(e){
+  const link=e.target.closest&&e.target.closest('a[href]');
+  if(link)keepLinksOnPreview(link);
+ },true);
+}
 function initToolCalculateTracking(){
  if(!document.body.classList.contains('tool-page'))return;
  const calculateIds=/^(calculate|calculatebtn|calculatebetween|calculatedeadline|calcduration|calcadd|findratio|solvesize|resize|measure)$/i;
@@ -100,6 +122,7 @@ function initReport(){
  });
  document.body.appendChild(btn);
 }
+initPreviewNavigation();
 initSearch();
 initReport();
 initToolCalculateTracking();
