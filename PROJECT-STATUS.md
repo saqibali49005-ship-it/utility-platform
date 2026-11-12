@@ -1,6 +1,7 @@
 # ZemTools — Master Project Status
 
 **Workflow version:** 1.0  
+**Final audit:** [FINAL-AUDIT-2026-11-13.md](FINAL-AUDIT-2026-11-13.md) — fixed 100-criterion checklist, denominator locked
 **Approved:** 2026-11-13  
 **Repository:** `saqibali49005-ship-it/utility-platform`  
 **Production domain:** `zemtools.com`
@@ -80,14 +81,16 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 ## 5. Active work queue
 
+**Active milestone: Final Baseline Audit ZT-FINAL-2026-11-13.** The fixed 100-criterion checklist and scoring rules are in `FINAL-AUDIT-2026-11-13.md`. Do not create a competing checklist or change its denominator silently.
+
 Work in this order unless new evidence changes priority:
 
-1. **P1 — Verify information pages on production:** inspect the four live routes and confirm the merged header/footer changes actually reached `zemtools.com`. Status: `IN PROGRESS` (merge verified; live verification pending).
-2. **P1 — Reconcile the single guide-page desktop burger test observation:** compare the 95/96 test result and inspected page CSS with the user's earlier evidence of the completed sitewide header fix. Do not make another code change or repeat the full header audit until the discrepancy is established. Status: `BLOCKED` pending evidence reconciliation.
-3. **P1 — Complete skipped technical QA:** run responsive tests after the fix, then run the SEO metadata and internal-link regression checks that were skipped. Status: `BLOCKED` by the responsive regression.
-4. **P2 — Complete technical SEO review:** only after the above checks, review remaining canonical/metadata/schema/internal-link and crawlability coverage. Avoid repeating the already-recorded smoke checks unless needed for post-change verification.
-5. **P2 — Review current Search Console data:** use a current export or authorized connected data. Separate historical indexing checks from current indexing/performance.
-6. **P3 — Complete content quality and AdSense readiness review:** use a defined checklist and record page-level findings.
+1. Run and record the fixed audit criteria in order, incorporating prior audit records where their scope/evidence is sufficient.
+2. Reconcile the one responsive test observation on `/sod-staple-spacing-guide/` with the user's prior sitewide header-fix evidence. Do not repeat the historical 20-page header audit.
+3. Verify the four approved information-page changes on production.
+4. Complete remaining technical SEO metadata/internal-link coverage and full sitemap route checks.
+5. Complete tool correctness, content quality, trust/AdSense, performance/accessibility, security and deployment criteria.
+6. Review fresh Search Console and analytics data when available; do not invent current impressions, clicks or index coverage.
 
 ## 6. New issue workflow
 
@@ -122,9 +125,10 @@ A side issue does not reset or rename the active phase.
 
 ## 8. Completion and reporting
 
-- Do not report a project-wide percentage until a fixed, agreed task checklist and denominator exist.
-- If a percentage is later approved, use: verified completed tasks / total agreed tasks × 100.
-- Any change to the denominator must be documented with the reason; never silently recalculate against a different scope.
+- The fixed 100-criterion final audit is defined in `FINAL-AUDIT-2026-11-13.md`.
+- Verified score = PASS criteria / 100 × 100. Audit coverage = criteria with conclusive PASS/FAIL/BLOCKED evidence / 100 × 100.
+- Keep audit score distinct from traffic, rankings, indexing or AdSense approval.
+- Any checklist/denominator change requires a versioned amendment and written reason.
 - Report the active phase, active task, status, evidence, blocker, and next action.
 - Keep completed history. Do not erase or re-label previous work to make progress appear larger.
 
