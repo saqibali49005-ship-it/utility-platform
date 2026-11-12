@@ -1,14 +1,24 @@
 (function(){'use strict';
 if(!window.__zemtoolsGa4Loaded){
  window.__zemtoolsGa4Loaded=true;
- var gaScript=document.createElement('script');
- gaScript.async=true;
- gaScript.src='https://www.googletagmanager.com/gtag/js?id=G-LX61P24FYK';
- document.head.appendChild(gaScript);
  window.dataLayer=window.dataLayer||[];
  window.gtag=function(){window.dataLayer.push(arguments);};
  window.gtag('js',new Date());
  window.gtag('config','G-LX61P24FYK');
+ // Queue analytics immediately, but fetch the third-party library after the browser has idle time.
+ var loadGaScript=function(){
+  var gaScript=document.createElement('script');
+  gaScript.async=true;
+  gaScript.src='https://www.googletagmanager.com/gtag/js?id=G-LX61P24FYK';
+  document.head.appendChild(gaScript);
+ };
+ if(typeof window.requestIdleCallback==='function'){
+  window.requestIdleCallback(loadGaScript,{timeout:2000});
+ }else if(document.readyState==='complete'){
+  window.setTimeout(loadGaScript,500);
+ }else{
+  window.addEventListener('load',function(){window.setTimeout(loadGaScript,500);},{once:true});
+ }
 }
 function initPreviewNavigation(){
  const host=location.hostname.toLowerCase();
