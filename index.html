@@ -135,28 +135,24 @@ document.addEventListener('DOMContentLoaded',function(){
   suggestions.addEventListener('click',e=>{const b=e.target.closest('[data-href]');if(b)location.href=b.dataset.href;});
   document.addEventListener('click',e=>{if(!search.contains(e.target))suggestions.hidden=true;});
 
-  if(!quick.children.length){quick.innerHTML=categories.filter(c=>tools.some(t=>t.category===c.id)).slice(0,6).map(c=>'<a href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');}
+  quick.innerHTML=categories.filter(c=>tools.some(t=>t.category===c.id)).slice(0,6).map(c=>'<a href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'"><span class="quick-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></a>').join('');
 
   const sorted=tools.sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0));
-  if(!latest.children.length){
-    latest.innerHTML=sorted.slice(0,6).map((t,i)=>{
-      const c=categoryMap[t.category];
-      return '<article class="latest-card">'+
-        '<div class="card-top"><span class="category-tag">'+(c?c.title:'Tools')+'</span>'+(i===0?'<span class="new-tag">New</span>':'')+'</div>'+
-        '<h3>'+t.title+'</h3><p>'+t.description+'</p>'+
-        '<a class="card-action" href="'+t.href+'">Open tool</a></article>';
-    }).join('');
-  }
+  latest.innerHTML=sorted.slice(0,6).map((t,i)=>{
+    const c=categoryMap[t.category];
+    return '<article class="latest-card">'+
+      '<div class="card-top"><span class="category-tag">'+(c?c.title:'Tools')+'</span>'+(i===0?'<span class="new-tag">New</span>':'')+'</div>'+
+      '<h3>'+t.title+'</h3><p>'+t.description+'</p>'+
+      '<a class="card-action" href="'+t.href+'">Open tool</a></article>';
+  }).join('');
 
   const liveCats=categories.filter(c=>tools.some(t=>t.category===c.id));
-  if(!catGrid.children.length){
-    catGrid.innerHTML=liveCats.map(c=>{
-      const count=tools.filter(t=>t.category===c.id).length;
-      return '<a class="category-card" href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'">'+
-        '<div class="category-icon" aria-hidden="true">'+c.icon+'</div><h3>'+c.title+'</h3><p>'+c.description+'</p>'+
-        '<div class="category-meta">'+count+' '+(count===1?'tool':'tools')+' · Explore →</div></a>';
-    }).join('');
-  }
+  catGrid.innerHTML=liveCats.map(c=>{
+    const count=tools.filter(t=>t.category===c.id).length;
+    return '<a class="category-card" href="'+(c.href||('tools/?category='+encodeURIComponent(c.id)))+'">'+
+      '<div class="category-icon" aria-hidden="true">'+c.icon+'</div><h3>'+c.title+'</h3><p>'+c.description+'</p>'+
+      '<div class="category-meta">'+count+' '+(count===1?'tool':'tools')+' · Explore →</div></a>';
+  }).join('');
 })();
 });
 </script>
