@@ -10,6 +10,24 @@ if(!window.__zemtoolsGa4Loaded){
  window.gtag('js',new Date());
  window.gtag('config','G-LX61P24FYK');
 }
+function initToolCalculateTracking(){
+ if(!document.body.classList.contains('tool-page'))return;
+ document.addEventListener('click',function(e){
+  const button=e.target.closest('button, input[type="button"], input[type="submit"]');
+  if(!button||button.disabled)return;
+  const label=String(button.textContent||button.value||'').replace(/\s+/g,' ').trim();
+  const id=String(button.id||'');
+  if(!/calculate/i.test(id+' '+label))return;
+  if(typeof window.gtag!=='function')return;
+  const heading=(document.querySelector('main h1, h1')?.textContent||document.title||'Unknown tool').trim();
+  window.gtag('event','tool_calculate',{
+   tool_name:heading,
+   tool_path:location.pathname,
+   button_id:id||'(none)',
+   button_label:label.slice(0,100)
+  });
+ },true);
+}
 function initSearch(){
  const searchBtn=document.getElementById('toolHeaderSearch');
  const searchPanel=document.getElementById('toolHeaderSearchPanel');
@@ -79,4 +97,5 @@ function initReport(){
 }
 initSearch();
 initReport();
+initToolCalculateTracking();
 })();
