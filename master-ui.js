@@ -11,35 +11,40 @@ if(!window.__zemtoolsGa4Loaded){
  window.gtag('config','G-LX61P24FYK');
 }
 
- // Privacy-conscious Mixpanel analytics: never collect calculator field values or textarea content.
+ // Privacy-conscious Mixpanel analytics. Use the official browser SDK module from a
+ // general-purpose CDN because tracker-blocking lists can block cdn.mxpnl.com.
+ // No calculator field values, textarea contents, or calculated results are sent.
  (function initZemToolsMixpanel(){
   if(window.__zemtoolsMixpanelLoaded)return;
   window.__zemtoolsMixpanelLoaded=true;
-  var script=document.createElement('script');
-  script.async=true;
-  script.src='https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
-  script.onload=function(){
-   if(!window.mixpanel||typeof window.mixpanel.init!=='function')return;
-   window.mixpanel.init('d20a7eedae0ea7140b9bb609e20418e6',{autocapture:false,track_pageview:false,ip:false,persistence:'localStorage',record_sessions_percent:0});
-   var pagePath=location.pathname;
-   var heading=document.querySelector('main h1');
-   var toolName=document.body.classList.contains('tool-page')&&heading?heading.textContent.trim():'';
-   var pageProps={page_path:pagePath,page_type:toolName?'tool':(document.body.classList.contains('home-page')?'home':'content')};
-   window.mixpanel.track('Page Viewed',pageProps);
-   if(toolName)window.mixpanel.track('Tool Opened',{tool_name:toolName,page_path:pagePath});
-   document.addEventListener('click',function(event){
-    var button=event.target&&event.target.closest?event.target.closest('button'):null;
-    if(!button||button.disabled)return;
-    var label=(button.getAttribute('aria-label')||button.textContent||'').trim().toLowerCase();
-    var action='';
-    if(/\b(calculate|calculate now|convert|generate|check result)\b/.test(label))action='calculate';
-    else if(/\b(copy|copy result|copy output)\b/.test(label))action='copy';
-    else if(/\b(download|export)\b/.test(label))action='download';
-    if(!action)return;
-    window.mixpanel.track('Tool Action',{action:action,tool_name:toolName||'none',page_path:pagePath});
-   },true);
-  };
-  document.head.appendChild(script);
+  import('https://cdn.jsdelivr.net/npm/mixpanel-browser@2.85.0/dist/mixpanel.module.js')
+   .then(function(module){
+    var mixpanel=module&&module.default;
+    if(!mixpanel||typeof mixpanel.init!=='function')throw new Error('Mixpanel SDK unavailable');
+    mixpanel.init('d20a7eedae0ea7140b9bb609e20418e6',{autocapture:false,track_pageview:false,ip:false,persistence:'localStorage',record_sessions_percent:0});
+    window.mixpanel=mixpanel;
+    var pagePath=location.pathname;
+    var heading=document.querySelector('main h1');
+    var toolName=document.body.classList.contains('tool-page')&&heading?heading.textContent.trim():'';
+    var pageProps={page_path:pagePath,page_type:toolName?'tool':(document.body.classList.contains('home-page')?'home':'content')};
+    mixpanel.track('Page Viewed',pageProps);
+    if(toolName)mixpanel.track('Tool Opened',{tool_name:toolName,page_path:pagePath});
+    document.addEventListener('click',function(event){
+     var button=event.target&&event.target.closest?event.target.closest('button'):null;
+     if(!button||button.disabled)return;
+     var label=(button.getAttribute('aria-label')||button.textContent||'').trim().toLowerCase();
+     var action='';
+     if(/\\b(calculate|convert|generate|check result)\\b/.test(label))action='calculate';
+     else if(/\\b(copy|copy result|copy output)\\b/.test(label))action='copy';
+     else if(/\\b(download|export)\\b/.test(label))action='download';
+     if(!action)return;
+     mixpanel.track('Tool Action',{action:action,tool_name:toolName||'none',page_path:pagePath});
+    },true);
+   })
+   .catch(function(error){
+    window.__zemtoolsMixpanelLoaded=false;
+    if(window.console&&console.warn)console.warn('ZemTools analytics could not load.',error);
+   });
  })();
 
 function initSearch(){
