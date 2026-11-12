@@ -86,7 +86,7 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 Work in this order unless new evidence changes priority:
 
 1. Run and record the fixed audit criteria in order, incorporating prior audit records where their scope/evidence is sufficient.
-2. Reconcile the one responsive test observation on `/sod-staple-spacing-guide/` with the user's prior sitewide header-fix evidence. Do not repeat the historical 20-page header audit.
+2. **Targeted fix opened:** PR #45 removes the page-specific desktop-only hide rule on `/sod-staple-spacing-guide/`. Await CI and preview verification. Do not repeat the historical 20-page header audit.
 3. Verify the four approved information-page changes on production.
 4. Complete remaining technical SEO metadata/internal-link coverage and full sitemap route checks.
 5. Complete tool correctness, content quality, trust/AdSense, performance/accessibility, security and deployment criteria.
