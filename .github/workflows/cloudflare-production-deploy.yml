@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: zemtools-production-deploy
+  group: ${{ github.event_name == 'pull_request' && format('zemtools-pr-{0}', github.event.pull_request.number) || 'zemtools-production-deploy' }}
   cancel-in-progress: false
 
 jobs:
