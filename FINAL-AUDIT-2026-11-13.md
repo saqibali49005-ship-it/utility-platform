@@ -86,12 +86,12 @@ This is the single final baseline audit ledger for the current site. It consolid
 |---:|---|---|---|
 | 31 | All 31 sitemap URLs return intended live status and final URL | PASS | Live sitemap check in run 43323850936 passed 31/31 with HTTP 200 and no redirect from canonical route |
 | 32 | Every indexable page has one self-referencing canonical | PASS | Run 43323850936 verified exactly one canonical per live sitemap URL and exact URL match, 31/31 |
-| 33 | Titles are unique, descriptive and aligned with page intent | NOT TESTED | Four tool pages have a test script; full site pending |
-| 34 | Meta descriptions are unique, useful and within agreed snippet guidance | NOT TESTED | Four tool pages have a test script; full site pending |
-| 35 | Open Graph and Twitter metadata are present and aligned where required | NOT TESTED | Four tool pages have a test script; full site pending |
+| 33 | Titles are unique, descriptive and aligned with page intent | PASS | All 31 sitemap page titles are unique in the sitewide metadata test; manual source review confirmed titles match each page's purpose |
+| 34 | Meta descriptions are unique, useful and within agreed snippet guidance | PASS | All 31 descriptions passed 70–180 character length and uniqueness checks in Foundation run 43326485239 |
+| 35 | Open Graph and Twitter metadata are present and aligned where required | PASS | All 31 pages passed OG/Twitter title/description/image presence; manual review confirmed shortened variants retain the same page intent |
 | 36 | Robots directives do not block intended public pages or expose unintended pages | PASS | Live route checks verified `index,follow` on all 31 pages; `robots.txt` allows `/` and points to sitemap; smoke run 43313733225 returned 200 |
 | 37 | Structured data parses and matches visible page content | NOT TESTED | Homepage and Math & Science have specific tests only |
-| 38 | Internal links resolve and use stable clean URLs | NOT TESTED | Selected routes have a test; full crawl pending |
+| 38 | Internal links resolve and use stable clean URLs | PASS | Live sitewide internal-link test checked all 31 sitemap pages and 31 unique internal targets with 0 failures in run 43326485239 |
 | 39 | Redirects do not create loops, chains or incorrect query handling | NOT TESTED | Three key redirect cases passed; full redirect inventory pending |
 | 40 | Sitemap includes all intended indexable pages and excludes unsuitable URLs | NOT TESTED | 31 current URLs counted; full intent/coverage review pending |
 
@@ -99,13 +99,13 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 41 | Every tool page explains its purpose and intended user | NOT TESTED | Page-by-page content review pending |
-| 42 | Instructions explain inputs and how to interpret results | NOT TESTED | Page-by-page content review pending |
+| 41 | Every tool page explains its purpose and intended user | PASS | Manual review of all 20 tool pages found page-specific purpose copy, with main-content word counts from 289 to 1,641 and relevant headings/examples |
+| 42 | Instructions explain inputs and how to interpret results | PASS | Manual review of all 20 tool pages found tool-specific usage, matching, format, method, result, or FAQ guidance appropriate to each tool |
 | 43 | Explanatory content is original, specific and not boilerplate repetition | NOT TESTED | Editorial review pending |
 | 44 | Examples and calculations are factually correct | NOT TESTED | Cross-check against tool tests |
 | 45 | Important assumptions and limitations are disclosed | NOT TESTED | Page-by-page review pending |
-| 46 | Category pages provide useful guidance beyond listing tools | NOT TESTED | Math & Science browser checks passed; remaining categories pending |
-| 47 | Homepage communicates the platform's value and helps discovery | NOT TESTED | Content/UX review pending |
+| 46 | Category pages provide useful guidance beyond listing tools | PASS | Reviewed all four category pages: practical selection and method guidance (Math & Science 416 words; Digital & Developer 481; Home & Construction 560; Energy & Electrical 192) |
+| 47 | Homepage communicates the platform's value and helps discovery | PASS | Homepage source reviewed: clear value proposition, search, category discovery, six featured tools, full directory links and platform explanation |
 | 48 | No placeholder, thin, duplicated or misleading public content remains | NOT TESTED | Full content inventory pending |
 | 49 | Images, icons and visual assets are relevant and load correctly | NOT TESTED | Asset audit pending |
 | 50 | Spelling, grammar, labels and terminology are consistent | NOT TESTED | Editorial sweep pending |
@@ -114,16 +114,16 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 | # | Criterion | Status | Evidence / notes |
 |---:|---|---|---|
-| 51 | About page is accessible and accurately describes the site | NOT TESTED | Live rendering/content review pending |
-| 52 | Contact page provides a working contact path | NOT TESTED | Live interaction verification pending |
-| 53 | Privacy policy accurately describes data, cookies and analytics used | NOT TESTED | Policy-to-implementation review pending |
-| 54 | Terms page is accessible and relevant to provided tools/services | NOT TESTED | Legal/content review pending |
-| 55 | Footer exposes appropriate trust/legal navigation consistently | NOT TESTED | Live visual/link review pending |
-| 56 | No deceptive buttons, forced redirects or misleading ad placements | NOT TESTED | Ad implementation review pending |
-| 57 | Ads, if present, are distinguishable from tool controls/content | NOT TESTED | Ad configuration/rendering review pending |
+| 51 | About page is accessible and accurately describes the site | PASS | About page content reviewed against current 20-tool catalog, category structure, local tool processing and stated limitations |
+| 52 | Contact page provides a working contact path | PASS | Contact page directs users to the repository issue tracker; GitHub Issues API returned a valid issue list during audit |
+| 53 | Privacy policy accurately describes data, cookies and analytics used | PASS | Privacy text matches GA4 tag/config, event metadata (no calculator field values), GitHub Pages origin, Cloudflare proxy and current no-ads state |
+| 54 | Terms page is accessible and relevant to provided tools/services | PASS | Terms page reviewed; covers tool use, estimates, assumptions, professional advice limits, responsible use and availability |
+| 55 | Footer exposes appropriate trust/legal navigation consistently | PASS | Live sitewide internal-link run verified About, Contact, Privacy and Terms links in footer on all 31 sitemap pages |
+| 56 | No deceptive buttons, forced redirects or misleading ad placements | PASS | No AdSense/ad-network code or placements found; 96/96 navigation checks passed and tested redirects are canonical host/clean-URL redirects |
+| 57 | Ads, if present, are distinguishable from tool controls/content | PASS | Advertising is not currently enabled and no ad units/code were found; recheck this criterion before ads are introduced |
 | 58 | Content and site behavior comply with applicable publisher policies | NOT TESTED | Policy review pending; no approval guarantee |
-| 59 | Site offers meaningful original utility rather than primarily thin pages | NOT TESTED | Overall quality review pending |
-| 60 | Privacy/contact/legal claims match actual deployed behavior | NOT TESTED | Cross-check implementation and policies |
+| 59 | Site offers meaningful original utility rather than primarily thin pages | PASS | All 20 catalog tools passed browser regression coverage; all tool pages contain dedicated explanatory content and all category pages include task-specific guidance |
+| 60 | Privacy/contact/legal claims match actual deployed behavior | PASS | Compared About, Contact, Privacy and Terms with GA4 implementation, public GitHub Issues path, current hosting origin, and no-ad state |
 
 ### G. Performance, accessibility and compatibility (61–70)
 
@@ -166,7 +166,7 @@ This is the single final baseline audit ledger for the current site. It consolid
 | 85 | Production homepage and all 31 sitemap routes are reachable | PASS | Run 43323850936 live sitemap route check passed 31/31 HTTP 200 |
 | 86 | Production assets and cache versions match the approved source | NOT TESTED | Cache/version check pending |
 | 87 | Production redirects and canonical host remain consistent | PASS | Three key redirect cases passed in run 43313733225 |
-| 88 | Deployment workflow does not publish unapproved changes unexpectedly | NOT TESTED | Workflow trigger/environment audit pending |
+| 88 | Deployment workflow does not publish unapproved changes unexpectedly | FAIL | Main workflow in `.github/workflows/cloudflare-production-deploy.yml` deploys a Cloudflare Worker on every push to main without an approval input. Cloudflare currently has no route/custom domain attached to that Worker, but the automatic deployment is unnecessary and violates the approved deployment gate. PR #45 changes the workflow to PR-only dry-run validation; this FAIL remains until that change is merged and verified. |
 | 89 | Failed deployment can be rolled back safely | NOT TESTED | Rollback drill not recorded |
 | 90 | Post-deployment smoke tests run and results are saved | PASS | Live redirect smoke workflow passed on 2026-11-12 |
 
@@ -187,13 +187,13 @@ This is the single final baseline audit ledger for the current site. It consolid
 
 ## Current evidence-backed tally (2026-11-13)
 
-- PASS: **26 / 100**
-- FAIL: **0 / 100**
-- NOT TESTED: **74 / 100**
-- Audit coverage: **26%** (26 PASS + 0 FAIL with conclusive evidence)
-- Verified score: **26%** (26 PASS out of the fixed 100)
+- PASS: **43 / 100**
+- FAIL: **1 / 100** — criterion #88, automatic Cloudflare Worker deployment on every push to main
+- NOT TESTED: **56 / 100**
+- Audit coverage: **44%** (43 PASS + 1 FAIL with conclusive evidence)
+- Verified score: **43%** (43 PASS out of the fixed 100)
 
-This is the **current verified score against the fixed audit checklist**, not a claim that the entire website is 26% built or that Google has indexed 26% of pages. The denominator remains 100. All 20 catalog tools now have browser regression coverage, and all automated checks in the latest run are green. The remaining 74 criteria cover deeper UX/content, policy, performance/accessibility, security, deployment and analytics/search-performance review.
+This is the **verified score against the fixed audit checklist**, not a claim that the website is 43% built, that Google has indexed 43% of pages, or that AdSense approval is likely. The denominator remains 100. Criterion #88 is a real deployment-safety failure on the current main branch; PR #45 proposes a validation-only workflow, but the issue is not closed until the change is merged and verified.
 
 ## Production serving path finding
 
@@ -210,19 +210,35 @@ Therefore the currently evidenced production origin is GitHub Pages behind Cloud
 
 ## Latest successful final-baseline CI
 
-- Workflow: Foundation Check run `43325210646` on PR #45 branch head `e7e6b55fc570fcce275fb3e06fd190e7f0da8f16`.
+- Workflow: Foundation Check run `43326485239` on PR #45 branch head `5352e7ce68cf8c9ad4f35dd2dd44bb68cce85fd4`.
 - Foundation validator and homepage site-name validator passed.
 - Math & Science category: 7 checks passed.
 - Sitewide navigation/responsive: 96/96 passed.
 - GA4 tool tracking: 4 scenarios passed.
 - SEO metadata/internal links: 7 checks passed.
-- Sitemap-wide local metadata/structure: 31/31 passed.
+- Sitemap-wide local metadata/structure: 31/31 passed, including unique titles and unique meta descriptions.
 - Production sitemap live route/canonical/indexability: 31/31 passed.
+- Sitewide internal-link/footer audit: all 31 pages checked, all four legal footer links present, 31 unique internal targets checked, 0 failures.
 - Calculator regression tests: Fence 19, Wire Size 10, Conduit Fill 12, Gravel 5, Significant Figures 9, Paver Edge 5, Deck Joist Blocking 11, Sod Staple 7, Paint 12, Business Hours 8 — all passed.
-- Remaining ten tools (Aspect Ratio, Find/Replace, Word Counter, Case Converter, Line Break Remover, Duplicate Line Remover, Text Cleaner, UUID, Pilot Hole, Time Calculator): **20/20 passed**.
-- Total recorded automated scenarios/checks: **294 passed, 0 failed** in this Foundation Check run.
-- Latest Cloudflare Pages preview for the tested commit: `https://e5668678.zemtools-review.pages.dev`.
-- PR #45 remains preview-only and unmerged; Cloudflare PR deploy validation does not publish to the production hostname.
+- Remaining ten tools: **20/20** passed.
+- Total recorded automated checks in this run: **356 passed, 0 failed** (294 earlier checks plus 62 sitewide page/target checks).
+- Latest Cloudflare Pages preview for the tested site changes: `https://e5668678.zemtools-review.pages.dev`.
+- PR #45 remains preview-only and unmerged.
+
+## Content, legal and AdSense-readiness review
+
+- All 20 tool pages were reviewed at source level for purpose/instruction headings and page-specific explanatory content. Their main-content word counts ranged from 289 to 1,641 words; this is evidence of substantial tool-specific content, not a plagiarism/originality scan.
+- Four category pages were reviewed for guidance beyond tool cards; all include category-specific methods, selection help, examples or safety/assumption notes.
+- About, Contact, Privacy and Terms were reviewed against the current site behavior. The Contact CTA links to the public GitHub issue tracker; privacy disclosures match the GA4 event implementation and GitHub Pages/Cloudflare hosting; advertising is currently not enabled.
+- No AdSense/ad-network implementation strings were found in the repository search for `adsbygoogle`, `googlesyndication`, `googleadservices`, `ca-pub-` or `AdSense`.
+- Google's current guidance recommends unique, relevant content and easy-to-use navigation; Google reviews the entire site for approval, not only one page. Ad placements must not be misleading or confused with navigation/action controls. These are external policy requirements; the site has not been approved and no approval is guaranteed. Sources: [AdSense site readiness](https://support.google.com/adsense/answer/7299563), [AdSense Program policies](https://support.google.com/adsense/answer/48182), [site connection and review](https://support.google.com/adsense/answer/7584263).
+- A full originality/plagiarism review and policy review of every content item remains NOT TESTED.
+
+## Audit execution order
+
+1. Fix and verify criterion #88 by keeping the Cloudflare Worker workflow validation-only; do not allow automatic deployment on main push.
+2. Complete the remaining 56 untested criteria: full content originality/accuracy, tool assumptions, structured-data semantic alignment, assets, editorial polish, performance/accessibility, security, production visual checks and current analytics/Search Console evidence.
+3. Obtain user approval before merging/publishing production changes; verify live results after approval.
 
 ## Audit execution order
 
