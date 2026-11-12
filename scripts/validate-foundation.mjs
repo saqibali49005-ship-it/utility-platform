@@ -38,7 +38,10 @@ if (!homepageSitemapEntry) fail.push('Homepage sitemap entry must include an acc
   if (!/class=["'][^"']*top-nav/.test(html)) fail.push('Missing desktop navigation: ' + tool.href);
   if (!/id=["']toolHeaderMenuPanel["']/.test(html)) fail.push('Missing mobile navigation: ' + tool.href);
   for (const href of requiredNav) {
-    if (!html.includes('href="' + href + '"') && !html.includes("href='" + href + "'")) {
+    const targets = href === '/'
+      ? ['href="/"', "href='/'"]
+      : ['href="' + href + '"', "href='" + href + "'", 'href="/' + href + '"', "href='/" + href + "'"];
+    if (!targets.some(target => html.includes(target))) {
       fail.push('Missing main navigation link ' + href + ': ' + tool.href);
     }
   }
