@@ -39,6 +39,12 @@ jobs:
         run: node tests/ga4-tool-tracking.browser.mjs
       - name: Run SEO metadata and internal-link regression tests
         run: node tests/seo-metadata-and-links.browser.mjs
+      - name: Run sitemap-wide metadata and page structure checks
+        run: node tests/sitemap-metadata.browser.mjs
+      - name: Verify all production sitemap routes and indexability
+        run: node scripts/validate-live-sitemap.mjs
+      - name: Verify sitewide internal links and footer consistency
+        run: node tests/sitewide-internal-links.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
@@ -59,3 +65,5 @@ jobs:
         run: node tests/paint-calculator.browser.mjs
       - name: Run business-hours calculator browser regression tests
         run: node tests/business-hours-calculator.browser.mjs
+      - name: Run remaining ten tool browser regression tests
+        run: node tests/remaining-tools.browser.mjs
