@@ -8,9 +8,9 @@ const titles = new Map();
 let passed = 0;
 
 try {
-  const sitemapResponse = await page.goto('http://127.0.0.1:4173/sitemap.xml', { waitUntil: 'domcontentloaded' });
-  assert.equal(sitemapResponse?.status(), 200, 'Local sitemap must return HTTP 200');
-  const sitemapText = await page.locator('body').innerText();
+  const sitemapResponse = await page.request.get('http://127.0.0.1:4173/sitemap.xml');
+  assert.equal(sitemapResponse.status(), 200, 'Local sitemap must return HTTP 200');
+  const sitemapText = await sitemapResponse.text();
   const routes = [...sitemapText.matchAll(/https:\/\/zemtools\.com\/[^\s<]+/g)].map(match => match[0].replace(/[<>"']/g, ''));
   assert.equal(routes.length, 31, 'The locked public sitemap inventory must contain 31 URLs');
 
