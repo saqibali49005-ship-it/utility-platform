@@ -1,5 +1,5 @@
 (function(){'use strict';
-if(!window.__zemtoolsGa4Loaded){
+if(!window.__zemtoolsGa4Loaded && location.hostname !== 'preview.zemtools.com' && !location.hostname.endsWith('.pages.dev')){
  window.__zemtoolsGa4Loaded=true;
  var gaScript=document.createElement('script');
  gaScript.async=true;
