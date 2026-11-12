@@ -15,7 +15,7 @@ function initToolCalculateTracking(){
  document.addEventListener('click',function(e){
   const button=e.target.closest('button, input[type="button"], input[type="submit"]');
   if(!button||button.disabled)return;
-  const label=String(button.textContent||button.value||'').replace(/\\s+/g,' ').trim();
+  const label=String(button.textContent||button.value||'').replace(/\s+/g,' ').trim();
   const id=String(button.id||'');
   if(!/calculate/i.test(id+' '+label))return;
   if(typeof window.gtag!=='function')return;
