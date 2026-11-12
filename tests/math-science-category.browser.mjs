@@ -28,9 +28,11 @@ try {
   await check('All three category cards link to their matching calculators', async () => {
     const cards = page.locator('main.wrap > .grid > .card');
     assert.equal(await cards.count(), 3);
-    assert.equal(await cards.nth(0).locator('a.button').getAttribute('href'), 'calculator/');
-    assert.equal(await cards.nth(1).locator('a.button').getAttribute('href'), 'time-calculator/');
-    assert.equal(await cards.nth(2).locator('a.button').getAttribute('href'), 'business-hours-calculator/');
+    const targets = await cards.evaluateAll(nodes => nodes.map(node => {
+      const href = node.querySelector('a.button').getAttribute('href');
+      return new URL(href, 'https://zemtools.com/math-science/').pathname;
+    }));
+    assert.deepEqual(targets, ['/calculator/', '/time-calculator/', '/business-hours-calculator/']);
     assert.match(await cards.nth(1).innerText(), /time math.*time difference.*add and subtract/i);
   });
 
