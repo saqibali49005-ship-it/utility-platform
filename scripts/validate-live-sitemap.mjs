@@ -17,7 +17,6 @@ const sitemapResponse = await fetchPage(sitemapUrl);
 assert.equal(sitemapResponse.status, 200, 'Production sitemap must return HTTP 200');
 const sitemapText = await sitemapResponse.text();
   const urls = sitemapText.split('<loc>').slice(1).map(chunk => chunk.split('</loc>')[0].trim()).filter(url => url.startsWith('https://zemtools.com/'));
-  .map(match => match[1].trim());
 assert.equal(urls.length, 31, 'Production sitemap must contain exactly 31 public routes');
 assert.equal(new Set(urls).size, 31, 'Production sitemap must not contain duplicate URLs');
 
