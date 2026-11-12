@@ -89,7 +89,7 @@ function initSearch(){
  }
  if(searchInput)searchInput.addEventListener('input',function(){render(searchInput.value);});
  if(searchForm&&searchInput)searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q);});
- if(menuBtn&&menu){
+ if(menuBtn&&menu&&!menuBtn.hasAttribute('data-menu-inline')){
   menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open));});
  }
  document.addEventListener('click',function(e){
