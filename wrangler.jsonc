@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "utility-platform",
+  "account_id": "3cb6c5326f32928d1c426008ece5b17a",
+  "compatibility_date": "2026-11-10",
+  "assets": {
+    "directory": "."
+  }
+}
