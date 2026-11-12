@@ -5,6 +5,7 @@ const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] }
 const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
 const failures = [];
 const titles = new Map();
+const descriptions = new Map();
 let passed = 0;
 
 try {
@@ -67,6 +68,10 @@ try {
         throw new Error('Duplicate title also used by ' + titles.get(data.title));
       }
       titles.set(data.title, route);
+      if (descriptions.has(data.description)) {
+        throw new Error('Duplicate meta description also used by ' + descriptions.get(data.description));
+      }
+      descriptions.set(data.description, route);
       passed++;
       console.log('PASS', route);
     } catch (error) {
