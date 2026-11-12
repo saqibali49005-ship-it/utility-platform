@@ -11,7 +11,7 @@ try {
   const sitemapResponse = await page.request.get('http://127.0.0.1:4173/sitemap.xml');
   assert.equal(sitemapResponse.status(), 200, 'Local sitemap must return HTTP 200');
   const sitemapText = await sitemapResponse.text();
-  const routes = [...sitemapText.matchAll(/https:\/\/zemtools\.com\/[^\s<]+/g)].map(match => match[0].replace(/[<>"']/g, ''));
+  const routes = [...sitemapText.matchAll(/<loc>\\s*(https:\\/\\/zemtools\\.com\\/[^<]+?)\\s*<\\/loc>/gi)].map(match => match[1].trim());
   assert.equal(routes.length, 31, 'The locked public sitemap inventory must contain 31 URLs');
 
   for (const canonicalUrl of routes) {
