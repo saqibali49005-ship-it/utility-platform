@@ -1,5 +1,5 @@
 (function(){'use strict';
-if(!window.__zemtoolsGa4Loaded){
+if(location.hostname.toLowerCase()==='zemtools.com'&&!window.__zemtoolsGa4Loaded){
  window.__zemtoolsGa4Loaded=true;
  window.dataLayer=window.dataLayer||[];
  window.gtag=function(){window.dataLayer.push(arguments);};
