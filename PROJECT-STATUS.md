@@ -61,8 +61,8 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 | Phase | Recorded status | Evidence / qualification |
 |---|---|---|
-| 1. Foundation and infrastructure | Partially verified; regression open | HTTPS/redirect smoke checks passed in GitHub workflow run 43313733225 on merged main commit `224fbc2be88720262e17fc8e57d0f73da38137ea`. Shared navigation exists. Desktop burger is hidden by page-specific CSS on `/sod-staple-spacing-guide/`; responsive suite was 95/96. |
-| 2. Website functionality and UI | In progress | Shared navigation work is committed. The guide-page desktop burger issue remains open. Four information-page changes were merged, but live rendering still needs direct verification. |
+| 1. Foundation and infrastructure | Core sitewide header audit completed historically; later isolated test observation needs reconciliation | HTTPS/redirect smoke checks passed in GitHub workflow run 43313733225 on merged main commit `224fbc2be88720262e17fc8e57d0f73da38137ea`. A prior sitewide header audit/fix across the 20 tool pages was recorded on 2026-09-22, covering search, hamburger, search/menu mutual closing and click behavior. Later navigation centralization was committed. A subsequent 95/96 browser run reported one desktop burger visibility failure on `/sod-staple-spacing-guide/`; this is a separate later test observation, not grounds to mark the original sitewide audit incomplete or repeat it. Reconcile that specific observation against the user's existing evidence before treating it as an open defect. |
+| 2. Website functionality and UI | In progress; historical sitewide header work preserved as completed | The 2026-09-22 sitewide header audit/fix is recorded as completed for its original scope. Later shared navigation work is committed. The single guide-page desktop failure is a later reported regression/test discrepancy awaiting evidence reconciliation, not a reason to restart the full header audit. Four information-page changes were merged, but live rendering still needs direct verification. |
 | 3. Technical SEO | Partially verified; audit incomplete | Smoke checks reported apex HTTPS redirect, www-to-apex redirect, legacy .html redirect with query preservation, a canonical tool page returning 200, robots.txt returning 200, and sitemap.xml returning 200. Sitemap source contains 31 URLs, including all 20 catalog tool pages. Metadata/internal-link regression checks did not run because the earlier responsive test failed. |
 | 4. Content quality and AdSense readiness | Not fully audited | Previous discussions included an AdSense readiness audit, but there is no completed, evidence-backed final sign-off recorded here. |
 | 5. Analytics and search performance | Pending fresh data review | No current Search Console performance export or connected data is recorded in this baseline. Do not infer impressions, clicks, rankings, or indexing counts. |
@@ -70,18 +70,20 @@ This is a snapshot of known evidence, not a claim that every area has been fully
 
 ### Important historical references
 
+- 2026-09-22 historical sitewide header audit: recorded as covering all 20 tool pages, including search, hamburger menu, mutual close behavior and click handling; deployment was pending in that historical conversation, so retain the completed implementation/audit record without overstating current live status.
+- Earlier page-specific header fixes: Aspect Ratio commit `311ca887`; Case Converter commit `0c160df34b171f83aba1c8b6e089cac1963324a2`.
 - Navigation centralization commit: `99f6570d38c0cb8c80d477fc333b03f0c723e8a3`
 - Shared search behavior commit: `82b865a5a09d619a88347af1f48c2134f602e7ea`
 - Information-page parity PR #43 was merged into main as `224fbc2be88720262e17fc8e57d0f73da38137ea`.
 - PR #43 changed `about/index.html`, `contact/index.html`, `privacy/index.html`, `terms/index.html`, and `site-design.css`. User approved the changes after preview review; production/live verification remains pending in this record.
-- Latest known responsive regression: `/sod-staple-spacing-guide/` at desktop viewport. Source contains `.tool-page .site-header .menu-btn{display:none!important}`, with a mobile-only override. Root cause is page-specific CSS, not evidence of a global controller failure.
+- Later responsive test observation: `/sod-staple-spacing-guide/` at desktop viewport was the sole failure in a 95/96 run. Source inspection found `.tool-page .site-header .menu-btn{display:none!important}`, with a mobile-only override. Treat this as a specific observation to reconcile against the user's earlier fix evidence; do not reopen the entire sitewide header audit or claim the earlier work was never completed.
 
 ## 5. Active work queue
 
 Work in this order unless new evidence changes priority:
 
 1. **P1 — Verify information pages on production:** inspect the four live routes and confirm the merged header/footer changes actually reached `zemtools.com`. Status: `IN PROGRESS` (merge verified; live verification pending).
-2. **P1 — Fix guide-page desktop burger regression:** remove or correct the page-specific CSS override in a preview branch; run the relevant desktop/mobile regression tests. Status: `FIXED — NOT VERIFIED` is not applicable yet; currently `NOT STARTED`.
+2. **P1 — Reconcile the single guide-page desktop burger test observation:** compare the 95/96 test result and inspected page CSS with the user's earlier evidence of the completed sitewide header fix. Do not make another code change or repeat the full header audit until the discrepancy is established. Status: `BLOCKED` pending evidence reconciliation.
 3. **P1 — Complete skipped technical QA:** run responsive tests after the fix, then run the SEO metadata and internal-link regression checks that were skipped. Status: `BLOCKED` by the responsive regression.
 4. **P2 — Complete technical SEO review:** only after the above checks, review remaining canonical/metadata/schema/internal-link and crawlability coverage. Avoid repeating the already-recorded smoke checks unless needed for post-change verification.
 5. **P2 — Review current Search Console data:** use a current export or authorized connected data. Separate historical indexing checks from current indexing/performance.
@@ -113,7 +115,8 @@ A side issue does not reset or rename the active phase.
 | Canonical tool-page HTTP response | One pilot-hole calculator route returned 200 | That route or routing/deployment changes; broader crawl is a separate audit |
 | robots.txt and sitemap.xml HTTP response | Both returned 200 | Files, hosting, routing, or indexing configuration changes |
 | Sitemap inventory | Source snapshot: 31 URLs; 20 catalog tool pages included | Sitemap/catalog changes; use current source before making claims |
-| Responsive browser regression suite | 95/96; one desktop burger failure on guide page | Must rerun after the CSS fix |
+| Sitewide header audit (20 tool pages) | Historical audit/fixes recorded 2026-09-22; later navigation centralization committed | Do not repeat the full audit. Revisit only for a specific new regression or changed code |
+| Responsive browser regression suite | 95/96; one desktop burger visibility failure reported on guide page in a later run; conflicts with user's evidence of prior sitewide fix and needs reconciliation | Re-run only the affected route/test after reconciling evidence or making a targeted change |
 | SEO metadata and internal-link regression tests | Not run; blocked by earlier responsive failure | Run after responsive suite passes |
 | Search Console indexing/performance | No current dataset recorded here | Review when fresh GSC data is available; do not pretend prior checks are current |
 
