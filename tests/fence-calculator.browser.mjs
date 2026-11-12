@@ -35,6 +35,7 @@ try {
     const depthField = page.locator('#holeDepth').locator('xpath=..');
     assert.match(await depthField.innerText(), /36 in default is an example input, not a recommendation/i);
     const faq = page.locator('details').filter({ hasText: 'How deep should a fence post hole be?' });
+    await faq.locator('summary').click();
     assert.match(await faq.innerText(), /does not determine a safe or code-compliant depth/i);
     assert.match(await faq.innerText(), /less any gravel-base depth/i);
   });
