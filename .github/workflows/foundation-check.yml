@@ -43,6 +43,8 @@ jobs:
         run: node tests/sitemap-metadata.browser.mjs
       - name: Verify all production sitemap routes and indexability
         run: node scripts/validate-live-sitemap.mjs
+      - name: Verify sitewide internal links and footer consistency
+        run: node tests/sitewide-internal-links.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
