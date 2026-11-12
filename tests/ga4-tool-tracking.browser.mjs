@@ -4,13 +4,18 @@ import { readFile } from 'node:fs/promises';
 
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-const base = 'http://127.0.0.1:4173';
+const base = 'https://zemtools.com';
 const localTrackingScript = await readFile(new URL('../master-ui.js', import.meta.url), 'utf8');
 await page.route('https://zemtools.com/master-ui.js*', route => route.fulfill({
   status: 200,
   contentType: 'application/javascript; charset=utf-8',
   body: localTrackingScript
 }));
+await page.route('https://zemtools.com/**', async route => {
+  const requestUrl = new URL(route.request().url());
+  const localResponse = await page.request.get('http://127.0.0.1:4173' + requestUrl.pathname + requestUrl.search);
+  await route.fulfill({ response: localResponse });
+});
 await page.route('https://www.googletagmanager.com/gtag/js*', route => route.abort());
 
 async function fresh(route) {
@@ -64,6 +69,8 @@ try {
   }));
   await page.goto('https://preview-test.zemtools-review.pages.dev/');
   await page.addScriptTag({ content: localTrackingScript });
+  assert.equal(await page.evaluate(() => typeof window.gtag), 'undefined', 'preview hostname must not initialize GA4');
+  assert.equal(await page.locator('script[src*="googletagmanager.com/gtag/js"]').count(), 0, 'preview hostname must not load the GA4 library');
   assert.equal(
     await page.locator('#internal').getAttribute('href'),
     'https://preview-test.zemtools-review.pages.dev/tools/',
