@@ -37,6 +37,8 @@ jobs:
         run: node tests/sitewide-responsive.browser.mjs
       - name: Run GA4 tool-usage tracking browser tests
         run: node tests/ga4-tool-tracking.browser.mjs
+      - name: Run SEO metadata and internal-link regression tests
+        run: node tests/seo-metadata-and-links.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
       - name: Run wire-size calculator browser regression tests
