@@ -156,6 +156,9 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
  .site-header .zt-nav-search-panel{position:absolute!important;top:100%!important;left:0!important;right:0!important;width:100%!important;max-width:none!important}
 }
 @media(max-width:420px){.site-header .header-inner{width:calc(100% - 24px)!important}.site-header .brand .brand-copy small{font-size:9px!important}}
+
+html body>footer.zt-global-footer .zt-footer-copy{display:grid!important;gap:2px!important;min-width:0!important}
+html body>footer.zt-global-footer .zt-footer-tagline{display:block!important;color:rgba(255,255,255,.76)!important;font:600 10px/1.15 system-ui,-apple-system,"Segoe UI",sans-serif!important;white-space:nowrap!important}
 `;
  const style=document.createElement('style');
  style.id='zemtools-navigation-v1';
@@ -262,7 +265,7 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
   return panel;
  }
  const menuPanel=menuPanelFor(menuBtn);
- menuPanel.innerHTML='<a href="/"'+(currentPath==='/'?' aria-current="page"':'')+'>Home</a><a href="/tools/"'+(currentPath==='/tools'?' aria-current="page"':'')+'>All Tools</a><div class="zt-nav-menu-label">Categories</div>'+activeCategories.map(c=>'<a href="'+categoryHref(c)+'"'+(currentPath===categoryHref(c).replace(/\\/+$/,'')?' aria-current="page"':'')+'>'+c.title+' <span>'+(catalog.length?countFor(c.id):'')+'</span></a>').join('');
+ menuPanel.innerHTML='<a href="/"'+(currentPath==='/'?' aria-current="page"':'')+'>Home</a><a href="/tools/"'+(currentPath==='/tools'?' aria-current="page"':'')+'>All Tools</a><div class="zt-nav-menu-label">Categories</div>'+activeCategories.map(c=>'<a href="'+categoryHref(c)+'"'+(currentPath===categoryHref(c).replace(/\/+$/,'')?' aria-current="page"':'')+'>'+c.title+' <span>'+(catalog.length?countFor(c.id):'')+'</span></a>').join('');
 
  function searchPanelFor(button){
   const known={toolHeaderSearch:'toolHeaderSearchPanel',categoryHeaderSearch:'categoryHeaderSearchPanel',mathHeaderSearch:'mathLocalSearch',digitalHeaderSearch:'digitalLocalSearch'};
@@ -384,8 +387,11 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
   const inner=document.createElement('div');inner.className='zt-footer-inner';
   const brand=document.createElement('a');brand.className='zt-footer-brand';brand.href='/';brand.setAttribute('aria-label','ZemTools home');
   const mark=document.createElement('span');mark.className='zt-footer-mark';mark.textContent='Z';mark.setAttribute('aria-hidden','true');
+  const copy=document.createElement('span');copy.className='zt-footer-copy';
   const name=document.createElement('span');name.className='zt-footer-name';name.textContent='ZemTools';
-  brand.append(mark,name);
+  const tagline=document.createElement('span');tagline.className='zt-footer-tagline';tagline.textContent='Practical online tools';
+  copy.append(name,tagline);
+  brand.append(mark,copy);
   const nav=document.createElement('nav');nav.className='zt-footer-links';nav.setAttribute('aria-label','Footer navigation');
   [{label:'About',href:'/about/'},{label:'Contact',href:'/contact/'},{label:'Privacy',href:'/privacy/'},{label:'Terms',href:'/terms/'}].forEach(item=>{
    const a=document.createElement('a');a.href=item.href;a.textContent=item.label;nav.appendChild(a);
