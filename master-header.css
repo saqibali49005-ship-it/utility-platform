@@ -61,7 +61,7 @@
  .site-header .menu-btn{display:grid}
  .site-header .search-panel{position:absolute;top:100%;right:0;left:0;z-index:1004;width:100%;padding:12px 14px;border-radius:0 0 16px 16px;border-left:1px solid #e1e8f1;border-right:1px solid #e1e8f1;box-shadow:0 12px 24px rgba(15,35,65,.12)}
  .site-header .mobile-nav{display:none;position:absolute;top:100%;left:0;right:0;z-index:1003;max-height:calc(100dvh - 74px);overflow:auto;padding:9px;background:#fff;border:1px solid #e1e8f1;border-radius:0 0 16px 16px;box-shadow:0 18px 30px rgba(15,35,65,.14)}
- .site-header .mobile-nav.is-open{display:block}
+ .site-header .mobile-nav.open{display:block}
  .site-header .zem-categories-panel{display:none!important}
 }
 @media(max-width:420px){.site-header .header-inner{width:calc(100% - 24px)}.site-header .brand-copy small{font-size:9px}.site-header .search-panel form button{padding:0 13px}}
