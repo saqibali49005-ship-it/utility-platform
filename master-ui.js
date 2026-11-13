@@ -96,6 +96,14 @@ function initReport(){
  document.body.appendChild(btn);
 }
 
+function initUnifiedFooter(){
+ const footer=document.querySelector('footer');
+ if(!footer||footer.dataset.zemUnifiedFooter==='1')return;
+ footer.dataset.zemUnifiedFooter='1';
+ footer.classList.add('zem-footer');
+ footer.innerHTML='<div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div>';
+}
+
 function initUnifiedHeader(){
  const header=document.querySelector('header.site-header');
  if(!header||header.dataset.zemUnified==='1')return;
@@ -115,6 +123,6 @@ function initUnifiedHeader(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){panel?.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false');}});
 }
 
-function initAll(){initUnifiedHeader();initSearch();initReport();initToolCalculateTracking();}
+function initAll(){initUnifiedHeader();initUnifiedFooter();initSearch();initReport();initToolCalculateTracking();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAll,{once:true});else initAll();
 })();
