@@ -66,11 +66,13 @@ function initToolCalculateTracking(){
  },true);
 }
 function loadSharedNavigation(){
- if(window.__zemtoolsNavigationRequested)return;
+ if(window.__ZEMTOOLS_NAV_READY||window.__zemtoolsNavigationRequested)return;
+ if(document.querySelector('script[src*="zemtools-navigation.js"]'))return;
  window.__zemtoolsNavigationRequested=true;
  var script=document.createElement('script');
  script.src='/zemtools-navigation.js';
- script.async=true;
+ script.async=false;
+ script.fetchPriority='high';
  script.onload=function(){window.__zemtoolsNavigationLoaded=true;};
  script.onerror=function(){window.__zemtoolsNavigationError=true;};
  document.head.appendChild(script);
