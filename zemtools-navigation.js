@@ -377,6 +377,14 @@ html body main .zt-category-search-inline button[type="submit"]{
   contextualSearch.classList.remove('category-header-panel','zt-nav-search-panel','zt-nav-open','is-open','open');
   contextualSearch.classList.add('zt-category-search-inline');
   contextualSearch.removeAttribute('aria-hidden');
+  contextualSearch.style.setProperty('display','block','important');
+  contextualSearch.style.setProperty('position','relative','important');
+  contextualSearch.style.setProperty('top','auto','important');
+  contextualSearch.style.setProperty('right','auto','important');
+  contextualSearch.style.setProperty('left','auto','important');
+  contextualSearch.style.setProperty('width','100%','important');
+  contextualSearch.style.setProperty('max-width','720px','important');
+  contextualSearch.style.setProperty('height','auto','important');
   const main=document.querySelector('main');
   if(main){
    const heading=main.querySelector('.heading')||main.querySelector('.category-intro')||main.querySelector('h1')?.parentElement;
