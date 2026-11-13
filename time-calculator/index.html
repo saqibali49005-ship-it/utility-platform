@@ -89,55 +89,26 @@
 </main>
 <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer><script src="tools-data.js"></script>
 <script src="master-ui.js?v=20260920-11"></script>
+<script src="/time-calculator-engine.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-function pad(n){return String(Math.trunc(n)).padStart(2,'0');}
-function clockSeconds(value){
-  if(!value) return null;
-  const parts=value.split(':').map(Number);
-  if(parts.some(Number.isNaN)||parts.length<2) return null;
-  const h=parts[0],m=parts[1],s=parts[2]||0;
-  if(h<0||h>23||m<0||m>59||s<0||s>59) return null;
-  return h*3600+m*60+s;
-}
-function formatDuration(total){
-  const sign=total<0?'-':''; let x=Math.abs(Math.round(total));
-  const days=Math.floor(x/86400); x%=86400;
-  const hours=Math.floor(x/3600); x%=3600;
-  const mins=Math.floor(x/60); const secs=x%60;
-  return {sign,days,hours,mins,secs};
-}
-function prettyDuration(total){
-  const p=formatDuration(total); const parts=[];
-  if(p.days) parts.push(p.days+' day'+(p.days===1?'':'s'));
-  if(p.hours) parts.push(p.hours+' hour'+(p.hours===1?'':'s'));
-  if(p.mins) parts.push(p.mins+' minute'+(p.mins===1?'':'s'));
-  if(p.secs||!parts.length) parts.push(p.secs+' second'+(p.secs===1?'':'s'));
-  return (p.sign||'')+parts.join(' ');
-}
-function clockFromSeconds(total){
-  const dayCount=Math.floor(total/86400);
-  let x=((total%86400)+86400)%86400;
-  const h=Math.floor(x/3600); x%=3600;
-  const m=Math.floor(x/60); const s=x%60;
-  const suffix=dayCount===0?'':(dayCount>0?' (next day)':' (previous day)');
-  return pad(h)+':'+pad(m)+':'+pad(s)+suffix;
-}
+const engine=window.ZemToolsTimeEngine;
+if(!engine) throw new Error('Time calculation engine failed to load.');
 function setMessage(el,msg){el.innerHTML=msg;}
 $('calcDuration').addEventListener('click',()=>{
-  const start=clockSeconds($('startTime').value),end=clockSeconds($('endTime').value);
-  if(start===null||end===null){setMessage($('durationResult'),'<strong>Enter valid start and end times.</strong>');return;}
-  let diff=end-start;
-  if(diff<0 && $('nextDay').checked) diff+=86400;
-  if(diff<0){setMessage($('durationResult'),'<strong>End time is earlier than start time.</strong><div class="small">Enable “next day” when the interval crosses midnight.</div>');return;}
-  const p=formatDuration(diff); const decimal=(diff/3600).toFixed(4).replace(/0+$/,'').replace(/\.$/,'');
-  setMessage($('durationResult'),'<div class="big">'+prettyDuration(diff)+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Total: '+(diff/60).toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+diff.toLocaleString()+' seconds · '+decimal+' decimal hours</div>');
+  const result=engine.calculateDuration($('startTime').value,$('endTime').value,$('nextDay').checked);
+  if(!result.ok){
+    if(result.error==='invalid-times') setMessage($('durationResult'),'<strong>Enter valid start and end times.</strong>');
+    else setMessage($('durationResult'),'<strong>End time is earlier than start time.</strong><div class="small">Enable “next day” when the interval crosses midnight.</div>');
+    return;
+  }
+  const p=result.parts;
+  setMessage($('durationResult'),'<div class="big">'+result.pretty+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Total: '+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+result.seconds.toLocaleString()+' seconds · '+result.decimalHours+' decimal hours</div>');
 });
 $('calcAdd').addEventListener('click',()=>{
-  const base=clockSeconds($('baseTime').value); const h=Number($('addHours').value||0),m=Number($('addMinutes').value||0),s=Number($('addSeconds').value||0);
-  if(base===null||![h,m,s].every(Number.isFinite)||h<0||m<0||s<0||!Number.isInteger(h)||!Number.isInteger(m)||!Number.isInteger(s)){setMessage($('addResult'),'<strong>Enter a valid base time and whole-number duration values.</strong>');return;}
-  const amount=h*3600+m*60+s; const result=$('operation').value==='add'?base+amount:base-amount;
-  setMessage($('addResult'),'<div class="big">'+clockFromSeconds(result)+'</div><div class="small" style="margin-top:8px">'+$('operation').value+' '+prettyDuration(amount)+' '+($('operation').value==='add'?'to':'from')+' '+$('baseTime').value+'.</div>');
+  const result=engine.calculateClockOperation($('baseTime').value,$('addHours').value,$('addMinutes').value,$('addSeconds').value,$('operation').value);
+  if(!result.ok){setMessage($('addResult'),'<strong>Enter a valid base time and whole-number duration values.</strong>');return;}
+  setMessage($('addResult'),'<div class="big">'+result.clockTime+'</div><div class="small" style="margin-top:8px">'+result.action+' '+result.prettyAmount+' '+(result.action==='add'?'to':'from')+' '+$('baseTime').value+'.</div>');
 });
 function resetDuration(){$('startTime').value='09:30:00';$('endTime').value='17:15:00';$('nextDay').checked=false;setMessage($('durationResult'),'');}
 function resetAdd(){$('baseTime').value='10:30:00';$('operation').value='add';$('addHours').value='2';$('addMinutes').value='30';$('addSeconds').value='0';setMessage($('addResult'),'');}
