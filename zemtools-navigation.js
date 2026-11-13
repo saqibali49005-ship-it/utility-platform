@@ -387,9 +387,15 @@ html body main .zt-category-search-inline button[type="submit"]{
   contextualSearch.style.setProperty('height','auto','important');
   const main=document.querySelector('main');
   if(main&&!main.contains(contextualSearch)){
-   const heading=main.querySelector('.heading')||main.querySelector('.category-intro')||main.querySelector('h1')?.parentElement;
-   if(heading&&heading!==contextualSearch)heading.insertAdjacentElement('afterend',contextualSearch);
-   else main.insertBefore(contextualSearch,main.firstChild);
+   const heading=main.querySelector('.heading')||main.querySelector('.category-intro');
+   const h1=main.querySelector('h1');
+   if(heading&&heading!==contextualSearch){
+    heading.insertAdjacentElement('afterend',contextualSearch);
+   }else if(h1&&h1!==contextualSearch){
+    h1.insertAdjacentElement('afterend',contextualSearch);
+   }else{
+    main.insertBefore(contextualSearch,main.firstChild);
+   }
   }
  }
  
