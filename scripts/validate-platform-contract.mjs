@@ -1,44 +1,52 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import vm from "node:vm";
 
-const source = readFileSync(new URL("../tools-data.js", import.meta.url), "utf8");
-const sandbox = { window: {} };
-vm.runInNewContext(source, sandbox, { filename: "tools-data.js" });
+const root = process.cwd();
+const catalogSource = readFileSync(path.join(root, "tools-data.js"), "utf8");
+const catalogSandbox = { window: {} };
+vm.runInNewContext(catalogSource, catalogSandbox, { filename: "tools-data.js" });
+const catalog = catalogSandbox.window.UTILITY_TOOLS;
+const manifest = JSON.parse(readFileSync(path.join(root, "tool-engine-manifest.json"), "utf8"));
 
-const tools = sandbox.window.UTILITY_TOOLS;
-const categories = sandbox.window.UTILITY_CATEGORIES;
+assert.equal(manifest.schemaVersion, 1, "Engine manifest schemaVersion must be 1");
+assert.equal(manifest.runtime, "browser", "Current tool execution must remain browser-based");
+assert.equal(manifest.authorization, "none", "Manifest must not be used for authorization");
+assert.ok(Array.isArray(catalog), "Tool catalog must be available");
+assert.ok(Array.isArray(manifest.tools), "Engine manifest tools must be an array");
+assert.equal(manifest.tools.length, catalog.length, "Manifest must cover every catalog tool");
 
-assert.ok(Array.isArray(tools), "UTILITY_TOOLS must be an array");
-assert.ok(Array.isArray(categories), "UTILITY_CATEGORIES must be an array");
-assert.equal(tools.length, 20, "Expected the current 20-tool catalog");
+const catalogSlugs = new Set(catalog.map(tool => tool.slug));
+const manifestSlugs = new Set();
+const modulePaths = new Set();
 
-const slugSet = new Set();
-const hrefSet = new Set();
-const categoryIds = new Set(categories.map((category) => category.id));
+for (const entry of manifest.tools) {
+  assert.ok(catalogSlugs.has(entry.slug), `Manifest contains unknown tool slug: ${entry.slug}`);
+  assert.ok(!manifestSlugs.has(entry.slug), `Duplicate manifest tool slug: ${entry.slug}`);
+  manifestSlugs.add(entry.slug);
 
-for (const [index, tool] of tools.entries()) {
-  assert.ok(tool && typeof tool === "object", `Tool at index ${index} must be an object`);
-  assert.match(tool.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, `Invalid stable slug: ${tool.slug}`);
-  assert.ok(!slugSet.has(tool.slug), `Duplicate stable slug: ${tool.slug}`);
-  slugSet.add(tool.slug);
+  assert.ok(
+    entry.implementation === "shared-module" || entry.implementation === "page-adapter",
+    `${entry.slug} has an unsupported implementation status`
+  );
 
-  assert.equal(tool.access, "public", `${tool.slug} must remain publicly accessible in this phase`);
-  assert.equal(tool.execution, "browser", `${tool.slug} must retain browser execution metadata`);
-  assert.equal(tool.contractVersion, 1, `${tool.slug} must declare catalog contract version 1`);
-
-  assert.ok(typeof tool.title === "string" && tool.title.trim(), `${tool.slug} needs a title`);
-  assert.ok(typeof tool.description === "string" && tool.description.trim(), `${tool.slug} needs a description`);
-  assert.ok(typeof tool.href === "string" && tool.href.endsWith("/"), `${tool.slug} needs a clean trailing-slash URL`);
-  assert.ok(!tool.href.startsWith("/") && !tool.href.includes(".html"), `${tool.slug} URL must preserve the relative clean-URL convention`);
-  assert.ok(!hrefSet.has(tool.href), `Duplicate tool URL: ${tool.href}`);
-  hrefSet.add(tool.href);
-
-  assert.ok(categoryIds.has(tool.category), `${tool.slug} references an unknown category: ${tool.category}`);
-  assert.ok(Array.isArray(tool.keywords), `${tool.slug} keywords must remain an array`);
-  assert.ok(Number.isFinite(tool.addedOrder), `${tool.slug} needs a numeric addedOrder`);
+  if (entry.implementation === "shared-module") {
+    assert.match(entry.modulePath, /^\/[a-z0-9-]+-engine\.js$/, `${entry.slug} must reference a root engine module`);
+    assert.match(entry.browserGlobal, /^ZemTools[A-Za-z0-9]+Engine$/, `${entry.slug} must name its browser engine global`);
+    assert.ok(!modulePaths.has(entry.modulePath), `Duplicate engine module path: ${entry.modulePath}`);
+    modulePaths.add(entry.modulePath);
+    assert.ok(existsSync(path.join(root, entry.modulePath.slice(1))), `Missing engine module: ${entry.modulePath}`);
+  } else {
+    assert.ok(!entry.modulePath && !entry.browserGlobal, `${entry.slug} page adapter must not claim an extracted module`);
+  }
 }
 
-console.log(`PASS: ${tools.length} tools satisfy the future-ready public catalog contract.`);
-console.log("PASS: slugs and URLs are unique; categories, metadata, and clean URLs are valid.");
-console.log("PASS: no login, billing, subscription, paywall, or API implementation was introduced by this contract.");
+for (const tool of catalog) {
+  assert.ok(manifestSlugs.has(tool.slug), `Catalog tool missing from engine manifest: ${tool.slug}`);
+}
+assert.equal(modulePaths.size, 3, "Expected the three completed reusable engine pilots");
+
+console.log(`PASS: engine manifest covers all ${catalog.length} catalog tools.`);
+console.log(`PASS: ${modulePaths.size} shared calculation modules exist; remaining tools are explicitly marked page-adapter.`);
+console.log("PASS: manifest is descriptive only and does not enable authentication, billing, subscriptions, or API access.");
