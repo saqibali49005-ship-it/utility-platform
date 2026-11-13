@@ -76,6 +76,7 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
 .site-header .brand .brand-copy{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important;line-height:1.12!important}
 .site-header .brand .brand-copy strong{display:block!important;color:#111c30!important;font-size:17px!important;font-weight:850!important;letter-spacing:-.4px!important}
 .site-header .brand .brand-copy small{display:block!important;color:#718096!important;font-size:10px!important;font-weight:600!important;letter-spacing:.1px!important}
+.site-header .brand::before,.site-header .brand::after{content:none!important;display:none!important}
 .site-header .top-nav{
  display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;
  flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:4px!important;
