@@ -80,3 +80,69 @@
 /* Explicit breakpoint control for the mobile-only hamburger. */
 #toolHeaderMenu{display:none!important}
 @media(max-width:820px){#toolHeaderMenu{display:grid!important}}
+
+/* Unified footer restored to the live ZemTools blue branded layout. */
+footer.zem-footer{
+ position:relative!important;
+ display:block!important;
+ width:100%!important;
+ max-width:none!important;
+ margin:30px 0 0!important;
+ padding:0!important;
+ box-sizing:border-box!important;
+ color:#dbe8f7!important;
+ background:linear-gradient(135deg,#082e62,#06498a)!important;
+ border-top:1px solid #0b4b85!important;
+ text-align:left!important;
+ overflow:hidden!important;
+}
+body>footer.zem-footer{width:100%!important;margin-left:0!important}
+body>main>footer.zem-footer,
+.category-page main.wrap>footer.zem-footer,
+.tool-page main>footer.zem-footer{
+ width:100vw!important;
+ max-width:none!important;
+ margin-left:calc(50% - 50vw)!important;
+}
+footer.zem-footer::before,
+footer.zem-footer::after{content:none!important;display:none!important}
+footer.zem-footer>.footer-inner{
+ display:flex!important;
+ width:min(calc(100% - 40px),1180px)!important;
+ max-width:1180px!important;
+ margin:0 auto!important;
+ padding:23px 20px!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ gap:22px!important;
+ box-sizing:border-box!important;
+}
+footer.zem-footer .footer-brand{display:flex!important;align-items:center!important;gap:10px!important}
+footer.zem-footer .footer-mark{
+ width:40px!important;height:40px!important;flex:0 0 40px!important;
+ border-radius:12px!important;background:rgba(255,255,255,.12)!important;
+ display:grid!important;place-items:center!important;color:#fff!important;font-weight:900!important
+}
+footer.zem-footer .footer-brand strong{display:block!important;color:#fff!important;font-size:16px!important;font-weight:800!important}
+footer.zem-footer .footer-brand span{display:block!important;color:#bdd1e5!important;font-size:12px!important}
+footer.zem-footer .footer-links{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ flex-wrap:wrap!important;gap:18px!important;width:auto!important;margin:0!important;padding:0!important;
+ line-height:1.5!important
+}
+footer.zem-footer .footer-links a{
+ display:inline-flex!important;align-items:center!important;min-height:28px!important;
+ padding:2px 0!important;color:#eef6ff!important;text-decoration:none!important;
+ text-underline-offset:0!important;font-size:13px!important;font-weight:650!important;white-space:nowrap!important
+}
+footer.zem-footer .footer-links a::before{content:none!important;display:none!important}
+footer.zem-footer .copyright{
+ display:block!important;width:100%!important;box-sizing:border-box!important;
+ border-top:1px solid rgba(255,255,255,.12)!important;padding:13px 20px!important;
+ text-align:center!important;color:#bcd1e6!important;font-size:12px!important;font-weight:400!important;
+}
+@media(max-width:700px){
+ footer.zem-footer>.footer-inner{padding:20px 16px!important;flex-direction:column!important;align-items:center!important;gap:16px!important}
+ footer.zem-footer .footer-links{justify-content:center!important;gap:12px 16px!important}
+ footer.zem-footer .copyright{text-align:center!important;padding:13px 16px!important}
+}
