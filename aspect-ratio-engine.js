@@ -104,7 +104,24 @@
     };
   }
 
+
+  function execute(request) {
+    const input = request || {};
+    try {
+      let data;
+      if (input.operation === 'ratio') data = calculateRatio(input.width, input.height);
+      else if (input.operation === 'solve') data = solveMissingDimension(input.ratioWidth, input.ratioHeight, input.knownDimension, input.knownValue);
+      else if (input.operation === 'resize') data = resizeDimensions(input.originalWidth, input.originalHeight, input.targetDimension, input.targetValue);
+      else throw new TypeError('Choose a supported aspect-ratio operation.');
+      return { ok: true, data };
+    } catch (error) {
+      return { ok: false, error: { code: 'INVALID_INPUT', message: error && error.message ? error.message : 'Unable to calculate this ratio.' } };
+    }
+  }
+
   return Object.freeze({
+    contractVersion: 1,
+    execute,
     gcd,
     simplifyRatio,
     calculateRatio,
