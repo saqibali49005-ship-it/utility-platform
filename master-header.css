@@ -108,8 +108,8 @@ footer.zem-footer::before,
 footer.zem-footer::after{content:none!important;display:none!important}
 footer.zem-footer>.footer-inner{
  display:flex!important;
- width:min(calc(100% - 40px),1180px)!important;
- max-width:1180px!important;
+ width:min(calc(100% - 40px),1120px)!important;
+ max-width:1120px!important;
  margin:0 auto!important;
  padding:23px 20px!important;
  align-items:center!important;
