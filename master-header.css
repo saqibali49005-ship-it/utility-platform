@@ -66,3 +66,13 @@
 }
 @media(max-width:420px){.site-header .header-inner{width:calc(100% - 24px)}.site-header .brand-copy small{font-size:9px}.site-header .search-panel form button{padding:0 13px}}
 @media(prefers-reduced-motion:reduce){.site-header *{transition:none!important}}
+
+/* Shared renderer wins over legacy page-specific brand experiments. */
+.site-header .brand .brand-mark,
+.category-page .site-header .brand .brand-mark{display:grid!important}
+.site-header .brand .brand-copy,
+.category-page .site-header .brand .brand-copy{display:flex!important;flex-direction:column!important}
+.site-header .brand::before,
+.site-header .brand::after,
+.category-page .site-header .brand::before,
+.category-page .site-header .brand::after{content:none!important;display:none!important}
