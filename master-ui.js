@@ -97,8 +97,6 @@ function initReport(){
 }
 
 function initUnifiedFooter(){
- // Informational pages keep their own approved centered footer, matching the live template.
- if(document.querySelector('main.info-page'))return;
  const footer=document.querySelector('footer');
  if(!footer||footer.dataset.zemUnifiedFooter==='1')return;
  footer.dataset.zemUnifiedFooter='1';
