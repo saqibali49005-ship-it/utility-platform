@@ -31,7 +31,7 @@ for (const route of routes) {
 
       const state = await page.evaluate(() => {
         const header = document.querySelector('.site-header');
-        const brand = header?.querySelector('.brand[href="/"]');
+        const brand = header?.querySelector('.zt-brand[href="/"]');
         const homeNav = header?.querySelector('.zt-primary-nav a[href="/"]');
         const search = header?.querySelectorAll('.zt-nav-search-toggle');
         const menu = header?.querySelectorAll('.zt-nav-menu-toggle');
