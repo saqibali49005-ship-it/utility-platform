@@ -133,6 +133,7 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
   {label:'Energy & Electrical',href:'/energy-electrical/'}
  ];
  const footerItems=[{label:'About',href:'/about/'},{label:'Contact',href:'/contact/'},{label:'Privacy',href:'/privacy/'},{label:'Terms',href:'/terms/'}];
+ const isMathPage=document.body.classList.contains('math-science-page');
  const current=location.pathname.replace(/index\.html$/,'').replace(/\/{2,}/g,'/').replace(/\/?$/,'/');
  const linkIsCurrent=href=>current===href;
  const makeLink=(item,cls)=>{
@@ -160,24 +161,24 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
   navItems.forEach(item=>primary.appendChild(makeLink(item)));
 
   const controls=document.createElement('div');controls.className='zt-header-controls';controls.setAttribute('aria-label','Header controls');
-  const searchButton=document.createElement('button');searchButton.type='button';searchButton.className='zt-header-action zt-search-toggle';
-  searchButton.id='ztGlobalSearchToggle';searchButton.setAttribute('aria-label','Open site search');searchButton.setAttribute('aria-expanded','false');searchButton.setAttribute('aria-controls','ztGlobalSearchPanel');searchButton.title='Search';
+  const searchButton=document.createElement('button');searchButton.type='button';searchButton.className='zt-header-action zt-search-toggle zt-nav-toggle zt-nav-search-toggle';
+  searchButton.id=isMathPage?'mathHeaderSearch':'ztGlobalSearchToggle';searchButton.setAttribute('aria-label','Open site search');searchButton.setAttribute('aria-expanded','false');searchButton.setAttribute('aria-controls',searchPanel.id);searchButton.title='Search';
   searchButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg>';
-  const menuButton=document.createElement('button');menuButton.type='button';menuButton.className='zt-header-action zt-menu-toggle';
-  menuButton.id='ztGlobalMenuToggle';menuButton.setAttribute('aria-label','Open menu');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-controls','ztGlobalMenuPanel');menuButton.title='Menu';
+  const menuButton=document.createElement('button');menuButton.type='button';menuButton.className='zt-header-action zt-menu-toggle zt-nav-toggle zt-nav-menu-toggle';
+  menuButton.id=isMathPage?'mathHeaderMenu':'ztGlobalMenuToggle';menuButton.setAttribute('aria-label','Open menu');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-controls',menuPanel.id);menuButton.title='Menu';
   menuButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
   controls.append(searchButton,menuButton);
 
-  const searchPanel=document.createElement('section');searchPanel.className='zt-search-panel';searchPanel.id='ztGlobalSearchPanel';
+  const searchPanel=document.createElement('section');searchPanel.className='zt-search-panel zt-nav-search-panel';searchPanel.id=isMathPage?'mathLocalSearch':'ztGlobalSearchPanel';
   searchPanel.setAttribute('aria-label','Search tools');searchPanel.setAttribute('aria-hidden','true');
   const form=document.createElement('form');form.setAttribute('role','search');form.action='/tools/';form.method='get';
   const label=document.createElement('label');label.className='zt-sr-only';label.htmlFor='ztGlobalSearchInput';label.textContent='Search tools';
-  const input=document.createElement('input');input.type='search';input.id='ztGlobalSearchInput';input.name='q';input.placeholder='Search tools or describe your task…';input.autocomplete='off';input.setAttribute('aria-label','Search tools');
+  const input=document.createElement('input');input.type='search';input.id=isMathPage?'mathLocalSearchInput':'ztGlobalSearchInput';input.name='q';input.placeholder='Search tools or describe your task…';input.autocomplete='off';input.setAttribute('aria-label','Search tools');
   const submit=document.createElement('button');submit.type='submit';submit.textContent='Search';
-  const results=document.createElement('div');results.className='zt-search-results';results.id='ztGlobalSearchResults';results.setAttribute('aria-live','polite');
+  const results=document.createElement('div');results.className='zt-search-results';results.id=isMathPage?'mathLocalSearchResults':'ztGlobalSearchResults';results.setAttribute('aria-live','polite');
   form.append(label,input,submit);searchPanel.append(form,results);
 
-  const menuPanel=document.createElement('nav');menuPanel.className='zt-menu-panel';menuPanel.id='ztGlobalMenuPanel';
+  const menuPanel=document.createElement('nav');menuPanel.className='zt-menu-panel zt-nav-menu-panel';menuPanel.id=isMathPage?'mathHeaderMenuPanel':'ztGlobalMenuPanel';
   menuPanel.setAttribute('aria-label','Site menu');menuPanel.setAttribute('aria-hidden','true');
   navItems.forEach(item=>menuPanel.appendChild(makeLink(item)));
 
@@ -212,7 +213,11 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
  const shell=createHeader();
  const footer=createFooter();
 
- const catalog=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
+ const catalog=isMathPage?[
+  {title:'Significant Figures Calculator',href:'/calculator/'},
+  {title:'Time Calculator',href:'/time-calculator/'},
+  {title:'Business Hours Calculator',href:'/business-hours-calculator/'}
+ ]:(Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[]);
  function renderResults(query){
   shell.results.replaceChildren();
   const term=String(query||'').trim().toLowerCase();
@@ -248,6 +253,8 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
  let lastTrigger=null;
  function setPanel(panel,button,open){
   panel.classList.toggle('zt-panel-open',open);
+  panel.classList.toggle('is-open',open);
+  panel.classList.toggle('open',open);
   panel.setAttribute('aria-hidden',String(!open));
   button.setAttribute('aria-expanded',String(open));
   button.setAttribute('aria-label',open?'Close '+(button===shell.menuButton?'menu':'search'):'Open '+(button===shell.menuButton?'menu':'site search'));
@@ -264,7 +271,10 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
   if(open){renderResults(shell.input.value);shell.input.focus({preventScroll:true});}
  });
  document.addEventListener('click',event=>{
-  if(!shell.header.contains(event.target)){closeMenu();closeSearch();}
+  const inMenu=shell.menuPanel.contains(event.target)||shell.menuButton.contains(event.target);
+  const inSearch=shell.searchPanel.contains(event.target)||shell.searchButton.contains(event.target);
+  if(!inMenu)closeMenu();
+  if(!inSearch)closeSearch();
   if(shell.menuPanel.contains(event.target)&&event.target.closest('a[href]'))closeMenu();
   if(shell.searchPanel.contains(event.target)&&event.target.closest('.zt-search-results a'))closeSearch();
  });
