@@ -147,7 +147,8 @@ body.text-cleaner-tool .tip strong{display:block;margin-bottom:4px}
     <p class="sub">These are mechanical cleanup operations. Review the output when line breaks, indentation, repeated entries, or whitespace carry meaning.</p>
   </section>
 
-  <section class="card" aria-labelledby="faq-title">
+  <section class="card"><h2>Text cleaning examples and safe use</h2><p>For example, a copied list may contain trailing spaces, repeated blank lines and inconsistent line endings. Trimming line edges and normalizing line endings can make the list easier to edit. If duplicate removal is enabled, repeated identical lines can be reduced to one retained occurrence.</p><h3>Choose cleanup rules carefully</h3><ul><li><strong>Whitespace:</strong> collapsing repeated spaces is useful for ordinary prose, but can damage code, aligned tables and fixed-width text.</li><li><strong>Blank lines:</strong> removing empty lines can make a list compact, but may merge sections that were intentionally separated.</li><li><strong>Duplicate lines:</strong> removing duplicates is useful for lists and copied records, but repeated lines may be meaningful in logs, lyrics, source code or data files.</li><li><strong>Line endings:</strong> normalizing line endings can improve compatibility between operating systems, but does not convert the contents of a document into a different format.</li></ul><p>Keep an unchanged copy of important source text before cleaning it. The operations are mechanical and do not understand the meaning of the content.</p></section>
+<section class="card" aria-labelledby="faq-title">
     <h2 id="faq-title">FAQ</h2>
     <div class="faq">
       <button type="button"><span>Is this text cleaner private?</span><span class="faq-icon" aria-hidden="true">+</span></button>
