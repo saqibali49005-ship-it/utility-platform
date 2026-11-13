@@ -160,6 +160,13 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
 
 html body>footer.zt-global-footer .zt-footer-copy{display:grid!important;gap:2px!important;min-width:0!important}
 html body>footer.zt-global-footer .zt-footer-tagline{display:block!important;color:rgba(255,255,255,.76)!important;font:600 10px/1.15 system-ui,-apple-system,"Segoe UI",sans-serif!important;white-space:nowrap!important}
+
+html body.category-page .site-header .brand::before,
+html body.category-page .site-header .brand::after,
+html body.info-page-shell .site-header .brand::before,
+html body.info-page-shell .site-header .brand::after,
+html body .site-header .brand::before,
+html body .site-header .brand::after{content:none!important;display:none!important}
 `;
  const style=document.createElement('style');
  style.id='zemtools-navigation-v1';
