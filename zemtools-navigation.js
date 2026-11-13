@@ -194,10 +194,7 @@ html body>footer.zt-global-footer .zt-footer-tagline{display:block!important;col
  }).join('');
  if(topNav){
   topNav.innerHTML='<a href="/"'+(currentPath==='/'?' aria-current="page"':'')+'>Home</a><a href="/tools/"'+(currentPath==='/tools'?' aria-current="page"':'')+'>All Tools</a><button class="zt-category-toggle" id="ztCategoryToggle" type="button" aria-expanded="false" aria-controls="ztCategoryPanel">Categories <span aria-hidden="true">⌄</span></button>';
-  topNav.querySelectorAll('a[href]').forEach(a=>{
-   const raw=a.getAttribute('href')||'';
-   if(raw&&!/^(?:[a-z]+:|\\/|#)/i.test(raw))a.setAttribute('href','/'+raw.replace(/^\\.\\//,''));
-  });
+
  }
  let categoryPanel=header.querySelector('#ztCategoryPanel');
  if(!categoryPanel){
