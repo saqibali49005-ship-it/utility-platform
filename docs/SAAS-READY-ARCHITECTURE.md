@@ -61,8 +61,8 @@ Only add queues, persistent storage, exports, or saved projects when usage data 
 
 1. **Public experience:** Keep homepage, catalog, search, categories, tool pages, mobile navigation, and SEO stable.
 2. **Catalog contract:** Maintain stable IDs and metadata; validate the schema in CI.
-3. **Calculation boundary pilot — completed:** The Aspect Ratio Calculator now delegates ratio reduction, missing-dimension solving, and proportional resizing to the pure functions in `aspect-ratio-engine.js`. Its page remains the browser UI adapter. Unit tests and browser regression checks verify the extracted engine and current page behaviour.
-4. **Reusable tool engine pattern — next:** Migrate additional tools gradually, only where justified. The Aspect Ratio pilot is the pattern to evaluate before expanding; do not mass-refactor all calculators.
+3. **Calculation boundary pilots — completed:** The Aspect Ratio Calculator and Time Calculator now delegate their calculation rules to separate pure engines (`aspect-ratio-engine.js` and `time-calculator-engine.js`). Their pages remain browser UI adapters. Both engines have dedicated unit tests and browser regression suites; the existing full site regression suite passes on the preview branch.
+4. **Reusable tool engine pattern — in progress:** Apply the proven boundary gradually to additional calculators where it provides clear value. Prefer one tool at a time with parity tests; do not mass-refactor all calculators.
 5. **Accounts, plans, billing, API, and storage:** Start these as separate projects after the site has meaningful usage and the owner explicitly approves scope, provider choice, budget, and privacy requirements.
 
 ## Explicitly out of scope for the current phase
