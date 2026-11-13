@@ -101,7 +101,7 @@ function initUnifiedFooter(){
  if(!footer||footer.dataset.zemUnifiedFooter==='1')return;
  footer.dataset.zemUnifiedFooter='1';
  footer.classList.add('zem-footer');
- footer.innerHTML='<div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div>';
+ footer.innerHTML='<div class="footer-inner foot"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div>';
 }
 
 function initUnifiedHeader(){
