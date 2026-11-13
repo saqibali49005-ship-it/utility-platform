@@ -45,7 +45,7 @@ function initSearch(){
   searchResults.innerHTML=matches.length?matches.map(t=>'<a href="'+t.href+'">'+t.title+'</a>').join(''):'<div class="tool-header-empty">No matching tool found.</div>';
  }
  function closeSearch(){if(searchPanel)searchPanel.classList.remove('open');if(searchBtn)searchBtn.setAttribute('aria-expanded','false');}
- function closeMenu(){if(menu)menu.classList.remove('is-open');if(menuBtn)menuBtn.setAttribute('aria-expanded','false');}
+ function closeMenu(){if(menu)menu.classList.remove('open');if(menuBtn)menuBtn.setAttribute('aria-expanded','false');}
  render('');
  if(searchBtn&&searchPanel){
   searchBtn.addEventListener('click',function(e){e.stopPropagation();const open=!searchPanel.classList.contains('open');closeMenu();searchPanel.classList.toggle('open',open);searchBtn.setAttribute('aria-expanded',String(open));if(open&&searchInput)searchInput.focus();});
@@ -53,7 +53,7 @@ function initSearch(){
  if(searchInput)searchInput.addEventListener('input',function(){render(searchInput.value);});
  if(searchForm&&searchInput)searchForm.addEventListener('submit',function(e){e.preventDefault();const q=searchInput.value.trim();if(q)location.href='tools/?q='+encodeURIComponent(q);});
  if(menuBtn&&menu){
-  menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('is-open');closeSearch();menu.classList.toggle('is-open',open);menuBtn.setAttribute('aria-expanded',String(open));});
+  menuBtn.addEventListener('click',function(e){e.stopPropagation();const open=!menu.classList.contains('open');closeSearch();menu.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));});
  }
  document.addEventListener('click',function(e){
   if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();
