@@ -13,6 +13,7 @@ This document records the agreed boundary so future work can extend the existing
 ## What exists today
 
 - A central catalog in `tools-data.js` drives homepage and directory discovery.
+- A versioned `tool-engine-manifest.json` identifies the current implementation boundary for all 20 tools; it is descriptive metadata, not an access-control mechanism.
 - Published tool slugs and clean URLs are stable public identifiers.
 - Search and category browsing use the shared catalog.
 - Tool calculations currently run in the browser on their individual pages.
@@ -61,9 +62,10 @@ Only add queues, persistent storage, exports, or saved projects when usage data 
 
 1. **Public experience:** Keep homepage, catalog, search, categories, tool pages, mobile navigation, and SEO stable.
 2. **Catalog contract:** Maintain stable IDs and metadata; validate the schema in CI.
-3. **Calculation boundary pilots — completed:** The Aspect Ratio Calculator and Time Calculator now delegate their calculation rules to separate pure engines (`aspect-ratio-engine.js` and `time-calculator-engine.js`). Their pages remain browser UI adapters. Both engines have dedicated unit tests and browser regression suites; the existing full site regression suite passes on the preview branch.
-4. **Reusable tool engine pattern — in progress:** Apply the proven boundary gradually to additional calculators where it provides clear value. Prefer one tool at a time with parity tests; do not mass-refactor all calculators.
-5. **Accounts, plans, billing, API, and storage:** Start these as separate projects after the site has meaningful usage and the owner explicitly approves scope, provider choice, budget, and privacy requirements.
+3. **Calculation boundary pilots — completed:** The Aspect Ratio Calculator, Time Calculator, and Significant Figures Calculator now delegate their calculation rules to separate pure engines (`aspect-ratio-engine.js`, `time-calculator-engine.js`, and `significant-figures-engine.js`). Their pages remain browser UI adapters. All three engines have dedicated unit tests and browser regression suites; the full existing site regression suite passes on the preview branch.
+4. **Engine registry — completed for current scope:** `tool-engine-manifest.json` records all 20 tools, including three shared-module engines and 17 page-adapter tools. The manifest is informational only.
+5. **Reusable tool engine pattern — next:** Apply the proven boundary gradually to additional tools where it provides clear value. Prefer one tool at a time with parity tests; do not mass-refactor all calculators.
+6. **Accounts, plans, billing, API, and storage:** Start these as separate projects after the site has meaningful usage and the owner explicitly approves scope, provider choice, budget, and privacy requirements.
 
 ## Explicitly out of scope for the current phase
 
