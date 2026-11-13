@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "runtime": "browser",
+  "authorization": "none",
+  "note": "Public descriptive inventory only. This manifest does not expose or enforce paid access. Shared calculation modules are pure browser/server-compatible functions; page-adapter tools have not yet been extracted.",
+  "tools": [
+    {
+      "slug": "aspect-ratio",
+      "implementation": "shared-module",
+      "modulePath": "/aspect-ratio-engine.js",
+      "browserGlobal": "ZemToolsAspectRatioEngine"
+    },
+    {
+      "slug": "business-hours",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "paver-edge-restraint",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "deck-joist-blocking",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "sod-staple",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "find-replace",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "word-counter",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "case-converter",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "remove-line-breaks",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "duplicate-line-remover",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "text-cleaner",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "conduit-fill",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "wire-size",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "paint",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "fence",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "gravel",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "uuid",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "pilot-hole",
+      "implementation": "page-adapter"
+    },
+    {
+      "slug": "time",
+      "implementation": "shared-module",
+      "modulePath": "/time-calculator-engine.js",
+      "browserGlobal": "ZemToolsTimeEngine"
+    },
+    {
+      "slug": "significant-figures",
+      "implementation": "shared-module",
+      "modulePath": "/significant-figures-engine.js",
+      "browserGlobal": "ZemToolsSignificantFiguresEngine"
+    }
+  ]
+}
