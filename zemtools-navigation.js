@@ -166,6 +166,7 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
   return panel;
  }
  const menuPanel=menuPanelFor(menuBtn);
+ menuPanel.innerHTML='<a href="/"'+(currentPath==='/'?' aria-current="page"':'')+'>Home</a><a href="/tools/"'+(currentPath==='/tools'?' aria-current="page"':'')+'>All Tools</a><div class="zt-nav-menu-label">Categories</div>'+activeCategories.map(c=>'<a href="'+categoryHref(c)+'"'+(currentPath===categoryHref(c).replace(/\\/+$/,'')?' aria-current="page"':'')+'>'+c.title+' <span>'+(catalog.length?countFor(c.id):'')+'</span></a>').join('');
 
  function searchPanelFor(button){
   const known={toolHeaderSearch:'toolHeaderSearchPanel',categoryHeaderSearch:'categoryHeaderSearchPanel',mathHeaderSearch:'mathLocalSearch',digitalHeaderSearch:'digitalLocalSearch'};
