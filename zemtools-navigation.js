@@ -77,8 +77,8 @@ html body>footer.zt-global-footer{
  box-sizing:border-box!important;display:block!important;position:relative!important;float:none!important;clear:both!important;
  width:100%!important;max-width:none!important;min-width:0!important;min-height:112px!important;height:112px!important;
  margin:30px 0 0!important;padding:0!important;left:auto!important;right:auto!important;transform:none!important;
- overflow:hidden!important;background:#fff!important;background-image:none!important;border:0!important;
- border-top:1px solid #dfe6ef!important;border-radius:0!important;color:#526174!important;text-align:left!important;
+ overflow:hidden!important;background:linear-gradient(105deg,#0a2e62 0%,#064783 100%)!important;background-image:linear-gradient(105deg,#0a2e62 0%,#064783 100%)!important;border:0!important;
+ border-top:1px solid rgba(255,255,255,.12)!important;border-radius:0!important;color:#fff!important;text-align:left!important;
  box-shadow:none!important;line-height:normal!important;
 }
 html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::after{content:none!important;display:none!important}
@@ -89,18 +89,18 @@ html body>footer.zt-global-footer.zt-global-footer>div.zt-footer-inner{display:f
 .zt-footer-brand{display:flex!important;align-items:center!important;gap:9px!important;flex:0 0 auto!important;
  margin:0!important;padding:0!important;color:#0b1220!important;text-decoration:none!important}
 .zt-footer-mark{display:grid!important;place-items:center!important;width:36px!important;height:36px!important;flex:0 0 36px!important;
- border-radius:11px!important;background:linear-gradient(135deg,#2563eb,#0ea5e9)!important;color:#fff!important;
+ border-radius:11px!important;background:rgba(255,255,255,.12)!important;color:#fff!important;
  font:900 17px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important}
-.zt-footer-name{display:block!important;color:#0b1220!important;font:850 15px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif!important}
+.zt-footer-name{display:block!important;color:#fff!important;font:850 15px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif!important}
 .zt-footer-links{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex-wrap:nowrap!important;
  gap:18px!important;margin:0!important;padding:0!important;list-style:none!important}
 .zt-footer-links a{display:inline-flex!important;align-items:center!important;min-height:32px!important;margin:0!important;padding:4px 0!important;
- background:transparent!important;border:0!important;color:#475569!important;text-decoration:none!important;
+ background:transparent!important;border:0!important;color:rgba(255,255,255,.92)!important;text-decoration:none!important;
  font:650 13px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;white-space:nowrap!important}
-.zt-footer-links a:hover,.zt-footer-links a:focus-visible{color:#1d4ed8!important;text-decoration:underline!important;text-underline-offset:3px!important}
+.zt-footer-links a:hover,.zt-footer-links a:focus-visible{color:#fff!important;text-decoration:underline!important;text-underline-offset:3px!important}
 .zt-footer-copyright{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:39px!important;
- min-height:39px!important;margin:0!important;padding:0 16px!important;border-top:1px solid #edf1f5!important;
- color:#718096!important;text-align:center!important;font:400 11px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important}
+ min-height:39px!important;margin:0!important;padding:0 16px!important;border-top:1px solid rgba(255,255,255,.16)!important;
+ color:rgba(255,255,255,.78)!important;text-align:center!important;font:400 11px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important}
 @media(max-width:1100px){
  .zt-header-inner{gap:12px!important}
  .zt-primary-nav{display:none!important}
