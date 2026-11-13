@@ -33,6 +33,35 @@
 @media(min-width:981px){.site-header .top-nav{display:flex!important}.site-header .zt-nav-menu-toggle{display:grid!important}}
 @media(max-width:430px){.site-header .zt-nav-toggle{width:39px!important;height:39px!important;min-width:39px!important;min-height:39px!important;flex-basis:39px!important}.site-header .zt-nav-actions{gap:6px!important}}
 @media(prefers-reduced-motion:reduce){.site-header .zt-nav-menu-panel,.site-header .zt-nav-search-panel{scroll-behavior:auto!important;transition:none!important}}
+
+/* Footer-only update: preserve the live header and use the approved branded footer. */
+html body>footer.zt-global-footer{
+ box-sizing:border-box!important;display:block!important;position:relative!important;float:none!important;clear:both!important;
+ width:100%!important;max-width:none!important;min-width:0!important;min-height:112px!important;height:112px!important;
+ margin:30px 0 0!important;padding:0!important;left:auto!important;right:auto!important;transform:none!important;
+ overflow:hidden!important;background:linear-gradient(105deg,#0a2e62 0%,#064783 100%)!important;
+ border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;border-radius:0!important;color:#fff!important;
+ text-align:left!important;box-shadow:none!important;line-height:normal!important;
+}
+html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::after{content:none!important;display:none!important}
+html body>footer.zt-global-footer *{box-sizing:border-box!important}
+html body>footer.zt-global-footer>div.zt-footer-inner{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
+ width:100%!important;max-width:1120px!important;height:72px!important;min-height:72px!important;margin:0 auto!important;padding:12px 18px!important}
+html body>footer.zt-global-footer .zt-footer-brand{display:flex!important;align-items:center!important;gap:9px!important;flex:0 0 auto!important;margin:0!important;padding:0!important;color:#fff!important;text-decoration:none!important}
+html body>footer.zt-global-footer .zt-footer-mark{display:grid!important;place-items:center!important;width:36px!important;height:36px!important;flex:0 0 36px!important;border-radius:11px!important;background:rgba(255,255,255,.12)!important;color:#fff!important;font:900 17px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important}
+html body>footer.zt-global-footer .zt-footer-name{display:block!important;color:#fff!important;font:850 15px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif!important}
+html body>footer.zt-global-footer .zt-footer-links{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex-wrap:nowrap!important;gap:18px!important;margin:0!important;padding:0!important;list-style:none!important}
+html body>footer.zt-global-footer .zt-footer-links a{display:inline-flex!important;align-items:center!important;min-height:32px!important;margin:0!important;padding:4px 0!important;background:transparent!important;border:0!important;color:rgba(255,255,255,.92)!important;text-decoration:none!important;font:650 13px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;white-space:nowrap!important}
+html body>footer.zt-global-footer .zt-footer-links a:hover,html body>footer.zt-global-footer .zt-footer-links a:focus-visible{color:#fff!important;text-decoration:underline!important;text-underline-offset:3px!important}
+html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:39px!important;min-height:39px!important;margin:0!important;padding:0 16px!important;border-top:1px solid rgba(255,255,255,.16)!important;color:rgba(255,255,255,.78)!important;text-align:center!important;font:400 11px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important}
+@media(max-width:650px){
+ html body>footer.zt-global-footer{height:150px!important;min-height:150px!important;margin-top:24px!important}
+ html body>footer.zt-global-footer>div.zt-footer-inner{height:110px!important;min-height:110px!important;flex-direction:column!important;justify-content:center!important;gap:9px!important;padding:11px 12px!important}
+ html body>footer.zt-global-footer .zt-footer-links{justify-content:center!important;flex-wrap:wrap!important;gap:4px 17px!important}
+ html body>footer.zt-global-footer .zt-footer-links a{min-height:27px!important;font-size:12px!important}
+ html body>footer.zt-global-footer .zt-footer-copyright{height:39px!important;min-height:39px!important}
+}
+
 `;
  const style=document.createElement('style');
  style.id='zemtools-navigation-v1';
@@ -203,5 +232,27 @@
  },true);
  menuBtn.setAttribute('aria-expanded','false');
  searchBtn.setAttribute('aria-expanded','false');
+
+ function createFooter(){
+  let footer=document.querySelector('footer');
+  if(!footer)footer=document.createElement('footer');
+  footer.className='zt-global-footer';
+  footer.removeAttribute('style');
+  footer.innerHTML='';
+  const inner=document.createElement('div');inner.className='zt-footer-inner';
+  const brand=document.createElement('a');brand.className='zt-footer-brand';brand.href='/';brand.setAttribute('aria-label','ZemTools home');
+  const mark=document.createElement('span');mark.className='zt-footer-mark';mark.textContent='Z';mark.setAttribute('aria-hidden','true');
+  const name=document.createElement('span');name.className='zt-footer-name';name.textContent='ZemTools';
+  brand.append(mark,name);
+  const nav=document.createElement('nav');nav.className='zt-footer-links';nav.setAttribute('aria-label','Footer navigation');
+  [{label:'About',href:'/about/'},{label:'Contact',href:'/contact/'},{label:'Privacy',href:'/privacy/'},{label:'Terms',href:'/terms/'}].forEach(item=>{
+   const a=document.createElement('a');a.href=item.href;a.textContent=item.label;nav.appendChild(a);
+  });
+  inner.append(brand,nav);
+  const copyright=document.createElement('div');copyright.className='zt-footer-copyright';copyright.textContent='© 2026 ZemTools';
+  footer.append(inner,copyright);
+  document.body.appendChild(footer);
+ }
+ createFooter();
  window.__ZEMTOOLS_NAV_READY=true;
 })();
