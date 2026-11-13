@@ -8,7 +8,8 @@
       "slug": "aspect-ratio",
       "implementation": "shared-module",
       "modulePath": "/aspect-ratio-engine.js",
-      "browserGlobal": "ZemToolsAspectRatioEngine"
+      "browserGlobal": "ZemToolsAspectRatioEngine",
+      "contractVersion": 1
     },
     {
       "slug": "business-hours",
@@ -82,13 +83,15 @@
       "slug": "time",
       "implementation": "shared-module",
       "modulePath": "/time-calculator-engine.js",
-      "browserGlobal": "ZemToolsTimeEngine"
+      "browserGlobal": "ZemToolsTimeEngine",
+      "contractVersion": 1
     },
     {
       "slug": "significant-figures",
       "implementation": "shared-module",
       "modulePath": "/significant-figures-engine.js",
-      "browserGlobal": "ZemToolsSignificantFiguresEngine"
+      "browserGlobal": "ZemToolsSignificantFiguresEngine",
+      "contractVersion": 1
     }
   ]
 }
