@@ -115,8 +115,6 @@ function initUnifiedHeader(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){panel?.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false');}});
 }
 
-initUnifiedHeader();
-initSearch();
-initReport();
-initToolCalculateTracking();
+function initAll(){initUnifiedHeader();initSearch();initReport();initToolCalculateTracking();}
+if(document.readyState==='loading'||document.readyState==='interactive')document.addEventListener('DOMContentLoaded',initAll,{once:true});else initAll();
 })();
