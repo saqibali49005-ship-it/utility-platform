@@ -47,6 +47,8 @@ jobs:
         run: node tests/math-science-category.browser.mjs
       - name: Run sitewide responsive and Home navigation browser audit
         run: node tests/sitewide-responsive.browser.mjs
+      - name: Run unified header and footer browser audit across all pages
+        run: node tests/unified-header-footer.browser.mjs
       - name: Run GA4 tool-usage tracking browser tests
         run: node tests/ga4-tool-tracking.browser.mjs
       - name: Run SEO metadata and internal-link regression tests
