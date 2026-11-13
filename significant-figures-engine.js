@@ -149,7 +149,21 @@
     }
   }
 
+
+  function execute(request) {
+    const input = request || {};
+    const mode = input.operation;
+    const result = calculate(mode, input.params || {});
+    if (!result.ok) {
+      return { ok: false, error: { code: 'INVALID_INPUT', message: result.error } };
+    }
+    const { ok, ...data } = result;
+    return { ok: true, data };
+  }
+
   return Object.freeze({
+    contractVersion: 1,
+    execute,
     normalizeNumeric,
     significantCount,
     formatForSig,
