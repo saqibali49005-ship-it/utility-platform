@@ -97,7 +97,7 @@ async function inspectInteractions(path, viewportName) {
   await page.keyboard.press('Escape');
   await menuPanel.waitFor({ state: 'hidden' });
   assert.equal(await menu.getAttribute('aria-expanded'), 'false', path + ' Escape closes menu');
-  assert.equal(await page.evaluate(() => document.activeElement.id), 'ztGlobalMenuToggle', path + ' Escape restores menu focus');
+  assert.equal(await page.evaluate(() => document.activeElement === document.querySelector('.zt-nav-menu-toggle')), true, path + ' Escape restores menu focus');
 
   await search.click();
   await searchPanel.waitFor({ state: 'visible' });
