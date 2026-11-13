@@ -78,7 +78,7 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
   brand.innerHTML='<span class="brand-mark" aria-hidden="true">Z</span><span class="brand-copy"><strong>ZemTools</strong><small>Practical online tools</small></span>';
  }
  const topNav=header.querySelector('.top-nav');
- const currentPath=location.pathname.replace(/\\/+$/,'')||'/';
+ const currentPath=location.pathname.replace(/\/+$/,'')||'/';
  const categories=Array.isArray(window.UTILITY_CATEGORIES)?window.UTILITY_CATEGORIES:[
   {id:'math-science',title:'Math & Science',href:'math-science/',icon:'∑'},
   {id:'home-construction',title:'Home & Construction',href:'home-construction/',icon:'⌂'},
@@ -88,11 +88,11 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
  const catalog=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
  const activeCategories=categories.filter(c=>c.href&&(!catalog.length||catalog.some(t=>t.category===c.id)));
  const countFor=id=>catalog.filter(t=>t.category===id).length;
- const categoryHref=c=>'/'+String(c.href||'').replace(/^\\/+/, '');
+ const categoryHref=c=>'/'+String(c.href||'').replace(/^\/+/, '');
  const categoryCards=activeCategories.map(c=>{
   const count=countFor(c.id);
   const href=categoryHref(c);
-  const active=currentPath===href.replace(/\\/+$/,'');
+  const active=currentPath===href.replace(/\/+$/,'');
   return '<a href="'+href+'"'+(active?' aria-current="page"':'')+'><span class="zt-category-icon" aria-hidden="true">'+(c.icon||'•')+'</span><span class="zt-category-copy"><strong>'+c.title+'</strong><small>'+(catalog.length?count+' '+(count===1?'tool':'tools'):'Browse tools')+'</small></span><span class="zt-category-arrow" aria-hidden="true">→</span></a>';
  }).join('');
  if(topNav){
