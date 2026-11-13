@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import { createRequire } from "node:module";
 
 const root = process.cwd();
+const require = createRequire(import.meta.url);
 const catalogSource = readFileSync(path.join(root, "tools-data.js"), "utf8");
 const catalogSandbox = { window: {} };
 vm.runInNewContext(catalogSource, catalogSandbox, { filename: "tools-data.js" });
@@ -34,9 +36,14 @@ for (const entry of manifest.tools) {
   if (entry.implementation === "shared-module") {
     assert.match(entry.modulePath, /^\/[a-z0-9-]+-engine\.js$/, `${entry.slug} must reference a root engine module`);
     assert.match(entry.browserGlobal, /^ZemTools[A-Za-z0-9]+Engine$/, `${entry.slug} must name its browser engine global`);
+    assert.equal(entry.contractVersion, 1, `${entry.slug} must declare shared engine contract version 1`);
     assert.ok(!modulePaths.has(entry.modulePath), `Duplicate engine module path: ${entry.modulePath}`);
     modulePaths.add(entry.modulePath);
-    assert.ok(existsSync(path.join(root, entry.modulePath.slice(1))), `Missing engine module: ${entry.modulePath}`);
+    const resolvedModule = path.join(root, entry.modulePath.slice(1));
+    assert.ok(existsSync(resolvedModule), `Missing engine module: ${entry.modulePath}`);
+    const engine = require(resolvedModule);
+    assert.equal(engine.contractVersion, 1, `${entry.slug} engine must export contract version 1`);
+    assert.equal(typeof engine.execute, "function", `${entry.slug} engine must implement execute(request)`);
   } else {
     assert.ok(!entry.modulePath && !entry.browserGlobal, `${entry.slug} page adapter must not claim an extracted module`);
   }
