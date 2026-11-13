@@ -165,6 +165,9 @@ html body.category-page .site-header .brand::before,
 html body.category-page .site-header .brand::after,
 html body.info-page-shell .site-header .brand::before,
 html body.info-page-shell .site-header .brand::after,
+html body.category-page .site-header .brand .brand-mark,
+html body.info-page-shell .site-header .brand .brand-mark,
+html body .site-header .brand .brand-mark{display:grid!important;visibility:visible!important;opacity:1!important;width:42px!important;height:42px!important;flex:0 0 42px!important;place-items:center!important;border-radius:13px!important;background:linear-gradient(145deg,#1d4ed8,#0785c8)!important;color:#fff!important;font-size:21px!important;font-weight:900!important;box-shadow:0 6px 15px rgba(29,78,216,.18)!important}
 html body .site-header .brand::before,
 html body .site-header .brand::after{content:none!important;display:none!important}
 `;
