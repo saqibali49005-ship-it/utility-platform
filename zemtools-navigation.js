@@ -162,17 +162,17 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
 
   const controls=document.createElement('div');controls.className='zt-header-controls';controls.setAttribute('aria-label','Header controls');
   const searchButton=document.createElement('button');searchButton.type='button';searchButton.className='zt-header-action zt-search-toggle zt-nav-toggle zt-nav-search-toggle';
-  searchButton.id=isMathPage?'mathHeaderSearch':'ztGlobalSearchToggle';searchButton.setAttribute('aria-label','Open site search');searchButton.setAttribute('aria-expanded','false');searchButton.setAttribute('aria-controls',searchPanel.id);searchButton.title='Search';
+  searchButton.id=isMathPage?'mathHeaderSearch':'ztGlobalSearchToggle';searchButton.setAttribute('aria-label','Open site search');searchButton.setAttribute('aria-expanded','false');searchButton.title='Search';
   searchButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg>';
   const menuButton=document.createElement('button');menuButton.type='button';menuButton.className='zt-header-action zt-menu-toggle zt-nav-toggle zt-nav-menu-toggle';
-  menuButton.id=isMathPage?'mathHeaderMenu':'ztGlobalMenuToggle';menuButton.setAttribute('aria-label','Open menu');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-controls',menuPanel.id);menuButton.title='Menu';
+  menuButton.id=isMathPage?'mathHeaderMenu':'ztGlobalMenuToggle';menuButton.setAttribute('aria-label','Open menu');menuButton.setAttribute('aria-expanded','false');menuButton.title='Menu';
   menuButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
   controls.append(searchButton,menuButton);
 
   const searchPanel=document.createElement('section');searchPanel.className='zt-search-panel zt-nav-search-panel';searchPanel.id=isMathPage?'mathLocalSearch':'ztGlobalSearchPanel';
   searchPanel.setAttribute('aria-label','Search tools');searchPanel.setAttribute('aria-hidden','true');
   const form=document.createElement('form');form.setAttribute('role','search');form.action='/tools/';form.method='get';
-  const label=document.createElement('label');label.className='zt-sr-only';label.htmlFor='ztGlobalSearchInput';label.textContent='Search tools';
+  const label=document.createElement('label');label.className='zt-sr-only';label.textContent='Search tools';
   const input=document.createElement('input');input.type='search';input.id=isMathPage?'mathLocalSearchInput':'ztGlobalSearchInput';input.name='q';input.placeholder='Search tools or describe your task…';input.autocomplete='off';input.setAttribute('aria-label','Search tools');
   const submit=document.createElement('button');submit.type='submit';submit.textContent='Search';
   const results=document.createElement('div');results.className='zt-search-results';results.id=isMathPage?'mathLocalSearchResults':'ztGlobalSearchResults';results.setAttribute('aria-live','polite');
@@ -180,6 +180,9 @@ html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::aft
 
   const menuPanel=document.createElement('nav');menuPanel.className='zt-menu-panel zt-nav-menu-panel';menuPanel.id=isMathPage?'mathHeaderMenuPanel':'ztGlobalMenuPanel';
   menuPanel.setAttribute('aria-label','Site menu');menuPanel.setAttribute('aria-hidden','true');
+  searchButton.setAttribute('aria-controls',searchPanel.id);
+  menuButton.setAttribute('aria-controls',menuPanel.id);
+  label.htmlFor=input.id;
   navItems.forEach(item=>menuPanel.appendChild(makeLink(item)));
 
   inner.append(brand,primary,controls,searchPanel,menuPanel);
