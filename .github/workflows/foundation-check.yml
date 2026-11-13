@@ -21,6 +21,8 @@ jobs:
         run: node tests/aspect-ratio-engine.test.mjs
       - name: Run time calculator engine unit checks
         run: node tests/time-calculator-engine.test.mjs
+      - name: Run significant-figures engine unit checks
+        run: node tests/significant-figures-engine.test.mjs
       - name: Validate homepage site-name SEO signals
         run: node scripts/validate-site-name.mjs
       - name: Install Playwright
