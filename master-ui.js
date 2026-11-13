@@ -1,5 +1,5 @@
 (function(){'use strict';
-if(!window.__zemtoolsGa4Loaded && location.hostname !== 'preview.zemtools.com' && !location.hostname.endsWith('.pages.dev')){
+if(!window.__zemtoolsGa4Loaded && typeof window.gtag!=='function' && location.hostname !== 'preview.zemtools.com' && !location.hostname.endsWith('.pages.dev')){
  window.__zemtoolsGa4Loaded=true;
  var gaScript=document.createElement('script');
  gaScript.async=true;
