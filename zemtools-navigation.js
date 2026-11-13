@@ -63,51 +63,51 @@ html body>footer.zt-global-footer .zt-footer-copyright{display:flex!important;al
 }
 
 /* Professional shared header system — one layout across all page types. */
-html body>header.site-header{
- position:sticky!important;top:0!important;z-index:10000!important;width:100%!important;
+html body .site-header{
+ box-sizing:border-box!important;position:sticky!important;top:0!important;z-index:10000!important;width:100%!important;
  min-height:76px!important;height:76px!important;max-height:76px!important;
  margin:0!important;padding:0!important;background:rgba(255,255,255,.97)!important;
  border:0!important;border-bottom:1px solid #e2eaf3!important;
  box-shadow:0 5px 22px rgba(15,23,42,.055)!important;
  backdrop-filter:saturate(160%) blur(12px)!important;
 }
-html body>header.site-header .header-inner{
- position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+html body .site-header .header-inner{
+ box-sizing:border-box!important;position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
  gap:20px!important;width:100%!important;max-width:1200px!important;height:76px!important;min-height:76px!important;
  margin:0 auto!important;padding:0 22px!important;overflow:visible!important;flex-wrap:nowrap!important;
 }
-html body>header.site-header .brand{
+html body .site-header .brand{
  display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;
  flex:0 0 auto!important;min-width:0!important;margin:0!important;padding:0!important;
  color:#0b1e36!important;text-decoration:none!important;white-space:nowrap!important;
 }
-html body>header.site-header .brand .brand-mark{
+html body .site-header .brand .brand-mark{
  display:grid!important;place-items:center!important;width:42px!important;height:42px!important;flex:0 0 42px!important;
  margin:0!important;border:0!important;border-radius:13px!important;
  background:linear-gradient(135deg,#1767e7 0%,#10a6dc 100%)!important;
  color:#fff!important;font:900 20px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
  box-shadow:0 7px 18px rgba(23,103,231,.20)!important;
 }
-html body>header.site-header .zt-brand-copy{
+html body .site-header .zt-brand-copy{
  display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
  min-width:0!important;margin:0!important;padding:0!important;
 }
-html body>header.site-header .zt-brand-copy strong{
+html body .site-header .zt-brand-copy strong{
  display:block!important;margin:0!important;padding:0!important;color:#0b1e36!important;
  font:850 16px/1.05 system-ui,-apple-system,"Segoe UI",sans-serif!important;letter-spacing:-.3px!important;
 }
-html body>header.site-header .zt-brand-copy small{
+html body .site-header .zt-brand-copy small{
  display:block!important;margin:0!important;padding:0!important;color:#718096!important;
  font:500 10.5px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif!important;letter-spacing:.05px!important;
 }
-html body>header.site-header .top-nav{
+html body .site-header .top-nav{
  position:relative!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;
  gap:5px!important;flex:1 1 auto!important;min-width:0!important;margin:0 0 0 16px!important;padding:0!important;
  border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
  overflow:visible!important;
 }
-html body>header.site-header .top-nav>a,
-html body>header.site-header .zt-category-toggle{
+html body .site-header .top-nav>a,
+html body .site-header .zt-category-toggle{
  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;
  min-height:42px!important;margin:0!important;padding:9px 12px!important;border:1px solid transparent!important;
  border-radius:10px!important;background:transparent!important;color:#40536b!important;
@@ -115,31 +115,31 @@ html body>header.site-header .zt-category-toggle{
  font:750 13px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
  cursor:pointer!important;box-shadow:none!important;
 }
-html body>header.site-header .top-nav>a:hover,
-html body>header.site-header .zt-category-toggle:hover{
+html body .site-header .top-nav>a:hover,
+html body .site-header .zt-category-toggle:hover{
  background:#f5f8fc!important;border-color:#e5ecf4!important;color:#0f2f55!important;
 }
-html body>header.site-header .top-nav>a[aria-current="page"]{
+html body .site-header .top-nav>a[aria-current="page"]{
  background:#edf4ff!important;border-color:#d9e8ff!important;color:#145fc8!important;
 }
-html body>header.site-header .zt-category-toggle[aria-expanded="true"]{
+html body .site-header .zt-category-toggle[aria-expanded="true"]{
  background:#edf4ff!important;border-color:#d9e8ff!important;color:#145fc8!important;
 }
-html body>header.site-header .zt-category-toggle svg{
+html body .site-header .zt-category-toggle svg{
  width:15px!important;height:15px!important;display:block!important;fill:none!important;stroke:currentColor!important;
  stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important;
 }
-html body>header.site-header .header-actions,
-html body>header.site-header .home-header-controls,
-html body>header.site-header .tools-header-controls,
-html body>header.site-header .category-header-controls,
-html body>header.site-header .math-header-controls,
-html body>header.site-header .digital-header-controls,
-html body>header.site-header .zt-nav-actions{
+html body .site-header .header-actions,
+html body .site-header .home-header-controls,
+html body .site-header .tools-header-controls,
+html body .site-header .category-header-controls,
+html body .site-header .math-header-controls,
+html body .site-header .digital-header-controls,
+html body .site-header .zt-nav-actions{
  display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;
  flex:0 0 auto!important;margin:0 0 0 auto!important;padding:0!important;
 }
-html body>header.site-header .zt-nav-search-toggle{
+html body .site-header .zt-nav-search-toggle{
  display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;
  width:166px!important;min-width:166px!important;max-width:166px!important;height:42px!important;min-height:42px!important;
  flex:0 0 166px!important;margin:0!important;padding:0 11px!important;
@@ -147,30 +147,30 @@ html body>header.site-header .zt-nav-search-toggle{
  box-shadow:inset 0 1px 0 rgba(255,255,255,.95)!important;cursor:pointer!important;
  font:650 12.5px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-nav-search-toggle:hover{
+html body .site-header .zt-nav-search-toggle:hover{
  background:#fff!important;border-color:#a9c6e8!important;color:#174d88!important;
  box-shadow:0 4px 14px rgba(27,83,139,.08)!important;
 }
-html body>header.site-header .zt-nav-search-toggle svg{
+html body .site-header .zt-nav-search-toggle svg{
  display:block!important;width:18px!important;height:18px!important;flex:0 0 18px!important;
  fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important;
 }
-html body>header.site-header .zt-search-label{display:block!important;white-space:nowrap!important}
-html body>header.site-header .zt-search-shortcut{
+html body .site-header .zt-search-label{display:block!important;white-space:nowrap!important}
+html body .site-header .zt-search-shortcut{
  display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:19px!important;height:21px!important;
  margin-left:auto!important;padding:0 5px!important;border:1px solid #e2e8f0!important;border-radius:5px!important;
  background:#fff!important;color:#8290a2!important;font:650 11px/1 ui-monospace,SFMono-Regular,Consolas,monospace!important;
 }
-html body>header.site-header .zt-nav-menu-toggle{
+html body .site-header .zt-nav-menu-toggle{
  display:none!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;
  min-height:42px!important;flex:0 0 42px!important;margin:0!important;padding:0!important;
  border:1px solid #d9e4f0!important;border-radius:11px!important;background:#fff!important;color:#12345d!important;cursor:pointer!important;
 }
-html body>header.site-header .zt-nav-menu-toggle svg{
+html body .site-header .zt-nav-menu-toggle svg{
  display:block!important;width:20px!important;height:20px!important;fill:none!important;stroke:currentColor!important;
  stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important;
 }
-html body>header.site-header .zt-category-panel{
+html body .site-header .zt-category-panel{
  display:none!important;position:absolute!important;top:calc(100% + 12px)!important;left:50%!important;right:auto!important;
  z-index:10030!important;transform:translateX(-50%)!important;width:min(540px,calc(100vw - 32px))!important;
  max-width:calc(100vw - 32px)!important;padding:15px!important;margin:0!important;
@@ -178,107 +178,107 @@ html body>header.site-header .zt-category-panel{
  border:1px solid #dce6f1!important;border-radius:16px!important;background:#fff!important;
  box-shadow:0 18px 42px rgba(10,35,67,.17)!important;
 }
-html body>header.site-header .zt-category-panel.zt-category-open{display:grid!important}
-html body>header.site-header .zt-category-panel-heading{
+html body .site-header .zt-category-panel.zt-category-open{display:grid!important}
+html body .site-header .zt-category-panel-heading{
  grid-column:1/-1!important;display:flex!important;flex-direction:column!important;gap:3px!important;
  margin:0 0 4px!important;padding:2px 3px 9px!important;border-bottom:1px solid #edf1f6!important;
 }
-html body>header.site-header .zt-category-panel-heading strong{
+html body .site-header .zt-category-panel-heading strong{
  color:#102b4d!important;font:850 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-category-panel-heading small{
+html body .site-header .zt-category-panel-heading small{
  color:#7a899a!important;font:450 11px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-category-card{
+html body .site-header .zt-category-card{
  display:flex!important;align-items:center!important;gap:10px!important;min-width:0!important;min-height:68px!important;
  margin:0!important;padding:10px!important;border:1px solid #edf1f6!important;border-radius:11px!important;
  background:#fff!important;color:#233d5c!important;text-decoration:none!important;
 }
-html body>header.site-header .zt-category-card:hover,
-html body>header.site-header .zt-category-card:focus-visible{
+html body .site-header .zt-category-card:hover,
+html body .site-header .zt-category-card:focus-visible{
  border-color:#c7dcf7!important;background:#f6faff!important;color:#145fc8!important;
 }
-html body>header.site-header .zt-category-card[aria-current="page"]{
+html body .site-header .zt-category-card[aria-current="page"]{
  border-color:#c7dcf7!important;background:#edf4ff!important;color:#145fc8!important;
 }
-html body>header.site-header .zt-category-icon{
+html body .site-header .zt-category-icon{
  display:grid!important;place-items:center!important;width:36px!important;height:36px!important;flex:0 0 36px!important;
  border-radius:10px!important;background:#edf4ff!important;color:#1767d5!important;
  font:850 16px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-category-copy{display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important}
-html body>header.site-header .zt-category-copy strong{
+html body .site-header .zt-category-copy{display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important}
+html body .site-header .zt-category-copy strong{
  display:block!important;color:inherit!important;font:800 12px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-category-copy small{
+html body .site-header .zt-category-copy small{
  display:block!important;color:#8492a3!important;font:450 10px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-category-arrow{
+html body .site-header .zt-category-arrow{
  margin-left:auto!important;color:#9aa8b8!important;font:700 14px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-nav-menu-panel{
+html body .site-header .zt-nav-menu-panel{
  display:none!important;position:absolute!important;top:calc(100% + 8px)!important;right:12px!important;left:auto!important;
  z-index:10031!important;width:min(390px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;
  max-height:min(76vh,620px)!important;overflow:auto!important;margin:0!important;padding:12px!important;gap:6px!important;
  border:1px solid #dce6f1!important;border-radius:16px!important;background:#fff!important;
  box-shadow:0 18px 42px rgba(10,35,67,.17)!important;pointer-events:none!important;
 }
-html body>header.site-header .zt-nav-menu-panel.zt-nav-open{display:grid!important;pointer-events:auto!important}
-html body>header.site-header .zt-mobile-menu-primary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin:0!important}
-html body>header.site-header .zt-mobile-menu-primary a{
+html body .site-header .zt-nav-menu-panel.zt-nav-open{display:grid!important;pointer-events:auto!important}
+html body .site-header .zt-mobile-menu-primary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin:0!important}
+html body .site-header .zt-mobile-menu-primary a{
  display:flex!important;align-items:center!important;min-height:42px!important;margin:0!important;padding:10px 11px!important;
  border:1px solid #e7edf5!important;border-radius:10px!important;background:#f8fafc!important;color:#294564!important;
  text-decoration:none!important;font:750 12px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-mobile-menu-heading{
+html body .site-header .zt-mobile-menu-heading{
  margin:10px 2px 3px!important;padding:5px 0!important;color:#74849a!important;
  font:800 10px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;letter-spacing:.09em!important;text-transform:uppercase!important;
 }
-html body>header.site-header .zt-mobile-category-grid{
+html body .site-header .zt-mobile-category-grid{
  display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;
 }
-html body>header.site-header .zt-mobile-category-grid a{
+html body .site-header .zt-mobile-category-grid a{
  display:flex!important;align-items:center!important;min-width:0!important;min-height:50px!important;gap:8px!important;
  margin:0!important;padding:8px!important;border:1px solid #e8eef5!important;border-radius:10px!important;
  background:#fff!important;color:#34506f!important;text-decoration:none!important;
  font:750 11px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-mobile-category-grid a[aria-current="page"]{
+html body .site-header .zt-mobile-category-grid a[aria-current="page"]{
  border-color:#c7dcf7!important;background:#edf4ff!important;color:#145fc8!important;
 }
-html body>header.site-header .zt-mobile-category-grid .zt-category-icon{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:13px!important}
-html body>header.site-header .zt-mobile-menu-footer{
+html body .site-header .zt-mobile-category-grid .zt-category-icon{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:13px!important}
+html body .site-header .zt-mobile-menu-footer{
  display:flex!important;align-items:center!important;gap:17px!important;margin:8px 2px 0!important;padding:9px 0 1px!important;
  border-top:1px solid #edf1f6!important;
 }
-html body>header.site-header .zt-mobile-menu-footer a{
+html body .site-header .zt-mobile-menu-footer a{
  color:#718096!important;text-decoration:none!important;font:650 11px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
-html body>header.site-header .zt-nav-search-panel{
+html body .site-header .zt-nav-search-panel{
  display:none!important;position:absolute!important;top:calc(100% + 10px)!important;right:18px!important;left:auto!important;
  z-index:10032!important;width:min(460px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;
  max-height:min(70vh,560px)!important;overflow:auto!important;margin:0!important;padding:14px!important;
  border:1px solid #dce6f1!important;border-radius:15px!important;background:#fff!important;
  box-shadow:0 18px 42px rgba(10,35,67,.17)!important;pointer-events:none!important;
 }
-html body>header.site-header .zt-nav-search-panel.zt-nav-open{display:block!important;pointer-events:auto!important}
-html body>header.site-header .zt-nav-search-panel form{
+html body .site-header .zt-nav-search-panel.zt-nav-open{display:block!important;pointer-events:auto!important}
+html body .site-header .zt-nav-search-panel form{
  display:flex!important;align-items:stretch!important;gap:8px!important;width:100%!important;margin:0!important;padding:0!important;
 }
-html body>header.site-header .zt-nav-search-panel input[type="search"],
-html body>header.site-header .zt-nav-search-panel input[type="text"]{
+html body .site-header .zt-nav-search-panel input[type="search"],
+html body .site-header .zt-nav-search-panel input[type="text"]{
  display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;min-height:46px!important;
  margin:0!important;padding:11px 13px!important;border:1px solid #cbd8e7!important;border-radius:10px!important;
  background:#fff!important;color:#102b4d!important;font:450 14px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important;
  box-shadow:none!important;
 }
-html body>header.site-header .zt-nav-search-panel button[type="submit"]{
+html body .site-header .zt-nav-search-panel button[type="submit"]{
  display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:46px!important;
  margin:0!important;padding:10px 16px!important;border:0!important;border-radius:10px!important;
  background:#1767e7!important;color:#fff!important;font:800 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;cursor:pointer!important;
 }
-html body>header.site-header .zt-nav-search-panel .tool-header-empty,
-html body>header.site-header .zt-nav-search-panel .zt-search-empty{
+html body .site-header .zt-nav-search-panel .tool-header-empty,
+html body .site-header .zt-nav-search-panel .zt-search-empty{
  margin-top:9px!important;padding:8px!important;color:#718096!important;font-size:12px!important;
 }
 html body main .zt-category-search-inline{
@@ -303,42 +303,42 @@ html body main .zt-category-search-inline button[type="submit"]{
  background:#1767e7!important;color:#fff!important;font:800 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
 }
 @media(max-width:1100px){
- html body>header.site-header{min-height:68px!important;height:68px!important;max-height:68px!important}
- html body>header.site-header .header-inner{max-width:none!important;height:68px!important;min-height:68px!important;padding:0 18px!important;gap:10px!important}
- html body>header.site-header .top-nav{display:none!important}
- html body>header.site-header .zt-nav-menu-toggle{display:grid!important}
- html body>header.site-header .zt-nav-search-toggle{width:42px!important;min-width:42px!important;max-width:42px!important;flex-basis:42px!important;justify-content:center!important;padding:0!important}
- html body>header.site-header .zt-search-label,
- html body>header.site-header .zt-search-shortcut{display:none!important}
- html body>header.site-header .zt-nav-search-panel{right:12px!important}
+ html body .site-header{min-height:68px!important;height:68px!important;max-height:68px!important}
+ html body .site-header .header-inner{max-width:none!important;height:68px!important;min-height:68px!important;padding:0 18px!important;gap:10px!important}
+ html body .site-header .top-nav{display:none!important}
+ html body .site-header .zt-nav-menu-toggle{display:grid!important}
+ html body .site-header .zt-nav-search-toggle{width:42px!important;min-width:42px!important;max-width:42px!important;flex-basis:42px!important;justify-content:center!important;padding:0!important}
+ html body .site-header .zt-search-label,
+ html body .site-header .zt-search-shortcut{display:none!important}
+ html body .site-header .zt-nav-search-panel{right:12px!important}
 }
 @media(max-width:650px){
- html body>header.site-header{min-height:64px!important;height:64px!important;max-height:64px!important}
- html body>header.site-header .header-inner{height:64px!important;min-height:64px!important;padding:0 12px!important;gap:8px!important}
- html body>header.site-header .brand{gap:8px!important}
- html body>header.site-header .brand .brand-mark{width:36px!important;height:36px!important;flex-basis:36px!important;border-radius:11px!important;font-size:17px!important}
- html body>header.site-header .zt-brand-copy strong{font-size:15.5px!important}
- html body>header.site-header .zt-brand-copy small{display:none!important}
- html body>header.site-header .zt-nav-search-toggle,
- html body>header.site-header .zt-nav-menu-toggle{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important}
- html body>header.site-header .header-actions,
- html body>header.site-header .home-header-controls,
- html body>header.site-header .tools-header-controls,
- html body>header.site-header .category-header-controls,
- html body>header.site-header .math-header-controls,
- html body>header.site-header .digital-header-controls,
- html body>header.site-header .zt-nav-actions{gap:7px!important}
- html body>header.site-header .zt-nav-menu-panel{right:8px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important}
- html body>header.site-header .zt-nav-search-panel{right:8px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important;padding:11px!important}
- html body>header.site-header .zt-nav-search-panel form,
+ html body .site-header{min-height:64px!important;height:64px!important;max-height:64px!important}
+ html body .site-header .header-inner{height:64px!important;min-height:64px!important;padding:0 12px!important;gap:8px!important}
+ html body .site-header .brand{gap:8px!important}
+ html body .site-header .brand .brand-mark{width:36px!important;height:36px!important;flex-basis:36px!important;border-radius:11px!important;font-size:17px!important}
+ html body .site-header .zt-brand-copy strong{font-size:15.5px!important}
+ html body .site-header .zt-brand-copy small{display:none!important}
+ html body .site-header .zt-nav-search-toggle,
+ html body .site-header .zt-nav-menu-toggle{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important}
+ html body .site-header .header-actions,
+ html body .site-header .home-header-controls,
+ html body .site-header .tools-header-controls,
+ html body .site-header .category-header-controls,
+ html body .site-header .math-header-controls,
+ html body .site-header .digital-header-controls,
+ html body .site-header .zt-nav-actions{gap:7px!important}
+ html body .site-header .zt-nav-menu-panel{right:8px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important}
+ html body .site-header .zt-nav-search-panel{right:8px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important;padding:11px!important}
+ html body .site-header .zt-nav-search-panel form,
  html body main .zt-category-search-inline form{gap:7px!important}
  html body main .zt-category-search-inline{margin:12px 0 20px!important}
  html body main .zt-category-search-inline button[type="submit"]{padding:10px 12px!important}
 }
 @media(prefers-reduced-motion:reduce){
- html body>header.site-header .zt-category-panel,
- html body>header.site-header .zt-nav-menu-panel,
- html body>header.site-header .zt-nav-search-panel{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+ html body .site-header .zt-category-panel,
+ html body .site-header .zt-nav-menu-panel,
+ html body .site-header .zt-nav-search-panel{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
 
 `;
@@ -372,7 +372,7 @@ html body main .zt-category-search-inline button[type="submit"]{
  
  /* Keep each page's useful category search, but put it in the page content.
     The global header search button will focus this contextual field. */
- const contextualSearch=header.querySelector('#mathLocalSearch,#digitalLocalSearch,#categoryHeaderSearchPanel');
+ const contextualSearch=document.querySelector('#mathLocalSearch,#digitalLocalSearch,#categoryHeaderSearchPanel');
  if(contextualSearch){
   contextualSearch.classList.remove('category-header-panel','zt-nav-search-panel','zt-nav-open','is-open','open');
   contextualSearch.classList.add('zt-category-search-inline');
@@ -386,7 +386,7 @@ html body main .zt-category-search-inline button[type="submit"]{
   contextualSearch.style.setProperty('max-width','720px','important');
   contextualSearch.style.setProperty('height','auto','important');
   const main=document.querySelector('main');
-  if(main){
+  if(main&&!main.contains(contextualSearch)){
    const heading=main.querySelector('.heading')||main.querySelector('.category-intro')||main.querySelector('h1')?.parentElement;
    if(heading&&heading!==contextualSearch)heading.insertAdjacentElement('afterend',contextualSearch);
    else main.insertBefore(contextualSearch,main.firstChild);
@@ -479,6 +479,10 @@ html body main .zt-category-search-inline button[type="submit"]{
  menuBtn.classList.add('zt-nav-toggle','zt-nav-menu-toggle');menuBtn.type='button';
  menuBtn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
  menuBtn.setAttribute('aria-label','Open menu');menuBtn.title='Menu';
+ const menuBreakpoint=window.matchMedia('(max-width: 1100px)');
+ const syncMenuVisibility=()=>menuBtn.style.setProperty('display',menuBreakpoint.matches?'grid':'none','important');
+ syncMenuVisibility();
+ if(typeof menuBreakpoint.addEventListener==='function')menuBreakpoint.addEventListener('change',syncMenuVisibility);
  
  let searchButtons=[...header.querySelectorAll('button[id$="Search"],[data-zt-nav-toggle="search"]')];
  let searchBtn=searchButtons[0];
