@@ -85,10 +85,16 @@ try {
     ]);
   });
 
-  await check('Mobile category search filters the actual listed tools', async () => {
+  await check('Mobile header search focuses the category filter in page content', async () => {
     await fresh({ width: 390, height: 844 });
     await page.locator('#mathHeaderSearch').click();
-    assert.equal(await page.locator('#mathLocalSearch').evaluate(el => el.classList.contains('is-open')), true);
+    const searchBoxVisible = await page.locator('#mathLocalSearch').evaluate(el => {
+      const rect = el.getBoundingClientRect();
+      return getComputedStyle(el).display !== 'none' && rect.width > 0 && rect.height > 0;
+    });
+    assert.equal(searchBoxVisible, true, 'category search should be visible below the page heading');
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'mathLocalSearchInput',
+      'header search should focus the contextual category filter');
     await page.locator('#mathLocalSearchInput').fill('time');
     const results = page.locator('#mathLocalSearchResults a');
     assert.equal(await results.count(), 1);
