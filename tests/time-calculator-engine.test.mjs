@@ -44,4 +44,11 @@ assert.equal(engine.calculateClockOperation('10:30:00', 1.5, 0, 0, 'add').error,
 assert.equal(engine.calculateClockOperation('10:30:00', -1, 0, 0, 'add').error, 'invalid-inputs');
 assert.equal(engine.calculateClockOperation('bad', 1, 0, 0, 'add').error, 'invalid-inputs');
 
-console.log('Time calculator engine unit checks: 16 passed.');
+
+assert.equal(engine.execute({ operation: 'duration', start: '09:30:00', end: '17:15:00' }).data.decimalHours, '7.75');
+assert.equal(engine.execute({ operation: 'duration', start: '23:30:00', end: '01:15:00', nextDay: true }).data.seconds, 6300);
+assert.equal(engine.execute({ operation: 'duration', start: '23:30:00', end: '01:15:00' }).error.code, 'INVALID_RANGE');
+assert.equal(engine.execute({ operation: 'clock-operation', baseTime: '23:30:00', hours: 2, minutes: 30, seconds: 0, action: 'add' }).data.clockTime, '02:00:00 (next day)');
+assert.equal(engine.contractVersion, 1);
+
+console.log('Time calculator engine unit checks: passed.');
