@@ -74,7 +74,7 @@ html body>footer.zt-global-footer *{box-sizing:border-box!important}
 
 /* Shared footer geometry and spacing */
 html body>footer.zt-global-footer{
- display:block!important;position:relative!important;float:none!important;clear:both!important;
+ box-sizing:border-box!important;display:block!important;position:relative!important;float:none!important;clear:both!important;
  width:100%!important;max-width:none!important;min-width:0!important;min-height:112px!important;height:112px!important;
  margin:30px 0 0!important;padding:0!important;left:auto!important;right:auto!important;transform:none!important;
  overflow:hidden!important;background:#fff!important;background-image:none!important;border:0!important;
@@ -82,6 +82,7 @@ html body>footer.zt-global-footer{
  box-shadow:none!important;line-height:normal!important;
 }
 html body>footer.zt-global-footer::before,html body>footer.zt-global-footer::after{content:none!important;display:none!important}
+html body>footer.zt-global-footer.zt-global-footer>div.zt-footer-inner{display:flex!important;}
 .zt-footer-inner{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
  width:100%!important;max-width:1120px!important;height:72px!important;min-height:72px!important;
  margin:0 auto!important;padding:12px 18px!important}
