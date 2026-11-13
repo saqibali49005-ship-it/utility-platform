@@ -116,5 +116,5 @@ function initUnifiedHeader(){
 }
 
 function initAll(){initUnifiedHeader();initSearch();initReport();initToolCalculateTracking();}
-if(document.readyState==='loading'||document.readyState==='interactive')document.addEventListener('DOMContentLoaded',initAll,{once:true});else initAll();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAll,{once:true});else initAll();
 })();
