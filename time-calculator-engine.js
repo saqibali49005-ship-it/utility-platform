@@ -98,7 +98,31 @@
     };
   }
 
+
+  function execute(request) {
+    const input = request || {};
+    let result;
+    if (input.operation === 'duration') {
+      result = calculateDuration(input.start, input.end, input.nextDay === true);
+    } else if (input.operation === 'clock-operation') {
+      result = calculateClockOperation(input.baseTime, input.hours, input.minutes, input.seconds, input.action);
+    } else {
+      return { ok: false, error: { code: 'INVALID_OPERATION', message: 'Choose a supported time operation.' } };
+    }
+    if (!result.ok) {
+      const code = result.error === 'end-before-start' ? 'INVALID_RANGE' : 'INVALID_INPUT';
+      const message = result.error === 'end-before-start'
+        ? 'End time is earlier than start time.'
+        : 'Enter valid clock times and whole-number duration values.';
+      return { ok: false, error: { code, message } };
+    }
+    const { ok, ...data } = result;
+    return { ok: true, data };
+  }
+
   return Object.freeze({
+    contractVersion: 1,
+    execute,
     parseClockTime,
     decomposeDuration,
     describeDuration,
