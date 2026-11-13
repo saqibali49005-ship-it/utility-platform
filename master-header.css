@@ -76,3 +76,7 @@
 .site-header .brand::after,
 .category-page .site-header .brand::before,
 .category-page .site-header .brand::after{content:none!important;display:none!important}
+
+/* Explicit breakpoint control for the mobile-only hamburger. */
+#toolHeaderMenu{display:none!important}
+@media(max-width:820px){#toolHeaderMenu{display:grid!important}}
