@@ -15,6 +15,8 @@ jobs:
         with:
           node-version: 20
       - run: node scripts/validate-foundation.mjs
+      - name: Validate future-ready public tool catalog contract
+        run: node scripts/validate-platform-contract.mjs
       - name: Validate homepage site-name SEO signals
         run: node scripts/validate-site-name.mjs
       - name: Install Playwright
