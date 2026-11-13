@@ -81,11 +81,11 @@ async function inspectGeometry(path, viewportName, expectedHeaderHeight, expecte
 }
 
 async function inspectInteractions(path, viewportName) {
-  const menu = page.locator('#ztGlobalMenuToggle');
-  const menuPanel = page.locator('#ztGlobalMenuPanel');
-  const search = page.locator('#ztGlobalSearchToggle');
-  const searchPanel = page.locator('#ztGlobalSearchPanel');
-  const searchInput = page.locator('#ztGlobalSearchInput');
+  const menu = page.locator('.zt-nav-menu-toggle');
+  const menuPanel = page.locator('.zt-nav-menu-panel');
+  const search = page.locator('.zt-nav-search-toggle');
+  const searchPanel = page.locator('.zt-nav-search-panel');
+  const searchInput = searchPanel.locator('input[type="search"]');
 
   await menu.click();
   await menuPanel.waitFor({ state: 'visible' });
@@ -106,7 +106,7 @@ async function inspectInteractions(path, viewportName) {
   const searchBox = await searchPanel.boundingBox();
   assert.ok(searchBox.x >= 0 && searchBox.x + searchBox.width <= width, path + ' search panel fits viewport');
   await searchInput.fill('time');
-  assert.ok(await page.locator('#ztGlobalSearchResults').count() === 1, path + ' search results region exists');
+  assert.ok(await searchPanel.locator('.zt-search-results').count() === 1, path + ' search results region exists');
   await page.keyboard.press('Escape');
   await searchPanel.waitFor({ state: 'hidden' });
   assert.equal(await search.getAttribute('aria-expanded'), 'false', path + ' Escape closes search');
