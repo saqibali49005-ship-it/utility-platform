@@ -6,7 +6,7 @@ const root = process.cwd();
 const catalog = fs.readFileSync(path.join(root, 'tools-data.js'), 'utf8');
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
 
-const entries = [...catalog.matchAll(/\{slug:"([^"]+)",title:"([^"]+)",href:"([^"]+)",category:"([^"]+)",description:"([^"]*)",addedOrder:(\d+),keywords:\[([^\]]*)\]\}/g)]
+const entries = [...catalog.matchAll(/\{slug:"([^"]+)",(?:access:"public",execution:"browser",contractVersion:1,)?title:"([^"]+)",href:"([^"]+)",category:"([^"]+)",description:"([^"]*)",addedOrder:(\d+),keywords:\[([^\]]*)\]\}/g)]
   .map(m => ({ slug: m[1], title: m[2], href: m[3], category: m[4], order: Number(m[6]) }));
 
 if (!entries.length) throw new Error('No catalog entries parsed.');

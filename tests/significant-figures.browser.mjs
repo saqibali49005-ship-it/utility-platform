@@ -18,6 +18,10 @@ async function calculateAddition(expression) {
 
 try {
   await page.goto('http://127.0.0.1:4173/calculator/', { waitUntil: 'domcontentloaded' });
+  await check('Calculation engine is loaded separately from the page adapter', async () => {
+    assert.equal(await page.evaluate(() => typeof window.ZemToolsSignificantFiguresEngine.calculate), 'function');
+  });
+
   await check('Page loads with significant-figures calculator', async () => {
     assert.match(await page.title(), /Significant Figures Calculator/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/calculator/');

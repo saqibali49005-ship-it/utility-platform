@@ -15,6 +15,14 @@ jobs:
         with:
           node-version: 20
       - run: node scripts/validate-foundation.mjs
+      - name: Validate future-ready public tool catalog contract
+        run: node scripts/validate-platform-contract.mjs
+      - name: Run aspect ratio engine unit checks
+        run: node tests/aspect-ratio-engine.test.mjs
+      - name: Run time calculator engine unit checks
+        run: node tests/time-calculator-engine.test.mjs
+      - name: Run significant-figures engine unit checks
+        run: node tests/significant-figures-engine.test.mjs
       - name: Validate homepage site-name SEO signals
         run: node scripts/validate-site-name.mjs
       - name: Install Playwright
@@ -31,6 +39,10 @@ jobs:
           done
           cat /tmp/zemtools-http.log
           exit 1
+      - name: Run aspect ratio calculator browser regression tests
+        run: node tests/aspect-ratio-calculator.browser.mjs
+      - name: Run time calculator browser regression tests
+        run: node tests/time-calculator.browser.mjs
       - name: Run Math & Science category browser regression tests
         run: node tests/math-science-category.browser.mjs
       - name: Run sitewide responsive and Home navigation browser audit

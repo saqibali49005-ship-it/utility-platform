@@ -172,33 +172,34 @@ menuBtn&&menuBtn.addEventListener('click',function(e){e.stopPropagation();const 
 document.addEventListener('click',function(e){if(!e.target.closest('#toolHeaderSearchPanel')&&!e.target.closest('#toolHeaderSearch'))closeSearch();if(!e.target.closest('#toolHeaderMenuPanel')&&!e.target.closest('#toolHeaderMenu'))closeMenu()});
 })();
 </script>
+<script src="/aspect-ratio-engine.js"></script>
 <script>
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
+const engine=window.ZemToolsAspectRatioEngine;
+if(!engine) throw new Error('Aspect ratio calculation engine failed to load.');
 const state={lastExport:null};
 function num(id){const n=Number($(id).value);return Number.isFinite(n)&&n>0?n:null}
-function gcd(a,b){a=Math.round(Math.abs(a));b=Math.round(Math.abs(b));while(b){const t=a%b;a=b;b=t}return a||1}
-function ratio(a,b){const g=gcd(a,b);return (a/g)+':'+(b/g)}
 function set(el,html){el.innerHTML=html}
 function validPair(a,b){return a!==null&&b!==null}
 function calcRatio(){
  const w=num('width'),h=num('height');if(!validPair(w,h)){set($('ratioResult'),'<strong>Enter positive width and height values.</strong>');return}
- const r=ratio(w,h),dec=(w/h).toFixed(4);
+ const calculated=engine.calculateRatio(w,h),r=calculated.ratio,dec=calculated.decimal;
  state.lastExport={ratio:r,width:w,height:h,source:'Find ratio'};set($('ratioResult'),'<div class="big">'+r+'</div><div class="result-grid"><div class="stat"><span>Width</span><strong>'+w.toLocaleString()+'</strong></div><div class="stat"><span>Height</span><strong>'+h.toLocaleString()+'</strong></div><div class="stat"><span>Simplified</span><strong>'+r+'</strong></div><div class="stat"><span>Decimal</span><strong>'+dec+':1</strong></div></div>');
  updatePreview(w/h,r)
 }
 function solve(){
  const rw=num('ratioW'),rh=num('ratioH'),known=num('knownValue');if(!validPair(rw,rh)||known===null){set($('sizeResult'),'<strong>Enter valid ratio and dimension values.</strong>');return}
- let w,h;if($('knownDimension').value==='width'){w=known;h=known*rh/rw}else{h=known;w=known*rw/rh}
- w=Math.round(w);h=Math.round(h);const r=ratio(rw,rh);
+ const calculated=engine.solveMissingDimension(rw,rh,$('knownDimension').value,known);
+ const w=calculated.width,h=calculated.height,r=calculated.ratio;
  state.lastExport={ratio:r,width:w,height:h,source:'Missing dimension'};set($('sizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>At <strong>'+r+'</strong>, '+$('knownDimension').value+' '+known.toLocaleString()+' px gives a matching '+($('knownDimension').value==='width'?'height':'width')+' of '+($('knownDimension').value==='width'?h:w).toLocaleString()+' px.</p>');
  updatePreview(rw/rh,r)
 }
 function resize(){
  const ow=num('origW'),oh=num('origH'),target=num('targetValue');if(!validPair(ow,oh)||target===null){set($('resizeResult'),'<strong>Enter valid original and target dimensions.</strong>');return}
- let w,h;if($('targetDimension').value==='width'){w=Math.round(target);h=Math.round(target*oh/ow)}else{h=Math.round(target);w=Math.round(target*ow/oh)}
- const r=ratio(ow,oh),scale=$('targetDimension').value==='width'?w/ow:h/oh;
+ const calculated=engine.resizeDimensions(ow,oh,$('targetDimension').value,target);
+ const w=calculated.width,h=calculated.height,r=calculated.ratio,scale=calculated.scale;
  state.lastExport={ratio:r,width:w,height:h,source:'Resize'};set($('resizeResult'),'<div class="big">'+w.toLocaleString()+' × '+h.toLocaleString()+' px</div><p>Original ratio: <strong>'+r+'</strong> · Scale: <strong>'+(scale*100).toFixed(2)+'%</strong></p>');
  updatePreview(w/h,r)
 }
