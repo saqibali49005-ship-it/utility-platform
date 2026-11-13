@@ -28,4 +28,12 @@ assert.equal(engine.calculate('multiply', { expression: '1 ÷ 0' }).error, 'Divi
 assert.equal(engine.calculate('round', { number: '5', target: '101' }).ok, false);
 assert.equal(engine.calculate('count', { number: '' }).error, 'Enter a number.');
 
-console.log('Significant-figures engine unit checks: 15 passed.');
+
+assert.equal(engine.execute({ operation: 'count', params: { number: '0.004560' } }).data.value, '4');
+assert.equal(engine.execute({ operation: 'add', params: { expression: '12.11 + 18.0' } }).data.value, '30.1');
+assert.equal(engine.execute({ operation: 'multiply', params: { expression: '2.50 × 4.0' } }).data.value, '1.0e+1');
+assert.equal(engine.execute({ operation: 'round', params: { number: '9.996', target: '3' } }).data.value, '1.00e+1');
+assert.equal(engine.execute({ operation: 'divide' }).error.code, 'INVALID_INPUT');
+assert.equal(engine.contractVersion, 1);
+
+console.log('Significant-figures engine unit checks: passed.');
