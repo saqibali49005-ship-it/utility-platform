@@ -42,6 +42,16 @@ When API or server-side processing becomes a real requirement, extract each calc
 
 Do not mass-refactor all 20 tools now. Migrate one representative tool at a time with regression tests before repeating the pattern.
 
+### Shared calculation engine contract (version 1)
+
+Each extracted engine exports a stable `execute(request)` entry point and `contractVersion: 1`. The current three engines use the same response envelope:
+
+- Success: `{ ok: true, data: { ... } }`
+- Failure: `{ ok: false, error: { code: "...", message: "..." } }`
+
+The engines contain deterministic calculation logic only. They do not perform network requests, read secrets, authenticate users, grant paid entitlements, or store personal data. A future API handler can validate an HTTP request, call the same engine entry point, and enforce rate limits and authorization on the server.
+
+
 ### 2. Accounts and identity (deferred)
 
 When needed, introduce a server-verified identity/session layer and account lifecycle (registration, login, recovery, deletion). Do not store passwords or session secrets in static files, browser local storage, or the public tool catalog.
