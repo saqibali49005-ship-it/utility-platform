@@ -134,7 +134,7 @@ function initUnifiedFooter(){
 function initReport(){
  if(!document.body.classList.contains('tool-page')||document.getElementById('reportProblemBtn'))return;
  if(!document.getElementById('reportProblemStyle')){
-  const st=document.createElement('style');st.id='reportProblemStyle';st.textContent='.report-problem-btn{position:fixed;right:16px;bottom:16px;z-index:9998;border:1px solid #c7d7ea;border-radius:999px;background:#fff;color:#0b2f66;padding:10px 14px;box-shadow:0 8px 24px rgba(15,23,42,.14);font:800 13px/1.1 system-ui,-apple-system,Segoe UI,sans-serif;cursor:pointer}.report-problem-btn:hover,.report-problem-btn:focus{background:#f5f9ff;border-color:#8eb5df;outline:none}.report-problem-btn:focus-visible{box-shadow:0 0 0 3px rgba(39,120,234,.2),0 8px 24px rgba(15,23,42,.14)}@media(max-width:650px){.report-problem-btn{right:12px;bottom:12px;padding:9px 12px;font-size:12px}}';document.head.appendChild(st);
+  const st=document.createElement('style');st.id='reportProblemStyle';st.textContent='.report-problem-btn{position:fixed;right:16px;bottom:16px;z-index:9998;border:1px solid #c7d7ea;border-radius:999px;background:#fff;color:#0b2f66;padding:10px 14px;box-shadow:0 8px 24px rgba(15,23,42,.14);font:800 13px/1.1 system-ui,-apple-system,Segoe UI,sans-serif;cursor:pointer;transition:opacity .14s ease,visibility .14s ease}.report-problem-btn:hover,.report-problem-btn:focus{background:#f5f9ff;border-color:#8eb5df;outline:none}.report-problem-btn:focus-visible{box-shadow:0 0 0 3px rgba(39,120,234,.2),0 8px 24px rgba(15,23,42,.14)}.report-problem-btn.is-footer-visible{opacity:0;visibility:hidden;pointer-events:none}@media(max-width:650px){.report-problem-btn{right:12px;bottom:12px;padding:9px 12px;font-size:12px}}';document.head.appendChild(st);
  }
  const btn=document.createElement('button');btn.id='reportProblemBtn';btn.className='report-problem-btn';btn.type='button';btn.setAttribute('aria-label','Report a problem with this tool');btn.textContent='⚑ Report a problem';
  btn.addEventListener('click',()=>{
@@ -165,6 +165,13 @@ function initReport(){
   window.open(url,'_blank','noopener,noreferrer');
  });
  document.body.appendChild(btn);
+ const footer=document.querySelector('footer.zem-footer')||document.querySelector('footer');
+ if(footer&&typeof IntersectionObserver==='function'){
+  const footerObserver=new IntersectionObserver(entries=>{
+   for(const entry of entries)btn.classList.toggle('is-footer-visible',entry.isIntersecting);
+  },{threshold:0});
+  footerObserver.observe(footer);
+ }
 }
 function initAll(){initUnifiedHeader();initSearch();initUnifiedFooter();initReport();initToolCalculateTracking();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){initPreviewNavigation();initAll();},{once:true});else{initPreviewNavigation();initAll();}
