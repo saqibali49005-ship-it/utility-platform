@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<head><script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
 <base href="/">
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Word Counter &amp; Character Counter Online | Text Counter</title>
@@ -54,4 +54,4 @@ async function copy(){const t=$('inputText').value;if(!t)return;try{if(navigator
 $('inputText').addEventListener('input',count);$('copyBtn').addEventListener('click',copy);$('clearBtn').addEventListener('click',()=>{$('inputText').value='';limit=0;$('limitInput').value='';count();$('status').textContent='Cleared. Start typing or paste text.';$('inputText').focus()});$('sampleBtn').addEventListener('click',()=>{$('inputText').value='ZemTools helps you check text length quickly.\n\nUse the counter for articles, social posts, SEO copy, emails and developer notes.';limit=160;$('limitInput').value=160;count()});document.querySelectorAll('[data-limit]').forEach(b=>b.addEventListener('click',()=>{limit=Number(b.dataset.limit);$('limitInput').value=limit;count()}));$('limitInput').addEventListener('input',()=>{limit=Math.max(0,Number($('limitInput').value)||0);count()});document.querySelectorAll('.faq button').forEach(b=>b.addEventListener('click',()=>{const i=b.parentElement,o=i.classList.toggle('open');b.querySelector('.faq-icon').textContent=o?'−':'+'}));count();
 })();
 </script><style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
-<script src="/tools-data.js"></script><script src="/master-ui.js?v=20261114-shell-final"></script></body></html>
+<script src="/master-ui.js?v=20261114-shell-final"></script></body></html>
