@@ -253,3 +253,6 @@ body:has(main.info-page) header.site-header[data-zem-unified="1"] .header-inner{
   pointer-events:auto!important;position:relative!important;z-index:1!important;cursor:pointer!important;
  }
 }
+
+/* Desktop-only safety: legacy icon-button styles must never reveal the hamburger above the mobile breakpoint. */
+@media(min-width:821px){.site-header .header-actions .menu-btn{display:none!important}}
