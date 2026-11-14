@@ -38,7 +38,7 @@ body.find-tool textarea{width:100%;min-height:310px;resize:vertical;border:1px s
 </main>
 <footer aria-label="Site footer"></footer>
 <script src="tools-data.js"></script>
-<script src="master-ui.js?v=20261114-7"></script><script>
+<script src="master-ui.js?v=20261114-8"></script><script>
 (()=>{'use strict';const $=id=>document.getElementById(id);
 function esc(s){return s.replace(/[.*+?^$()|{}\[\]\\]/g,'\\$&')}
 function pattern(){const q=$('findText').value;if(!q)return null;let p=esc(q);if($('wholeWord').checked)p='(?<![\\p{L}\\p{N}_])'+p+'(?![\\p{L}\\p{N}_])';try{return new RegExp(p,$('matchCase').checked?'gu':'giu')}catch(e){return null}}
