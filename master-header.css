@@ -3,9 +3,6 @@
 .site-header.site-header:not([data-zem-unified="1"]){visibility:hidden!important}
 .site-header.site-header .brand::before,
 .site-header.site-header .brand::after{content:none!important;display:none!important}
-.site-header.site-header .brand .brand-mark,
-.site-header.site-header .brand .brand-copy,
-.site-header.site-header .brand>div:last-child{display:initial!important;visibility:visible!important;opacity:1!important}
 .site-header.site-header .header-inner{max-width:1180px!important;min-height:76px!important;margin:0 auto!important;padding:10px 0!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:28px!important;flex-wrap:nowrap!important;overflow:visible!important}
 .site-header.site-header .brand{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:11px!important;min-width:190px!important;flex:0 0 auto!important;margin:0!important;padding:0!important}
 .site-header.site-header .top-nav{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;flex:1 1 auto!important;min-width:0!important;width:auto!important;margin:0!important;padding:0!important;order:initial!important;flex-wrap:nowrap!important;overflow:visible!important;background:none!important;border:0!important;box-shadow:none!important}
