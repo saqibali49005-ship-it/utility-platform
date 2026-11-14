@@ -87,7 +87,7 @@ h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:
 .math-local-search-empty{padding:8px 10px;color:#64748b;font-size:13px}
 </style>
 <link rel="stylesheet" href="master-header.css?v=20261112-2">
-<script src="master-ui.js?v=20261114-7" defer></script>
+<script src="master-ui.js?v=20261114-8" defer></script>
 
 <style id="math-science-layout-final">
 /* Consistent category-page alignment: content follows the shared 1120px header grid. */
@@ -137,38 +137,5 @@ h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:
 </section>
 <footer aria-label="Site footer"></footer>
 
-</main><script id="math-header-controls-js">
-(function(){
- const b=document.getElementById('mathHeaderSearch'),m=document.getElementById('mathHeaderMenu'),p=document.getElementById('mathHeaderMenuPanel');
- const s=document.getElementById('mathLocalSearch'),i=document.getElementById('mathLocalSearchInput'),r=document.getElementById('mathLocalSearchResults');
- const items=[{n:'Significant Figures Calculator',u:'calculator/'},{n:'Time Calculator',u:'time-calculator/'},{n:'Business Hours Calculator',u:'business-hours-calculator/'}];
- if(b&&s&&i){
-  b.addEventListener('click',function(){
-   const o=!s.classList.contains('is-open'); s.classList.toggle('is-open',o);
-   if(o&&p)p.classList.remove('is-open');
-   if(o&&m){m.setAttribute('aria-expanded','false');m.setAttribute('aria-label','Open menu');}
-   if(o){i.focus();render('');}
-  });
-  function render(q){const x=q.trim().toLowerCase();const a=items.filter(v=>v.n.toLowerCase().includes(x));r.innerHTML=a.length?a.map(v=>'<a href="'+v.u+'">'+v.n+'</a>').join(''):'<div class="math-local-search-empty">No matching Math &amp; Science tool found.</div>';}
-  i.addEventListener('input',function(){render(i.value)});
- }
- if(m&&p){
-  m.addEventListener('click',function(){
-   const o=!p.classList.contains('is-open');
-   p.classList.toggle('is-open',o);
-   if(o&&s)s.classList.remove('is-open');
-   if(o&&b)b.setAttribute('aria-expanded','false');
-   m.setAttribute('aria-expanded',String(o));
-   m.setAttribute('aria-label',o?'Close menu':'Open menu');
-  });
-  document.addEventListener('click',function(e){
-   if(!p.contains(e.target)&&e.target!==m&&!m.contains(e.target)){
-    p.classList.remove('is-open');
-    m.setAttribute('aria-expanded','false');
-    m.setAttribute('aria-label','Open menu');
-   }
-  });
- }
-})();
-</script>
+</main>
 </body></html>
