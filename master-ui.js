@@ -83,7 +83,7 @@ function initUnifiedHeader(){
  function revealUnifiedHeader(){const prepaint=document.getElementById('zem-header-prepaint');if(prepaint)prepaint.remove();header.dataset.zemUnified='1';header.style.visibility='visible';}
  link.addEventListener('load',revealUnifiedHeader,{once:true});
  link.addEventListener('error',revealUnifiedHeader,{once:true});
- link.href='/master-header.css?v=20261114-5';
+ link.href='/master-header.css?v=20261114-6';
  const toggle=header.querySelector('#zemCategoriesToggle'),panel=header.querySelector('#zemCategoriesPanel');
  if(toggle&&panel){toggle.addEventListener('click',e=>{e.stopPropagation();const open=!panel.classList.contains('is-open');panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));});}
  document.addEventListener('click',e=>{if(!e.target.closest('#zemCategoriesPanel')&&!e.target.closest('#zemCategoriesToggle')){panel?.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false');}});
