@@ -196,7 +196,7 @@ body:has(main.info-page) header.site-header[data-zem-unified="1"] .header-action
  display:flex!important;align-items:center!important;gap:7px!important;flex:0 0 auto!important;margin-left:auto!important;
 }
 body:has(main.info-page) header.site-header[data-zem-unified="1"] .icon-btn{
- width:40px!important;height:40px!important;display:grid!important;place-items:center!important;
+ width:40px!important;height:40px!important;place-items:center!important;
  padding:0!important;border:1px solid #dbe3ed!important;border-radius:12px!important;
  background:#fff!important;color:#334155!important;cursor:pointer!important;
 }
