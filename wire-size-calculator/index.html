@@ -88,6 +88,36 @@
 <article class="card"><h2>Formula</h2><div class="formula">Vdrop = I × R × path factor</div><p>The path factor is 2 for DC and single-phase circuits and √3 for balanced three-phase calculations.</p></article>
 </section>
 
+<section class="card">
+<h2>How to use this wire size calculator</h2>
+<ol>
+<li><strong>Choose the circuit type.</strong> Select DC, single-phase AC or balanced three-phase AC so the calculator uses the matching current and circuit-path relationship.</li>
+<li><strong>Enter the load.</strong> Use the design current when it is known. You can also enter power; for AC calculations, provide the power factor when it applies.</li>
+<li><strong>Enter system voltage.</strong> Use the nominal voltage for the cable run. For a solar DC run, use the voltage relevant to that actual run rather than assuming every solar circuit is the same.</li>
+<li><strong>Enter one-way cable length.</strong> Measure the physical distance from the source to the load. Do not enter the combined outgoing-and-return length; the calculator applies its path factor.</li>
+<li><strong>Select material and voltage-drop target.</strong> Choose copper or aluminum and a target suitable for your design brief. A smaller permitted voltage drop can require a larger conductor.</li>
+</ol>
+<p>After calculating, review the displayed voltage drop and the assumptions behind the result. Then check ampacity, protection, installation conditions and the applicable electrical requirements separately before specifying a cable.</p>
+</section>
+
+<section class="card">
+<h2>Worked example: a 48 V DC battery cable run</h2>
+<p>For a simple planning example, use the calculator's default values: 48 V DC, 60 A, a 5 m one-way run, copper conductor and a 2% voltage-drop target. These are example inputs, not a recommendation for a particular installation.</p>
+<ul>
+<li><strong>Allowed voltage drop:</strong> 2% of 48 V = 0.96 V.</li>
+<li><strong>Calculated minimum cross-sectional area:</strong> approximately 10.78 mm² using the calculator's fixed copper-resistance model.</li>
+<li><strong>Next size in the calculator's metric size list:</strong> 16 mm².</li>
+<li><strong>Estimated drop at 16 mm²:</strong> approximately 0.65 V, or 1.35% of 48 V.</li>
+</ul>
+<p>The example shows why the calculator rounds up to a listed metric size that meets the selected voltage-drop target under its model. It does <strong>not</strong> prove that the cable's current-carrying capacity, fuse, terminals or installation are suitable.</p>
+</section>
+
+<section class="card">
+<h2>What this voltage-drop estimate does not model</h2>
+<p>The calculation uses fixed conductor-resistivity values and a simplified resistance-based voltage-drop model. It does not calculate cable ampacity, conductor operating-temperature corrections, AC cable reactance, motor starting or locked-rotor current, short-circuit withstand, protective-device ratings or installation-specific correction factors.</p>
+<p>Those checks can change the required cable size. Use the cable manufacturer's data, the equipment instructions and the electrical code adopted for the installation. Where the design is safety-critical, have the selection checked by a qualified electrician or electrical designer.</p>
+</section>
+
 <section class="card"><h2>Wire-size result: what to verify next</h2><p>The recommendation on this page is a voltage-drop planning result based on the values entered. It should not be treated as a final cable specification or as proof that a conductor can safely carry the load.</p><h3>Before selecting a cable</h3><ul><li>Check the conductor's allowable ampacity for its material, insulation temperature rating, installation method and ambient conditions.</li><li>Apply required adjustment and correction factors for grouped conductors and environmental conditions.</li><li>Confirm terminal temperature limitations, overcurrent protection, short-circuit requirements, grounding and bonding.</li><li>Use the manufacturer's datasheet for the exact cable construction and the locally adopted electrical code.</li></ul><p>For a second planning comparison, use the <a href="https://www.southwire.com/calculator-vdrop" rel="noopener noreferrer">Southwire Voltage Drop Calculator</a> where its supported inputs match your circuit. Different tools may use different conductor-temperature or resistance assumptions, so compare the assumptions as well as the result.</p><p class="sub">For installations governed by the US NEC, consult the edition adopted by the authority having jurisdiction and the official <a href="https://www.nfpa.org/codes-and-standards/nfpa-70-standard-development/70" rel="noopener noreferrer">NFPA 70 information</a>. This calculator does not replace a qualified electrical design review.</p></section>
 <section class="card faq-card">
 <h2>Frequently Asked Questions</h2>
@@ -95,6 +125,9 @@
 <div class="faq"><button type="button"><span>Can I use watts instead of amps?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. For DC and single-phase AC the calculator derives current from watts and voltage, with power factor applied when relevant. For three-phase AC, it uses the three-phase power relationship and the selected power factor.</div></div>
 <div class="faq"><button type="button"><span>Does a passing voltage-drop result mean the cable is safe?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Voltage drop is only one design check. Ampacity, insulation rating, installation method, ambient temperature, grouping, protection and local electrical requirements must also be checked before an installation is finalized.</div></div>
 <div class="faq"><button type="button"><span>Why does low-voltage wiring often need a larger cable?</span><span class="faq-icon">+</span></button><div class="faq-answer">For the same power, lower voltage requires more current. Higher current creates more voltage drop and resistive loss, so a low-voltage 12V, 24V or 48V run can need substantially more conductor area than a higher-voltage circuit of the same power.</div></div>
+<div class="faq"><button type="button"><span>Can I use this for an inverter or battery cable?</span><span class="faq-icon">+</span></button><div class="faq-answer">You can use DC mode for a voltage-drop planning estimate when you already know the design current, nominal voltage and one-way cable distance. The result does not account for inverter surge current, battery fault current, fuse selection, terminal limits or the cable maker's installation requirements. Check the inverter manual and cable datasheet before choosing a cable.</div></div>
+<div class="faq"><button type="button"><span>Does this calculator check ampacity or current-carrying capacity?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. It selects a listed metric cross-section to meet the chosen voltage-drop target in its simplified model. Ampacity depends on cable construction, insulation rating, installation method, ambient temperature, grouping and local electrical rules, and must be checked separately.</div></div>
+<div class="faq"><button type="button"><span>Can I use it to choose a cable for an air compressor or motor?</span><span class="faq-icon">+</span></button><div class="faq-answer">Use it only as a voltage-drop estimate when the correct design current and one-way run length are already known. It does not calculate motor starting or locked-rotor current, overload protection or motor-circuit requirements, so it must not be used by itself to select a motor cable.</div></div>
 <div class="faq"><button type="button"><span>Are the AWG and mm² values exact equivalents?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. AWG and metric cross-sectional sizes are different standards. The calculator shows an approximate AWG equivalent for the selected metric size; use the actual cable datasheet and applicable standard when purchasing or specifying cable.</div></div>
 </section>
 
