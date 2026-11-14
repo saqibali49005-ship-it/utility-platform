@@ -1,5 +1,7 @@
 (function(){'use strict';
-if(!window.__zemtoolsGa4Loaded){
+const analyticsHost=location.hostname.toLowerCase();
+const isProductionHost=analyticsHost==='zemtools.com'||analyticsHost==='www.zemtools.com';
+if(isProductionHost&&!window.__zemtoolsGa4Loaded){
  window.__zemtoolsGa4Loaded=true;
  window.dataLayer=window.dataLayer||[];
  window.gtag=function(){window.dataLayer.push(arguments);};
