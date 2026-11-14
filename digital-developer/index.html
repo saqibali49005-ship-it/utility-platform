@@ -39,7 +39,7 @@ h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:
 <script src="tools-data.js"></script>
 
 <link rel="stylesheet" href="master-header.css?v=20261112-2">
-<script src="master-ui.js?v=20261114-7" defer></script>
+<script src="master-ui.js?v=20261114-8" defer></script>
 </head>
 <body class="category-page digital-developer-page">
 <header class="site-header" aria-label="Site header"></header>
@@ -110,13 +110,5 @@ h1{font-size:clamp(30px,7vw,44px);line-height:1.15;margin:0 0 10px}.muted{color:
 
 <footer aria-label="Site footer"></footer>
 
-</main><script id="digital-header-controls-js">
-(function(){
- const b=document.getElementById('digitalHeaderSearch'),m=document.getElementById('digitalHeaderMenu'),p=document.getElementById('digitalHeaderMenuPanel'),s=document.getElementById('digitalLocalSearch'),i=document.getElementById('digitalLocalSearchInput'),r=document.getElementById('digitalLocalSearchResults');
- const items=[{n:'Aspect Ratio Calculator',u:'aspect-ratio-calculator/'},{n:'Find and Replace Text Online',u:'find-replace/'},{n:'Word Counter & Character Counter',u:'word-counter/'},{n:'Case Converter Online',u:'case-converter/'},{n:'Remove Line Breaks Online',u:'remove-line-breaks/'},{n:'Duplicate Line Remover',u:'duplicate-line-remover/'},{n:'Text Cleaner Online',u:'text-cleaner/'},{n:'UUID Generator & Validator',u:'uuid-generator-calculator/'}];
- function render(q){const x=q.trim().toLowerCase();const a=items.filter(v=>v.n.toLowerCase().includes(x));r.innerHTML=a.length?a.map(v=>'<a href="'+v.u+'">'+v.n+'</a>').join(''):'<div class="digital-local-search-empty">No matching Digital &amp; Developer tool found.</div>';}
- if(b&&s&&i){b.addEventListener('click',function(){const o=!s.classList.contains('is-open');s.classList.toggle('is-open',o);if(o){i.focus();render('');}});i.addEventListener('input',function(){render(i.value)});}
- if(m&&p){m.addEventListener('click',function(){const o=!p.classList.contains('is-open');p.classList.toggle('is-open',o);m.setAttribute('aria-expanded',String(o));m.setAttribute('aria-label',o?'Close menu':'Open menu');});document.addEventListener('click',function(e){if(!p.contains(e.target)&&e.target!==m&&!m.contains(e.target)){p.classList.remove('is-open');m.setAttribute('aria-expanded','false');m.setAttribute('aria-label','Open menu');}});}
-})();
-</script>
+</main>
 </body></html>
