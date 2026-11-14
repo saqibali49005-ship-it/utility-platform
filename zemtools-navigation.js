@@ -170,6 +170,20 @@ html body.info-page-shell .site-header .brand .brand-mark,
 html body .site-header .brand .brand-mark{display:grid!important;visibility:visible!important;opacity:1!important;width:42px!important;height:42px!important;flex:0 0 42px!important;place-items:center!important;border-radius:13px!important;background:linear-gradient(145deg,#1d4ed8,#0785c8)!important;color:#fff!important;font-size:21px!important;font-weight:900!important;box-shadow:0 6px 15px rgba(29,78,216,.18)!important}
 html body .site-header .brand::before,
 html body .site-header .brand::after{content:none!important;display:none!important}
+
+.site-header .zt-brand{display:flex!important;align-items:center!important;gap:11px!important;flex:0 0 190px!important;min-width:190px!important;padding:0!important;color:#101d33!important;text-decoration:none!important;white-space:nowrap!important}
+.site-header .zt-brand .brand-mark{width:42px!important;height:42px!important;display:grid!important;place-items:center!important;flex:0 0 42px!important;border-radius:13px!important;background:linear-gradient(145deg,#1d4ed8,#0785c8)!important;color:#fff!important;font-size:21px!important;font-weight:900!important;box-shadow:0 6px 15px rgba(29,78,216,.18)!important}
+.site-header .zt-brand .brand-copy{display:flex!important;flex-direction:column!important;gap:2px!important;min-width:0!important;line-height:1.12!important}
+.site-header .zt-brand .brand-copy strong{display:block!important;color:#111c30!important;font-size:17px!important;font-weight:850!important;letter-spacing:-.4px!important}
+.site-header .zt-brand .brand-copy small{display:block!important;color:#718096!important;font-size:10px!important;font-weight:600!important;letter-spacing:.1px!important}
+@media(max-width:1050px) and (min-width:981px){.site-header .zt-brand{flex-basis:175px!important;min-width:175px!important}}
+@media(max-width:980px){
+ .site-header .zt-brand{flex:1 1 auto!important;min-width:0!important;gap:9px!important}
+ .site-header .zt-brand .brand-mark{width:39px!important;height:39px!important;flex-basis:39px!important;border-radius:12px!important;font-size:19px!important}
+ .site-header .zt-brand .brand-copy strong{font-size:16px!important}
+ .site-header .zt-brand .brand-copy small{font-size:9.5px!important}
+}
+@media(max-width:420px){.site-header .zt-brand .brand-copy small{font-size:9px!important}}
 `;
  const style=document.createElement('style');
  style.id='zemtools-navigation-v1';
@@ -183,6 +197,8 @@ html body .site-header .brand::after{content:none!important;display:none!importa
  if(brand){
   brand.setAttribute('href','/');
   brand.setAttribute('aria-label','ZemTools home');
+  brand.classList.remove('brand');
+  brand.classList.add('zt-brand');
   brand.innerHTML='<span class="brand-mark" aria-hidden="true">Z</span><span class="brand-copy"><strong>ZemTools</strong><small>Practical online tools</small></span>';
  }
  const topNav=header.querySelector('.top-nav');
