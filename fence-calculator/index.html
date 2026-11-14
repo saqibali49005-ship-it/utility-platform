@@ -7,10 +7,10 @@
 <meta name="theme-color" content="#111827"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <title>Wood Fence Material Calculator | Posts, Rails &amp; Concrete</title>
-<meta name="description" content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan gate openings, multiple runs and material costs."/>
+<meta name="description" content="Calculate wood fence posts, rails, pickets or panels, and concrete bags. Plan multiple runs, shared corners, gate openings and material costs."/>
 <link href="https://zemtools.com/fence-calculator/" rel="canonical"/>
 <meta content="Wood Fence Material Calculator | Posts, Rails &amp; Concrete" property="og:title"/>
-<meta content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan gate openings, multiple runs and material costs." property="og:description"/>
+<meta content="Calculate wood fence posts, rails, pickets or panels, and concrete bags. Plan multiple runs, shared corners, gate openings and material costs." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://zemtools.com/fence-calculator/" property="og:url"/>
 <meta content="https://zemtools.com/social-preview.png" property="og:image"/>
@@ -19,7 +19,7 @@
 <meta content="ZemTools — Practical Online Tools" name="twitter:image:alt"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Wood Fence Material Calculator | Posts, Rails &amp; Concrete" name="twitter:title"/>
-<meta content="Estimate wood fence posts, rails, pickets, panels and concrete. Plan gate openings, multiple runs and material costs." name="twitter:description"/>
+<meta content="Calculate wood fence posts, rails, pickets or panels, and concrete bags. Plan multiple runs, shared corners, gate openings and material costs." name="twitter:description"/>
 <meta content="index,follow" name="robots"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Wood Fence Material Calculator","url":"https://zemtools.com/fence-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Estimate wood fence posts, rails, pickets or panels, concrete and optional material cost for a fence project.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -231,7 +231,7 @@ body.fence-tool .site-header .mobile-nav.is-open a:hover,body.fence-tool .site-h
 <p class="section-label">Post-hole concrete</p>
 <div class="tool-grid">
 <div class="field"><label for="holeDiameter">Post-hole diameter <span class="unit-small">(in)</span></label><input id="holeDiameter" type="number" min="0.1" step="0.1" value="8" inputmode="decimal"/></div>
-<div class="field"><label for="holeDepth">Post-hole depth <span class="unit-small">(in)</span></label><input id="holeDepth" type="number" min="0.1" step="0.1" value="36" inputmode="decimal"/></div>
+<div class="field"><label for="holeDepth">Post-hole depth <span class="unit-small">(in)</span></label><input id="holeDepth" type="number" min="0.1" step="0.1" value="36" inputmode="decimal"/><span class="field-help">Enter the depth specified for your fence design or local requirements. The 36 in default is an example input, not a recommendation.</span></div>
 <div class="field"><label for="gravelBase">Gravel base depth <span class="unit-small">(in)</span></label><input id="gravelBase" type="number" min="0" step="0.1" value="3" inputmode="decimal"/><span class="field-help">Removed from the concrete depth; set to 0 when you are not using a gravel base.</span></div>
 <div class="field"><label for="postWidth">Post width / diameter <span class="unit-small">(in)</span></label><input id="postWidth" type="number" min="0.1" step="0.1" value="3.5" inputmode="decimal"/></div>
 <div class="field"><label for="postShape">Post shape</label><select id="postShape"><option value="square" selected>Square / rectangular</option><option value="round">Round</option></select></div>
@@ -330,6 +330,7 @@ Concrete = (hole volume − post displacement) × total posts
 <details><summary>How does adding a second fence run affect posts?</summary><p>Each run has its own end positions, so the calculator estimates post positions separately for every non-empty run, then subtracts the shared-corner count you enter. Only count a shared corner when two runs really use the same physical post.</p></details>
 <details><summary>How does a gate affect pickets or panels?</summary><p>Total gate width is removed from the covered fence length. Because exact gate locations are not entered, the opening width is distributed proportionally across the runs for material estimates. Two gate-position posts per opening are added as a conservative allowance; this can overcount when a gate post replaces an ordinary line post. Gate hardware and exact gate-frame materials are not included.</p></details>
 <details><summary>How is concrete estimated?</summary><p>The tool calculates the volume of the cylindrical hole, subtracts the volume occupied by the post within the concrete depth, multiplies by the number of posts and divides by the selected bag yield. It then rounds up to whole bags.</p></details>
+<details><summary>How deep should a fence post hole be?</summary><p>There is no single depth that applies to every fence. Required embedment depends on the fence design and height, post dimensions, soil, wind exposure, frost depth where relevant, drainage and local requirements. Use the depth specified for your project and check the fence-system and concrete product instructions. This calculator does not determine a safe or code-compliant depth; it uses the depth you enter, less any gravel-base depth, only to estimate concrete volume.</p></details>
 <details><summary>Can I use this for chain-link or metal fencing?</summary><p>This version is intended for common wood picket/privacy layouts and pre-made fence panels. Chain-link and metal systems use different components and installation rules, so they are not treated as interchangeable with this material model.</p></details>
 </section>
 
