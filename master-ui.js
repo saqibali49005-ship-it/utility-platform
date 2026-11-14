@@ -75,8 +75,8 @@ function initUnifiedFooter(){
 
 function initUnifiedHeader(){
  const header=document.querySelector('header.site-header');
- if(!header||header.dataset.zemUnified==='1')return;
- header.dataset.zemUnified='1';
+ if(!header||header.dataset.zemUnified==='1'||header.dataset.zemUnifiedPending==='1')return;
+ header.dataset.zemUnifiedPending='1';
  const path=location.pathname.replace(/\/+$/,'')||'/';
  const categories=Array.isArray(window.UTILITY_CATEGORIES)?window.UTILITY_CATEGORIES:[];
  const tools=Array.isArray(window.UTILITY_TOOLS)?window.UTILITY_TOOLS:[];
@@ -85,8 +85,10 @@ function initUnifiedHeader(){
  const categoryLinks=active.map(c=>'<a href="/'+c.href.replace(/^\//,'')+'"'+(path==='/'+c.href.replace(/^\//,'').replace(/\/$/,'')?' aria-current="page"':'')+'><span class="zem-category-icon" aria-hidden="true">'+(c.icon||'•')+'</span><span class="zem-category-copy"><strong>'+c.title+'</strong><small>'+countFor(c.id)+' '+(countFor(c.id)===1?'tool':'tools')+'</small></span><span class="zem-category-arrow" aria-hidden="true">→</span></a>').join('');
  const links='<a href="/"'+(path==='/'?' aria-current="page"':'')+'>Home</a><a href="/tools/"'+(path==='/tools'?' aria-current="page"':'')+'>All Tools</a>';
  header.innerHTML='<div class="header-inner"><a class="brand" href="/" aria-label="ZemTools home"><span class="brand-mark" aria-hidden="true">Z</span><span class="brand-copy"><strong>ZemTools</strong><small>Practical online tools</small></span></a><nav class="top-nav" aria-label="Primary navigation">'+links+'<button class="nav-categories-toggle" id="zemCategoriesToggle" type="button" aria-expanded="false" aria-controls="zemCategoriesPanel">Categories <span aria-hidden="true">⌄</span></button></nav><div class="header-actions" aria-label="Header actions"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Search tools" aria-expanded="false" aria-controls="toolHeaderSearchPanel" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="toolHeaderMenuPanel" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><label class="sr-only" for="toolHeaderSearchInput">Search tools</label><input id="toolHeaderSearchInput" type="search" placeholder="Search calculators and tools…" autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" class="zem-search-results" aria-live="polite"></div></div><section class="zem-categories-panel" id="zemCategoriesPanel" aria-label="Browse tool categories"><div class="zem-panel-heading"><div><strong>Explore categories</strong><span>Find the right tool for the job</span></div><a href="/tools/">Browse all tools →</a></div><div class="zem-category-grid">'+categoryLinks+'</div></section><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><div class="mobile-nav-label">Categories</div>'+active.map(c=>'<a href="/'+c.href.replace(/^\//,'')+'">'+c.title+' <span>'+countFor(c.id)+'</span></a>').join('')+'</nav></div>';
- const link=document.createElement('link');link.rel='stylesheet';link.href='/master-header.css?v=20261114-2';document.head.appendChild(link);
- header.style.visibility='visible';
+ const link=document.createElement('link');link.rel='stylesheet';link.href='/master-header.css?v=20261114-3';
+ link.onload=function(){header.dataset.zemUnified='1';delete header.dataset.zemUnifiedPending;header.style.visibility='visible';};
+ link.onerror=function(){header.dataset.zemUnified='1';delete header.dataset.zemUnifiedPending;header.style.visibility='visible';};
+ document.head.appendChild(link);
  const toggle=header.querySelector('#zemCategoriesToggle'),panel=header.querySelector('#zemCategoriesPanel');
  if(toggle&&panel){toggle.addEventListener('click',e=>{e.stopPropagation();const open=!panel.classList.contains('is-open');panel.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));});}
  document.addEventListener('click',e=>{if(!e.target.closest('#zemCategoriesPanel')&&!e.target.closest('#zemCategoriesToggle')){panel?.classList.remove('is-open');toggle?.setAttribute('aria-expanded','false');}});
